@@ -1,0 +1,1684 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Ontology rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1"/>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ParaleloBaseadoEmEventos">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoGateway"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#RegraDeNegocio">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#DepositoDados">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoArtefato"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Artefato"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoEvento">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Tipos"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Escalar">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Modelo"/>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#SubProcesso"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoProcesso"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:tipoSubProcesso>Sem Tipo</j.0:tipoSubProcesso>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Return Invoice to Supplier</j.0:nome>
+    <j.0:id>b48087b1-d1d4-4cc2-b97a-dd1fe685b34d</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Servico">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatProducts/Services_Require_Approval">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Exclusivo"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoGateway"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:nome>Products/Services Require Approval</j.0:nome>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiApprove_products/services"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPorCasoPositivo"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Gateway"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Convergente"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#direcaoGateway"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:descricao>When the invoice's information is correct, it must follow to the next task. If the products or services invoiced need an extra approval, the process continue to the task Approve Products or Services and is performed by the person who requested the purchase. Otherwise it should upgrade the company's ERP.</j.0:descricao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiUpdate_Financial_ERP"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:id>b042747d-1f66-4275-8a80-8b871f7b6c24</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:documentacao>When the invoice's information is correct, it must follow to the next task. If the products or services invoiced need an extra approval, the process continue to the task Approve Products or Services and is performed by the person who requested the purchase. Otherwise it should upgrade the company's ERP.</j.0:documentacao>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procMain_Process">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Processo"/>
+    </rdfs:subClassOf>
+    <j.0:tipoProcesso>None</j.0:tipoProcesso>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Main Process</j.0:nome>
+    <j.0:id>aa9413e7-9727-4760-9567-417fd401f951</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éCompostoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artReceive_Invoice_Form">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ObjetoDados"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Receive Invoice Form</j.0:nome>
+    <j.0:id>ee364a1b-f764-4a9f-a8b8-07478ce53611</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiCheck_Invoice_Products/Services">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatProducts/Services_Require_Approval"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:nome>Check Invoice Products/Services</j.0:nome>
+    <j.0:éRequisitoFuncional>true</j.0:éRequisitoFuncional>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorFinancial_Assistant"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éExecutadaPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Usuario"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RuntimeProperties"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>The financial assistant must check the products or services in the invoice in order to see if they require approval.</j.0:documentacao>
+    <j.0:descricao>The financial assistant must check the products or services in the invoice in order to see if they require approval.</j.0:descricao>
+    <j.0:id>d50d98b6-fd37-4904-943f-548c0ed7fd64</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#modAccounts__Payable">
+    <j.0:dataModificacao>Fri Aug 26 13:58:00 BRT 2016</j.0:dataModificacao>
+    <j.0:documentacao>As your business grows the large number of bills to be processed daily, can become a critical and complicated task. The impacts generated when they are incorrectly processed or no one remembers to take care of them makes this activity a problem. Eventually this will cause late payments, incorrect payments, lost discounts, among other things.
+		Therefore Bizagi offers the solution with the Accounts Payable process. 
+		It will help to improve the process of receiving, verifying and approving invoices, reducing processing time and avoiding misinformation.
+		Accounts Payable supports you through the invoice reception, validate and approval task, reducing process time and avoiding incorrect information. </j.0:documentacao>
+    <j.0:dataCriacao>Wed Mar 09 12:07:00 BRT 2011</j.0:dataCriacao>
+    <j.0:autor>Sem Autor</j.0:autor>
+    <j.0:nome>Accounts  Payable</j.0:nome>
+    <j.0:id>ec7401dd-faf4-4150-a04d-e8dc1726582c</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosModelo"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éCompostoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Modelo"/>
+    <j.0:descricao>Accounts  Payable</j.0:descricao>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artPurchase_Order">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#DepositoDados"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Purchase Order</j.0:nome>
+    <j.0:id>1f24a0c7-24e6-42c0-8986-2157e6a59aab</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Usuario">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Manual">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosModelo"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RNF">
+    <j.0:valor>Usability: new user don&amp;#39;t need training;Receive ate least 100 simultaneous acesses at the same time&amp;nbsp;&amp;nbsp;&amp;nbsp;</j.0:valor>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#AtributoEstendido"/>
+    </rdfs:subClassOf>
+    <j.0:éRequisitoNaoFuncional>true</j.0:éRequisitoNaoFuncional>
+    <j.0:éRequisitoFuncional>false</j.0:éRequisitoFuncional>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:valor>Must be done in less than 3 seconds;Must support 50 transactions at the same time;</j.0:valor>
+    <j.0:nome>RNF</j.0:nome>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Inicio">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Multiplo">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artInvoice">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#DepositoDados"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Invoice</j.0:nome>
+    <j.0:id>ab3f1230-37b9-4584-a4cc-de139416ba5f</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Sinal">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#eveInformation_updated">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Evento"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Nenhum"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatilhoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Fim"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Finantial informations are updated</j.0:documentacao>
+    <j.0:descricao>Finantial informations are updated</j.0:descricao>
+    <j.0:nome>Information updated</j.0:nome>
+    <j.0:id>973185cb-34b8-43de-8a09-413e27e0688a</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artApproval_Form">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ObjetoDados"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Approval Form</j.0:nome>
+    <j.0:id>81825f3d-b1ba-4b5d-948c-4a1f480b1b24</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoArtefato">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Tipos"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#RecebimentoDeMensagem">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Gateway">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosSubProcesso"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosSubProcesso"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Anotacao">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoArtefato"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Artefato"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Convergente">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#DirecaoGateway"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Link">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorAdministration_Manager_">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Ator"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Administration Manager </j.0:nome>
+    <j.0:id>b234668e-a815-4fc6-b0de-9e9ac781187a</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#MultiploParalelo">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ExclusivoBaseadoEmEventos">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoGateway"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Simples">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Evento">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosSubProcesso"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Divergente">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#DirecaoGateway"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorSystem">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Ator"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>System</j.0:nome>
+    <j.0:id>330559fa-a988-431f-bbd8-0ff84765d2ee</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorReceptionist">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Ator"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Receptionist</j.0:nome>
+    <j.0:id>f07c2cde-f692-4696-aa06-a312463cfa4f</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Tipos"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Complexo">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoGateway"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatProducts/Services_have_been_approved">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Gateway"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Exclusivo"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoGateway"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Convergente"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#direcaoGateway"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:id>2de06ea8-c4ad-4ccb-ae11-6ae76534fd7b</j.0:id>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiReturn_Invoice_to_Supplier"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiUpdate_Financial_ERP"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPorCasoPositivo"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>If the product or service has been approved by the applicant, the process continues with updating financial records in the ERP of the company. If not, the supplier should be informed about the required changes</j.0:documentacao>
+    <j.0:nome>Products/Services have been approved</j.0:nome>
+    <j.0:descricao>If the product or service has been approved by the applicant, the process continues with updating financial records in the ERP of the company. If not, the supplier should be informed about the required changes</j.0:descricao>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__Forma">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#AtributoEstendido"/>
+    </rdfs:subClassOf>
+    <j.0:éRequisitoNaoFuncional>false</j.0:éRequisitoNaoFuncional>
+    <j.0:éRequisitoFuncional>false</j.0:éRequisitoFuncional>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:valor>return products.png</j.0:valor>
+    <j.0:nome>Forma</j.0:nome>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Nenhum">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__Attachment">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#AtributoEstendido"/>
+    </rdfs:subClassOf>
+    <j.0:éRequisitoNaoFuncional>false</j.0:éRequisitoNaoFuncional>
+    <j.0:éRequisitoFuncional>false</j.0:éRequisitoFuncional>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:valor>Sem Valor</j.0:valor>
+    <j.0:nome>Attachment</j.0:nome>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#SubProcesso">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosSubProcesso"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éCompostoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosSubProcesso"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiJustify__the_rejection">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <j.0:descricao>indicate the reason for rejection</j.0:descricao>
+    <j.0:id>7e032e15-06c3-4313-a9aa-3d92332d8302</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiInform_Supplier"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__REGRA"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>indicate the reason for rejection</j.0:documentacao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Usuario"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:nome>Justify  the rejection</j.0:nome>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RuntimeProperties"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorFinancial_Assistant"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éExecutadaPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRequisitoFuncional>true</j.0:éRequisitoFuncional>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#MultiplasInstanciasSequenciais">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoSubProcesso"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#AtributoEstendido">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosSubProcesso"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt_5de78156-3e23-4ae4-a050-4a87bcf584cb_RuntimeProperties">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#AtributoEstendido"/>
+    <j.0:éRequisitoNaoFuncional>false</j.0:éRequisitoNaoFuncional>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:éRequisitoFuncional>false</j.0:éRequisitoFuncional>
+    <j.0:valor>{}</j.0:valor>
+    <j.0:nome>RuntimeProperties</j.0:nome>
+    <j.0:id>5de78156-3e23-4ae4-a050-4a87bcf584cb</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhosEventos"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#eveInvoice_Arrival">
+    <j.0:documentacao>The invoice is received; it can be received by mail, e-mail, courier, or by fax.</j.0:documentacao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Inicio"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Evento"/>
+    <j.0:nome>Invoice Arrival</j.0:nome>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:id>d7f019c2-0cff-4db7-9edc-a5f61a504e80</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Nenhum"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatilhoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt_d7f019c2-0cff-4db7-9edc-a5f61a504e80_RuntimeProperties"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiReceive_Invoice"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:descricao>The invoice is received; it can be received by mail, e-mail, courier, or by fax.</j.0:descricao>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Script">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Cancelamento">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorFinancial_Assistant">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Ator"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Financial Assistant</j.0:nome>
+    <j.0:id>4380b4c4-c48d-44d9-9e99-ecfabeba11b0</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Exclusivo">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoGateway"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Grupo">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoArtefato"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Artefato"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#DirecaoGateway">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#SentidosGateways"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Processo">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosModelo"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiInform_Supplier">
+    <j.0:id>333dfd84-a4f7-4c7b-bc93-52c26db3016e</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatProducts_have_to_be_returned_"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:nome>Inform Supplier</j.0:nome>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Script"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>This is done automatically by sending an email to the supplier with the reason for the rejection of the invoice and the return of products.</j.0:documentacao>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:descricao>This is done automatically by sending an email to the supplier with the reason for the rejection of the invoice and the return of products.</j.0:descricao>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorFinancial_Assistant"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éExecutadaPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRequisitoFuncional>true</j.0:éRequisitoFuncional>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#eveFimProcessoReturn_Invoice_to_Supplier">
+    <j.0:id>59e8eed4-2744-42f1-8871-e3016076034b</j.0:id>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Evento"/>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:id>d008d4ec-d850-4a55-80c7-64388ca1932f</j.0:id>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Fim"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:nome>FimProcessoReturn Invoice to Supplier</j.0:nome>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Nenhum"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatilhoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Fim"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Nenhum"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatilhoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ObjetoDados">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoArtefato"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Artefato"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Tempo">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Reutilizavel">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoSubProcesso"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoGateway">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Tipos"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Fim">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Paralelo">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoGateway"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Artefato">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosSubProcesso"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#MultiplasInstanciasParalelas">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoSubProcesso"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiReturn_Invoice_to_Supplier">
+    <j.0:descricao>Return invoice to Supplier is a sub-process which is performed when data from an invoice does not match the purchase order; it also includes the possibility to return the products to the supplier, when they do not meet the requirements. </j.0:descricao>
+    <j.0:id>b48087b1-d1d4-4cc2-b97a-dd1fe685b34d</j.0:id>
+    <j.0:nome>Return Invoice to Supplier</j.0:nome>
+    <j.0:éRequisitoFuncional>false</j.0:éRequisitoFuncional>
+    <j.0:documentacao>Return invoice to Supplier is a sub-process which is performed when data from an invoice does not match the purchase order; it also includes the possibility to return the products to the supplier, when they do not meet the requirements. </j.0:documentacao>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__Attachment"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorFinancial_Assistant"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éExecutadaPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#SubProcesso"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RuntimeProperties"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Processo"/>
+    <j.0:tipoProcesso>None</j.0:tipoProcesso>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Accounts Payable</j.0:nome>
+    <j.0:id>fffd5568-2495-45c0-8dc9-e6868dc54d20</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éCompostoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#SentidosGateways">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosAuxiliares"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosSubProcesso">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Inclusivo">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoGateway"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__REGRA">
+    <j.0:valor>Sem Valor</j.0:valor>
+    <j.0:valor>If the invoice matches with the purchase order information (products, due dates, costs), the invoice is approved. If not, it is rejected and comments are made;If in a particular case the invoice is not associated with any Purchase Order, the user must enter the required information, such as cost, product, date of payment and supplier information;&amp;nbsp;</j.0:valor>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#AtributoEstendido"/>
+    <j.0:éRequisitoNaoFuncional>false</j.0:éRequisitoNaoFuncional>
+    <j.0:éRequisitoFuncional>false</j.0:éRequisitoFuncional>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:valor>If the invoice is rejected, the person who executes this task must indicate the reason for rejection either because the information does not match the purchase order or because the products or services are unsatisfactory; </j.0:valor>
+    <j.0:nome>REGRA</j.0:nome>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Adhoc">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoSubProcesso"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Compensacao">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhosEventos">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosAuxiliares"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Termino">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatInvoice_match_with_PO">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Convergente"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#direcaoGateway"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiCheck_Invoice_Products/Services"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Gateway"/>
+    <j.0:descricao>The gateway determines the next activity to be performed. </j.0:descricao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Exclusivo"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoGateway"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>The gateway determines the next activity to be performed. </j.0:documentacao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiReturn_Invoice_to_Supplier"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:id>fff58954-eac8-464e-be3c-70f296d1835a</j.0:id>
+    <j.0:nome>Invoice match with PO</j.0:nome>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiReturn_Products">
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:id>c904bcb7-532a-4512-ae4e-646148a3666b</j.0:id>
+    <j.0:documentacao>The products are returned to the supplier´s address.</j.0:documentacao>
+    <j.0:nome>Return Products</j.0:nome>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__Forma"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#eveFimProcessoReturn_Invoice_to_Supplier"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRequisitoFuncional>false</j.0:éRequisitoFuncional>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Manual"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:descricao>The products are returned to the supplier´s address.</j.0:descricao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RuntimeProperties"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Loop">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoSubProcesso"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Tipos">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosAuxiliares"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Mensagem">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiApprove_products/services">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Usuario"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RuntimeProperties"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:id>cb137e51-3d62-4335-8978-000dd0cf1903</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artApproval_Form"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#produzSaida"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__REGRA"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>As mentioned above, if the products or services require further approval, the task should be assigned to the person who made the purchase request. This person approves or rejects the products or services invoiced, after performing the respective product inspection or service verification.  </j.0:documentacao>
+    <j.0:éRequisitoFuncional>true</j.0:éRequisitoFuncional>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorAdministration_Manager_"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éExecutadaPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:descricao>As mentioned above, if the products or services require further approval, the task should be assigned to the person who made the purchase request. This person approves or rejects the products or services invoiced, after performing the respective product inspection or service verification.  </j.0:descricao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatProducts/Services_have_been_approved"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <j.0:nome>Approve products/services</j.0:nome>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiReceive_Invoice">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artPurchase_Order"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#utilizaEntrada"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Usuario"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Receiving and processing an invoice can be a very document intensive function. Accounts Payable reduces the processing time. In the reception task the invoice is received and associated with an unpaid Purchase Order. The order can be searched by order number, order date, supplier name, payment options or terms of payment.  </j.0:documentacao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRequisitoFuncional>true</j.0:éRequisitoFuncional>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artInvoice"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#utilizaEntrada"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiValidate__Invoice"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__REGRA"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artReceive_Invoice_Form"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#utilizaEntrada"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:descricao>Receiving and processing an invoice can be a very document intensive function. Accounts Payable reduces the processing time. In the reception task the invoice is received and associated with an unpaid Purchase Order. The order can be searched by order number, order date, supplier name, payment options or terms of payment.  </j.0:descricao>
+    <j.0:nome>Receive Invoice</j.0:nome>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <j.0:id>b5e549a5-b786-4f3e-992c-05ccf6431750</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RuntimeProperties"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorReceptionist"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éExecutadaPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt_d7f019c2-0cff-4db7-9edc-a5f61a504e80_RuntimeProperties">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#AtributoEstendido"/>
+    <j.0:éRequisitoNaoFuncional>false</j.0:éRequisitoNaoFuncional>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:éRequisitoFuncional>false</j.0:éRequisitoFuncional>
+    <j.0:valor>{}</j.0:valor>
+    <j.0:nome>RuntimeProperties</j.0:nome>
+    <j.0:id>d7f019c2-0cff-4db7-9edc-a5f61a504e80</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artReject_Notification">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ObjetoDados"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Dear The invoice received on has the following inconsistencies:And Please return the invoice with the corrected information</j.0:documentacao>
+    <j.0:descricao>Dear The invoice received on has the following inconsistencies:And Please return the invoice with the corrected information</j.0:descricao>
+    <j.0:nome>Reject Notification</j.0:nome>
+    <j.0:id>2b0d5805-4f89-4879-b601-1e3394b2d0c5</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Intermediario">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiUpdate_Financial_ERP">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RNF"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:id>93d92476-09d1-4788-82ab-d813c865a23f</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Servico"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:descricao>The final step is to send the necessary information to the ERP for the accounting entry of the invoice through an interface. </j.0:descricao>
+    <j.0:documentacao>The final step is to send the necessary information to the ERP for the accounting entry of the invoice through an interface. </j.0:documentacao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#eveInformation_updated"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RuntimeProperties"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorSystem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éExecutadaPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRequisitoFuncional>true</j.0:éRequisitoFuncional>
+    <j.0:nome>Update Financial ERP</j.0:nome>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#artRejection_Form">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ObjetoDados"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Rejection Form</j.0:nome>
+    <j.0:id>86153b69-b435-43fd-96ea-778ac413f1d5</j.0:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#BaseadoEmEventos">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoGateway"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Excecao">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Transacional">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoSubProcesso"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#EnvioDeMensagem">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoSubProcesso">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Tipos"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Condicao">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatProducts_have_to_be_returned_">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Convergente"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#direcaoGateway"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Exclusivo"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoGateway"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiReturn_Products"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPorCasoPositivo"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:id>ec807a00-184a-406d-807f-6c04ca780339</j.0:id>
+    <j.0:documentacao>If previous steps in the process indicate that the products must be returned, the next task is Return Products. If not the process ends. </j.0:documentacao>
+    <j.0:descricao>If previous steps in the process indicate that the products must be returned, the next task is Return Products. If not the process ends. </j.0:descricao>
+    <j.0:nome>Products have to be returned </j.0:nome>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Gateway"/>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#eveFimProcessoReturn_Invoice_to_Supplier"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RuntimeProperties">
+    <j.0:nome>RuntimeProperties</j.0:nome>
+    <j.0:éRequisitoNaoFuncional>false</j.0:éRequisitoNaoFuncional>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#AtributoEstendido"/>
+    <j.0:valor>{"cost":0,"priority":0,"asynchronousBehavior":{}}</j.0:valor>
+    <j.0:éRequisitoFuncional>false</j.0:éRequisitoFuncional>
+    <j.0:valor>{"priority":0,"asynchronousBehavior":{},"subProcessType":"None","inputMappingType":"None","outputMappingType":"None","exitMode":"AllTokens","groupByAttributesXPathListRef":[]}</j.0:valor>
+    <j.0:valor>{"cost":0,"priority":0,"isSingleton":false,"isConditional":false}</j.0:valor>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <j.0:valor>{}</j.0:valor>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#eveInicioProcessoReturn_Invoice_to_Supplier">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiJustify__the_rejection"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Inicio"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt_5de78156-3e23-4ae4-a050-4a87bcf584cb_RuntimeProperties"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#subReturn_Invoice_to_Supplier"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:nome>InicioProcessoReturn Invoice to Supplier</j.0:nome>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Nenhum"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatilhoEvento"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:id>5de78156-3e23-4ae4-a050-4a87bcf584cb</j.0:id>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Evento"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atiValidate__Invoice">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RuntimeProperties"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__REGRA"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#procAccounts_Payable"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#fazParteDoSubProcesso"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:éRequisitoFuncional>true</j.0:éRequisitoFuncional>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Usuario"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:id>8b40e419-4331-4168-ae1a-180a06a56561</j.0:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atrExt__RNF"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatInvoice_match_with_PO"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:descricao>Compare the received invoice against the Purchase Order information. Some products or services require the approval of the applicant before making the payment. This option can be chosen from the purchase request. But it can be changed in this activity. &amp;nbsp;</j.0:descricao>
+    <j.0:documentacao>Compare the received invoice against the Purchase Order information. Some products or services require the approval of the applicant before making the payment. This option can be chosen from the purchase request. But it can be changed in this activity. &amp;nbsp;</j.0:documentacao>
+    <j.0:éRegraDeNegocio>false</j.0:éRegraDeNegocio>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#atorFinancial_Assistant"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éExecutadaPor"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:nome>Validate  Invoice</j.0:nome>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Ator">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosSubProcesso"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éParteDoGrupo">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Grupo"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPorCasoPositivo">
+    <j.0:descCondicaoSucedidoPor>If the invoice needs the approval of the person who requested the purchase, either because the applicant requested it from the beginning or because it was selected in the Validate Invoice task, it should be assigned to the person in charge of this approval.;</j.0:descCondicaoSucedidoPor>
+    <j.0:descCondicaoSucedidoPor>If the goods or services invoiced meet the requirements, the invoice is approved and the process continues with the updating of the financial records in the ERP of the company.;</j.0:descCondicaoSucedidoPor>
+    <j.0:descCondicaoSucedidoPor>If the Approve Products / Services task indicated that the products require changing, the process continues with the task of Return Products ;</j.0:descCondicaoSucedidoPor>
+    <j.0:tipoCondicaoSucedidoPor>Condicao</j.0:tipoCondicaoSucedidoPor>
+    <rdfs:subPropertyOf>
+      <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#possuiAtributoEstendido">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#AtributoEstendido"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éAnotadoPor">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Anotacao"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPorCasoNegativo">
+    <j.0:descCondicaoSucedidoPor>If the invoice does not require approval, it continues with the task of updating the financial ERP;</j.0:descCondicaoSucedidoPor>
+    <j.0:descCondicaoSucedidoPor>If the products of the invoice must be returned or if there is any incorrect information regarding them, the process should continue with the return of the invoice and / or products to the supplier.;</j.0:descCondicaoSucedidoPor>
+    <j.0:descCondicaoSucedidoPor>If the invoice does not match the Purchase Order, the invoice is rejected and it must be returned to the supplier. ;</j.0:descCondicaoSucedidoPor>
+    <j.0:descCondicaoSucedidoPor>If it is not necessary to return the products, the process ends.;</j.0:descCondicaoSucedidoPor>
+    <j.0:tipoCondicaoSucedidoPor>Condicao</j.0:tipoCondicaoSucedidoPor>
+    <rdfs:subPropertyOf>
+      <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éCompostoPor">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosModelo"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ElementosProcesso"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éExecutadaPor">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Ator"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#valor">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#autor">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#gatilhoEvento">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#GatilhoEvento"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoProcesso">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éDecisaoSim">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éDecisaoNao">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoEvento">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoEvento"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoSubProcesso">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoSubProcesso"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éRequisitoNaoFuncional">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#descricao">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#dataCriacao">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éRegraDeNegocio">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#documentacao">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#dataModificacao">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#id">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoGateway">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoGateway"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#nome">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#regraDeNegocio">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoAtividade">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoAtividade"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#direcaoGateway">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#DirecaoGateway"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éRequisitoFuncional">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoArtefato">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#TipoArtefato"/>
+  </owl:DatatypeProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#utilizaEntrada">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ObjetoDados"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#DepositoDados"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#trocaMensagemCom">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#SubProcesso"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Evento"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Processo"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Processo"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Evento"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Gateway"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#SubProcesso"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#produzSaida">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#ObjetoDados"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#DepositoDados"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor">
+    <j.0:tipoCondicaoSucedidoPor>Condicao</j.0:tipoCondicaoSucedidoPor>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#SubProcesso"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Evento"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#Atividade"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#tipoCondicaoSucedidoPor">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#descCondicaoSucedidoPor">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/AccountPayableV1#éSucedidoPor"/>
+  </owl:AnnotationProperty>
+</rdf:RDF>

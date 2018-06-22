@@ -1,0 +1,602 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Consulta de uma Ontologia</title>
+        <script type="text/javascript">
+            function start() {
+                PF('statusDialog').show();
+            }
+
+            function stop() {
+                PF('statusDialog').hide();
+            }
+        </script>
+    </h:head>
+    <h:body>
+        <h:form id="frmConsulta">
+            <p:growl id="growl" sticky="true" showDetail="true"/>
+            <p:wizard id="wzConsulta" flowListener="#{consultaOntologiaController.onFlowProcess}" 
+                      backLabel="Voltar"
+                      nextLabel="Avançar">
+                <p:tab id="selecaoOntologia" title="Seleção da Ontologia">
+                    <p:panel header="Selecione uma ontologia para realizar a consulta desejada">
+                        <p:messages/>
+                        <h:panelGrid id="pnlOntologias" columns="1">
+                            <p:dataTable id="dtOntologias"
+                                         widgetVar="dtOntologias"
+                                         var="ont" 
+                                         value="#{consultaOntologiaController.lazyOntologiaModel}"
+                                         paginator="true" rows="10"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} 
+                                         {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15"
+                                         lazy="true"
+                                         selectionMode="single" 
+                                         selection="#{consultaOntologiaController.ontologiaSelected}"
+                                         rowKey="#{ont.idOntologia}"
+                                         style="width: 850px">
+                                <f:facet name="header">Ontologias para consulta</f:facet>
+                                <p:column headerText="Id" width="15%" sortBy="#{ont.idOntologia}" filterBy="#{ont.idOntologia}">
+                                    <h:outputText value="#{ont.idOntologia}"/>
+                                </p:column>
+                                <p:column headerText="Nome" width="30%" sortBy="#{ont.nome}" filterBy="#{ont.nome}">
+                                    <h:outputText value="#{ont.nome}"/>
+                                </p:column>
+                                <p:column headerText="Descrição" width="40%" sortBy="#{ont.descricao}" filterBy="#{ont.descricao}">
+                                    <h:outputText value="#{ont.descricao}"/>
+                                </p:column>
+                                <p:column width="15%" style="text-align: center">
+                                    <p:commandLink id="btnRemoveOntologia"
+                                                   value="Remover"
+                                                   title="Remover"
+                                                   actionListener="#{consultaOntologiaController.removeOntologia()}"
+                                                   update="messageRemocaoOntologia"
+                                                   process="@this"
+                                                   oncomplete="atualizaGridOntologias();">
+                                        <f:setPropertyActionListener value="#{ont}" target="#{consultaOntologiaController.ontologiaSelected}"/>
+                                    </p:commandLink>
+                                    <p:growl id="messageRemocaoOntologia" showDetail="true"/>
+                                </p:column>
+                            </p:dataTable>
+                            <p:remoteCommand id="atualizaGridOntologias"
+                                             name="atualizaGridOntologias"
+                                             update=":frmConsulta:dtOntologias"
+                                             process="@this"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+                <p:tab id="pesquisa" title="Pesquisa">
+                    <p:panel>
+                        <p:messages/>
+                        <p:outputLabel id="lblLegenda" value="Os filtros marcados com (*) são obrigatórios"
+                                       style="color: red; margin-left: 0px"/>
+                        <h:panelGrid id="pnlTipoConsulta" columns="4" style="margin-top: 10px">                            
+                            <p:outputLabel id="lblTipoConsulta" for="selOneMenuTipoConsulta" 
+                                           value="Selecione o Tipo de Consulta:"
+                                           style="margin-left: 110px"/>
+                            <p:selectOneMenu id="selOneMenuTipoConsulta" 
+                                             value="#{consultaOntologiaController.tipoConsultaSelected}"
+                                             converter="tipoConsultaConverter"
+                                             required="true"
+                                             requiredMessage="Tipo de Consulta é obrigatório!"
+                                             style="width:250px"
+                                             disabled="#{consultaOntologiaController.ontologiaSelected eq null}">
+                                <f:selectItem itemLabel="Selecione um tipo ..." itemValue="#{null}"/>
+                                <f:selectItems value="#{consultaOntologiaController.tipoConsultaList}" 
+                                               var="tipCon"
+                                               itemValue="#{tipCon}"
+                                               itemLabel="#{tipCon.nome}"/>
+                                <p:ajax event="change"
+                                        listener="#{consultaOntologiaController.limpaOpcoesPesquisa}"
+                                        update=":frmConsulta:pnlPesquisa, :frmConsulta:pnlTipoElemento, 
+                                        :frmConsulta:pnlConsultaIntermediaria, messagesTipoConsulta"/>                                
+                            </p:selectOneMenu>
+                            <p:growl id="messagesTipoConsulta" showDetail="true"/>
+                            <p:commandButton id="cmdHelpTipoConsulta" value="?"
+                                             process="@this"
+                                             style="color: white; font-weight: bold; background-color: orange"/>
+                            <p:overlayPanel id="pnlHelpTipoConsulta" for="cmdHelpTipoConsulta" hideEffect="fade"
+                                            appendToBody="true" style="width: 400px; height: 400px">
+                                <h:outputText value="#{consultaOntologiaController.msgHelpTipoConsulta}"
+                                              escape="false"/>
+                            </p:overlayPanel>
+                        </h:panelGrid>
+                        <h:panelGrid id="pnlTipoElemento" columns="4" style="margin-top: 10px; margin-left: 215px">
+                            <p:outputLabel id="lblTipoElemento" for="selOneMenuTipoElemento" value="Tipo Elemento:"
+                                           rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                       and consultaOntologiaController.tipoConsultaSelected.id eq 0}"/>
+                            <p:selectOneMenu id="selOneMenuTipoElemento" 
+                                             value="#{consultaOntologiaController.tipoElementoSelected}"
+                                             converter="tipoElementoConverter"
+                                             style="width:250px"
+                                             rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                         and consultaOntologiaController.tipoConsultaSelected.id eq 0}">
+                                <f:selectItem itemLabel="Selecione um tipo ..." itemValue="#{null}"/>
+                                <f:selectItems value="#{consultaOntologiaController.tipoElementoList}" 
+                                               var="tipEle"
+                                               itemValue="#{tipEle}"
+                                               itemLabel="#{tipEle.nome}"/>
+                                <p:ajax event="change"
+                                        listener="#{consultaOntologiaController.selecionaTipoElemento()}"
+                                        update="@parent, @parent:lblSubTipoElemento, @parent:selOneMenuSubTipoElemento"
+                                        process="@parent"/>                   
+                            </p:selectOneMenu>
+                            <p:commandButton id="cmdHelpTipoElemento" value="?"
+                                             process="@this"
+                                             style="color: white; font-weight: bold; background-color: orange"
+                                             rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                         and consultaOntologiaController.tipoConsultaSelected.id eq 0}"/>
+                            <p:overlayPanel id="pnlHelpTipoElemento" for="cmdHelpTipoElemento" hideEffect="fade"
+                                            appendToBody="true" style="width: 400px"
+                                            rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                        and consultaOntologiaController.tipoConsultaSelected.id eq 0}">
+                                <h:outputText value="#{consultaOntologiaController.msgTipoElemento}"
+                                              escape="false"/>
+                            </p:overlayPanel>
+                            <p:outputLabel id="lblSubTipoElemento" for="selOneMenuSubTipoElemento" value="Subtipo Elemento:"
+                                           rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                       and consultaOntologiaController.tipoConsultaSelected.id eq 0
+                                                       and consultaOntologiaController.tipoElementoSelected ne null
+                                                       and (consultaOntologiaController.tipoElementoSelected.id eq 0 
+                                                       or consultaOntologiaController.tipoElementoSelected.id eq 1
+                                                       or consultaOntologiaController.tipoElementoSelected.id eq 2
+                                                       or consultaOntologiaController.tipoElementoSelected.id eq 3)}"/>
+                            <p:selectOneMenu id="selOneMenuSubTipoElemento" 
+                                             value="#{consultaOntologiaController.subTipoElementoSelected}"
+                                             converter="subTipoElementoConverter"
+                                             style="width:250px"
+                                             rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                         and consultaOntologiaController.tipoConsultaSelected.id eq 0
+                                                         and consultaOntologiaController.tipoElementoSelected ne null
+                                                         and (consultaOntologiaController.tipoElementoSelected.id eq 0 
+                                                         or consultaOntologiaController.tipoElementoSelected.id eq 1
+                                                         or consultaOntologiaController.tipoElementoSelected.id eq 2
+                                                         or consultaOntologiaController.tipoElementoSelected.id eq 3)}">
+                                <f:selectItem itemLabel="Selecione um subtipo ..." itemValue="#{null}"/>
+                                <f:selectItems value="#{consultaOntologiaController.subTipoElementoList}" 
+                                               var="subTipEle"
+                                               itemValue="#{subTipEle}"
+                                               itemLabel="#{subTipEle.nome}"/>
+                                <p:ajax event="change" 
+                                        update="@parent"
+                                        process="@parent"/>                   
+                            </p:selectOneMenu>
+                            <p:commandButton id="cmdHelpSubTipoElemento" value="?"
+                                             process="@this"
+                                             style="color: white; font-weight: bold; background-color: orange"
+                                             rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                         and consultaOntologiaController.tipoConsultaSelected.id eq 0
+                                                         and consultaOntologiaController.tipoElementoSelected ne null
+                                                         and (consultaOntologiaController.tipoElementoSelected.id eq 0 
+                                                         or consultaOntologiaController.tipoElementoSelected.id eq 1
+                                                         or consultaOntologiaController.tipoElementoSelected.id eq 2
+                                                         or consultaOntologiaController.tipoElementoSelected.id eq 3)}"/>
+                            <p:overlayPanel id="pnlHelpSubTipoElemento" for="cmdHelpSubTipoElemento" hideEffect="fade"
+                                            appendToBody="true" style="width: 400px;"
+                                            rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                        and consultaOntologiaController.tipoConsultaSelected.id eq 0
+                                                        and consultaOntologiaController.tipoElementoSelected ne null
+                                                        and (consultaOntologiaController.tipoElementoSelected.id eq 0 
+                                                        or consultaOntologiaController.tipoElementoSelected.id eq 1
+                                                        or consultaOntologiaController.tipoElementoSelected.id eq 2
+                                                        or consultaOntologiaController.tipoElementoSelected.id eq 3)}">
+                                <h:outputText value="#{consultaOntologiaController.msgSubTipoElemento}"
+                                              escape="false"/>
+                            </p:overlayPanel>
+                            <p:outputLabel id="lblAtributoElemento" for="selOneMenuAtributoElemento" value="Atributo Elemento:"
+                                           rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                       and consultaOntologiaController.tipoConsultaSelected.id eq 0}"/>
+                            <p:selectOneMenu id="selOneMenuAtributoElemento" 
+                                             value="#{consultaOntologiaController.atributoElementoSelected}"
+                                             converter="atributoElementoConverter"
+                                             style="width:250px"
+                                             rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                         and consultaOntologiaController.tipoConsultaSelected.id eq 0}">
+                                <f:selectItem itemLabel="Selecione um atributo ..." itemValue="#{null}"/>
+                                <f:selectItems value="#{consultaOntologiaController.atributoElementoList}" 
+                                               var="atrEle"
+                                               itemValue="#{atrEle}"
+                                               itemLabel="#{atrEle.nome}"/>
+                                <p:ajax event="change" 
+                                        update="@parent, @parent:txtFiltroPesquisa"
+                                        process="@parent"/>                   
+                            </p:selectOneMenu>
+                            <p:commandButton id="cmdHelpAtributoElemento" value="?"
+                                             process="@this"
+                                             style="color: white; font-weight: bold; background-color: orange"
+                                             rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                         and consultaOntologiaController.tipoConsultaSelected.id eq 0}"/>
+                            <p:overlayPanel id="pnlHelpAtributoElemento" for="cmdHelpAtributoElemento" hideEffect="fade"
+                                            appendToBody="true" style="width: 400px;"
+                                            rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                        and consultaOntologiaController.tipoConsultaSelected.id eq 0}">
+                                <h:outputText value="#{consultaOntologiaController.msgAtributo}"
+                                              escape="false"/>
+                            </p:overlayPanel>
+                            <p:outputLabel id="lblFiltroPesquisa" for="txtFiltroPesquisa" value="Filtro pesquisa:"
+                                           rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                       and consultaOntologiaController.tipoConsultaSelected.id eq 0}"/>
+                            <p:inputText id="txtFiltroPesquisa"
+                                         value="#{consultaOntologiaController.filtroPesquisa}"
+                                         maxlength="50"
+                                         rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                     and consultaOntologiaController.tipoConsultaSelected.id eq 0}"
+                                         disabled="#{consultaOntologiaController.atributoElementoSelected eq null}"
+                                         style="width: 275px">
+                                <p:ajax event="change" process="@parent"/>
+                            </p:inputText>
+                            <p:commandButton id="cmdHelpFiltroPesquisa" value="?"
+                                             process="@this"
+                                             style="color: white; font-weight: bold; background-color: orange"
+                                             rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                         and consultaOntologiaController.tipoConsultaSelected.id eq 0}"/>
+                            <p:overlayPanel id="pnlHelpFiltroPesquisa" for="cmdHelpFiltroPesquisa" hideEffect="fade"
+                                            appendToBody="true" style="width: 400px"
+                                            rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                        and consultaOntologiaController.tipoConsultaSelected.id eq 0}">
+                                <h:outputText value="#{consultaOntologiaController.msgFiltroPesquisa}"
+                                              escape="false"/>
+                            </p:overlayPanel>
+                        </h:panelGrid>                  
+                        <h:panelGrid id="pnlConsultaIntermediaria" columns="2">
+                            <p:outputLabel id="lblTipoConsultaIntermed" for="selOneMenuTipoConsultaIntermed" 
+                                           value="Tipo Consulta Avançada:"
+                                           rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                       and consultaOntologiaController.tipoConsultaSelected.id eq 1}"
+                                           style="margin-left: 150px"/>
+                            <h:panelGrid id="pnlTipoConsultaIntermed" columns="2">
+                                <p:selectOneMenu id="selOneMenuTipoConsultaIntermed" 
+                                                 value="#{consultaOntologiaController.tipoConsultaIntermediariaSelected}"
+                                                 converter="tipoConsultaIntermediariaConverter"
+                                                 required="true"
+                                                 requiredMessage="Tipo de Consulta Avançada é obrigatório!"
+                                                 style="width:250px"
+                                                 rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                             and consultaOntologiaController.tipoConsultaSelected.id eq 1}">
+                                    <f:selectItem itemLabel="Selecione um tipo ..." itemValue="#{null}"/>
+                                    <f:selectItems value="#{consultaOntologiaController.tipoConsultaIntermediariaList}" 
+                                                   var="tipCon"
+                                                   itemValue="#{tipCon}"
+                                                   itemLabel="#{tipCon.nome}"/>
+                                    <p:ajax event="change"
+                                            listener="#{consultaOntologiaController.selecionaTipoConsultaIntermediaria}"
+                                            update="@parent:@parent, @parent:@parent:pnlElementoOrigem, 
+                                            @parent:@parent:pnlElementoDest, @parent:@parent:txtFiltroAtorAtividade"
+                                            process="@parent"/>
+                                </p:selectOneMenu>
+                                <p:commandButton id="cmdHelpTipoConsultaAvancada" value="?"
+                                                 process="@this"
+                                                 style="color: white; font-weight: bold; background-color: orange"
+                                                 rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                             and consultaOntologiaController.tipoConsultaSelected.id eq 1}"/>
+                                <p:overlayPanel id="pnlHelpTipoConsultaAvancada" for="cmdHelpTipoConsultaAvancada" hideEffect="fade"
+                                                appendToBody="true" style="width: 400px"
+                                                rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                            and consultaOntologiaController.tipoConsultaSelected.id eq 1}">
+                                    <h:outputText value="#{consultaOntologiaController.msgTipoConsultaAvancada}"
+                                                  escape="false"/>
+                                </p:overlayPanel>
+                            </h:panelGrid>
+                            <p:outputLabel id="lblTipoElementoOrigem" for="selOneMenuElementoOrigem" value="Tipo Elemento Origem:"
+                                           rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                       and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                       and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                       and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 1
+                                                       or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 2
+                                                       or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6)}"
+                                           style="margin-left: 160px;"/>
+                            <h:panelGrid id="pnlElementoOrigem" columns="2">
+                                <p:selectOneMenu id="selOneMenuElementoOrigem" 
+                                                 value="#{consultaOntologiaController.elementoOrigemSelected}"
+                                                 converter="tipoElementoConverter"
+                                                 style="width:250px"
+                                                 rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                             and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                             and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                             and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 1
+                                                             or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 2
+                                                             or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6)}">
+                                    <f:selectItem itemLabel="Selecione um tipo ..." itemValue="#{null}"/>
+                                    <f:selectItems value="#{consultaOntologiaController.tipoElementoList}" 
+                                                   var="tipEleOrigem"
+                                                   itemValue="#{tipEleOrigem}"
+                                                   itemLabel="#{tipEleOrigem.nome}"/>
+                                    <p:ajax event="change"
+                                            process="@parent"
+                                            update="@parent"/>                    
+                                </p:selectOneMenu>
+                                <p:commandButton id="cmdHelpTipoElementoOrigem" value="?"
+                                                 process="@this"
+                                                 style="color: white; font-weight: bold; background-color: orange"
+                                                 rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                             and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                             and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                             and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 1
+                                                             or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 2
+                                                             or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6)}"/>
+                                <p:overlayPanel id="pnlHelpTipoElementoOrigem" for="cmdHelpTipoElementoOrigem" hideEffect="fade"
+                                                appendToBody="true" style="width: 400px"
+                                                rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                            and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                            and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                            and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 1
+                                                            or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 2
+                                                            or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6)}">
+                                    <h:outputText value="#{consultaOntologiaController.msgTipoElementoOrigem}"
+                                                  escape="false"/>
+                                </p:overlayPanel>
+                            </h:panelGrid>                            
+                            <p:outputLabel id="lblTipoElementoDest" for="selOneMenuElementoDest" value="Tipo Elemento Destino:"
+                                           rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                       and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                       and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                       and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 1
+                                                       or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 2)}"
+                                           style="margin-left: 160px;"/>
+                            <h:panelGrid id="pnlElementoDest" columns="2">
+                                <p:selectOneMenu id="selOneMenuElementoDest" 
+                                                 value="#{consultaOntologiaController.elementoDestinoSelected}"
+                                                 converter="tipoElementoConverter"
+                                                 style="width:250px"
+                                                 rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                             and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                             and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                             and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 1
+                                                             or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 2)}">
+                                    <f:selectItem itemLabel="Selecione um tipo ..." itemValue="#{null}"/>
+                                    <f:selectItems value="#{consultaOntologiaController.tipoElementoDestList}" 
+                                                   var="tipEleDest"
+                                                   itemValue="#{tipEleDest}"
+                                                   itemLabel="#{tipEleDest.nome}"/>
+                                    <p:ajax event="change" 
+                                            update="@parent"
+                                            process="@parent"/>                    
+                                </p:selectOneMenu>
+                                <p:commandButton id="cmdHelpTipoElementoDestino" value="?"
+                                                 process="@this"
+                                                 style="color: white; font-weight: bold; background-color: orange"
+                                                 rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                             and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                             and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                             and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 1
+                                                             or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 2)}"/>
+                                <p:overlayPanel id="pnlHelpTipoElementoDestino" for="cmdHelpTipoElementoDestino" hideEffect="fade"
+                                                appendToBody="true" style="width: 400px"
+                                                rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                            and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                            and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                            and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 1
+                                                            or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 2)}">
+                                    <h:outputText value="#{consultaOntologiaController.msgTipoElementoDestino}"
+                                                  escape="false"/>
+                                </p:overlayPanel>
+                            </h:panelGrid>
+                            <p:outputLabel id="lblFiltroAtorAtividade" for="txtFiltroAtorAtividade" 
+                                           value="#{consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 0 ? 'Ator:'
+                                                    : consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6 ? 'Elemento:'
+                                                    : 'Atividade:'}"
+                                           rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                       and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                       and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                       and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 0
+                                                       or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6
+                                                       or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 7
+                                                       or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 8
+                                                       or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 9
+                                                       or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 10)}"
+                                           style="margin-left: 260px"/>
+                            <p:inputText id="txtFiltroAtorAtividade"
+                                         value="#{consultaOntologiaController.filtroAtorAtividade}"
+                                         maxlength="50"
+                                         style="width: 280px;"
+                                         rendered="#{consultaOntologiaController.tipoConsultaSelected ne null
+                                                     and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                     and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                     and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 0
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 7
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 8
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 9
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 10)}">
+                                <p:ajax event="change" process="@parent"/>
+                            </p:inputText>                           
+                        </h:panelGrid>
+
+                        <h:panelGroup id="pnlPesquisa" layout="block" style="margin-top: 15px; text-align: center">
+                            <p:commandButton id="btnPesquisar" 
+                                             value="Pesquisar"
+                                             actionListener="#{consultaOntologiaController.efetuaPesquisa}"
+                                             update="@this, @parent:pnlResultadosPesquisa, btnLimpar, @parent:pnlTipoConsulta, 
+                                             @parent:pnlTipoElemento, @parent:pnlConsultaIntermediaria, messagesPesquisa"
+                                             process="@this"
+                                             onstart="PF('statusDialog').show();"
+                                             onsuccess="PF('statusDialog').hide();"
+                                             disabled="#{not consultaOntologiaController.pesquisaHabilitada 
+                                                         or consultaOntologiaController.tipoConsultaSelected eq null}"/>
+                            <p:commandButton id="btnLimpar" 
+                                             value="Limpar"
+                                             actionListener="#{consultaOntologiaController.limpaPesquisa}"
+                                             update="@this, @parent:pnlResultadosPesquisa, btnPesquisar, @parent:pnlTipoConsulta, 
+                                             @parent:pnlTipoElemento, @parent:pnlConsultaIntermediaria, messagesPesquisa"
+                                             process="@this"
+                                             onstart="PF('statusDialog').show();"
+                                             onsuccess="PF('statusDialog').hide();"
+                                             disabled="#{not consultaOntologiaController.pesquisaHabilitada 
+                                                         or consultaOntologiaController.tipoConsultaSelected eq null}"/>
+                            <p:growl id="messagesPesquisa" showDetail="true"/>
+                        </h:panelGroup>
+                        <h:panelGrid id="pnlResultadosPesquisa" columns="1" style="margin-top: 30px">
+                            <p:dataTable id="dtResultadoConsultaBasica"
+                                         var="res" 
+                                         value="#{consultaOntologiaController.consultaDTOList}"
+                                         emptyMessage="Nenhum registro encontrado!"
+                                         paginator="true" 
+                                         rows="10"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15"
+                                         style="width: 1100px"
+                                         rendered="#{consultaOntologiaController.exibeResultados 
+                                                     and consultaOntologiaController.tipoConsultaSelected ne null
+                                                     and consultaOntologiaController.tipoConsultaSelected.id eq 0}">
+                                <f:facet name="header">Elementos encontrados na Ontologia</f:facet>
+                                <p:column headerText="Id" width="100px">
+                                    <h:outputText value="#{res.id}"/>
+                                </p:column>
+                                <p:column headerText="Nome" width="150px">
+                                    <h:outputText value="#{res.nome}"/>
+                                </p:column>
+                                <p:column headerText="Tipo" width="70px">
+                                    <h:outputText value="#{res.tipo}"/>
+                                </p:column>
+                                <p:column headerText="SubTipo" width="80px">
+                                    <h:outputText value="#{res.subTipo}"/>
+                                </p:column>
+                                <p:column headerText="Descrição" width="300px">
+                                    <h:outputText value="#{res.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Documentação" width="300px">
+                                    <h:outputText value="#{res.documentacao}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <p:dataTable id="dtResultadoRequisitos"
+                                         var="res" 
+                                         value="#{consultaOntologiaController.consultaDTOList}"
+                                         emptyMessage="Nenhum registro encontrado!"
+                                         paginator="true" 
+                                         rows="10"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15"
+                                         style="width: 1100px"
+                                         rendered="#{consultaOntologiaController.exibeResultados 
+                                                     and consultaOntologiaController.tipoConsultaSelected ne null
+                                                     and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                     and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                     and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 3
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 4
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 5)}">
+                                <f:facet name="header">Requisitos encontrados na ontologia</f:facet>
+                                <p:column headerText="Nome" width="20%">
+                                    <h:outputText value="#{res.nome}"/>
+                                </p:column>
+                                <p:column headerText="Descrição" width="60%">
+                                    <h:outputText value="#{res.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Tipo" width="20%">
+                                    <h:outputText value="#{res.tipo}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <p:dataTable id="dtResultadoPesquisaAvancada1"
+                                         var="res" 
+                                         value="#{consultaOntologiaController.consultaDTOList}"
+                                         emptyMessage="Nenhum registro encontrado!"
+                                         paginator="true" 
+                                         rows="10"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15"
+                                         style="width: 1100px"
+                                         rendered="#{consultaOntologiaController.exibeResultados 
+                                                     and consultaOntologiaController.tipoConsultaSelected ne null
+                                                     and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                     and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                     and (consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 0
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 2
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 7
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 8
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 9
+                                                     or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 10)}">
+                                <f:facet name="header">Resultados da Pesquisa</f:facet>
+                                <p:column headerText="#{consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 0
+                                                        or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 7
+                                                        or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 8
+                                                        or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 9
+                                                        or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 10
+                                                        ? 'Atividade' : consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6 ? 'Atividade/Evento'
+                                                        : 'Elemento Origem'}" width="10%">
+                                    <h:outputText value="#{res.nome}"/>
+                                </p:column>
+                                <p:column headerText="Descrição" width="30%">
+                                    <h:outputText value="#{res.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Tipo" width="10%">
+                                    <h:outputText value="#{res.tipo}"/>
+                                </p:column>
+                                <p:column headerText="#{consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 0
+                                                        ? 'Ator' : consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 6
+                                                        or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 7
+                                                        ? 'Artefato' : consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 8
+                                                        or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 9
+                                                        or consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 10 ? 'Gateway'
+                                                        : 'Elemento Destino'}" width="10%">
+                                    <h:outputText value="#{res.nomeDest}"/>
+                                </p:column>
+                                <p:column headerText="Descrição" width="30%">
+                                    <h:outputText value="#{res.descricaoDest}"/>
+                                </p:column>
+                                <p:column headerText="Tipo" width="10%">
+                                    <h:outputText value="#{res.tipoDest}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <p:dataTable id="dtResultadoPesquisaAvancada2"
+                                         var="res" 
+                                         value="#{consultaOntologiaController.consultaDTOList}"
+                                         emptyMessage="Nenhum registro encontrado!"
+                                         paginator="true" 
+                                         rows="10"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15"
+                                         style="width: 1100px"
+                                         rendered="#{consultaOntologiaController.exibeResultados 
+                                                     and consultaOntologiaController.tipoConsultaSelected ne null
+                                                     and consultaOntologiaController.tipoConsultaSelected.id eq 1
+                                                     and consultaOntologiaController.tipoConsultaIntermediariaSelected ne null
+                                                     and consultaOntologiaController.tipoConsultaIntermediariaSelected.id eq 1}">
+                                <f:facet name="header">Resultados da Pesquisa</f:facet>
+                                <p:column headerText="Elemento" width="14%">
+                                    <h:outputText value="#{res.nome}"/>
+                                </p:column>
+                                <p:column headerText="Descrição" width="10%">
+                                    <h:outputText value="#{res.descricao}"/>
+                                </p:column>
+                                <p:column headerText="Tipo" width="10%">
+                                    <h:outputText value="#{res.tipo}"/>
+                                </p:column>
+                                <p:column headerText="Elemento Predecessor" width="13%">
+                                    <h:outputText value="#{res.nomeAnt}"/>
+                                </p:column>
+                                <p:column headerText="Descrição" width="10%">
+                                    <h:outputText value="#{res.descricaoAnt}"/>
+                                </p:column>
+                                <p:column headerText="Tipo" width="10%">
+                                    <h:outputText value="#{res.tipoAnt}"/>
+                                </p:column>
+                                <p:column headerText="Elemento Sucessor" width="13%">
+                                    <h:outputText value="#{res.nomeDest}"/>
+                                </p:column>
+                                <p:column headerText="Descrição" width="10%">
+                                    <h:outputText value="#{res.descricaoDest}"/>
+                                </p:column>
+                                <p:column headerText="Tipo" width="10%">
+                                    <h:outputText value="#{res.tipoDest}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+            <p:commandButton id="btnRetornar"
+                             value="Retornar ao Menu Inicial"
+                             action="index"
+                             style="margin-top: 10px"/>
+            <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" 
+                      resizable="false" 
+                      showHeader="false">
+                <p:graphicImage name="ajaxloadingbar.gif"/>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>

@@ -1,0 +1,1126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="fb2f8f82-78cc-48b2-8463-44b093e4bbaf" Name="Access Management" xmlns="http://www.wfmc.org/2009/XPDL2.2">
+  <PackageHeader>
+    <XPDLVersion>2.2</XPDLVersion>
+    <Vendor>Bizagi Process Modeler.</Vendor>
+    <Created>2011-07-01T11:47:01.0178904-03:00</Created>
+    <ModificationDate>2016-08-26T13:49:06.7036715-03:00</ModificationDate>
+    <Description>Access Management</Description>
+    <Documentation />
+  </PackageHeader>
+  <RedefinableHeader>
+    <Author>GermanA</Author>
+    <Version>1.0</Version>
+    <Countrykey>CO</Countrykey>
+  </RedefinableHeader>
+  <ExternalPackages />
+  <Participants>
+    <Participant Id="0f55b79f-ad9f-456b-98d5-442107f89576" Name="Employee">
+      <ParticipantType Type="RESOURCE" />
+      <Description>Person who opens the case</Description>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="Employee" />
+      </ExtendedAttributes>
+    </Participant>
+    <Participant Id="77dc77df-4b3d-4fb0-9070-419835b4c8f0" Name="New Boss for employee">
+      <ParticipantType Type="RESOURCE" />
+      <Description>Person who approves the special permissions of a specific employee</Description>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="New_Boss_for_employee" />
+      </ExtendedAttributes>
+    </Participant>
+    <Participant Id="f9e66704-f2dc-4718-a5cb-c43089fa56a6" Name="Permissions Manager">
+      <ParticipantType Type="ROLE" />
+      <Description>Person who manage the activation, deactivation or change of privileges of a permission</Description>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="Permissions_Manager" />
+      </ExtendedAttributes>
+    </Participant>
+    <Participant Id="fcccbc92-defd-4818-a5aa-b3f4a937c6ac" Name="Support Team Member">
+      <ParticipantType Type="ROLE" />
+      <Description>Person in charge of additional managements for the activation, deactivation or change of privileges of permissions. </Description>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="Support_Team_Member" />
+      </ExtendedAttributes>
+    </Participant>
+  </Participants>
+  <DataStores>
+    <DataStore Id="f3383a28-c861-450d-9af5-a6be1748434e" Name="Permission" IsUnlimited="true">
+      <Object>
+        <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Permission&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;</Documentation>
+      </Object>
+    </DataStore>
+  </DataStores>
+  <Pools>
+    <Pool Id="f3302436-23bd-46ad-a347-cb00b4bb60cc" Name="Main Process" Process="a1c405a7-cfe0-4ef0-ba73-aeac5797ff0c" BoundaryVisible="false">
+      <Lanes />
+      <NodeGraphicsInfos>
+        <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="350" Width="700" BorderColor="-16777216" FillColor="-1">
+          <Coordinates XCoordinate="0" YCoordinate="0" />
+        </NodeGraphicsInfo>
+      </NodeGraphicsInfos>
+    </Pool>
+    <Pool Id="023163aa-b8da-4fd7-a6b2-a0e873278138" Name="Access Management" Process="209dc8dd-4359-4a9b-84d7-027344062ce7" BoundaryVisible="true">
+      <Lanes>
+        <Lane Id="9202bf74-9095-4c6d-82cf-f6c6352e4d5e" Name="Support Team Member" ParentPool="023163aa-b8da-4fd7-a6b2-a0e873278138">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="116" Width="985" BorderColor="-11513776" FillColor="-1">
+              <Coordinates XCoordinate="50" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Lane>
+        <Lane Id="b774c311-26fa-4c3a-826e-8b71196fc644" Name="Employee" ParentPool="023163aa-b8da-4fd7-a6b2-a0e873278138">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="179.30000305175781" Width="985" BorderColor="-11513776" FillColor="-1">
+              <Coordinates XCoordinate="50" YCoordinate="116" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Lane>
+        <Lane Id="7d7dba52-7a7c-4af5-b6d4-6317c6d7e910" Name="Permissions Manager" ParentPool="023163aa-b8da-4fd7-a6b2-a0e873278138">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="145.60000610351562" Width="985" BorderColor="-11513776" FillColor="-1">
+              <Coordinates XCoordinate="50" YCoordinate="295.29998779296875" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Lane>
+        <Lane Id="4ed647d0-9761-4ffa-a15f-1eac809aba18" Name="Employee´s Boss" ParentPool="023163aa-b8da-4fd7-a6b2-a0e873278138">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="127.39999389648437" Width="985" BorderColor="-11513776" FillColor="-1">
+              <Coordinates XCoordinate="50" YCoordinate="440.89999389648437" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Lane>
+      </Lanes>
+      <NodeGraphicsInfos>
+        <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="568.29998779296875" Width="1035" BorderColor="-16777216" FillColor="-1">
+          <Coordinates XCoordinate="30" YCoordinate="30" />
+        </NodeGraphicsInfo>
+      </NodeGraphicsInfos>
+    </Pool>
+  </Pools>
+  <Associations>
+    <Association Id="ef167b01-e368-4623-9ee5-9a9887607514" Source="fe5a1b14-1f1c-4ca1-9eb5-459cda63a5bd" Target="f81876f8-86d9-47c1-8bd3-835f8dd5923b">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="242" YCoordinate="188" />
+          <Coordinates XCoordinate="242" YCoordinate="145.5" />
+          <Coordinates XCoordinate="200" YCoordinate="145.5" />
+          <Coordinates XCoordinate="200" YCoordinate="104" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="f178e699-e171-4719-b321-b1c42fd613fc" Source="c4b7978f-3019-4041-9b86-53df78902880" Target="6ba3ebe0-7958-4dc4-93c6-2583b86911c9">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="435" YCoordinate="239" />
+          <Coordinates XCoordinate="435" YCoordinate="222.5" />
+          <Coordinates XCoordinate="390" YCoordinate="222.5" />
+          <Coordinates XCoordinate="390" YCoordinate="180" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="7bfe6a20-f940-44d3-926a-ad0fc4e4c0fd" Source="303a890b-ead0-405e-9534-ba0da136eba4" Target="097fcfd5-9f33-4bbe-b8d2-629955a04b58">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="240" YCoordinate="506" />
+          <Coordinates XCoordinate="240" YCoordinate="491" />
+          <Coordinates XCoordinate="166" YCoordinate="491" />
+          <Coordinates XCoordinate="166" YCoordinate="504" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="27daf387-0f9e-495a-864f-d21fa4f22226" Source="7b54ed6c-aea6-4626-9a8a-9349b061627f" Target="3eaf4ea7-e835-4bbb-8c1b-fdd684541fb3">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="496" YCoordinate="506" />
+          <Coordinates XCoordinate="496" YCoordinate="343.9000244140625" />
+          <Coordinates XCoordinate="796" YCoordinate="343.9000244140625" />
+          <Coordinates XCoordinate="796" YCoordinate="240" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="fc85c62c-a059-4655-a899-e512dcaeb337" Source="7f7c2716-ca27-402f-9827-da90973f56c9" Target="3eaf4ea7-e835-4bbb-8c1b-fdd684541fb3">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="783" YCoordinate="387" />
+          <Coordinates XCoordinate="783" YCoordinate="322" />
+          <Coordinates XCoordinate="796" YCoordinate="322" />
+          <Coordinates XCoordinate="796" YCoordinate="240" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="45051379-858d-448f-980b-ee23fc404cc0" Source="4c166262-84ee-42fe-90e9-86b98e480afc" Target="3eaf4ea7-e835-4bbb-8c1b-fdd684541fb3">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="648" YCoordinate="292" />
+          <Coordinates XCoordinate="754.16668701171875" YCoordinate="292" />
+          <Coordinates XCoordinate="754.16668701171875" YCoordinate="215" />
+          <Coordinates XCoordinate="776" YCoordinate="215" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="37857082-db7e-4ae1-88e7-468c9e402d3a" Source="9c1c3335-e857-4356-95c2-c158f9eeb83c" Target="206a76dd-dc4b-4596-abff-ed3c654071c7">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="631" YCoordinate="93" />
+          <Coordinates XCoordinate="768.66668701171875" YCoordinate="93" />
+          <Coordinates XCoordinate="768.66668701171875" YCoordinate="86" />
+          <Coordinates XCoordinate="805" YCoordinate="86" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="e6157061-c167-4e41-b873-7c02d743f727" Source="ceaef87c-f04e-486b-b306-7772f27ead02" Target="886c2b4e-e975-43c7-8de1-2b6d99e31bfe">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="890" YCoordinate="279" />
+          <Coordinates XCoordinate="890" YCoordinate="333" />
+          <Coordinates XCoordinate="915" YCoordinate="333" />
+          <Coordinates XCoordinate="915" YCoordinate="387" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+  </Associations>
+  <WorkflowProcesses>
+    <WorkflowProcess Id="a1c405a7-cfe0-4ef0-ba73-aeac5797ff0c" Name="Main Process">
+      <ProcessHeader>
+        <Created>2017-09-26T18:52:51.4746714-03:00</Created>
+        <Description />
+      </ProcessHeader>
+      <RedefinableHeader>
+        <Author />
+        <Version />
+        <Countrykey>CO</Countrykey>
+      </RedefinableHeader>
+      <ActivitySets />
+      <DataInputOutputs />
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;processClassProperties&quot;:{&quot;displayName&quot;:&quot;Main Process&quot;,&quot;accessType&quot;:&quot;Process&quot;,&quot;order&quot;:0,&quot;enableAlarms&quot;:false,&quot;enableNotifications&quot;:false,&quot;creationDate&quot;:&quot;2016-08-26T13:39:15.2965719-03:00&quot;},&quot;processProperties&quot;:{&quot;version&quot;:{&quot;numberVersion&quot;:&quot;1.0&quot;,&quot;isActive&quot;:true},&quot;versionCreationDate&quot;:&quot;2016-08-26T13:39:15.2965719-03:00&quot;,&quot;supportsScopes&quot;:false,&quot;caseAccessType&quot;:&quot;Public&quot;,&quot;renderVersion&quot;:2,&quot;formsVersion&quot;:0}}" />
+      </ExtendedAttributes>
+    </WorkflowProcess>
+    <WorkflowProcess Id="209dc8dd-4359-4a9b-84d7-027344062ce7" Name="Access Management">
+      <ProcessHeader>
+        <Created>2017-09-26T18:52:51.4976884-03:00</Created>
+        <Description />
+      </ProcessHeader>
+      <RedefinableHeader>
+        <Author />
+        <Version />
+        <Countrykey>CO</Countrykey>
+      </RedefinableHeader>
+      <ActivitySets />
+      <DataInputOutputs>
+        <DataInput Id="0d60194c-278c-4007-878f-57e45f62552a" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataInput>
+        <DataOutput Id="e2724708-1a3d-4179-868d-81553867683d" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+        <DataOutput Id="4032fec3-c9e5-4cfc-9172-ad327ceb3791" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+        <DataOutput Id="e321e2fb-aeed-4619-baa6-2e59a84e80e8" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+        <DataOutput Id="9e9b769a-6870-49f5-893a-4059e81d314b" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+        <DataOutput Id="adca625e-d72c-476c-b28a-258cfee71ea2" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+        <DataOutput Id="9e7e48f2-fbdc-4d5d-8265-535fafdf3618" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+        <DataOutput Id="69753954-cb8f-4c65-9151-9d3fd5b86559" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+      </DataInputOutputs>
+      <Activities>
+        <Activity Id="e840420d-cce4-4d2b-a278-0e9b3d41fa2e" Name="Start">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Enter request&lt;/span&gt;&lt;/p&gt;</Description>
+          <Event>
+            <StartEvent Trigger="None" />
+          </Event>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Enter request&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-10311914" FillColor="-1638505">
+              <Coordinates XCoordinate="139" YCoordinate="203.14285278320312" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{}" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="3b56fd59-3be4-4f22-babb-7c13ef9e48c0" Name="Documents Required?">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This gateway evaluated if it is necessary to request documents to the employee. &lt;/span&gt;&lt;/p&gt;</Description>
+          <Route MarkerVisible="true" GatewayDirection="Diverging" />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This gateway evaluated if it is necessary to request documents to the employee. &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="40" Width="40" BorderColor="-5855715" FillColor="-52">
+              <Coordinates XCoordinate="520" YCoordinate="377.60003662109375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="4c166262-84ee-42fe-90e9-86b98e480afc" Name="Request Documents">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;A notification is sent to the employee to ask for necessary documents to manage the request.&lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskScript>
+                <Script>Dear &lt;Employee&gt;We have analyzed your request &lt;Case Number&gt; and we need you to send the following information:&lt;Requested Documents&gt;Yours sincerelyPermissions Management</Script>
+              </TaskScript>
+            </Task>
+          </Implementation>
+          <Performers />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;A notification is sent to the employee to ask for necessary documents to manage the request.&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet>
+              <Output ArtifactId="e2724708-1a3d-4179-868d-81553867683d" />
+            </OutputSet>
+            <OutputSet />
+            <OutputSet />
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="558" YCoordinate="239.00001525878906" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Actions" Value="Table" />
+            <ExtendedAttribute Name="Notifications" Value="Table" />
+            <ExtendedAttribute Name="REGRA" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Create E-mail: Rule to generate the e-mail that is going to be sent to the Employee.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="7f7c2716-ca27-402f-9827-da90973f56c9" Name="Send Notification">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;A notification is sent to the employee to inform the execution of the actions over the requested permissions.&lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskScript>
+                <Script>Dear &lt;Employee&gt;Below you find the summary of the actions performed over the permissions of your request:&lt;Permissions of the Request Table&gt;Yours sincerelyPermissions Management</Script>
+              </TaskScript>
+            </Task>
+          </Implementation>
+          <Performers />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;A notification is sent to the employee to inform the execution of the actions over the requested permissions.&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet>
+              <Output ArtifactId="4032fec3-c9e5-4cfc-9172-ad327ceb3791" />
+            </OutputSet>
+            <OutputSet />
+            <OutputSet />
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="738" YCoordinate="387.60003662109375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Actions" Value="Table" />
+            <ExtendedAttribute Name="Notifications" Value="Table" />
+            <ExtendedAttribute Name="REGRA" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Create E-mail: Rule to generate the e-mail that is going to be sent to the Employee.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="65cdce69-7046-4864-acca-604a012a64a5" Name="Install or Additional Support Required?">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This Gateway evaluates if installation or additional support were required in the activity “Manage Permissions”&lt;/span&gt;&lt;/p&gt;</Description>
+          <Route MarkerVisible="true" GatewayDirection="Diverging" />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This Gateway evaluates if installation or additional support were required in the activity “Manage Permissions”&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="40" Width="40" BorderColor="-5855715" FillColor="-52">
+              <Coordinates XCoordinate="665" YCoordinate="357.9000244140625" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="7b54ed6c-aea6-4626-9a8a-9349b061627f" Name="Send Reject Notification">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;A notification is sent to the employee to inform the rejection of one or more permissions by his/her Boss&lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskScript>
+                <Script>Dear &lt;Employeer&gt;We are sorry to inform you that your Boss has rejected the activation of the following permissions:&lt;Employee Permissions Table [Approved=false]&gt;Thanks for your comprehension.Yours sincerelyPermission Management</Script>
+              </TaskScript>
+            </Task>
+          </Implementation>
+          <Performers />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;A notification is sent to the employee to inform the rejection of one or more permissions by his/her Boss&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet>
+              <Output ArtifactId="e321e2fb-aeed-4619-baa6-2e59a84e80e8" />
+            </OutputSet>
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="451" YCoordinate="506.60052490234375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="Actions" Value="Table" />
+            <ExtendedAttribute Name="Notifications" Value="Table" />
+            <ExtendedAttribute Name="REGRA" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Create E-mail: Rule to generate the e-mail that is going to be sent to the Employee.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="886c2b4e-e975-43c7-8de1-2b6d99e31bfe" Name="Update Permissions">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Add permissions: Rule to add or update the active permissions in the table “Active Permissions” &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Remove permissions: Rule to delete the deactivated permissions from the table “Active Permissions” &lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskService />
+            </Task>
+          </Implementation>
+          <Performers />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Add permissions: Rule to add or update the active permissions in the table “Active Permissions” &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Remove permissions: Rule to delete the deactivated permissions from the table “Active Permissions” &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet>
+              <Input ArtifactId="0d60194c-278c-4007-878f-57e45f62552a" />
+            </InputSet>
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="870" YCoordinate="387.60003662109375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;asynchronousBehavior&quot;:{}}" />
+            <ExtendedAttribute Name="Actions" Value="Table" />
+            <ExtendedAttribute Name="Interfaces" Value="Table" />
+            <ExtendedAttribute Name="REGRA" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Add permissions: Rule to add or update the active permissions in the table “Active Permissions” &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Remove permissions: Rule to delete the deactivated permissions from the table “Active Permissions” &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+            <ExtendedAttribute Name="RNF" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Must be done in less than 2 seconds&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="e84d865b-f39c-4026-ba07-49448b96d244" Name="Permissions updated">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Permissions updated&lt;/span&gt;&lt;/p&gt;</Description>
+          <Event>
+            <EndEvent Result="Terminate" />
+          </Event>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Permissions updated&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-6750208" FillColor="-1135958">
+              <Coordinates XCoordinate="988" YCoordinate="402.60003662109375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="1c83a7e6-e495-4857-81e6-ce6b117048ca" Name="Request rejected">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Request rejected&lt;/span&gt;&lt;/p&gt;</Description>
+          <Event>
+            <EndEvent Result="None" />
+          </Event>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Request rejected&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-6750208" FillColor="-1135958">
+              <Coordinates XCoordinate="577" YCoordinate="521.60052490234375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="a826c240-497f-4bd1-851e-185a7d34ef34" Name="All permissions approved?">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This inclusive Gateway evaluates if the employees´s Boss approved all the permissions that were requested.&lt;/span&gt;&lt;/p&gt;</Description>
+          <Route GatewayType="Inclusive" GatewayDirection="Diverging" />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This inclusive Gateway evaluates if the employees´s Boss approved all the permissions that were requested.&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="40" Width="40" BorderColor="-5855715" FillColor="-52">
+              <Coordinates XCoordinate="347" YCoordinate="516.60052490234375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="fe5a1b14-1f1c-4ca1-9eb5-459cda63a5bd" Name="Enter Permission Request">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;In this activity the user enters the information of the request and the actions required for each permission. A request can be opened for several reasons by different areas:&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;By the Human Resources Department to request the activation of the permissions related to the position of a new employee or&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;To Request the deactivation of permissions for people who are no longer employed&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;By an employee who requires special permissions for the development of his/her job&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;By a user of the Information Security Management area to report forbidden Access of an employee.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; When a user is selected, all his/her active permissions are loaded , the following reasons for the request can be selected:&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; New Hire: According to the user´s roles, the related profiles of these roles are loaded to suggest the permissions that should be activated. The user can decide the permissions to add and the level of authorization for each one. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Resignation/Dismissal: The requested actions over the user´s active permissions are set on Remove Access Rights &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Job requirements: The user can add profiles that will load the related applications to the request or add individual permissions.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Report Forbidden Access: The user can choose the permissions that must be removed. In many cases, those permissions are not in the user´s active permissions.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>0f55b79f-ad9f-456b-98d5-442107f89576</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;In this activity the user enters the information of the request and the actions required for each permission. A request can be opened for several reasons by different areas:&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;By the Human Resources Department to request the activation of the permissions related to the position of a new employee or&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;To Request the deactivation of permissions for people who are no longer employed&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;By an employee who requires special permissions for the development of his/her job&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;By a user of the Information Security Management area to report forbidden Access of an employee.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; When a user is selected, all his/her active permissions are loaded , the following reasons for the request can be selected:&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; New Hire: According to the user´s roles, the related profiles of these roles are loaded to suggest the permissions that should be activated. The user can decide the permissions to add and the level of authorization for each one. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Resignation/Dismissal: The requested actions over the user´s active permissions are set on Remove Access Rights &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Job requirements: The user can add profiles that will load the related applications to the request or add individual permissions.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Report Forbidden Access: The user can choose the permissions that must be removed. In many cases, those permissions are not in the user´s active permissions.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet>
+              <Output ArtifactId="9e9b769a-6870-49f5-893a-4059e81d314b" />
+            </OutputSet>
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="197" YCoordinate="188.14285278320312" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+            <ExtendedAttribute Name="Duration" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+            <ExtendedAttribute Name="Allocations" Value="Table" />
+            <ExtendedAttribute Name="Notify_x0020_assignment" Value="" />
+            <ExtendedAttribute Name="Forms" Value="Table" />
+            <ExtendedAttribute Name="Forms_x0020_behaviors" Value="Table" />
+            <ExtendedAttribute Name="Actions" Value="Table" />
+            <ExtendedAttribute Name="Notifications" Value="Table" />
+            <ExtendedAttribute Name="REGRA" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Get parameter values: Stores the values of the parameter tables “Profiles”,”Role-Profile” and “Profile-Permission” in master tables;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Fill Profile-Permissions: Gets the permissions related to each Profile and stores them in the table “Related Permissions” of the table “Profiles of the Request” ;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Load Suggested Profiles: Gets the profiles related to the employee´s roles and stores them in the table “Requested Profiles” ;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Update Permissions: Fills the table “Active Permissions” with the permissions related to the Profiles entered in the table “Requested Profiles” ;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Delete Permissions: This rule deletes the records of permissions that are not related to the requested profiles. Logic: According to the selected value to the attribute “Reasons”, the requested action to each permission is set;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Get Permissions of the Request: Fills the table “Requested Permissions” with the permissions for which any action has been requested;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Remove none-active permissions : Removes the record of the none-active permissions from the table “Active Permissions”;It is necessary to parameterize some entities for this template to work correctly. In order of execution you should define: Permissions, Modules, Privileges, Profiles, Profiles-Permissions, Roles-Profiles. For more information about how this parameterization can be performed please review the Construction Document.;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+            <ExtendedAttribute Name="RNF" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Usability: new user don't need training;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Receive ate least 100 simultaneous acesses at the same time&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="303a890b-ead0-405e-9534-ba0da136eba4" Name="Approve Permissions">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;In this activity the employee´s Boss verifies the employee information and decides if the special permissions are approved or rejected &lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>77dc77df-4b3d-4fb0-9070-419835b4c8f0</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;In this activity the employee´s Boss verifies the employee information and decides if the special permissions are approved or rejected &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet>
+              <Output ArtifactId="adca625e-d72c-476c-b28a-258cfee71ea2" />
+            </OutputSet>
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="195" YCoordinate="506.60052490234375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+            <ExtendedAttribute Name="Duration" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+            <ExtendedAttribute Name="Allocations" Value="Table" />
+            <ExtendedAttribute Name="Notify_x0020_assignment" Value="" />
+            <ExtendedAttribute Name="Forms" Value="Table" />
+            <ExtendedAttribute Name="Forms_x0020_behaviors" Value="Table" />
+            <ExtendedAttribute Name="Actions" Value="Table" />
+            <ExtendedAttribute Name="Notifications" Value="Table" />
+            <ExtendedAttribute Name="REGRA" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;This activity must be performed by the Boss of the user for whom the permissions are requested &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;The activity is assigned to the person registered as Boss of the user for whom the permissions are requested.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Update permissions status: This rule updates the status of the permissions for which approvals was required. The status change to “Approved” or “Rejected” according to the decision of the Boss&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="2df7d946-d1ad-4def-889e-cb313da51b9f" Name="Approvals Required?">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This Gateway evaluates the condition related to the necessary approvals of the requested permissions. Approvals are required only if specials permissions that are not included in the standard permissions related to the user´s roles are requested.&lt;/span&gt;&lt;/p&gt;</Description>
+          <Route GatewayType="Inclusive" GatewayDirection="Diverging" />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This Gateway evaluates the condition related to the necessary approvals of the requested permissions. Approvals are required only if specials permissions that are not included in the standard permissions related to the user´s roles are requested.&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="40" Width="40" BorderColor="-5855715" FillColor="-52">
+              <Coordinates XCoordinate="220" YCoordinate="377.60003662109375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="c4b7978f-3019-4041-9b86-53df78902880" Name="Send Documents">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;In this activity the employee enters the documents requested by the Permissions Manager.&lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>0f55b79f-ad9f-456b-98d5-442107f89576</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;In this activity the employee enters the documents requested by the Permissions Manager.&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet>
+              <Output ArtifactId="9e7e48f2-fbdc-4d5d-8265-535fafdf3618" />
+            </OutputSet>
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="390" YCoordinate="239" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+            <ExtendedAttribute Name="Duration" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" />
+            <ExtendedAttribute Name="Allocations" Value="Table" />
+            <ExtendedAttribute Name="Notify_x0020_assignment" Value="" />
+            <ExtendedAttribute Name="Forms" Value="Table" />
+            <ExtendedAttribute Name="Forms_x0020_behaviors" Value="Table" />
+            <ExtendedAttribute Name="Actions" Value="Table" />
+            <ExtendedAttribute Name="Notifications" Value="Table" />
+            <ExtendedAttribute Name="REGRA" />
+            <ExtendedAttribute Name="RNF" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="074c67aa-c07b-4ecd-b704-9bc94acff6ce" Name="Manage Permissions">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The Permissions Manager reviews the request and performs the necessary actions for each requested permission. For each one, the following options can be chosen:&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;- Request Installation or additional Support: This option is used to send the request to the Support Department for activating, deactivating or changing the privileges of permissions that are not able to be managed directly by the Permissions Manager.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;-Reject: If for any reason the activation, deactivation or change of privileges of a permission was not possible, the action over the permission must be marked as rejected.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;- Mark as ready: Once the requested action over a permission has been executed it must be marked as ready.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;It is important to advice that the process will not be able to continue if all the requested permissions are not marked as ready or rejected. The permissions marked as ready will update the list of user´s active permissions in bizagi with the addition, removal or changing of privileges while the permissions marked as rejected will not change anything in that list.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>f9e66704-f2dc-4718-a5cb-c43089fa56a6</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The Permissions Manager reviews the request and performs the necessary actions for each requested permission. For each one, the following options can be chosen:&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;- Request Installation or additional Support: This option is used to send the request to the Support Department for activating, deactivating or changing the privileges of permissions that are not able to be managed directly by the Permissions Manager.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;-Reject: If for any reason the activation, deactivation or change of privileges of a permission was not possible, the action over the permission must be marked as rejected.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;- Mark as ready: Once the requested action over a permission has been executed it must be marked as ready.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;It is important to advice that the process will not be able to continue if all the requested permissions are not marked as ready or rejected. The permissions marked as ready will update the list of user´s active permissions in bizagi with the addition, removal or changing of privileges while the permissions marked as rejected will not change anything in that list.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="345" YCoordinate="367.60003662109375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+            <ExtendedAttribute Name="Duration" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Times New Roman;font-size:12pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+            <ExtendedAttribute Name="Allocations" Value="Table" />
+            <ExtendedAttribute Name="Notify_x0020_assignment" Value="" />
+            <ExtendedAttribute Name="Forms" Value="Table" />
+            <ExtendedAttribute Name="Forms_x0020_behaviors" Value="Table" />
+            <ExtendedAttribute Name="Actions" Value="Table" />
+            <ExtendedAttribute Name="Notifications" Value="Table" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="9c1c3335-e857-4356-95c2-c158f9eeb83c" Name="Report Support Accomplishment">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The person of the support team in charge of the requested permissions management registers that the task has been made&lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>fcccbc92-defd-4818-a5aa-b3f4a937c6ac</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The person of the support team in charge of the requested permissions management registers that the task has been made&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet>
+              <Output ArtifactId="69753954-cb8f-4c65-9151-9d3fd5b86559" />
+            </OutputSet>
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="110" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="521" YCoordinate="63" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+            <ExtendedAttribute Name="Duration" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+            <ExtendedAttribute Name="Allocations" Value="Table" />
+            <ExtendedAttribute Name="Notify_x0020_assignment" Value="" />
+            <ExtendedAttribute Name="Forms" Value="Table" />
+            <ExtendedAttribute Name="Forms_x0020_behaviors" Value="Table" />
+            <ExtendedAttribute Name="Actions" Value="Table" />
+            <ExtendedAttribute Name="Notifications" Value="Table" />
+          </ExtendedAttributes>
+        </Activity>
+      </Activities>
+      <DataObjects>
+        <DataObject Id="f81876f8-86d9-47c1-8bd3-835f8dd5923b" Name="Request Form">
+          <Object>
+            <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This form is used to enter the information of the request &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;</Documentation>
+          </Object>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="180" YCoordinate="54" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <DataField />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;reason:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;description:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;employee name:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;identification number:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;telephone number:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;email:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;area:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;permission:Permission;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt; &lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataObject>
+        <DataObject Id="097fcfd5-9f33-4bbe-b8d2-629955a04b58" Name="Approval Form">
+          <Object>
+            <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This form is used to approve or reject the requested permissions&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;</Documentation>
+          </Object>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="146" YCoordinate="504.60003662109375" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <DataField />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;name&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;identification number:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;telephone number:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;area:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;email:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;reasons:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;description:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;attachment:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;permission&lt;/span&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;:Permission;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataObject>
+        <DataObject Id="3eaf4ea7-e835-4bbb-8c1b-fdd684541fb3" Name="Notification">
+          <Object>
+            <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Dear We are sorry to inform you that your Boss has rejected the activation of the following permissions:Thanks for your comprehension.Yours sincerelyPermission Management&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;&amp;nbsp;Dear Below you find the summary of the actions performed over the permissions of your request:Yours sincerelyPermissions Management&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Dear We have analyzed your request and we need you to send the following information:Yours sincerelyPermissions Management&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;</Documentation>
+          </Object>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="776" YCoordinate="190.30000305175781" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <DataField />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;id:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;module:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;privilege:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;requested action:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;reason:T;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataObject>
+        <DataObject Id="6ba3ebe0-7958-4dc4-93c6-2583b86911c9" Name="Send Documents Form">
+          <Object>
+            <Documentation />
+          </Object>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="370" YCoordinate="130.30000305175781" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <DataField />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;reasons:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;description:T; &lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;permission:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;module:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;privilege:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;requestedAction:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;document:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;response:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;attachment:T;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataObject>
+        <DataObject Id="206a76dd-dc4b-4596-abff-ed3c654071c7" Name="Report Service Form">
+          <Object>
+            <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This form is used to report the accomplishment of the management over the requested permissions.&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;</Documentation>
+          </Object>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="805" YCoordinate="61" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <DataField />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;reasons&lt;/span&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;description&lt;/span&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;attachment&lt;/span&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;name&lt;/span&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;identification number:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;telephone number&lt;/span&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;email&lt;/span&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;area:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;permission:Permission;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataObject>
+      </DataObjects>
+      <DataStoreReferences>
+        <DataStoreReference DataStoreRef="f3383a28-c861-450d-9af5-a6be1748434e" Id="ceaef87c-f04e-486b-b306-7772f27ead02" State="">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="50" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="865" YCoordinate="229" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;id:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;module:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;privilege:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;requested action:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;action to execute:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;approved:B;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;approvalcomments:T;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataStoreReference>
+      </DataStoreReferences>
+      <Transitions>
+        <Transition Id="1552868a-c63c-4d2f-9726-114eaf6328a9" From="fe5a1b14-1f1c-4ca1-9eb5-459cda63a5bd" To="2df7d946-d1ad-4def-889e-cb313da51b9f" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="242" YCoordinate="248" />
+              <Coordinates XCoordinate="242" YCoordinate="363.30001831054687" />
+              <Coordinates XCoordinate="206" YCoordinate="363.30001831054687" />
+              <Coordinates XCoordinate="206" YCoordinate="397" />
+              <Coordinates XCoordinate="220" YCoordinate="397" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="4ab2b78c-72aa-47c0-96e7-c6849bc07e28" From="074c67aa-c07b-4ecd-b704-9bc94acff6ce" To="3b56fd59-3be4-4f22-babb-7c13ef9e48c0" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="435" YCoordinate="397" />
+              <Coordinates XCoordinate="520" YCoordinate="397" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="fbee2581-d5ba-4000-ad3e-7c89c886a334" From="3b56fd59-3be4-4f22-babb-7c13ef9e48c0" To="4c166262-84ee-42fe-90e9-86b98e480afc" Name="YES">
+          <Condition Type="CONDITION">
+            <Expression>The necessary documents are requested.</Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="540" YCoordinate="377" />
+              <Coordinates XCoordinate="540" YCoordinate="337.5" />
+              <Coordinates XCoordinate="603" YCoordinate="337.5" />
+              <Coordinates XCoordinate="603" YCoordinate="299" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="a853e3a2-ad32-4ae7-a0b1-72a2164212f7" From="4c166262-84ee-42fe-90e9-86b98e480afc" To="c4b7978f-3019-4041-9b86-53df78902880" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="603" YCoordinate="239" />
+              <Coordinates XCoordinate="603" YCoordinate="225" />
+              <Coordinates XCoordinate="435" YCoordinate="225" />
+              <Coordinates XCoordinate="435" YCoordinate="239" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="fb486c09-b940-4459-87ad-edf2e52153d7" From="c4b7978f-3019-4041-9b86-53df78902880" To="074c67aa-c07b-4ecd-b704-9bc94acff6ce" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="390" YCoordinate="269" />
+              <Coordinates XCoordinate="376" YCoordinate="269" />
+              <Coordinates XCoordinate="376" YCoordinate="312.70001220703125" />
+              <Coordinates XCoordinate="390" YCoordinate="312.70001220703125" />
+              <Coordinates XCoordinate="390" YCoordinate="367" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="ec3984d9-d207-4c0d-b989-5df7e767dbe4" From="65cdce69-7046-4864-acca-604a012a64a5" To="7f7c2716-ca27-402f-9827-da90973f56c9" Name="NO">
+          <Condition Type="CONDITION">
+            <Expression>The process continues to the activity “Update Permissions”</Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="685" YCoordinate="397" />
+              <Coordinates XCoordinate="685" YCoordinate="417" />
+              <Coordinates XCoordinate="738" YCoordinate="417" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="7eebde0f-9dcc-4fb2-9630-225fb925a0c7" From="3b56fd59-3be4-4f22-babb-7c13ef9e48c0" To="65cdce69-7046-4864-acca-604a012a64a5" Name="NO">
+          <Condition Type="CONDITION">
+            <Expression>The process continues to the Gateway “Installation or additional support required?”</Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="560" YCoordinate="397" />
+              <Coordinates XCoordinate="633.5" YCoordinate="397" />
+              <Coordinates XCoordinate="633.5" YCoordinate="377" />
+              <Coordinates XCoordinate="665" YCoordinate="377" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="50e2c767-5799-48b9-8fa6-3dbeac9cd7fa" From="e840420d-cce4-4d2b-a278-0e9b3d41fa2e" To="fe5a1b14-1f1c-4ca1-9eb5-459cda63a5bd" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="169" YCoordinate="218" />
+              <Coordinates XCoordinate="197" YCoordinate="218" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="fb181e75-8dba-46e3-9972-634d57d59592" From="2df7d946-d1ad-4def-889e-cb313da51b9f" To="074c67aa-c07b-4ecd-b704-9bc94acff6ce" Name="NO">
+          <Condition Type="CONDITION">
+            <Expression>The process continues to the activity “Manage Permissions” </Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="240" YCoordinate="377" />
+              <Coordinates XCoordinate="240" YCoordinate="364" />
+              <Coordinates XCoordinate="294" YCoordinate="364" />
+              <Coordinates XCoordinate="294" YCoordinate="397" />
+              <Coordinates XCoordinate="345" YCoordinate="397" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="c6696f95-ef1e-49dc-811e-3ac34656a26a" From="2df7d946-d1ad-4def-889e-cb313da51b9f" To="303a890b-ead0-405e-9534-ba0da136eba4" Name="YES">
+          <Condition Type="CONDITION">
+            <Expression>The process continues to the activity “Approve Permissions”</Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="240" YCoordinate="417" />
+              <Coordinates XCoordinate="240" YCoordinate="506" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="94a49974-b823-4a04-8768-24ee123d1a31" From="303a890b-ead0-405e-9534-ba0da136eba4" To="a826c240-497f-4bd1-851e-185a7d34ef34" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="285" YCoordinate="536" />
+              <Coordinates XCoordinate="347" YCoordinate="536" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="d5a90c20-7e38-4362-9e30-6529fb8d2b7e" From="a826c240-497f-4bd1-851e-185a7d34ef34" To="074c67aa-c07b-4ecd-b704-9bc94acff6ce" Name="YES">
+          <Condition Type="CONDITION">
+            <Expression />
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="367" YCoordinate="516" />
+              <Coordinates XCoordinate="367" YCoordinate="461.5" />
+              <Coordinates XCoordinate="390" YCoordinate="461.5" />
+              <Coordinates XCoordinate="390" YCoordinate="427" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="f9b90664-add3-4c10-953f-cf290c13609a" From="a826c240-497f-4bd1-851e-185a7d34ef34" To="7b54ed6c-aea6-4626-9a8a-9349b061627f" Name="NO">
+          <Condition Type="CONDITION">
+            <Expression />
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="387" YCoordinate="536" />
+              <Coordinates XCoordinate="451" YCoordinate="536" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="1e84213a-5bef-40fb-9ebd-b33076699881" From="7b54ed6c-aea6-4626-9a8a-9349b061627f" To="1c83a7e6-e495-4857-81e6-ce6b117048ca" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="541" YCoordinate="536" />
+              <Coordinates XCoordinate="577" YCoordinate="536" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="867723df-f6bd-41c4-b4ea-8bf18728d3b1" From="65cdce69-7046-4864-acca-604a012a64a5" To="9c1c3335-e857-4356-95c2-c158f9eeb83c" Name="YES">
+          <Condition Type="CONDITION">
+            <Expression>The process continues to the activity “Record Service Accomplishment”</Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="685" YCoordinate="357" />
+              <Coordinates XCoordinate="685" YCoordinate="224.69999694824219" />
+              <Coordinates XCoordinate="576" YCoordinate="224.69999694824219" />
+              <Coordinates XCoordinate="576" YCoordinate="123" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="90a9ada5-2d94-4675-ae7f-ae80cb6c8618" From="9c1c3335-e857-4356-95c2-c158f9eeb83c" To="074c67aa-c07b-4ecd-b704-9bc94acff6ce" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="521" YCoordinate="93" />
+              <Coordinates XCoordinate="355" YCoordinate="93" />
+              <Coordinates XCoordinate="355" YCoordinate="367" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="ed652e8a-e0fc-4832-9257-b09003871033" From="7f7c2716-ca27-402f-9827-da90973f56c9" To="886c2b4e-e975-43c7-8de1-2b6d99e31bfe" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="828" YCoordinate="417" />
+              <Coordinates XCoordinate="870" YCoordinate="417" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="4c5fe95c-ebe8-47dc-ae00-04b0621ae3ab" From="886c2b4e-e975-43c7-8de1-2b6d99e31bfe" To="e84d865b-f39c-4026-ba07-49448b96d244" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="960" YCoordinate="417" />
+              <Coordinates XCoordinate="988" YCoordinate="417" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+      </Transitions>
+      <DataAssociations>
+        <DataAssociation Id="004c845c-6676-4605-bcaa-6313e455f695" From="e2724708-1a3d-4179-868d-81553867683d" To="3eaf4ea7-e835-4bbb-8c1b-fdd684541fb3">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="7e4127cb-7e23-4fe5-9fee-1bffa849efda" From="4032fec3-c9e5-4cfc-9172-ad327ceb3791" To="3eaf4ea7-e835-4bbb-8c1b-fdd684541fb3">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="04db10e1-c4c9-4541-a89f-57710258630a" From="e321e2fb-aeed-4619-baa6-2e59a84e80e8" To="3eaf4ea7-e835-4bbb-8c1b-fdd684541fb3">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="7594cde7-5bae-4fd0-9624-b3095c5ccb0f" From="ceaef87c-f04e-486b-b306-7772f27ead02" To="0d60194c-278c-4007-878f-57e45f62552a">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="136e6fd8-d6d2-4f57-a12b-8f6e886b8d95" From="9e9b769a-6870-49f5-893a-4059e81d314b" To="f81876f8-86d9-47c1-8bd3-835f8dd5923b">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="71e73329-fd21-40e9-9fec-8a5f802cd5c5" From="adca625e-d72c-476c-b28a-258cfee71ea2" To="097fcfd5-9f33-4bbe-b8d2-629955a04b58">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="e88722ec-43c0-414c-a25e-3be75d65d956" From="9e7e48f2-fbdc-4d5d-8265-535fafdf3618" To="6ba3ebe0-7958-4dc4-93c6-2583b86911c9">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="15c9ce65-0a1b-4ab8-8bc7-463155852719" From="69753954-cb8f-4c65-9151-9d3fd5b86559" To="206a76dd-dc4b-4596-abff-ed3c654071c7">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+      </DataAssociations>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;processClassProperties&quot;:{&quot;displayName&quot;:&quot;Access Management&quot;,&quot;accessType&quot;:&quot;Process&quot;,&quot;order&quot;:0,&quot;enableAlarms&quot;:false,&quot;enableNotifications&quot;:false,&quot;creationDate&quot;:&quot;2016-08-26T13:39:15.3121946-03:00&quot;},&quot;processProperties&quot;:{&quot;version&quot;:{&quot;numberVersion&quot;:&quot;1.0&quot;,&quot;isActive&quot;:true},&quot;versionCreationDate&quot;:&quot;2016-08-26T13:39:15.3121946-03:00&quot;,&quot;supportsScopes&quot;:false,&quot;caseAccessType&quot;:&quot;Public&quot;,&quot;renderVersion&quot;:2,&quot;formsVersion&quot;:0}}" />
+      </ExtendedAttributes>
+    </WorkflowProcess>
+  </WorkflowProcesses>
+  <ExtendedAttributes />
+</Package>

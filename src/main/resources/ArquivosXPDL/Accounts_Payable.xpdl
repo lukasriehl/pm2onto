@@ -1,0 +1,960 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="ec7401dd-faf4-4150-a04d-e8dc1726582c" Name="Accounts  Payable" xmlns="http://www.wfmc.org/2009/XPDL2.2">
+  <PackageHeader>
+    <XPDLVersion>2.2</XPDLVersion>
+    <Vendor>Bizagi Process Modeler.</Vendor>
+    <Created>2011-03-09T12:07:54.151-03:00</Created>
+    <ModificationDate>2018-01-13T17:51:19.3789184-02:00</ModificationDate>
+    <Description>Accounts  Payable</Description>
+    <Documentation>&lt;p&gt;&lt;span style="font-family:Segoe UI;font-size:8pt;"&gt;As your business grows the large number of bills to be processed daily, can become a critical and complicated task. The impacts generated when they are incorrectly processed or no one remembers to take care of them makes this activity a problem. Eventually this will cause late payments, incorrect payments, lost discounts, among other things.&lt;/span&gt;&lt;/p&gt;
+		&lt;p&gt;&lt;span style="font-family:Segoe UI;font-size:8pt;"&gt;Therefore Bizagi offers the solution with the Accounts Payable process. &lt;/span&gt;&lt;/p&gt;
+		&lt;p&gt;&lt;span style="font-family:Segoe UI;font-size:8pt;"&gt;It will help to improve the process of receiving, verifying and approving invoices, reducing processing time and avoiding misinformation.&lt;/span&gt;&lt;/p&gt;
+		&lt;p&gt;&lt;span style="font-family:Segoe UI;font-size:8pt;"&gt;Accounts Payable supports you through the invoice reception, validate and approval task, reducing process time and avoiding incorrect information. &lt;/span&gt;&lt;/p&gt;</Documentation>
+  </PackageHeader>
+  <RedefinableHeader>
+    <Author>Bizagi Process Modeler.</Author>
+    <Version>1.0</Version>
+    <Countrykey>CO</Countrykey>
+  </RedefinableHeader>
+  <ExternalPackages />
+  <Participants>
+    <Participant Id="f07c2cde-f692-4696-aa06-a312463cfa4f" Name="Receptionist">
+      <ParticipantType Type="ROLE" />
+      <Description>Worker that receives the invoices, starting the process</Description>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="Receptionist" />
+      </ExtendedAttributes>
+    </Participant>
+    <Participant Id="4380b4c4-c48d-44d9-9e99-ecfabeba11b0" Name="Financial Assistant">
+      <ParticipantType Type="ROLE" />
+      <Description>Worker responsible for validate and check invoices.</Description>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="Financial_Assistant" />
+      </ExtendedAttributes>
+    </Participant>
+    <Participant Id="6d09a658-9e9f-411c-b7fe-16341002d3d5" Name="Accountant">
+      <ParticipantType Type="ROLE" />
+      <Description>Worker responsible for updating financial information in the accountant recordings</Description>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="Accountant" />
+      </ExtendedAttributes>
+    </Participant>
+    <Participant Id="b234668e-a815-4fc6-b0de-9e9ac781187a" Name="Administration Manager ">
+      <ParticipantType Type="ROLE" />
+      <Description>Worker responsible for approving products</Description>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="Administration_Manager_" />
+      </ExtendedAttributes>
+    </Participant>
+  </Participants>
+  <DataStores>
+    <DataStore Id="ab3f1230-37b9-4584-a4cc-de139416ba5f" Name="Invoice" IsUnlimited="true">
+      <Object>
+        <Documentation />
+      </Object>
+    </DataStore>
+    <DataStore Id="1f24a0c7-24e6-42c0-8986-2157e6a59aab" Name="Purchase Order" IsUnlimited="true">
+      <Object>
+        <Documentation />
+      </Object>
+    </DataStore>
+  </DataStores>
+  <Pools>
+    <Pool Id="332b4844-b5c6-44ec-a111-7de697bad577" Name="Main Process" Process="aa9413e7-9727-4760-9567-417fd401f951" BoundaryVisible="false">
+      <Lanes />
+      <NodeGraphicsInfos>
+        <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="350" Width="700" BorderColor="-16777216" FillColor="-1">
+          <Coordinates XCoordinate="0" YCoordinate="0" />
+        </NodeGraphicsInfo>
+      </NodeGraphicsInfos>
+    </Pool>
+    <Pool Id="71bb05d9-47b9-4ce4-8b89-b541a2b721ed" Name="Accounts Payable" Process="fffd5568-2495-45c0-8dc9-e6868dc54d20" BoundaryVisible="true">
+      <Lanes>
+        <Lane Id="e20d2169-33ce-45f3-a12d-f8fa7d19ae14" Name="Reception" ParentPool="71bb05d9-47b9-4ce4-8b89-b541a2b721ed">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="138.9659423828125" Width="789" BorderColor="-11513776" FillColor="-1">
+              <Coordinates XCoordinate="50" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Lane>
+        <Lane Id="b42579d8-eb17-4557-9136-631cf068ebb7" Name="Financial Assistant" ParentPool="71bb05d9-47b9-4ce4-8b89-b541a2b721ed">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="205" Width="789" BorderColor="-11513776" FillColor="-1">
+              <Coordinates XCoordinate="50" YCoordinate="138.9659423828125" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Lane>
+        <Lane Id="5e1e7b8e-d492-47d5-b659-669ff30cdc27" Name="Administrative Manager" ParentPool="71bb05d9-47b9-4ce4-8b89-b541a2b721ed">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="155" Width="789" BorderColor="-11513776" FillColor="-1">
+              <Coordinates XCoordinate="50" YCoordinate="343.9659423828125" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Lane>
+        <Lane Id="aca20dce-7110-4e0d-b5cf-365905962341" Name="Accounting" ParentPool="71bb05d9-47b9-4ce4-8b89-b541a2b721ed">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="130.0340576171875" Width="789" BorderColor="-11513776" FillColor="-1">
+              <Coordinates XCoordinate="50" YCoordinate="498.9659423828125" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Lane>
+      </Lanes>
+      <NodeGraphicsInfos>
+        <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="629" Width="839" BorderColor="-16777216" FillColor="-1">
+          <Coordinates XCoordinate="60" YCoordinate="60" />
+        </NodeGraphicsInfo>
+      </NodeGraphicsInfos>
+    </Pool>
+  </Pools>
+  <Associations>
+    <Association Id="96b402e8-1f1a-40dd-9a08-629cfe73ea56" Source="ee364a1b-f764-4a9f-a8b8-07478ce53611" Target="b5e549a5-b786-4f3e-992c-05ccf6431750">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="244" YCoordinate="218" />
+          <Coordinates XCoordinate="244" YCoordinate="201.5" />
+          <Coordinates XCoordinate="259" YCoordinate="201.5" />
+          <Coordinates XCoordinate="259" YCoordinate="160" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="6861a087-b7fb-4872-812a-2665453ca3d7" Source="cb137e51-3d62-4335-8978-000dd0cf1903" Target="81825f3d-b1ba-4b5d-948c-4a1f480b1b24">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="730" YCoordinate="457" />
+          <Coordinates XCoordinate="839" YCoordinate="457" />
+          <Coordinates XCoordinate="839" YCoordinate="463" />
+          <Coordinates XCoordinate="797" YCoordinate="463" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="deb7635e-0d77-484b-9714-10a4c650c26e" Source="26887417-71b7-4aad-b09e-f60d7f419461" Target="b5e549a5-b786-4f3e-992c-05ccf6431750">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="483" YCoordinate="84" />
+          <Coordinates XCoordinate="483" YCoordinate="66" />
+          <Coordinates XCoordinate="259" YCoordinate="66" />
+          <Coordinates XCoordinate="259" YCoordinate="100" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="e6a51f23-5c04-4596-acd1-893d6251c0f3" Source="9122c883-acdf-479b-becb-c9239f6f7439" Target="b5e549a5-b786-4f3e-992c-05ccf6431750">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="399" YCoordinate="123" />
+          <Coordinates XCoordinate="399" YCoordinate="65" />
+          <Coordinates XCoordinate="259" YCoordinate="65" />
+          <Coordinates XCoordinate="259" YCoordinate="100" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+  </Associations>
+  <WorkflowProcesses>
+    <WorkflowProcess Id="aa9413e7-9727-4760-9567-417fd401f951" Name="Main Process">
+      <ProcessHeader>
+        <Created>2018-01-13T17:51:39.88098-02:00</Created>
+        <Description />
+      </ProcessHeader>
+      <RedefinableHeader>
+        <Author />
+        <Version />
+        <Countrykey>CO</Countrykey>
+      </RedefinableHeader>
+      <ActivitySets />
+      <DataInputOutputs />
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;processClassProperties&quot;:{&quot;displayName&quot;:&quot;Main Process&quot;,&quot;accessType&quot;:&quot;Process&quot;,&quot;order&quot;:0,&quot;enableAlarms&quot;:false,&quot;enableNotifications&quot;:false,&quot;creationDate&quot;:&quot;2016-08-26T13:49:12.4811005-03:00&quot;},&quot;processProperties&quot;:{&quot;version&quot;:{&quot;numberVersion&quot;:&quot;1.0&quot;,&quot;isActive&quot;:true},&quot;versionCreationDate&quot;:&quot;2016-08-26T13:49:12.4811005-03:00&quot;,&quot;supportsScopes&quot;:false,&quot;caseAccessType&quot;:&quot;Public&quot;,&quot;renderVersion&quot;:2,&quot;formsVersion&quot;:0}}" />
+      </ExtendedAttributes>
+    </WorkflowProcess>
+    <WorkflowProcess Id="fffd5568-2495-45c0-8dc9-e6868dc54d20" Name="Accounts Payable">
+      <ProcessHeader>
+        <Created>2018-01-13T17:51:39.88098-02:00</Created>
+        <Description />
+      </ProcessHeader>
+      <RedefinableHeader>
+        <Author />
+        <Version />
+        <Countrykey>CO</Countrykey>
+      </RedefinableHeader>
+      <ActivitySets>
+        <ActivitySet Id="b48087b1-d1d4-4cc2-b97a-dd1fe685b34d" Name="Return Invoice to Supplier">
+          <Associations>
+            <Association Id="4a2be19e-a557-42fb-932d-f1498f1efb0f" Source="333dfd84-a4f7-4c7b-bc93-52c26db3016e" Target="2b0d5805-4f89-4879-b601-1e3394b2d0c5">
+              <ConnectorGraphicsInfos>
+                <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+                  <Coordinates XCoordinate="547" YCoordinate="150" />
+                  <Coordinates XCoordinate="547" YCoordinate="176.5" />
+                  <Coordinates XCoordinate="481" YCoordinate="176.5" />
+                  <Coordinates XCoordinate="481" YCoordinate="203" />
+                </ConnectorGraphicsInfo>
+              </ConnectorGraphicsInfos>
+              <ExtendedAttributes />
+            </Association>
+            <Association Id="c4f5bdf2-17ae-4f9c-9e9b-8c5f4571b9ec" Source="7e032e15-06c3-4313-a9aa-3d92332d8302" Target="86153b69-b435-43fd-96ea-778ac413f1d5">
+              <ConnectorGraphicsInfos>
+                <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+                  <Coordinates XCoordinate="366" YCoordinate="150" />
+                  <Coordinates XCoordinate="366" YCoordinate="171" />
+                  <Coordinates XCoordinate="281" YCoordinate="171" />
+                  <Coordinates XCoordinate="281" YCoordinate="192" />
+                </ConnectorGraphicsInfo>
+              </ConnectorGraphicsInfos>
+              <ExtendedAttributes />
+            </Association>
+          </Associations>
+          <Artifacts />
+          <Activities>
+            <Activity Id="c904bcb7-532a-4512-ae4e-646148a3666b" Name="Return Products">
+              <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The products are returned to the supplier´s address.&lt;/span&gt;&lt;/p&gt;</Description>
+              <Implementation>
+                <Task>
+                  <TaskManual />
+                </Task>
+              </Implementation>
+              <Performers />
+              <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The products are returned to the supplier´s address.&lt;/span&gt;&lt;/p&gt;</Documentation>
+              <Loop LoopType="None" />
+              <NodeGraphicsInfos>
+                <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+                  <Coordinates XCoordinate="631" YCoordinate="240" />
+                </NodeGraphicsInfo>
+              </NodeGraphicsInfos>
+              <ExtendedAttributes>
+                <ExtendedAttribute Name="RuntimeProperties" Value="{}" />
+                <ExtendedAttribute Name="Forma" Value="return products.png" />
+              </ExtendedAttributes>
+            </Activity>
+            <Activity Id="ec807a00-184a-406d-807f-6c04ca780339" Name="Products have to be returned ">
+              <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;If previous steps in the process indicate that the products must be returned, the next task is Return Products. If not the process ends. &lt;/span&gt;&lt;/p&gt;</Description>
+              <Route MarkerVisible="true" />
+              <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;If previous steps in the process indicate that the products must be returned, the next task is Return Products. If not the process ends. &lt;/span&gt;&lt;/p&gt;</Documentation>
+              <NodeGraphicsInfos>
+                <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="40" Width="40" BorderColor="-5855715" FillColor="-52">
+                  <Coordinates XCoordinate="656" YCoordinate="100" />
+                </NodeGraphicsInfo>
+              </NodeGraphicsInfos>
+              <ExtendedAttributes />
+            </Activity>
+            <Activity Id="59e8eed4-2744-42f1-8871-e3016076034b" Name="End event if products have to be returned">
+              <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;End event if products have to be returned&lt;/span&gt;&lt;/p&gt;</Description>
+              <Event>
+                <EndEvent Result="None" />
+              </Event>
+              <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;End event if products have to be returned&lt;/span&gt;&lt;/p&gt;</Documentation>
+              <NodeGraphicsInfos>
+                <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-6750208" FillColor="-1135958">
+                  <Coordinates XCoordinate="821" YCoordinate="255" />
+                </NodeGraphicsInfo>
+              </NodeGraphicsInfos>
+              <ExtendedAttributes />
+            </Activity>
+            <Activity Id="333dfd84-a4f7-4c7b-bc93-52c26db3016e" Name="Inform Supplier">
+              <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This is done automatically by sending an email to the supplier with the reason for the rejection of the invoice and the return of products.&lt;/span&gt;&lt;/p&gt;</Description>
+              <Implementation>
+                <Task>
+                  <TaskScript>
+                    <Script>Dear &lt;idInvoice.Supplier.Supplier&gt;The invoice received on &lt;idInvoice.ReceptionDate&gt; has the following inconsistencies:&lt;idInvoice.Observations&gt;And &lt;idInvoice.ApprovalObservations&gt;Please return the invoice with the corrected information</Script>
+                  </TaskScript>
+                </Task>
+              </Implementation>
+              <Performers>
+                <Performer>4380b4c4-c48d-44d9-9e99-ecfabeba11b0</Performer>
+              </Performers>
+              <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This is done automatically by sending an email to the supplier with the reason for the rejection of the invoice and the return of products.&lt;/span&gt;&lt;/p&gt;</Documentation>
+              <InputSets>
+                <InputSet />
+                <InputSet />
+                <InputSet />
+              </InputSets>
+              <OutputSets>
+                <OutputSet />
+                <OutputSet />
+                <OutputSet />
+              </OutputSets>
+              <Loop LoopType="None" />
+              <NodeGraphicsInfos>
+                <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+                  <Coordinates XCoordinate="502" YCoordinate="90" />
+                </NodeGraphicsInfo>
+              </NodeGraphicsInfos>
+              <ExtendedAttributes />
+            </Activity>
+            <Activity Id="5de78156-3e23-4ae4-a050-4a87bcf584cb" Name="Start event for return invoice to supplier">
+              <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;End event if products have to be returned.&lt;/span&gt;&lt;/p&gt;</Description>
+              <Event>
+                <StartEvent Trigger="None" />
+              </Event>
+              <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;End event if products have to be returned.&lt;/span&gt;&lt;/p&gt;</Documentation>
+              <NodeGraphicsInfos>
+                <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-10311914" FillColor="-1638505">
+                  <Coordinates XCoordinate="181" YCoordinate="105" />
+                </NodeGraphicsInfo>
+              </NodeGraphicsInfos>
+              <ExtendedAttributes>
+                <ExtendedAttribute Name="RuntimeProperties" Value="{}" />
+              </ExtendedAttributes>
+            </Activity>
+            <Activity Id="d008d4ec-d850-4a55-80c7-64388ca1932f" Name="End event if no products have to be returned">
+              <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;End event if no products have to be returned&lt;/span&gt;&lt;/p&gt;</Description>
+              <Event>
+                <EndEvent Result="None" />
+              </Event>
+              <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;End event if no products have to be returned&lt;/span&gt;&lt;/p&gt;</Documentation>
+              <NodeGraphicsInfos>
+                <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-6750208" FillColor="-1135958">
+                  <Coordinates XCoordinate="809" YCoordinate="105" />
+                </NodeGraphicsInfo>
+              </NodeGraphicsInfos>
+              <ExtendedAttributes />
+            </Activity>
+            <Activity Id="7e032e15-06c3-4313-a9aa-3d92332d8302" Name="Justify  the rejection">
+              <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;indicate the reason for rejection&lt;/span&gt;&lt;/p&gt;</Description>
+              <Implementation>
+                <Task>
+                  <TaskUser Implementation="Unspecified" />
+                </Task>
+              </Implementation>
+              <Performers>
+                <Performer>4380b4c4-c48d-44d9-9e99-ecfabeba11b0</Performer>
+              </Performers>
+              <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;indicate the reason for rejection&lt;/span&gt;&lt;/p&gt;</Documentation>
+              <InputSets>
+                <InputSet />
+                <InputSet />
+                <InputSet />
+              </InputSets>
+              <OutputSets>
+                <OutputSet />
+                <OutputSet />
+                <OutputSet />
+              </OutputSets>
+              <Loop LoopType="None" />
+              <NodeGraphicsInfos>
+                <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+                  <Coordinates XCoordinate="321" YCoordinate="90" />
+                </NodeGraphicsInfo>
+              </NodeGraphicsInfos>
+              <ExtendedAttributes>
+                <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+                <ExtendedAttribute Name="REGRA" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;If the invoice is rejected, the person who executes this task must indicate the reason for rejection either because the information does not match the purchase order or because the products or services are unsatisfactory;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" />
+                <ExtendedAttribute Name="RNF" />
+              </ExtendedAttributes>
+            </Activity>
+          </Activities>
+          <DataObjects>
+            <DataObject Id="2b0d5805-4f89-4879-b601-1e3394b2d0c5" Name="Reject Notification">
+              <Object>
+                <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Dear The invoice received on has the following inconsistencies:And Please return the invoice with the corrected information&lt;/span&gt;&lt;/p&gt;</Documentation>
+              </Object>
+              <NodeGraphicsInfos>
+                <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+                  <Coordinates XCoordinate="461" YCoordinate="203" />
+                </NodeGraphicsInfo>
+              </NodeGraphicsInfos>
+              <DataField />
+              <ExtendedAttributes>
+                <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;spplierId:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;observations:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;receptionDate:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;approvalObservations:T;&lt;/span&gt;&lt;/p&gt;" />
+              </ExtendedAttributes>
+            </DataObject>
+            <DataObject Id="86153b69-b435-43fd-96ea-778ac413f1d5" Name="Rejection Form">
+              <Object>
+                <Documentation />
+              </Object>
+              <NodeGraphicsInfos>
+                <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+                  <Coordinates XCoordinate="261" YCoordinate="192" />
+                </NodeGraphicsInfo>
+              </NodeGraphicsInfos>
+              <DataField />
+              <ExtendedAttributes>
+                <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;invoiceData:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;invoiceNumber:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;approvedInvoice:B;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;approvedInspection:B;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;inspectionComments:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;comments:T;&lt;/span&gt;&lt;/p&gt;" />
+              </ExtendedAttributes>
+            </DataObject>
+          </DataObjects>
+          <Transitions>
+            <Transition Id="d16bf1f9-5895-4078-bcbc-0a508e3a9306" From="ec807a00-184a-406d-807f-6c04ca780339" To="c904bcb7-532a-4512-ae4e-646148a3666b" Name="Yes">
+              <Condition Type="CONDITION">
+                <Expression>If the Approve Products / Services task indicated that the products require changing, the process continues with the task of Return Products </Expression>
+              </Condition>
+              <Description />
+              <ConnectorGraphicsInfos>
+                <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+                  <Coordinates XCoordinate="676" YCoordinate="140" />
+                  <Coordinates XCoordinate="676" YCoordinate="240" />
+                </ConnectorGraphicsInfo>
+              </ConnectorGraphicsInfos>
+              <ExtendedAttributes />
+            </Transition>
+            <Transition Id="1bb25d73-7515-450f-ae19-1e0a805cf101" From="ec807a00-184a-406d-807f-6c04ca780339" To="d008d4ec-d850-4a55-80c7-64388ca1932f" Name="No">
+              <Condition Type="CONDITION">
+                <Expression>If it is not necessary to return the products, the process ends.</Expression>
+              </Condition>
+              <Description />
+              <ConnectorGraphicsInfos>
+                <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+                  <Coordinates XCoordinate="696" YCoordinate="120" />
+                  <Coordinates XCoordinate="809" YCoordinate="120" />
+                </ConnectorGraphicsInfo>
+              </ConnectorGraphicsInfos>
+              <ExtendedAttributes />
+            </Transition>
+            <Transition Id="754b0343-c2e6-4853-b527-e6b9b7b7cc97" From="c904bcb7-532a-4512-ae4e-646148a3666b" To="59e8eed4-2744-42f1-8871-e3016076034b" Name="">
+              <Condition />
+              <Description />
+              <ConnectorGraphicsInfos>
+                <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+                  <Coordinates XCoordinate="721" YCoordinate="270" />
+                  <Coordinates XCoordinate="821" YCoordinate="270" />
+                </ConnectorGraphicsInfo>
+              </ConnectorGraphicsInfos>
+              <ExtendedAttributes />
+            </Transition>
+            <Transition Id="4022ad6e-63ee-4cdf-a33b-40f0fb03bb86" From="5de78156-3e23-4ae4-a050-4a87bcf584cb" To="7e032e15-06c3-4313-a9aa-3d92332d8302" Name="">
+              <Condition />
+              <Description />
+              <ConnectorGraphicsInfos>
+                <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+                  <Coordinates XCoordinate="211" YCoordinate="120" />
+                  <Coordinates XCoordinate="321" YCoordinate="120" />
+                </ConnectorGraphicsInfo>
+              </ConnectorGraphicsInfos>
+              <ExtendedAttributes />
+            </Transition>
+            <Transition Id="8588e082-e7ab-471b-9f14-225c27050f46" From="7e032e15-06c3-4313-a9aa-3d92332d8302" To="333dfd84-a4f7-4c7b-bc93-52c26db3016e" Name="">
+              <Condition />
+              <Description />
+              <ConnectorGraphicsInfos>
+                <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+                  <Coordinates XCoordinate="411" YCoordinate="120" />
+                  <Coordinates XCoordinate="502" YCoordinate="120" />
+                </ConnectorGraphicsInfo>
+              </ConnectorGraphicsInfos>
+              <ExtendedAttributes />
+            </Transition>
+            <Transition Id="f87965a9-5f27-44bc-a2f3-1d3ee3ae602f" From="333dfd84-a4f7-4c7b-bc93-52c26db3016e" To="ec807a00-184a-406d-807f-6c04ca780339" Name="">
+              <Condition />
+              <Description />
+              <ConnectorGraphicsInfos>
+                <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+                  <Coordinates XCoordinate="592" YCoordinate="120" />
+                  <Coordinates XCoordinate="656" YCoordinate="120" />
+                </ConnectorGraphicsInfo>
+              </ConnectorGraphicsInfos>
+              <ExtendedAttributes />
+            </Transition>
+          </Transitions>
+        </ActivitySet>
+      </ActivitySets>
+      <DataInputOutputs>
+        <DataInput Id="7a3878db-f741-44e8-b425-c404610a794b" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataInput>
+        <DataInput Id="1d64e142-c3c1-4db4-a54d-cccd2cc8e2b3" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataInput>
+        <DataInput Id="8804cbed-d65a-4bb5-a941-bd3e57cc6d24" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataInput>
+        <DataOutput Id="a75e9336-1852-4f53-8f4d-d9373be2f5c2" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+      </DataInputOutputs>
+      <Activities>
+        <Activity Id="d7f019c2-0cff-4db7-9edc-a5f61a504e80" Name="Invoice Arrival">
+          <Description>The invoice is received; it can be received by mail, e-mail, courier, or by fax.</Description>
+          <Event>
+            <StartEvent Trigger="None" />
+          </Event>
+          <Documentation>The invoice is received; it can be received by mail, e-mail, courier, or by fax.</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-10311914" FillColor="-1638505">
+              <Coordinates XCoordinate="160" YCoordinate="115" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{}" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="b48087b1-d1d4-4cc2-b97a-dd1fe685b34d" Name="Return Invoice to Supplier">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Return invoice to Supplier is a sub-process which is performed when data from an invoice does not match the purchase order; it also includes the possibility to return the products to the supplier, when they do not meet the requirements. &lt;/span&gt;&lt;/p&gt;</Description>
+          <BlockActivity ActivitySetId="b48087b1-d1d4-4cc2-b97a-dd1fe685b34d" />
+          <Performers>
+            <Performer>4380b4c4-c48d-44d9-9e99-ecfabeba11b0</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Return invoice to Supplier is a sub-process which is performed when data from an invoice does not match the purchase order; it also includes the possibility to return the products to the supplier, when they do not meet the requirements. &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="359.5" YCoordinate="307" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;priority&quot;:0,&quot;asynchronousBehavior&quot;:{},&quot;subProcessType&quot;:&quot;None&quot;,&quot;inputMappingType&quot;:&quot;None&quot;,&quot;outputMappingType&quot;:&quot;None&quot;,&quot;exitMode&quot;:&quot;AllTokens&quot;,&quot;groupByAttributesXPathListRef&quot;:[]}" />
+            <ExtendedAttribute Name="Attachment" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="fff58954-eac8-464e-be3c-70f296d1835a" Name="Invoice match with PO">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The gateway determines the next activity to be performed. &lt;/span&gt;&lt;/p&gt;</Description>
+          <Route MarkerVisible="true" />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The gateway determines the next activity to be performed. &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="40" Width="40" BorderColor="-5855715" FillColor="-52">
+              <Coordinates XCoordinate="468" YCoordinate="230.58297729492187" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="93d92476-09d1-4788-82ab-d813c865a23f" Name="Update Financial ERP">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The final step is to send the necessary information to the ERP for the accounting entry of the invoice through an interface. &lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskService />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>6d09a658-9e9f-411c-b7fe-16341002d3d5</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The final step is to send the necessary information to the ERP for the accounting entry of the invoice through an interface. &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="671" YCoordinate="611.9659423828125" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;asynchronousBehavior&quot;:{}}" />
+            <ExtendedAttribute Name="RNF" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Must be done in less than 3 seconds;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Must support 50 transactions at the same time;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="2de06ea8-c4ad-4ccb-ae11-6ae76534fd7b" Name="Products/Services have been approved">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;If the product or service has been approved by the applicant, the process continues with updating financial records in the ERP of the company. If not, the supplier should be informed about the required changes&lt;/span&gt;&lt;/p&gt;</Description>
+          <Route MarkerVisible="true" />
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;If the product or service has been approved by the applicant, the process continues with updating financial records in the ERP of the company. If not, the supplier should be informed about the required changes&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="40" Width="40" BorderColor="-5855715" FillColor="-52">
+              <Coordinates XCoordinate="665.98876953125" YCoordinate="507.9659423828125" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="973185cb-34b8-43de-8a09-413e27e0688a" Name="Information updated">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Finantial informations are updated&lt;/span&gt;&lt;/p&gt;</Description>
+          <Event>
+            <EndEvent Result="None" />
+          </Event>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Finantial informations are updated&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-6750208" FillColor="-1135958">
+              <Coordinates XCoordinate="860" YCoordinate="626.9659423828125" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="b042747d-1f66-4275-8a80-8b871f7b6c24" Name="Products/Services Require Approval">
+          <Description>When the invoice's information is correct, it must follow to the next task. If the products or services invoiced need an extra approval, the process continue to the task Approve Products or Services and is performed by the person who requested the purchase. Otherwise it should upgrade the company's ERP.</Description>
+          <Route MarkerVisible="true" />
+          <Documentation>When the invoice's information is correct, it must follow to the next task. If the products or services invoiced need an extra approval, the process continue to the task Approve Products or Services and is performed by the person who requested the purchase. Otherwise it should upgrade the company's ERP.</Documentation>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="40" Width="40" BorderColor="-5855715" FillColor="-52">
+              <Coordinates XCoordinate="561" YCoordinate="323" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+        <Activity Id="8b40e419-4331-4168-ae1a-180a06a56561" Name="Validate  Invoice">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Compare the received invoice against the Purchase Order information. Some products or services require the approval of the applicant before making the payment. This option can be chosen from the purchase request. But it can be changed in this activity. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>4380b4c4-c48d-44d9-9e99-ecfabeba11b0</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Compare the received invoice against the Purchase Order information. Some products or services require the approval of the applicant before making the payment. This option can be chosen from the purchase request. But it can be changed in this activity. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="357.5" YCoordinate="220.58297729492187" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+            <ExtendedAttribute Name="REGRA" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;If the invoice matches with the purchase order information (products, due dates, costs), the invoice is approved. If not, it is rejected and comments are made;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;If in a particular case the invoice is not associated with any Purchase Order, the user must enter the required information, such as cost, product, date of payment and supplier information;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" />
+            <ExtendedAttribute Name="RNF" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Usability: new user don&amp;#39;t need training;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Receive ate least 100 simultaneous acesses at the same time&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="b5e549a5-b786-4f3e-992c-05ccf6431750" Name="Receive Invoice">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Receiving and processing an invoice can be a very document intensive function. Accounts Payable reduces the processing time. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;In the reception task the invoice is received and associated with an unpaid Purchase Order. The order can be searched by order number, order date, supplier name, payment options or terms of payment. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>f07c2cde-f692-4696-aa06-a312463cfa4f</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Receiving and processing an invoice can be a very document intensive function. Accounts Payable reduces the processing time. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;In the reception task the invoice is received and associated with an unpaid Purchase Order. The order can be searched by order number, order date, supplier name, payment options or terms of payment. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt; &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet>
+              <Input ArtifactId="7a3878db-f741-44e8-b425-c404610a794b" />
+              <Input ArtifactId="1d64e142-c3c1-4db4-a54d-cccd2cc8e2b3" />
+              <Input ArtifactId="8804cbed-d65a-4bb5-a941-bd3e57cc6d24" />
+            </InputSet>
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="214" YCoordinate="100" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+            <ExtendedAttribute Name="REGRA" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="cb137e51-3d62-4335-8978-000dd0cf1903" Name="Approve products/services">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;As mentioned above, if the products or services require further approval, the task should be assigned to the person who made the purchase request. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This person approves or rejects the products or services invoiced, after performing the respective product inspection or service verification.  &lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>b234668e-a815-4fc6-b0de-9e9ac781187a</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;As mentioned above, if the products or services require further approval, the task should be assigned to the person who made the purchase request. &lt;/span&gt;&lt;/p&gt;&lt;p style="text-align:left;text-indent:0pt;margin:12pt 0pt 12pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;This person approves or rejects the products or services invoiced, after performing the respective product inspection or service verification.  &lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+            <InputSet />
+          </InputSets>
+          <OutputSets>
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet />
+            <OutputSet>
+              <Output ArtifactId="a75e9336-1852-4f53-8f4d-d9373be2f5c2" />
+            </OutputSet>
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="640.98876953125" YCoordinate="427.01272583007812" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+            <ExtendedAttribute Name="REGRA" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="d50d98b6-fd37-4904-943f-548c0ed7fd64" Name="Check Invoice Products/Services">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The financial assistant must check the products or services in the invoice in order to see if they require approval.&lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>4380b4c4-c48d-44d9-9e99-ecfabeba11b0</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;The financial assistant must check the products or services in the invoice in order to see if they require approval.&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="94" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="534" YCoordinate="220.58297729492187" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+          </ExtendedAttributes>
+        </Activity>
+      </Activities>
+      <DataObjects>
+        <DataObject Id="ee364a1b-f764-4a9f-a8b8-07478ce53611" Name="Receive Invoice Form">
+          <Object>
+            <Documentation />
+          </Object>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="224" YCoordinate="218" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <DataField />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;date:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;purchaseOrder:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;invoice date:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;invoiceNumber:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;due date:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;invoice file:T;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataObject>
+        <DataObject Id="81825f3d-b1ba-4b5d-948c-4a1f480b1b24" Name="Approval Form">
+          <Object>
+            <Documentation />
+          </Object>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="797" YCoordinate="438" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <DataField />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;approval required:B;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;invoice approved:B;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;approval comments:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;inspection approval:B;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;inspection comments:T;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataObject>
+      </DataObjects>
+      <DataStoreReferences>
+        <DataStoreReference DataStoreRef="ab3f1230-37b9-4584-a4cc-de139416ba5f" Id="26887417-71b7-4aad-b09e-f60d7f419461" State="">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="50" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="458.5" YCoordinate="84" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;date:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;number:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;dueDate:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;invoice file:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;discount:B;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;discountdate:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;discount percentage:D;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;cost center:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;comments:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;supplier ID:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;supplier name:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;payment option:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;product:Product;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataStoreReference>
+        <DataStoreReference DataStoreRef="1f24a0c7-24e6-42c0-8986-2157e6a59aab" Id="9122c883-acdf-479b-becb-c9239f6f7439" State="">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="50" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="374.5" YCoordinate="123" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;number:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;order date:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;supplier name:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;payment option:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;terms of payment:T;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataStoreReference>
+      </DataStoreReferences>
+      <Transitions>
+        <Transition Id="2787bb31-456f-4108-8558-8499df6ce0e1" From="d7f019c2-0cff-4db7-9edc-a5f61a504e80" To="b5e549a5-b786-4f3e-992c-05ccf6431750" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="190" YCoordinate="130" />
+              <Coordinates XCoordinate="214" YCoordinate="130" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="8193b93e-3556-47f8-9823-379a5d3b49ad" From="b5e549a5-b786-4f3e-992c-05ccf6431750" To="8b40e419-4331-4168-ae1a-180a06a56561" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="304" YCoordinate="130" />
+              <Coordinates XCoordinate="330.5" YCoordinate="130" />
+              <Coordinates XCoordinate="330.5" YCoordinate="250" />
+              <Coordinates XCoordinate="357" YCoordinate="250" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="1bbaf1b8-fdb2-4dfb-bd98-0ec562b5d8c4" From="8b40e419-4331-4168-ae1a-180a06a56561" To="fff58954-eac8-464e-be3c-70f296d1835a" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="447" YCoordinate="250" />
+              <Coordinates XCoordinate="468" YCoordinate="250" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="f87b5fc5-686c-45ae-be59-2f06ddba7cb1" From="cb137e51-3d62-4335-8978-000dd0cf1903" To="2de06ea8-c4ad-4ccb-ae11-6ae76534fd7b" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="685" YCoordinate="487" />
+              <Coordinates XCoordinate="685" YCoordinate="507" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="1021ded4-75e2-429c-b297-7dffcc28ddd6" From="2de06ea8-c4ad-4ccb-ae11-6ae76534fd7b" To="93d92476-09d1-4788-82ab-d813c865a23f" Name="Yes">
+          <Condition Type="CONDITION">
+            <Expression>If the goods or services invoiced meet the requirements, the invoice is approved and the process continues with the updating of the financial records in the ERP of the company.</Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="685" YCoordinate="547" />
+              <Coordinates XCoordinate="685" YCoordinate="579.5" />
+              <Coordinates XCoordinate="716" YCoordinate="579.5" />
+              <Coordinates XCoordinate="716" YCoordinate="611" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="7cc68a4f-7665-4679-9b40-42492ddf6180" From="fff58954-eac8-464e-be3c-70f296d1835a" To="b48087b1-d1d4-4cc2-b97a-dd1fe685b34d" Name="No">
+          <Condition Type="CONDITION">
+            <Expression>If the invoice does not match the Purchase Order, the invoice is rejected and it must be returned to the supplier. </Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="488" YCoordinate="270" />
+              <Coordinates XCoordinate="488" YCoordinate="294.58297729492187" />
+              <Coordinates XCoordinate="404" YCoordinate="294.58297729492187" />
+              <Coordinates XCoordinate="404" YCoordinate="307" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="b1ae8be0-e86c-41c0-8e75-f74e7ca4bd87" From="2de06ea8-c4ad-4ccb-ae11-6ae76534fd7b" To="b48087b1-d1d4-4cc2-b97a-dd1fe685b34d" Name="No">
+          <Condition Type="CONDITION">
+            <Expression>If the products of the invoice must be returned or if there is any incorrect information regarding them, the process should continue with the return of the invoice and / or products to the supplier.</Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="665" YCoordinate="527" />
+              <Coordinates XCoordinate="404" YCoordinate="527" />
+              <Coordinates XCoordinate="404" YCoordinate="367" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="b5bc7457-25f0-4bb6-b35d-c25d0ec4f98a" From="93d92476-09d1-4788-82ab-d813c865a23f" To="973185cb-34b8-43de-8a09-413e27e0688a" Name="">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="761" YCoordinate="641" />
+              <Coordinates XCoordinate="860" YCoordinate="641" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="03bf80e7-480b-4928-8674-bc0b08ce4726" From="b042747d-1f66-4275-8a80-8b871f7b6c24" To="cb137e51-3d62-4335-8978-000dd0cf1903" Name="Yes">
+          <Condition Type="CONDITION">
+            <Expression>If the invoice needs the approval of the person who requested the purchase, either because the applicant requested it from the beginning or because it was selected in the Validate Invoice task, it should be assigned to the person in charge of this approval.</Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="601" YCoordinate="343" />
+              <Coordinates XCoordinate="685" YCoordinate="343" />
+              <Coordinates XCoordinate="685" YCoordinate="427" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="4783b6a2-2808-46e2-8221-f0223fe8d4dc" From="b042747d-1f66-4275-8a80-8b871f7b6c24" To="93d92476-09d1-4788-82ab-d813c865a23f" Name="No">
+          <Condition Type="CONDITION">
+            <Expression>If the invoice does not require approval, it continues with the task of updating the financial ERP</Expression>
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="0">
+              <Coordinates XCoordinate="581" YCoordinate="363" />
+              <Coordinates XCoordinate="581" YCoordinate="641" />
+              <Coordinates XCoordinate="671" YCoordinate="641" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="16284a7a-d9e3-40f2-9622-0b69f7c00a50" From="d50d98b6-fd37-4904-943f-548c0ed7fd64" To="b042747d-1f66-4275-8a80-8b871f7b6c24">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+              <Coordinates XCoordinate="581" YCoordinate="280" />
+              <Coordinates XCoordinate="581" YCoordinate="323" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="eda49f6c-bf55-403b-9be3-7dbaa4b7c0c7" From="fff58954-eac8-464e-be3c-70f296d1835a" To="d50d98b6-fd37-4904-943f-548c0ed7fd64">
+          <Condition Type="CONDITION">
+            <Expression />
+          </Condition>
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+              <Coordinates XCoordinate="508" YCoordinate="250" />
+              <Coordinates XCoordinate="534" YCoordinate="250" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+      </Transitions>
+      <DataAssociations>
+        <DataAssociation Id="5ff47f9e-6641-493a-9b2e-ef4d31beb91c" From="ee364a1b-f764-4a9f-a8b8-07478ce53611" To="7a3878db-f741-44e8-b425-c404610a794b">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="a176c9f7-99b2-4a9f-81de-6dd003131349" From="26887417-71b7-4aad-b09e-f60d7f419461" To="1d64e142-c3c1-4db4-a54d-cccd2cc8e2b3">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="775f7503-0835-412b-aa17-d4373cc15192" From="9122c883-acdf-479b-becb-c9239f6f7439" To="8804cbed-d65a-4bb5-a941-bd3e57cc6d24">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="0bed7b75-3d76-4022-aca4-8be3259baf61" From="a75e9336-1852-4f53-8f4d-d9373be2f5c2" To="81825f3d-b1ba-4b5d-948c-4a1f480b1b24">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+      </DataAssociations>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;processClassProperties&quot;:{&quot;displayName&quot;:&quot;Accounts Payable&quot;,&quot;accessType&quot;:&quot;Process&quot;,&quot;order&quot;:0,&quot;enableAlarms&quot;:false,&quot;enableNotifications&quot;:false,&quot;creationDate&quot;:&quot;2016-08-26T13:49:12.4941089-03:00&quot;},&quot;processProperties&quot;:{&quot;version&quot;:{&quot;numberVersion&quot;:&quot;1.0&quot;,&quot;isActive&quot;:true},&quot;versionCreationDate&quot;:&quot;2016-08-26T13:49:12.4941089-03:00&quot;,&quot;supportsScopes&quot;:false,&quot;caseAccessType&quot;:&quot;Public&quot;,&quot;renderVersion&quot;:2,&quot;formsVersion&quot;:0}}" />
+      </ExtendedAttributes>
+    </WorkflowProcess>
+  </WorkflowProcesses>
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="Objective" Value="&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;The Account Payment process seeks to reduce the approval and process time and provide the appropriate scaling of the invoice when it needs additional approvals&lt;/span&gt;&lt;/p&gt;" />
+    <ExtendedAttribute Name="Scope" Value="&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;The process covers:&lt;/span&gt;&lt;/p&gt;&#xA;		&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;- Receiving invoices and upload them.&lt;/span&gt;&lt;/p&gt;&#xA;		&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;- Assigning unpaid Purchase Orders to a received invoice.&lt;/span&gt;&lt;/p&gt;&#xA;		&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;- Comparing received invoice against the chosen Purchase Order.&lt;/span&gt;&lt;/p&gt;&#xA;		&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;- Rejecting or approving an invoice based on the information contained therein.&lt;/span&gt;&lt;/p&gt;&#xA;		&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;- Performing escalation of the invoice, if it needs approval by the type of product or service purchased.&lt;/span&gt;&lt;/p&gt;&#xA;		&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;- Informing the supplier when the invoice has incorrect information&lt;/span&gt;&lt;/p&gt;&#xA;		&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;- Returning the products received if they do not meet the requirements of the applicant. &lt;/span&gt;&lt;/p&gt;&#xA;		&lt;p&gt;&lt;span style=&quot;font-family:Segoe UI;font-size:8pt;&quot;&gt;- Send the required information through an interface to the ERP of the company for the accounting entry of the invoice.&lt;/span&gt;&lt;/p&gt;" />
+  </ExtendedAttributes>
+</Package>

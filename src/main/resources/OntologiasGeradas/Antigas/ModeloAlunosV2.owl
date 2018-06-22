@@ -1,0 +1,390 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Ontology rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2"/>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#ator">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#processo"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#sentidosGateways">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#elementosAuxiliares"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#evento">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#processo"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoAtividade">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipos"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoSubProcessoEnum">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoSubProcesso"/>
+    </rdfs:subClassOf>
+    <owl:oneOf rdf:parseType="Collection">
+      <j.0:tipoSubProcesso rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Reutilizavel"/>
+      <j.0:tipoSubProcesso rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Transacional"/>
+      <j.0:tipoSubProcesso rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Adhoc"/>
+      <j.0:tipoSubProcesso rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Loop"/>
+      <j.0:tipoSubProcesso rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#MultiplasInstanciasParalelas"/>
+      <j.0:tipoSubProcesso rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#MultiplasInstanciasSequenciais"/>
+    </owl:oneOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gatilhosEventos">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#elementosAuxiliares"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#artefato">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#processo"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoGateway">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipos"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipos">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#elementosAuxiliares"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#atividade">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#processo"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#atributoEstendido">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#processo"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gateway">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#processo"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#anotacao">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#artefato"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoGatewayEnum">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoGateway"/>
+    <owl:oneOf rdf:parseType="Collection">
+      <j.0:tipoGateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Exclusivo"/>
+      <j.0:tipoGateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Paralelo"/>
+      <j.0:tipoGateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Inclusivo"/>
+      <j.0:tipoGateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#BaseadoEmEventos"/>
+      <j.0:tipoGateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#ExclusivoBaseadoEmEventos"/>
+      <j.0:tipoGateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#ParaleloBaseadoEmEventos"/>
+      <j.0:tipoGateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Complexo"/>
+    </owl:oneOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoArtefatoEnum">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoArtefato"/>
+    </rdfs:subClassOf>
+    <owl:oneOf rdf:parseType="Collection">
+      <j.0:tipoArtefato rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#ObjetoDados"/>
+      <j.0:tipoArtefato rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#DepositoDados"/>
+      <j.0:tipoArtefato rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Grupo"/>
+      <j.0:tipoArtefato rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Anotacao"/>
+    </owl:oneOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#grupo">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#artefato"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoAtividadeEnum">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoAtividade"/>
+    <owl:oneOf rdf:parseType="Collection">
+      <j.0:tipoAtividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Simples"/>
+      <j.0:tipoAtividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Usuario"/>
+      <j.0:tipoAtividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Script"/>
+      <j.0:tipoAtividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Servico"/>
+      <j.0:tipoAtividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#RecebimentoDeMensagem"/>
+      <j.0:tipoAtividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#EnvioDeMensagem"/>
+      <j.0:tipoAtividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Manual"/>
+      <j.0:tipoAtividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#RegraDeNegocio"/>
+    </owl:oneOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoEventoEnum">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoEvento"/>
+    </rdfs:subClassOf>
+    <owl:oneOf rdf:parseType="Collection">
+      <j.0:tipoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Inicio"/>
+      <j.0:tipoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Intermediario"/>
+      <j.0:tipoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Fim"/>
+    </owl:oneOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#subProcesso">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#processo"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#processo">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#modelo"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#direcaoGateway">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#sentidosGateways"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gatilhoEventoEnum">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gatilhoEvento"/>
+    </rdfs:subClassOf>
+    <owl:oneOf rdf:parseType="Collection">
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Nenhum"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Mensagem"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Tempo"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Condicao"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Sinal"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Multiplo"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#MultiploParalelo"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Link"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Compensacao"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Escalar"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Excecao"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Cancelamento"/>
+      <j.0:gatilhoEvento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Termino"/>
+    </owl:oneOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoArtefato">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipos"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoSubProcesso">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipos"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gatilhoEvento">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gatilhosEventos"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#depositoDados">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#artefato"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoEvento">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipos"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#direcaoGatewayEnum">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#direcaoGateway"/>
+    <owl:oneOf rdf:parseType="Collection">
+      <j.0:direcaoGateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Divergente"/>
+      <j.0:direcaoGateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#Convergente"/>
+    </owl:oneOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#objetoDados">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#artefato"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#possuiAtributoEstendido">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#atributoEstendido"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gateway"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#evento"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#atividade"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#fazParteDoProcesso"/>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#fazParteDoModelo"/>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#éExecutadaPor">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#ator"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#atividade"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gatilhoEventoProp">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gatilhoEventoEnum"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoSubProcessoProp">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoSubProcessoEnum"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#éRequisitoFuncional">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#autor">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#nome">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#documentacao">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoAtividadeProp">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoAtividadeEnum"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#éRequisitoNaoFuncional">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoGatewayProp">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoGatewayEnum"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#dataCriacao">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#dataModificacao">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoEventoProp">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoEventoEnum"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#id">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#descricao">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoArtefatoProp">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoArtefatoEnum"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#tipoProcesso">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#valor">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#direcaoGatewayProp">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#direcaoGatewayEnum"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#regraDeNegocio">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#éSucedidoPor">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#evento"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#atividade"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#gateway"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#evento"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#atividade"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#utilizaEntrada">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#objetoDados"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#depositoDados"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#atividade"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#produzSaida">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#objetoDados"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#depositoDados"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#evento"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#atividade"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <j.0:processo rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#22d79482-c552-443c-bb9c-611f18ba75b8_Processo_principal">
+    <j.0:fazParteDoModelo>
+      <j.0:modelo rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#c03a312e-8299-497e-8211-5b9549762003_Modelo_Alunos">
+        <j.0:dataModificacao>Fri Aug 18 19:30:00 BRT 2017</j.0:dataModificacao>
+        <j.0:dataCriacao>Tue Aug 08 20:32:00 BRT 2017</j.0:dataCriacao>
+        <j.0:autor>Sem Autor</j.0:autor>
+        <j.0:documentacao></j.0:documentacao>
+        <j.0:descricao>Modelo Alunos</j.0:descricao>
+        <j.0:nome>Modelo Alunos</j.0:nome>
+        <j.0:id>c03a312e-8299-497e-8211-5b9549762003</j.0:id>
+      </j.0:modelo>
+    </j.0:fazParteDoModelo>
+    <j.0:tipoProcesso>None</j.0:tipoProcesso>
+    <j.0:documentacao>Sem Documentação</j.0:documentacao>
+    <j.0:descricao>Sem Descrição</j.0:descricao>
+    <j.0:nome>Processo principal</j.0:nome>
+    <j.0:id>22d79482-c552-443c-bb9c-611f18ba75b8</j.0:id>
+  </j.0:processo>
+  <j.0:atividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#08447019-3e95-499e-98e9-0fbc276cfa04_Assistir_aula">
+    <j.0:utilizaEntrada>
+      <j.0:objetoDados rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#c8a6e6cd-103d-4ee1-adb7-10401a3432d4_Material_de_estudo_da_aula">
+        <j.0:fazParteDoProcesso>
+          <j.0:processo rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#5cc3646c-f08d-4df9-a3f3-f42f8bffa79e_Aluno">
+            <j.0:fazParteDoModelo rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#c03a312e-8299-497e-8211-5b9549762003_Modelo_Alunos"/>
+            <j.0:tipoProcesso>None</j.0:tipoProcesso>
+            <j.0:documentacao>Sem Documentação</j.0:documentacao>
+            <j.0:descricao>Sem Descrição</j.0:descricao>
+            <j.0:nome>Aluno</j.0:nome>
+            <j.0:id>5cc3646c-f08d-4df9-a3f3-f42f8bffa79e</j.0:id>
+          </j.0:processo>
+        </j.0:fazParteDoProcesso>
+        <j.0:documentacao>Os alunos recebem um material de estudo referente &amp;agrave; aula&amp;nbsp;</j.0:documentacao>
+        <j.0:descricao>Os alunos recebem um material de estudo referente &amp;agrave; aula&amp;nbsp;</j.0:descricao>
+        <j.0:nome>Material de estudo da aula</j.0:nome>
+        <j.0:id>c8a6e6cd-103d-4ee1-adb7-10401a3432d4</j.0:id>
+      </j.0:objetoDados>
+    </j.0:utilizaEntrada>
+    <j.0:tipoAtividadeProp>Usuario</j.0:tipoAtividadeProp>
+    <j.0:descricao>O aluno assiste &amp;agrave; aula de determinada disciplina por um per&amp;iacute;odo previamente definido.</j.0:descricao>
+    <j.0:produzSaida>
+      <j.0:depositoDados rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#9c7daf3a-9cf9-4c14-ab6d-807546590cc0_Lista_de_presença_online">
+        <j.0:fazParteDoProcesso rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#5cc3646c-f08d-4df9-a3f3-f42f8bffa79e_Aluno"/>
+        <j.0:documentacao>Aluno assina  a lista de presen&amp;ccedil;a online e atualiza a base de dados de presen&amp;ccedil;a de alunos</j.0:documentacao>
+        <j.0:descricao>Aluno assina  a lista de presen&amp;ccedil;a online e atualiza a base de dados de presen&amp;ccedil;a de alunos</j.0:descricao>
+        <j.0:nome>Lista de presença online</j.0:nome>
+        <j.0:id>9c7daf3a-9cf9-4c14-ab6d-807546590cc0</j.0:id>
+      </j.0:depositoDados>
+    </j.0:produzSaida>
+    <j.0:fazParteDoProcesso rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#5cc3646c-f08d-4df9-a3f3-f42f8bffa79e_Aluno"/>
+    <j.0:id>08447019-3e95-499e-98e9-0fbc276cfa04</j.0:id>
+    <j.0:documentacao>O aluno assiste &amp;agrave; aula de determinada disciplina por um per&amp;iacute;odo previamente definido.</j.0:documentacao>
+    <j.0:éExecutadaPor>
+      <j.0:ator rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#9e09bbe9-ee73-4b5d-a699-15fd13c328e1_Aluno">
+        <j.0:fazParteDoProcesso rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#5cc3646c-f08d-4df9-a3f3-f42f8bffa79e_Aluno"/>
+        <j.0:documentacao>Sem Documentação</j.0:documentacao>
+        <j.0:descricao>Aluno que participa de aulas e pertence à uma determinada escola.</j.0:descricao>
+        <j.0:nome>Aluno</j.0:nome>
+        <j.0:id>9e09bbe9-ee73-4b5d-a699-15fd13c328e1</j.0:id>
+      </j.0:ator>
+    </j.0:éExecutadaPor>
+    <j.0:nome>Assistir aula</j.0:nome>
+    <j.0:possuiAtributoEstendido>
+      <j.0:atributoEstendido rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#08447019-3e95-499e-98e9-0fbc276cfa04_RuntimeProperties">
+        <j.0:valor>{"cost":0,"priority":0,"isSingleton":false,"isConditional":false}</j.0:valor>
+        <j.0:nome>RuntimeProperties</j.0:nome>
+      </j.0:atributoEstendido>
+    </j.0:possuiAtributoEstendido>
+  </j.0:atividade>
+  <j.0:gateway rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#c54de790-f821-4bdd-8cdb-476eec54158b_Decisão_de_continuidade_da_aula">
+    <j.0:possuiAtributoEstendido>
+      <j.0:atributoEstendido rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#c54de790-f821-4bdd-8cdb-476eec54158b_RN">
+        <j.0:valor>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;&amp;Eacute; preciso verificar se o tempo em minutos da aula excedeu. Se sim, a aula deve ser finalizada.&lt;/span&gt;&lt;/p&gt;</j.0:valor>
+        <j.0:nome>RN</j.0:nome>
+        <j.0:id>c54de790-f821-4bdd-8cdb-476eec54158b</j.0:id>
+      </j.0:atributoEstendido>
+    </j.0:possuiAtributoEstendido>
+    <j.0:fazParteDoProcesso rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#5cc3646c-f08d-4df9-a3f3-f42f8bffa79e_Aluno"/>
+    <j.0:direcaoGatewayProp>Convergente</j.0:direcaoGatewayProp>
+    <j.0:tipoGatewayProp>Exclusivo</j.0:tipoGatewayProp>
+    <j.0:documentacao>Decis&amp;atilde;o de continuidade da aula</j.0:documentacao>
+    <j.0:descricao>Decis&amp;atilde;o de continuidade da aula</j.0:descricao>
+    <j.0:nome>Decisão de continuidade da aula</j.0:nome>
+    <j.0:id>c54de790-f821-4bdd-8cdb-476eec54158b</j.0:id>
+  </j.0:gateway>
+  <j.0:evento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#49fe189b-0e23-448f-bdbb-8f333bf964ed_">
+    <j.0:possuiAtributoEstendido>
+      <j.0:atributoEstendido rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#49fe189b-0e23-448f-bdbb-8f333bf964ed_RuntimeProperties">
+        <j.0:valor>{}</j.0:valor>
+        <j.0:nome>RuntimeProperties</j.0:nome>
+        <j.0:id>49fe189b-0e23-448f-bdbb-8f333bf964ed</j.0:id>
+      </j.0:atributoEstendido>
+    </j.0:possuiAtributoEstendido>
+    <j.0:fazParteDoProcesso rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#5cc3646c-f08d-4df9-a3f3-f42f8bffa79e_Aluno"/>
+    <j.0:gatilhoEventoProp>Nenhum</j.0:gatilhoEventoProp>
+    <j.0:tipoEventoProp>Inicio</j.0:tipoEventoProp>
+    <j.0:documentacao></j.0:documentacao>
+    <j.0:descricao></j.0:descricao>
+    <j.0:nome></j.0:nome>
+    <j.0:id>49fe189b-0e23-448f-bdbb-8f333bf964ed</j.0:id>
+  </j.0:evento>
+  <j.0:atividade rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#8ea13aad-d079-4f86-b73d-dfb4aa4dfcfe_Continuar_assistindo_aula">
+    <j.0:fazParteDoProcesso rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#5cc3646c-f08d-4df9-a3f3-f42f8bffa79e_Aluno"/>
+    <j.0:tipoAtividadeProp>Simples</j.0:tipoAtividadeProp>
+    <j.0:documentacao></j.0:documentacao>
+    <j.0:descricao></j.0:descricao>
+    <j.0:nome>Continuar assistindo aula</j.0:nome>
+    <j.0:id>8ea13aad-d079-4f86-b73d-dfb4aa4dfcfe</j.0:id>
+  </j.0:atividade>
+  <j.0:evento rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#6b441901-999f-48c3-b237-c72fa9362ff6_">
+    <j.0:fazParteDoProcesso rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV2#5cc3646c-f08d-4df9-a3f3-f42f8bffa79e_Aluno"/>
+    <j.0:gatilhoEventoProp>Nenhum</j.0:gatilhoEventoProp>
+    <j.0:tipoEventoProp>Fim</j.0:tipoEventoProp>
+    <j.0:documentacao></j.0:documentacao>
+    <j.0:descricao></j.0:descricao>
+    <j.0:nome></j.0:nome>
+    <j.0:id>6b441901-999f-48c3-b237-c72fa9362ff6</j.0:id>
+  </j.0:evento>
+</rdf:RDF>

@@ -1,0 +1,1472 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#8-"
+    xmlns:j.1="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#7-"
+    xmlns:j.2="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#6-"
+    xmlns:j.3="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#5-"
+    xmlns:j.4="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.5="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#4-"
+    xmlns:j.6="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#3-"
+    xmlns:j.7="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#2-"
+    xmlns:j.8="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#1-"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Ontology rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4"/>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Compensation">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewayDirection">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewaysDirections"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Process"/>
+    </rdfs:subClassOf>
+    <j.0:processType>None</j.0:processType>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>Aluno</j.7:name>
+    <j.8:id>5cc3646c-f08d-4df9-a3f3-f42f8bffa79e</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isComposedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Multiple">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-Material_online">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataStore"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#subProcess-Ler_o_conteudo_da_aula"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfSubProcess"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>Material online</j.7:name>
+    <j.8:id>36fc2d45-87e1-4df2-ad43-0a3d97910896</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Assistir_aula">
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.5:documentation>O aluno assiste &amp;agrave; aula de determinada disciplina por um per&amp;iacute;odo previamente definido.</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onClass>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-Material_de_estudo_da_aula"/>
+        </owl:onClass>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#usesInput"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>Assistir aula</j.7:name>
+    <j.8:id>08447019-3e95-499e-98e9-0fbc276cfa04</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-InicioProcessoAluno"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatw-Decisao_de_continuidade_da_aula"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#User"/>
+    </rdfs:subClassOf>
+    <j.6:description>O aluno assiste &amp;agrave; aula de determinada disciplina por um per&amp;iacute;odo previamente definido.</j.6:description>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actor-Aluno"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPerformedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-InicioProcessoAluno"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isActivatedWhenEventIsTriggered"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onClass>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-Lista_de_presenca_online"/>
+        </owl:onClass>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#producesOutput"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib--RuntimeProperties"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.4:isFunctionalRequirement>true</j.4:isFunctionalRequirement>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Memorizar_conteudo_da_prova">
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#intersectionOfActivitiesToMemorizar_conteudo_da_prova"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isExecutedAfterParallelExecutionOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.8:id>4fc52528-17ff-4976-88a5-8c6c819de440</j.8:id>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-FimProcessoAluno"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.6:description>No Description</j.6:description>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>Memorizar conteudo da prova</j.7:name>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Simple"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#End">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Signal">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#OutputIsNo">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewaysOutputs"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-FimProcessoAluno">
+    <j.8:id>791beff6-3cf5-4151-accd-5ff130ead17e</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Memorizar_conteudo_da_prova"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.6:description>No Description</j.6:description>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.8:id>6b441901-999f-48c3-b237-c72fa9362ff6</j.8:id>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#End"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#None"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#eventTrigger"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#None"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#eventTrigger"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>FimProcessoAluno</j.7:name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatw-Decisao_de_continuidade_da_aula"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededByPositiveCase"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Cancel">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#None">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ModelElements"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#OutputIsYes">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewaysOutputs"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Scale">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actor-Aluno">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Continuar_assistindo_aula"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isExecutorOfActivity"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Assistir_aula"/>
+        <owl:onProperty>
+          <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isExecutorOfActivity"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Actor"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>Aluno que participa de aulas e pertence a uma determinada escola.</j.6:description>
+    <j.7:name>Aluno</j.7:name>
+    <j.8:id>9e09bbe9-ee73-4b5d-a699-15fd13c328e1</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Exclusive">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Analisar_a_lista_de_presenca">
+    <j.8:id>80eacfbd-5575-4b10-ac70-f32e957ffde2</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-InicioProcessoProfessor"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>No Description</j.6:description>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-541666ca-d167-4ace-a041-7dc7f6be63d7"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isAnnotatedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-InicioProcessoProfessor"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isActivatedWhenEventIsTriggered"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>Analisar a lista de presenca</j.7:name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Professor"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Ler_o_conteudo_da_aula"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Assistir_aula"/>
+        <owl:onProperty>
+          <owl:SymmetricProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#communicatesWith"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Simple"/>
+    </rdfs:subClassOf>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actor-Professor"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPerformedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-FimProcessoProfessor">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Ler_o_conteudo_da_aula"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#End"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Professor"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#None"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#eventTrigger"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>FimProcessoProfessor</j.7:name>
+    <j.8:id>022278b5-70d3-42ef-a419-f411495ffa7b</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#model-Modelo_Alunos">
+    <j.6:description>Modelo Alunos</j.6:description>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.2:creationDate>Tue Aug 08 20:32:00 BRT 2017</j.2:creationDate>
+    <j.1:modificationDate>Tue Oct 17 20:14:00 BRST 2017</j.1:modificationDate>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ModelElements"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isComposedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>Modelo Alunos</j.7:name>
+    <j.8:id>c03a312e-8299-497e-8211-5b9549762003</j.8:id>
+    <j.3:author>No Author</j.3:author>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Model"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-541666ca-d167-4ace-a041-7dc7f6be63d7">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Annotation"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Professor"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>Professor analisa a lista de presenca</j.5:documentation>
+    <j.6:description>Professor analisa a lista de presenca</j.6:description>
+    <j.7:name>No Name</j.7:name>
+    <j.8:id>541666ca-d167-4ace-a041-7dc7f6be63d7</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-Lista_de_presenca_online">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataStore"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>Aluno assina  a lista de presen&amp;ccedil;a online e atualiza a base de dados de presen&amp;ccedil;a de alunos</j.5:documentation>
+    <j.6:description>Aluno assina  a lista de presen&amp;ccedil;a online e atualiza a base de dados de presen&amp;ccedil;a de alunos</j.6:description>
+    <j.7:name>Lista de presenca online</j.7:name>
+    <j.8:id>9c7daf3a-9cf9-4c14-ab6d-807546590cc0</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Annotation">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Artifact"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Processo_principal">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Process"/>
+    </rdfs:subClassOf>
+    <j.0:processType>None</j.0:processType>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>Processo principal</j.7:name>
+    <j.8:id>22d79482-c552-443c-bb9c-611f18ba75b8</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isComposedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Actor">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#OutputIsUndefined">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewaysOutputs"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib--RuntimeProperties">
+    <j.6:value>{"priority":0,"asynchronousBehavior":{},"subProcessType":"None","inputMappingType":"None","outputMappingType":"None","exitMode":"AllTokens","groupByAttributesXPathListRef":[]}</j.6:value>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <j.4:isNonFunctionalRequirement>false</j.4:isNonFunctionalRequirement>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.6:value>{"cost":0,"priority":0,"isSingleton":false,"isConditional":false}</j.6:value>
+    <j.7:name>RuntimeProperties</j.7:name>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Time">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Message">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Link">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Prestar_atencao">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>Prestar atencao</j.7:name>
+    <j.8:id>daef438b-10ba-4fa2-a0db-78fb4e4e4024</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatw-b569f0d9-1005-4fc7-9416-bfc2a38bc4f2"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Simple"/>
+    </rdfs:subClassOf>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#subProcess-Ler_o_conteudo_da_aula">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#SubProcess"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Professor"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>Ler o conteudo da aula</j.7:name>
+    <j.8:id>92ed799d-d69d-46f7-98fc-e748a95a2c56</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actor-Professor">
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Dar_a_aula_sobre_o_conteudo"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isExecutorOfActivity"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.8:id>bafbd4a3-19d3-46c9-a1f7-0a261ce3647b</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Professor"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Analisar_a_lista_de_presenca"/>
+        <owl:onProperty>
+          <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isExecutorOfActivity"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#subProcess-Ler_o_conteudo_da_aula"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfSubProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Ler_o_conteudo_da_aula"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isExecutorOfActivity"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>Professor</j.7:name>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Actor"/>
+    <j.6:description>Professor que da as aulas.</j.6:description>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ExtendedAttribute">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Simple">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataObject">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Artifact"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-StartProcessoLer_o_conteudo_da_aula">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Start"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#None"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#eventTrigger"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.8:id>d39f8e8e-9244-4bef-9fb4-e1faca0b3a41</j.8:id>
+    <j.6:description>No Description</j.6:description>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib-d39f8e8e-9244-4bef-9fb4-e1faca0b3a41-RuntimeProperties"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#subProcess-Ler_o_conteudo_da_aula"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfSubProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Dar_a_aula_sobre_o_conteudo"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.7:name>StartProcessoLer o conteudo da aula</j.7:name>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Continuar_assistindo_aula">
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#OutputIsNo"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isExecutedWhen_actv-Assistiraula_OutputIs"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatw-144710c8-2f3e-4df7-a41f-2d3d3f0461e9"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actor-Aluno"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPerformedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Simple"/>
+    <j.7:name>Continuar assistindo aula</j.7:name>
+    <j.6:description>No Description</j.6:description>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.8:id>8ea13aad-d079-4f86-b73d-dfb4aa4dfcfe</j.8:id>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTriggers"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatw-Decisao_de_continuidade_da_aula">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Assistir_aula"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-FimProcessoAluno"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededByPositiveCase"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib-c54de790-f821-4bdd-8cdb-476eec54158b-RN"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>Decisao de continuidade da aula</j.7:name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Converging"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatewayDirection"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.8:id>c54de790-f821-4bdd-8cdb-476eec54158b</j.8:id>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Exclusive"/>
+    <j.5:documentation>Decis&amp;atilde;o de continuidade da aula</j.5:documentation>
+    <j.6:description>Decis&amp;atilde;o de continuidade da aula</j.6:description>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib-49fe189b-0e23-448f-bdbb-8f333bf964ed-RuntimeProperties">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ExtendedAttribute"/>
+    <j.4:isNonFunctionalRequirement>false</j.4:isNonFunctionalRequirement>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <j.6:value>{}</j.6:value>
+    <j.7:name>RuntimeProperties</j.7:name>
+    <j.8:id>49fe189b-0e23-448f-bdbb-8f333bf964ed</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Professor">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Process"/>
+    </rdfs:subClassOf>
+    <j.0:processType>None</j.0:processType>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>Professor</j.7:name>
+    <j.8:id>1c59103d-72d3-4825-96a4-a9f5aaa22498</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isComposedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#SubProcess">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity">
+    <owl:differentFrom>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    </owl:differentFrom>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib-c54de790-f821-4bdd-8cdb-476eec54158b-RN">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ExtendedAttribute"/>
+    <j.4:isNonFunctionalRequirement>false</j.4:isNonFunctionalRequirement>
+    <j.4:isBusinessRule>true</j.4:isBusinessRule>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <j.6:value>&amp;Eacute; preciso verificar se o tempo em minutos da aula excedeu. Se sim, a aula deve ser finalizada.</j.6:value>
+    <j.7:name>RN</j.7:name>
+    <j.8:id>c54de790-f821-4bdd-8cdb-476eec54158b</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#AuxiliaryElements"/>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib-1c0a0b6a-63a9-4908-aa86-65fd786df724-RuntimeProperties">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ExtendedAttribute"/>
+    <j.4:isNonFunctionalRequirement>false</j.4:isNonFunctionalRequirement>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <j.6:value>{}</j.6:value>
+    <j.7:name>RuntimeProperties</j.7:name>
+    <j.8:id>1c0a0b6a-63a9-4908-aa86-65fd786df724</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib-d39f8e8e-9244-4bef-9fb4-e1faca0b3a41-RuntimeProperties">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ExtendedAttribute"/>
+    <j.4:isNonFunctionalRequirement>false</j.4:isNonFunctionalRequirement>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <j.6:value>{}</j.6:value>
+    <j.7:name>RuntimeProperties</j.7:name>
+    <j.8:id>d39f8e8e-9244-4bef-9fb4-e1faca0b3a41</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Dar_a_aula_sobre_o_conteudo">
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-StartProcessoLer_o_conteudo_da_aula"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isActivatedWhenEventIsTriggered"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Simple"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actor-Professor"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPerformedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>Dar a aula sobre o conteudo</j.7:name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-EndProcessoLer_o_conteudo_da_aula"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.8:id>a46030c0-d0bd-4308-b17c-d641c27cb6b3</j.8:id>
+    <j.6:description>No Description</j.6:description>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-StartProcessoLer_o_conteudo_da_aula"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-ce1c8a77-8fa7-456e-b007-47900296ea83"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isAnnotatedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#subProcess-Ler_o_conteudo_da_aula"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfSubProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Converging">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewayDirection"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataStore">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Artifact"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Ler_o_conteudo_da_aula">
+    <j.7:name>Ler o conteudo da aula</j.7:name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib--RuntimeProperties"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Analisar_a_lista_de_presenca"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#SubProcess"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Professor"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.6:description>O professor inicia a leitura do cont&amp;eacute;udo da aula para seus alunos.</j.6:description>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.8:id>92ed799d-d69d-46f7-98fc-e748a95a2c56</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actor-Professor"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPerformedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-FimProcessoProfessor"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>O professor inicia a leitura do cont&amp;eacute;udo da aula para seus alunos.</j.5:documentation>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ParallelMultiple">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-EndProcessoLer_o_conteudo_da_aula">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Dar_a_aula_sobre_o_conteudo"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#End"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#subProcess-Ler_o_conteudo_da_aula"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfSubProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#None"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#eventTrigger"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>EndProcessoLer o conteudo da aula</j.7:name>
+    <j.8:id>c33d73ea-28fb-4dd6-b267-db9c308ad19f</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Artifact">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Exception">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-ce1c8a77-8fa7-456e-b007-47900296ea83">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Annotation"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#subProcess-Ler_o_conteudo_da_aula"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfSubProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>Professor da aula sobre o livro</j.5:documentation>
+    <j.6:description>Professor da aula sobre o livro</j.6:description>
+    <j.7:name>No Name</j.7:name>
+    <j.8:id>ce1c8a77-8fa7-456e-b007-47900296ea83</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-InicioProcessoAluno">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Assistir_aula"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib-49fe189b-0e23-448f-bdbb-8f333bf964ed-RuntimeProperties"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#None"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#eventTrigger"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>InicioProcessoAluno</j.7:name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.8:id>49fe189b-0e23-448f-bdbb-8f333bf964ed</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Start"/>
+    </rdfs:subClassOf>
+    <j.6:description>No Description</j.6:description>
+    <j.5:documentation>No Documentation</j.5:documentation>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-Material_de_estudo_da_aula">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataObject"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>Os alunos recebem um material de estudo referente &amp;agrave; aula&amp;nbsp;</j.5:documentation>
+    <j.6:description>Os alunos recebem um material de estudo referente &amp;agrave; aula&amp;nbsp;</j.6:description>
+    <j.7:name>Material de estudo da aula</j.7:name>
+    <j.8:id>c8a6e6cd-103d-4ee1-adb7-10401a3432d4</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Parallel">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Anotar_observacoes">
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.7:name>Anotar observacoes</j.7:name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatw-b569f0d9-1005-4fc7-9416-bfc2a38bc4f2"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <j.8:id>17f5ff07-ca3e-4d35-8aa5-f7839314e36b</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.6:description>No Description</j.6:description>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Simple"/>
+    <j.5:documentation>No Documentation</j.5:documentation>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#User">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Start">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewaysOutputs">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#AuxiliaryElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event">
+    <owl:differentFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Group">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Artifact"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#artft-Caderno">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataObject"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#subProcess-Ler_o_conteudo_da_aula"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfSubProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>Caderno</j.7:name>
+    <j.8:id>2bb4042a-0adf-46e1-a4ca-98fd1802c97c</j.8:id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#intersectionOfActivitiesToMemorizar_conteudo_da_prova">
+    <owl:intersectionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Anotar_observacoes"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Absorver_conteudo"/>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Prestar_atencao"/>
+    </owl:intersectionOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#evt-InicioProcessoProfessor">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Professor"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>InicioProcessoProfessor</j.7:name>
+    <j.6:description>No Description</j.6:description>
+    <j.8:id>1c0a0b6a-63a9-4908-aa86-65fd786df724</j.8:id>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#None"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#eventTrigger"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Analisar_a_lista_de_presenca"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#extAttrib-1c0a0b6a-63a9-4908-aa86-65fd786df724-RuntimeProperties"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Start"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatw-144710c8-2f3e-4df7-a41f-2d3d3f0461e9">
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Parallel"/>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>No Name</j.7:name>
+    <j.8:id>144710c8-2f3e-4df7-a41f-2d3d3f0461e9</j.8:id>
+    <j.6:description>No Description</j.6:description>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Continuar_assistindo_aula"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Converging"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatewayDirection"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Diverging">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewayDirection"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewaysDirections">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#AuxiliaryElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Process">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ModelElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatw-b569f0d9-1005-4fc7-9416-bfc2a38bc4f2">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Parallel"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Absorver_conteudo"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.6:description>No Description</j.6:description>
+    <j.7:name>No Name</j.7:name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Converging"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatewayDirection"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.5:documentation>No Documentation</j.5:documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Prestar_atencao"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.8:id>b569f0d9-1005-4fc7-9416-bfc2a38bc4f2</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Anotar_observacoes"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#actv-Absorver_conteudo">
+    <j.4:isFunctionalRequirement>false</j.4:isFunctionalRequirement>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Simple"/>
+    <j.8:id>fd19927a-ac6b-4ee8-94fd-e541f371477e</j.8:id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#process-Aluno"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatw-b569f0d9-1005-4fc7-9416-bfc2a38bc4f2"/>
+        <owl:onProperty>
+          <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.7:name>Absorver conteudo</j.7:name>
+    <j.6:description>No Description</j.6:description>
+    <j.4:isBusinessRule>false</j.4:isBusinessRule>
+    <j.5:documentation>No Documentation</j.5:documentation>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Condition">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTriggers">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#AuxiliaryElements"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededByNegativeCase">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededByNegativeCase"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededByNegativeCase">
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededByNegativeCase"/>
+    <rdfs:subPropertyOf>
+      <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPerformedBy">
+    <owl:inverseOf>
+      <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isExecutorOfActivity"/>
+    </owl:inverseOf>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Actor"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isComposedBy">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ModelElements"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ProcessElements"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPartOfGroup">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Group"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isAnnotatedBy">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Annotation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isActivatedWhenEventIsTriggered">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededByPositiveCase">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededByPositiveCase"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#hasExtendedAttribute">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#ExtendedAttribute"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededByPositiveCase">
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededByPositiveCase"/>
+    <rdfs:subPropertyOf>
+      <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isDecisionYes">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#businessRule">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#6-creationDate">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#gatewayDirection">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#GatewayDirection"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#eventTrigger">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#EventTrigger"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#2-name">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#1-id">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#7-modificationDate">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#3-description">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#8-processType">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isNonFunctionalRequirement">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isDecisionNo">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isFunctionalRequirement">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isBusinessRule">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#3-value">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#5-author">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#4-documentation">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:SymmetricProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#communicatesWith">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Process"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Process"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#SubProcess"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#SubProcess"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+  </owl:SymmetricProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#producesOutput">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataObject"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataStore"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+    <owl:inverseOf>
+      <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+    </owl:inverseOf>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#SubProcess"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#SubProcess"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#SubProcess"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPrecededBy"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Event"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#SubProcess"/>
+  </owl:FunctionalProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#usesInput">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataObject"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#DataStore"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:FunctionalProperty>
+  <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isExecutorOfActivity">
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isPerformedBy"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Activity"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#Actor"/>
+  </owl:InverseFunctionalProperty>
+  <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#conditionTypeSucceededBy">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#descConditionSucceededBy">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/ModeloAlunosV4#isSucceededBy"/>
+  </owl:AnnotationProperty>
+</rdf:RDF>
