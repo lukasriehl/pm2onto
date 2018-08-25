@@ -2,32 +2,23 @@ package com.lukas.pm2onto.model;
 
 import com.lukas.pm2onto.model.enumerador.DirecaoGateway;
 import com.lukas.pm2onto.model.enumerador.TipoGateway;
-import javax.persistence.Transient;
 
 /**
  *
  * @author lukas
  */
-//@Entity
-//@Table(name = "gateway", schema = "pm2onto")
+
+
 public class Gateway extends Elemento {
 
-    //@Column(name = "tipo")
     private TipoGateway tipo;
 
-    //@Column(name = "tipo")
     private DirecaoGateway direcao;
-    
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_processo", referencedColumnName = "id_elemento")
+        
     private Processo processo;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_anotacao", referencedColumnName = "id_elemento")
     private Anotacao anotacao;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_grupo", referencedColumnName = "id_elemento")
     private Grupo grupo;    
 
     public Gateway() {

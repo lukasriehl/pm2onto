@@ -5,40 +5,28 @@ import java.util.Objects;
 
 /**
  *
- * @author lukas
- * Classe que representa as transições. Elas podem ocorrer entre uma atividade e uma outra atividade,
- * atividade e evento, atividade e gateway, evento e outro evento, evento e atividade, evento e gateway,
- * gateway e outro gateway, gateway e atividade e gateway e evento.
+ * @author lukas Classe que representa as transições. Elas podem ocorrer entre
+ * uma atividade e uma outra atividade, atividade e evento, atividade e gateway,
+ * evento e outro evento, evento e atividade, evento e gateway, gateway e outro
+ * gateway, gateway e atividade e gateway e evento.
  */
-//@Entity
-//@Table(name = "sucedido_por", schema = "pm2onto")
 public class SucedidoPor implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-//    @Id
-//    @Column(name = "id_sucedido_por")
-//    @Size(min = 36, max = 36)
+
     private String idSucedidoPor;
-    
-//    @JoinColumn(name = "id_elemento_origem", referencedColumnName = "id_elemento")
-//    @OneToOne
+
     private Elemento elementoOrigem;
-    
-//    @JoinColumn(name = "id_elemento_destino", referencedColumnName = "id_elemento")
-//    @OneToOne
+
     private Elemento elementoDestino;
-    
-    //@Column(name = "tipo_condicao")
+
     private TipoCondicao tipoCondicao;
-    
-    //@Column(name = "descricao_condicao")
+
     private String descricaoCondicao;
-    
-    //@Transient
+
     private String nomeTransicao;
-    
-    public SucedidoPor(){        
+
+    public SucedidoPor() {
     }
 
     public String getIdSucedidoPor() {
@@ -87,7 +75,7 @@ public class SucedidoPor implements java.io.Serializable {
 
     public void setNomeTransicao(String nomeTransicao) {
         this.nomeTransicao = nomeTransicao;
-    }   
+    }
 
     @Override
     public int hashCode() {
@@ -109,5 +97,5 @@ public class SucedidoPor implements java.io.Serializable {
         }
         final SucedidoPor other = (SucedidoPor) obj;
         return Objects.equals(this.idSucedidoPor, other.idSucedidoPor);
-    }    
+    }
 }

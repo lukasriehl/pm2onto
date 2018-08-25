@@ -11,22 +11,14 @@ import java.util.List;
 //@Table(name = "artefato", schema = "pm2onto")
 public class Artefato extends Elemento {
 
-    //@Column(name = "tipo")
     private TipoArtefato tipo;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_processo", referencedColumnName = "id_elemento")
     private Processo processo;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_anotacao", referencedColumnName = "id_elemento")
     private Anotacao anotacao;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_grupo", referencedColumnName = "id_elemento")
     private Grupo grupo;
 
-    //@OneToMany(mappedBy = "artefato", cascade = CascadeType.ALL)
     private List<ProduzSaida> produzSaidaList;
 
     public Artefato() {

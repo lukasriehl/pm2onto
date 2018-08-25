@@ -67,17 +67,14 @@ public class Modelo implements java.io.Serializable {
     private String idDocumento;
     //Fim dos Atributos do XPDL
 
-    //    @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_ontologia", referencedColumnName = "id_ontologia")
     private Ontologia ontologia;
 
     @Transient
-    //@OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL)
     private List<Processo> processoList;
 
     @Transient
-    //@OneToMany(mappedBy = "modelo", cascade = CascadeType.ALL)
     private List<TrocaMensagemCom> trocaMensagemComList;
 
     public Modelo() {

@@ -6,15 +6,10 @@ import com.lukas.pm2onto.model.enumerador.TipoSubProcesso;
  *
  * @author lukas
  */
-//@Entity
-//@Table(name = "sub_processo", schema = "pm2onto")
 public class SubProcesso extends Processo {
 
-    //@Column(name = "tipo")
     private TipoSubProcesso tipo;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_processo", referencedColumnName = "id_elemento")
     private Processo processo;
 
     private Evento eventoGatilho;

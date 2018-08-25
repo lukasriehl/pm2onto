@@ -14,39 +14,24 @@ public class Elemento implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
 
-//    @Id
-//    @Column(name = "id_elemento")
-//    @Size(min = 36, max = 36)
-    private String idElemento;
+private String idElemento;
 
-//    @NotNull
-//    @Column(name = "nome")
-//    @Size(max = 100)
-    private String nome;
+private String nome;
 
-//    @NotNull
-//    @Column(name = "descricao")
     private String descricao;
 
-//    @Column(name = "documentacao")
-    private String documentacao;
+private String documentacao;
 
-//    @OneToMany(mappedBy = "elemento", cascade = CascadeType.ALL)
     private List<AtributoEstendido> atributoEstendidoList;
 
-//    @OneToOne(mappedBy = "elementoOrigem")
     private SucedidoPor sucedidoPorOrigem;
 
-//    @OneToOne(mappedBy = "elementoDestino")
     private SucedidoPor sucedidoPorDestino;
 
-//    @OneToMany(mappedBy = "elementoOrigem", cascade = CascadeType.ALL)
     private List<TrocaMensagemCom> trocaMensagemComOrigemList;
 
-    //@OneToMany(mappedBy = "elementoDestino", cascade = CascadeType.ALL)
     private List<TrocaMensagemCom> trocaMensagemComDestinoList;
 
-    //@OneToMany(mappedBy = "elemento", cascade = CascadeType.ALL)
     private List<ProduzSaida> produzSaidaList;
 
     //@Transient

@@ -6,50 +6,32 @@ import java.util.List;
  *
  * @author lukas
  */
-//@Entity
-//@Table(name = "processo", schema = "pm2onto")
 public class Processo extends Elemento {
 
-//    @NotNull
-//    @Column(name = "tipo_processo")
-//    @Size(max = 45)
     private String tipoProcesso;
 
-    //@OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)
     private List<SubProcesso> subProcessoList;
 
-    //@OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)
     private List<Atividade> atividadeList;
 
-    //@OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)
     private List<Evento> eventoList;
 
-    //@OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)
     private List<Gateway> gatewayList;
 
-    //@OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)
     private List<Artefato> artefatoList;
 
-    //@OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)
     private List<Ator> atorList;
-    
+
     private List<Piscina> piscinaList;
 
-    //    @NotNull
-    //@ManyToOne
-    //@JoinColumn(name = "id_modelo", referencedColumnName = "id_elemento")
     private Modelo modelo;
 
-    //@Transient
     private List<ExecutadoPor> executadoPorList;
 
-    //@Transient
     private List<SucedidoPor> sucedidoPorList;
-    
-    //@Transient
+
     private List<UtilizaEntrada> utilizaEntradaList;
 
-    //@Transient
     private List<ProduzSaida> produzSaidaList;
 
     public Processo() {
@@ -142,7 +124,7 @@ public class Processo extends Elemento {
     public void setSucedidoPorList(List<SucedidoPor> sucedidoPorList) {
         this.sucedidoPorList = sucedidoPorList;
     }
-    
+
     public List<UtilizaEntrada> getUtilizaEntradaList() {
         return utilizaEntradaList;
     }

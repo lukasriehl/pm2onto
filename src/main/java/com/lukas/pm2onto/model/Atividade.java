@@ -8,26 +8,17 @@ import javax.persistence.JoinColumn;
  *
  * @author lukas
  */
-//@Entity
-//@Table(name = "atividade", schema = "pm2onto")
 public class Atividade extends Elemento {
 
-    //@Column(name = "tipo")
     private TipoAtividade tipo;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_processo", referencedColumnName = "id_elemento")
     private Processo processo;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_anotacao", referencedColumnName = "id_elemento")
     private Anotacao anotacao;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_grupo", referencedColumnName = "id_elemento")
     private Grupo grupo;
 
-    //@OneToMany(mappedBy = "atividade", cascade = CascadeType.ALL)
     private List<ExecutadoPor> executadoPorList;
     
     private boolean isSubFlow;

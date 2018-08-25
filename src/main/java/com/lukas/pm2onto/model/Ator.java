@@ -1,12 +1,6 @@
 package com.lukas.pm2onto.model;
 
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
@@ -16,11 +10,8 @@ import javax.persistence.Table;
 //@Table(name = "ator", schema = "pm2onto")
 public class Ator extends Elemento {
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id_processo", referencedColumnName = "id_elemento")
     private Processo processo;
-    
-    //@OneToMany(mappedBy = "ator", cascade = CascadeType.ALL)
+
     private List<ExecutadoPor> executadoPorList;
 
     public Ator() {
@@ -40,5 +31,5 @@ public class Ator extends Elemento {
 
     public void setExecutadoPorList(List<ExecutadoPor> executadoPorList) {
         this.executadoPorList = executadoPorList;
-    }   
+    }
 }

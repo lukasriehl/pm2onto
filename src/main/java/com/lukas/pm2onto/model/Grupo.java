@@ -7,20 +7,14 @@ import java.util.List;
  *
  * @author lukas
  */
-//@Entity
-//@Table(name = "grupo", schema = "pm2onto")
 public class Grupo extends Artefato {
 
-    //@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
     private List<Atividade> atividadeList;
 
-    //@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
     private List<Evento> eventoList;
 
-    //@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
     private List<Gateway> gatewayList;
 
-    //@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
     private List<Artefato> artefatoList;
 
     public Grupo() {

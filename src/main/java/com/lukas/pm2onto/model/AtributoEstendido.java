@@ -10,32 +10,23 @@ import java.util.Objects;
 //@Entity
 //@Table(name = "atributo_estendido", schema = "pm2onto")
 public class AtributoEstendido implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
 
-//    @Id
-//    @Column(name = "id_elemento")
-//    @Size(min = 36, max = 36)
     private String idElemento;
 
-//    @NotNull
-//    @Column(name = "nome")
     private String nome;
-    
-//    @NotNull
-//    @Column(name = "valor")
+
     private String valor;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_elemento", referencedColumnName = "id_elemento")
     private Elemento elemento;
-    
+
     //@Transient
     private boolean isRegraNegocio;
-    
+
     //@Transient    
     private boolean isRequisitoNaoFuncional;
-    
+
     //@Transient    
     private boolean isRequisitoFuncional;
 
@@ -64,7 +55,7 @@ public class AtributoEstendido implements Serializable {
 
     public void setValor(String valor) {
         this.valor = valor;
-    }   
+    }
 
     public Elemento getElemento() {
         return elemento;
@@ -80,7 +71,7 @@ public class AtributoEstendido implements Serializable {
 
     public void setIsRegraNegocio(boolean isRegraNegocio) {
         this.isRegraNegocio = isRegraNegocio;
-    }    
+    }
 
     public boolean getIsRequisitoNaoFuncional() {
         return isRequisitoNaoFuncional;
@@ -118,6 +109,6 @@ public class AtributoEstendido implements Serializable {
         }
         final AtributoEstendido other = (AtributoEstendido) obj;
         return Objects.equals(this.idElemento, other.idElemento);
-    }    
+    }
 
 }

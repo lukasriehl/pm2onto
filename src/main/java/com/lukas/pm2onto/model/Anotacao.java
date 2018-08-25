@@ -2,29 +2,19 @@ package com.lukas.pm2onto.model;
 
 import com.lukas.pm2onto.model.enumerador.TipoArtefato;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author lukas
  */
-//@Entity
-//@Table(name = "anotacao", schema = "pm2onto")
 public class Anotacao extends Artefato {
 
-    //@OneToMany(mappedBy = "anotacao", cascade = CascadeType.ALL)
     private List<Atividade> atividadeList;
 
-    //@OneToMany(mappedBy = "anotacao", cascade = CascadeType.ALL)
     private List<Evento> eventoList;
 
-    //@OneToMany(mappedBy = "anotacao", cascade = CascadeType.ALL)
     private List<Gateway> gatewayList;
 
-    //@OneToMany(mappedBy = "anotacao", cascade = CascadeType.ALL)
     private List<Artefato> artefatoList;
 
     public Anotacao() {
