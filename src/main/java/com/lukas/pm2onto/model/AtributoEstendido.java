@@ -1,5 +1,6 @@
 package com.lukas.pm2onto.model;
 
+import com.lukas.pm2onto.model.enumerador.TipoDado;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,8 +8,6 @@ import java.util.Objects;
  *
  * @author lukas
  */
-//@Entity
-//@Table(name = "atributo_estendido", schema = "pm2onto")
 public class AtributoEstendido implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,16 +17,15 @@ public class AtributoEstendido implements Serializable {
     private String nome;
 
     private String valor;
+    
+    private TipoDado tipoDado;
 
-    private Elemento elemento;
+    private Elemento elementoPai;
 
-    //@Transient
     private boolean isRegraNegocio;
 
-    //@Transient    
     private boolean isRequisitoNaoFuncional;
 
-    //@Transient    
     private boolean isRequisitoFuncional;
 
     public AtributoEstendido() {
@@ -57,12 +55,20 @@ public class AtributoEstendido implements Serializable {
         this.valor = valor;
     }
 
-    public Elemento getElemento() {
-        return elemento;
+    public TipoDado getTipoDado() {
+        return tipoDado;
     }
 
-    public void setElemento(Elemento elemento) {
-        this.elemento = elemento;
+    public void setTipoDado(TipoDado tipoDado) {
+        this.tipoDado = tipoDado;
+    }   
+
+    public Elemento getElementoPai() {
+        return elementoPai;
+    }
+
+    public void setElementoPai(Elemento elementoPai) {
+        this.elementoPai = elementoPai;
     }
 
     public boolean getIsRegraNegocio() {

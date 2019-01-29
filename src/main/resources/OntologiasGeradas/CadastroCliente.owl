@@ -1,0 +1,1202 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.0="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Ontology rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente"/>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#AuxiliaryElements"/>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-End">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTriggers">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#AuxiliaryElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actv-User">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Cpf_for_artftClienteTBL">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i3-value>T</j.0:i3-value>
+    <j.0:i2-name>Cpf for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-ClienteTBL"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>Cpf for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i1-id>8220f291-a6a3-4e0e-8732-882fc2ef3931</j.0:i1-id>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Sexo_for_artftClienteTBL">
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i3-value>T</j.0:i3-value>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i1-id>8220f291-a6a3-4e0e-8732-882fc2ef3931</j.0:i1-id>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-ClienteTBL"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>Sexo for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i2-name>Sexo for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i2-name>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-Start">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ModelElements"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Data_nascto_for_artftRelatorio_de_Cadastro">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>Data_nascto for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i2-name>Data_nascto for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i1-id>530a9f89-8d8d-4292-94e7-950ef21adf81</j.0:i1-id>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i3-value rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >19800102</j.0:i3-value>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-Relatorio_de_Cadastro"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Flow">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Id_for_artftRelatorio_de_Cadastro">
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i1-id>530a9f89-8d8d-4292-94e7-950ef21adf81</j.0:i1-id>
+    <j.0:i4-documentation>Id for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i3-value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</j.0:i3-value>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-Relatorio_de_Cadastro"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i2-name>Id for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i2-name>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess">
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataObject"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#InclusiveFlow"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ParallelFlow"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ParallelMultiple">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Cancel">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-ClienteTBL">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Cidade_for_artftClienteTBL"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Endereco_for_artftClienteTBL"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Cpf_for_artftClienteTBL"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Nome_for_artftClienteTBL"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Id_for_artftClienteTBL"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Data_nascto_for_artftClienteTBL"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Sexo_for_artftClienteTBL"/>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#process-Cadastrar_Cliente"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfProcess"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>Tabela Cliente do banco de dados. </j.0:i4-documentation>
+    <j.0:i3-description>Tabela Cliente do banco de dados. </j.0:i3-description>
+    <j.0:i2-name>ClienteTBL for the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i1-id>8220f291-a6a3-4e0e-8732-882fc2ef393b</j.0:i1-id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-RuntimeProperties_for_actv-Cadastrar_Cliente">
+    <j.0:i2-name>RuntimeProperties for the Activity Cadastrar Cliente in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i3-value>{"cost"</j.0:i3-value>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <j.0:i1-id>4f19c66d-aeb3-4d6f-85e0-c8a2393c23a1</j.0:i1-id>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actv-Cadastrar_Cliente"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>RuntimeProperties for the Activity Cadastrar Cliente in the Process Cadastrar Cliente</j.0:i4-documentation>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Nome_for_artftRelatorio_de_Cadastro">
+    <j.0:i1-id>530a9f89-8d8d-4292-94e7-950ef21adf81</j.0:i1-id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-Relatorio_de_Cadastro"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i3-value>TESTE2</j.0:i3-value>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i4-documentation>Nome for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i2-name>Nome for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i2-name>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Cpf_for_artftRelatorio_de_Cadastro">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-Relatorio_de_Cadastro"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i3-value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >38901656718</j.0:i3-value>
+    <j.0:i4-documentation>Cpf for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i1-id>530a9f89-8d8d-4292-94e7-950ef21adf81</j.0:i1-id>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i2-name>Cpf for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i2-name>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Nome_for_artftClienteTBL">
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-ClienteTBL"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>Nome for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i2-name>Nome for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i1-id>8220f291-a6a3-4e0e-8732-882fc2ef3931</j.0:i1-id>
+    <j.0:i3-value>T</j.0:i3-value>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#OutputIsUndefined">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewaysOutputs"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Group">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Artifact"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Sexo_for_artftRelatorio_de_Cadastro">
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-Relatorio_de_Cadastro"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i3-value>M</j.0:i3-value>
+    <j.0:i2-name>Sexo for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i1-id>530a9f89-8d8d-4292-94e7-950ef21adf81</j.0:i1-id>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i4-documentation>Sexo for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </rdfs:subClassOf>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event">
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ParallelFlow"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#InclusiveFlow"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataObject"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Scale">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Diverging">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewayDirection"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#model-Cadastrar_Cliente">
+    <j.0:i6-creationDate>Tue Nov 27 19:36:00 BRST 2018</j.0:i6-creationDate>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Model"/>
+    </rdfs:subClassOf>
+    <j.0:i2-name>Cadastrar Cliente</j.0:i2-name>
+    <j.0:i3-description>Cadastrar Cliente</j.0:i3-description>
+    <j.0:i4-documentation>Cadastra um novo cliente no sistema.</j.0:i4-documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ModelElements"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isComposedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i5-author>No Author</j.0:i5-author>
+    <j.0:i7-modificationDate>Mon Jan 14 22:03:00 BRST 2019</j.0:i7-modificationDate>
+    <j.0:i1-id>845066bf-ccd6-4b9d-b4ad-6b7939200ea5</j.0:i1-id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#pool-Cadastrar_Cliente">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#process-Cadastrar_Cliente"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>No Documentation</j.0:i4-documentation>
+    <j.0:i3-description>Lanes: Recepção;</j.0:i3-description>
+    <j.0:i2-name>Cadastrar Cliente for the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i1-id>44c61ac7-e5b4-44c9-97b3-acd9c537483f</j.0:i1-id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#InclusiveFlow">
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataObject"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Flow"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataObject"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#InclusiveFlow"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ParallelFlow"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-REGRA_for_actv-Cadastrar_Cliente">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <j.0:i1-id>4f19c66d-aeb3-4d6f-85e0-c8a2393c23a1</j.0:i1-id>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i8-businessRule>&amp;Eacute; necess&amp;aacute;rio validar o CPF do cliente.Cadastrar somente clientes com mais de 18 anos.&amp;nbsp;</j.0:i8-businessRule>
+    <j.0:i2-name>REGRA for the Activity Cadastrar Cliente in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actv-Cadastrar_Cliente"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>REGRA for the Activity Cadastrar Cliente in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i3-value>&amp;Eacute; necess&amp;aacute;rio validar o CPF do cliente.Cadastrar somente clientes com mais de 18 anos.&amp;nbsp;</j.0:i3-value>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</j.0:i5-isBusinessRule>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTriggers"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actor-Usuario">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#process-Cadastrar_Cliente"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actv-Cadastrar_Cliente"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExecutorOfActivity"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>No Documentation</j.0:i4-documentation>
+    <j.0:i3-description>No Description</j.0:i3-description>
+    <j.0:i2-name>Usuario for the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i1-id>65525f4a-72c7-44cf-ad22-e91cf7a75ad8</j.0:i1-id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#OutputIsNo">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewaysOutputs"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewaysOutputs">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#AuxiliaryElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Compensation">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#process-Cadastrar_Cliente">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Process"/>
+    </rdfs:subClassOf>
+    <j.0:processType>None</j.0:processType>
+    <j.0:i4-documentation>No Documentation</j.0:i4-documentation>
+    <j.0:i3-description>No Description</j.0:i3-description>
+    <j.0:i2-name>Cadastrar Cliente</j.0:i2-name>
+    <j.0:i1-id>3adabb06-48b9-4a4d-9659-18b53245c43d</j.0:i1-id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isComposedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Id_for_artftClienteTBL">
+    <j.0:i1-id>8220f291-a6a3-4e0e-8732-882fc2ef3931</j.0:i1-id>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-ClienteTBL"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i3-value>I</j.0:i3-value>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i2-name>Id for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i2-name>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <j.0:i4-documentation>Id for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i4-documentation>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ParallelFlow">
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataObject"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#InclusiveFlow"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Flow"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewaysDirections">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#AuxiliaryElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Process">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ModelElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-Relatorio_de_Cadastro">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Cidade_for_artftRelatorio_de_Cadastro"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Endereco_for_artftRelatorio_de_Cadastro"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Cpf_for_artftRelatorio_de_Cadastro"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Nome_for_artftRelatorio_de_Cadastro"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Id_for_artftRelatorio_de_Cadastro"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Data_nascto_for_artftRelatorio_de_Cadastro"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Sexo_for_artftRelatorio_de_Cadastro"/>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataObject"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#process-Cadastrar_Cliente"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>No Documentation</j.0:i4-documentation>
+    <j.0:i3-description>No Description</j.0:i3-description>
+    <j.0:i2-name>Relatorio de Cadastro for the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i1-id>530a9f89-8d8d-4292-94e7-950ef21adf83</j.0:i1-id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Cidade_for_artftClienteTBL">
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i4-documentation>Cidade for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-ClienteTBL"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i2-name>Cidade for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i3-value>Cidade</j.0:i3-value>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i1-id>8220f291-a6a3-4e0e-8732-882fc2ef3931</j.0:i1-id>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#OutputIsYes">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewaysOutputs"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#None">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Exception">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Condition">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Message">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Artifact">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Endereco_for_artftClienteTBL">
+    <j.0:i4-documentation>Endereco for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i3-value>T</j.0:i3-value>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-ClienteTBL"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i1-id>8220f291-a6a3-4e0e-8732-882fc2ef3931</j.0:i1-id>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i2-name>Endereco for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i2-name>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Converging">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewayDirection"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EndTrigger">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataObject">
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Artifact"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ParallelFlow"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#InclusiveFlow"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataObject"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataObject"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#InclusiveFlow"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ParallelFlow"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-RNF_for_actv-Cadastrar_Cliente">
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <j.0:i1-id>4f19c66d-aeb3-4d6f-85e0-c8a2393c23a1</j.0:i1-id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actv-Cadastrar_Cliente"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i4-documentation>RNF for the Activity Cadastrar Cliente in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i3-value>O usu&amp;aacute;rio deve fazer o cadastro do cliente em menos de 5 minutos. </j.0:i3-value>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i2-name>RNF for the Activity Cadastrar Cliente in the Process Cadastrar Cliente</j.0:i2-name>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-Inicio_ProcessoCadastrar_Cliente">
+    <j.0:i3-description>No Description</j.0:i3-description>
+    <j.0:i1-id>a75aa89c-1131-47c1-9ce7-7bda9eb644c5</j.0:i1-id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actv-Cadastrar_Cliente"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#process-Cadastrar_Cliente"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#None"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#eventTrigger"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-Start"/>
+    <j.0:i4-documentation>No Documentation</j.0:i4-documentation>
+    <j.0:i2-name>Inicio ProcessoCadastrar Cliente for the Process Cadastrar Cliente</j.0:i2-name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-RuntimeProperties_for_evt-Inicio_ProcessoCadastrar_Cliente"/>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actv-Cadastrar_Cliente">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-Inicio_ProcessoCadastrar_Cliente"/>
+        <owl:onProperty>
+          <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>Usu&amp;aacute;rio cadastra cliente.</j.0:i4-documentation>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actv-User"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onClass rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-Relatorio_de_Cadastro"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#producesOutput"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#process-Cadastrar_Cliente"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i2-name>Cadastrar Cliente for the Process Cadastrar Cliente</j.0:i2-name>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-Fim_ProcessoCadastrar_Cliente"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isSucceededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onClass rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-ClienteTBL"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#long"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#producesOutput"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i1-id>4f19c66d-aeb3-4d6f-85e0-c8a2393c23a8</j.0:i1-id>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:intersectionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-RuntimeProperties_for_actv-Cadastrar_Cliente"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-REGRA_for_actv-Cadastrar_Cliente"/>
+              <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-RNF_for_actv-Cadastrar_Cliente"/>
+            </owl:intersectionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#hasExtendedAttribute"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actor-Usuario"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPerformedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i3-description>Usu&amp;aacute;rio cadastra cliente.</j.0:i3-description>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</j.0:i5-isBusinessRule>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-Inicio_ProcessoCadastrar_Cliente"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isActivatedWhenEventIsTriggered"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >true</j.0:i6-isFunctionalRequirement>
+    <j.0:i8-businessRule>Usu&amp;aacute;rio cadastra cliente.</j.0:i8-businessRule>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Cidade_for_artftRelatorio_de_Cadastro">
+    <j.0:i1-id>530a9f89-8d8d-4292-94e7-950ef21adf81</j.0:i1-id>
+    <j.0:i2-name>Cidade for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i3-value>CIDADE TESTE 123</j.0:i3-value>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i4-documentation>Cidade for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-Relatorio_de_Cadastro"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Signal">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-Fim_ProcessoCadastrar_Cliente">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#actv-Cadastrar_Cliente"/>
+        <owl:onProperty>
+          <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPrecededBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-End"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#process-Cadastrar_Cliente"/>
+        <owl:onProperty rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfProcess"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#None"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#eventTrigger"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i4-documentation>No Documentation</j.0:i4-documentation>
+    <j.0:i3-description>No Description</j.0:i3-description>
+    <j.0:i2-name>Fim ProcessoCadastrar Cliente for the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i1-id>6ffd5758-1855-4a7c-a589-e05158f997b2</j.0:i1-id>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Endereco_for_artftRelatorio_de_Cadastro">
+    <j.0:i4-documentation>Endereco for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-Relatorio_de_Cadastro"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i3-value>RUA TESTE 123</j.0:i3-value>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i1-id>530a9f89-8d8d-4292-94e7-950ef21adf81</j.0:i1-id>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <j.0:i2-name>Endereco for the Artifact Relatorio de Cadastro in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewayDirection">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewaysDirections"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Time">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Link">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Annotation">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Artifact"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-Data_nascto_for_artftClienteTBL">
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <j.0:i3-value>T</j.0:i3-value>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <j.0:i2-name>Data_nascto for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i1-id>8220f291-a6a3-4e0e-8732-882fc2ef3931</j.0:i1-id>
+    <j.0:i4-documentation>Data_nascto for the Artifact ClienteTBL in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#artft-ClienteTBL"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Multiple">
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#DataStore">
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    <owl:disjointWith rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Artifact"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#extAttr-RuntimeProperties_for_evt-Inicio_ProcessoCadastrar_Cliente">
+    <j.0:i1-id>a75aa89c-1131-47c1-9ce7-7bda9eb644c1</j.0:i1-id>
+    <j.0:i4-documentation>RuntimeProperties for the Event Inicio ProcessoCadastrar Cliente in the Process Cadastrar Cliente</j.0:i4-documentation>
+    <j.0:i2-name>RuntimeProperties for the Event Inicio ProcessoCadastrar Cliente in the Process Cadastrar Cliente</j.0:i2-name>
+    <j.0:i7-isNonFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i7-isNonFunctionalRequirement>
+    <j.0:i8-businessRule>No Description for the Business Rule</j.0:i8-businessRule>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#evt-Inicio_ProcessoCadastrar_Cliente"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <j.0:i5-isBusinessRule rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i5-isBusinessRule>
+    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <j.0:i3-value>{}</j.0:i3-value>
+    <j.0:i6-isFunctionalRequirement rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:i6-isFunctionalRequirement>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isAnnotatedBy">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Annotation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isSucceededBy">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    <owl:inverseOf>
+      <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPrecededBy"/>
+    </owl:inverseOf>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExecutedAfterParallelExecutionOf">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ParallelFlow"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#usesInput">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Artifact"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExecutedAfterInclusiveExecutionOf">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#InclusiveFlow"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isActivatedWhenEventIsTriggered">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#producesOutput">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Artifact"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#hasExtendedAttribute">
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#hasExtendedAttribute"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfGroup">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Group"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExtendedAttributeOf">
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#hasExtendedAttribute"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ExtendedAttribute"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPerformedBy">
+    <owl:inverseOf>
+      <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExecutorOfActivity"/>
+    </owl:inverseOf>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isComposedBy">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ModelElements"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#ProcessElements"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfFlow"/>
+  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPartOfSubProcess"/>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i3-value">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isDecisionYes">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i5-isBusinessRule">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i7-isNonFunctionalRequirement">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i5-author">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i6-creationDate">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i8-businessRule">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#gatewayDirection">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#GatewayDirection"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i1-id">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i3-description">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i7-modificationDate">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#processType">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i2-name">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i4-documentation">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#i6-isFunctionalRequirement">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#eventTrigger">
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#EventTrigger"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isDecisionNo">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#communicatesWith">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Process"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Pool"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Process"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+  </owl:FunctionalProperty>
+  <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isExecutorOfActivity">
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPerformedBy"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Actor"/>
+  </owl:InverseFunctionalProperty>
+  <owl:InverseFunctionalProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isPrecededBy">
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Gateway"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#SubProcess"/>
+    <owl:inverseOf rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isSucceededBy"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Activity"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#Event"/>
+  </owl:InverseFunctionalProperty>
+  <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#descConditionSucceededBy">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isSucceededBy"/>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#conditionTypeSucceededBy">
+    <rdfs:domain rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:range rdf:resource="http://www.semanticweb.org/ontologiaDeProcesso/CadastroCliente#isSucceededBy"/>
+  </owl:AnnotationProperty>
+</rdf:RDF>

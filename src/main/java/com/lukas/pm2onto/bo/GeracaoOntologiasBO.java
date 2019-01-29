@@ -25,6 +25,7 @@ import com.lukas.pm2onto.model.enumerador.DirecaoGateway;
 import com.lukas.pm2onto.model.enumerador.GatilhoEvento;
 import com.lukas.pm2onto.model.enumerador.TipoArtefato;
 import com.lukas.pm2onto.model.enumerador.TipoAtividade;
+import com.lukas.pm2onto.model.enumerador.TipoDado;
 import com.lukas.pm2onto.model.enumerador.TipoEvento;
 import com.lukas.pm2onto.model.enumerador.TipoGateway;
 import com.lukas.pm2onto.model.enumerador.TipoSubProcesso;
@@ -142,547 +143,544 @@ public class GeracaoOntologiasBO {
     public boolean geraProcessos() throws Exception {
         Processo processo;
 
-        try {
-            if (arquivosOntologiasList != null && !arquivosOntologiasList.isEmpty()) {
-                arquivosOntologiasList.clear();
+//        try {
+        if (arquivosOntologiasList != null && !arquivosOntologiasList.isEmpty()) {
+            arquivosOntologiasList.clear();
+        }
+
+        //Pega informações do cabeçalho do primeiro XPDL que foi incluido
+        if (rootPackageProcessosList != null && !rootPackageProcessosList.isEmpty()) {
+            ModeloDAO modeloDAO = new ModeloDAO();
+            geracaoElementosBPMNBO = new GeracaoElementosBPMNBO();
+
+            modelo = new Modelo();
+
+            modelo.setId(modeloDAO.retornaProxIdModelo());
+            modelo.setIdModelo(rootPackageProcessosList.get(0).getId());
+            modelo.setNome(rootPackageProcessosList.get(0).getName());
+
+            if (rootPackageProcessosList.get(0).getPackageHeader() != null) {
+                Date dataCriacao = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(rootPackageProcessosList.get(0)
+                        .getPackageHeader()
+                        .getCreated().getValue().replace("T", " ").substring(0, 16));
+                Date dataModificacao = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(rootPackageProcessosList.get(0).getPackageHeader()
+                        .getModificationDate().getValue().replace("T", " ").substring(0, 16));
+
+                modelo.setDataCriacao(dataCriacao);
+                modelo.setDataModificacao(dataModificacao);
+                modelo.setDescricao(TextUtils.removeTagsHtml(rootPackageProcessosList.get(0)
+                        .getPackageHeader().getDescription().getValue()));
+                modelo.setDocumentacao(TextUtils.removeTagsHtml(rootPackageProcessosList.get(0)
+                        .getPackageHeader().getDocumentation().getValue()));
             }
 
-            //Pega informações do cabeçalho do primeiro XPDL que foi incluido
-            if (rootPackageProcessosList != null && !rootPackageProcessosList.isEmpty()) {
-                ModeloDAO modeloDAO = new ModeloDAO();
-                geracaoElementosBPMNBO = new GeracaoElementosBPMNBO();
-
-                modelo = new Modelo();
-
-                modelo.setId(modeloDAO.retornaProxIdModelo());
-                modelo.setIdModelo(rootPackageProcessosList.get(0).getId());
-                modelo.setNome(rootPackageProcessosList.get(0).getName());
-
-                if (rootPackageProcessosList.get(0).getPackageHeader() != null) {
-                    Date dataCriacao = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(rootPackageProcessosList.get(0)
-                            .getPackageHeader()
-                            .getCreated().getValue().replace("T", " ").substring(0, 16));
-                    Date dataModificacao = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(rootPackageProcessosList.get(0).getPackageHeader()
-                            .getModificationDate().getValue().replace("T", " ").substring(0, 16));
-
-                    modelo.setDataCriacao(dataCriacao);
-                    modelo.setDataModificacao(dataModificacao);
-                    modelo.setDescricao(TextUtils.removeTagsHtml(rootPackageProcessosList.get(0)
-                            .getPackageHeader().getDescription().getValue()));
-                    modelo.setDocumentacao(TextUtils.removeTagsHtml(rootPackageProcessosList.get(0)
-                            .getPackageHeader().getDocumentation().getValue()));
-                }
-
-                /*No momento está pegando os dados do primeiro arquivo XPDL da lista para inclusão nos atributos
+            /*No momento está pegando os dados do primeiro arquivo XPDL da lista para inclusão nos atributos
                 do modelo criado.*/
-                for (PackageType pacote : rootPackageProcessosList) {
+            for (PackageType pacote : rootPackageProcessosList) {
 
-                    //Preenche os Atores
-                    if (pacote.getParticipants() != null) {
-                        atorList = new ArrayList();
+                //Preenche os Atores
+                if (pacote.getParticipants() != null) {
+                    atorList = new ArrayList();
 
-                        pacote.getParticipants().getParticipant().stream().map((p) -> {
-                            Ator ator = new Ator();
-                            ator.setIdElemento(p.getId());
-                            ator.setNome(TextUtils.removeTagsHtml(p.getName()));
-                            ator.setDescricao(TextUtils.removeTagsHtml(p.getDescription().getValue()));
-                            return ator;
-                        }).forEach((ator) -> {
-                            atorList.add(ator);
-                        });
-                    }
-
-                    //Preenche os artefatos
-                    artefatoList = preencheArtefatos(pacote);
-
-                    //Preenche os processos
-                    for (ProcessType wfp : pacote.getWorkflowProcesses().getWorkflowProcess()) {
-                        processo = new Processo();
-                        processo.setIdElemento(wfp.getId());
-                        processo.setNome(wfp.getName());
-                        processo.setTipoProcesso(wfp.getProcessType());
-                        processo.setArtefatoList(preencheArtefatosProcesso(wfp));
-
-                        if (processosList == null) {
-                            processosList = new ArrayList();
-                        }
-
-                        processosList.add(processo);
-                    }
-
-                    List<Performer> performerList;
-
-                    //Itera sobre as definições de fluxo de processos
-                    for (ProcessType wfp : pacote.getWorkflowProcesses().getWorkflowProcess()) {
-                        processo = processosList.stream().filter(p -> p.getIdElemento().equals(wfp.getId()))
-                                .findFirst().get();
-
-                        for (Object conjunto : wfp.getContent()) {
-
-                            //Itera sobre as atividades (atividades, eventos ou gateways)
-                            if (conjunto instanceof Activities) {
-                                Activities conjuntoAtividades = (Activities) conjunto;
-                                for (Activity ati : conjuntoAtividades.getActivity()) {
-                                    boolean isAtividade = true, isEvento = false, isGateway = false,
-                                            isSubFlow = false;
-                                    String descricao = null, documentacao = null, idSubFlow = null,
-                                            targetId = null;
-                                    TipoAtividade tipoAtividade = null;
-                                    TipoEvento tipoEvento = null;
-                                    GatilhoEvento gatilhoEvento = null;
-                                    TipoGateway tipoGateway = null;
-                                    DirecaoGateway direcaoGateway = null;
-                                    String regraDeNegocio = null;
-                                    List<ExtendedAttribute> atributosEstendidosList = null;
-                                    List<InputSet> inputSetList = null;
-                                    List<OutputSet> outputSetList = null;
-                                    performerList = null;
-
-                                    for (Object propriedade : ati.getContent()) {
-
-                                        //TODO:preencher lista de atributos estendidos
-                                        if (propriedade instanceof ExtendedAttributes) {
-                                            atributosEstendidosList = ((ExtendedAttributes) propriedade)
-                                                    .getExtendedAttribute();
-                                        }
-                                        if (propriedade instanceof Description) {
-                                            descricao = TextUtils.removeTagsHtml(((Description) propriedade).getValue());
-                                        }
-                                        if (propriedade instanceof Documentation) {
-                                            documentacao = TextUtils.removeTagsHtml(((Documentation) propriedade).getValue());
-                                        }
-                                        if (propriedade instanceof Event) {
-                                            isEvento = true;
-                                            isGateway = false;
-                                            isAtividade = false;
-
-                                            //Verifica o tipo do evento (Start, Intermediate ou End)
-                                            if (((Event) propriedade).getStartEvent() != null) {
-                                                tipoEvento = TipoEvento.Start;
-                                                //Verifica o gatilho do evento
-                                                gatilhoEvento = geracaoElementosBPMNBO.retornaGatilhoEvento(((Event) propriedade).getStartEvent()
-                                                        .getTrigger());
-                                            } else if (((Event) propriedade).getIntermediateEvent() != null) {
-                                                tipoEvento = TipoEvento.Intermediate;
-                                                //Verifica o gatilho do evento
-                                                gatilhoEvento = geracaoElementosBPMNBO.retornaGatilhoEvento(((Event) propriedade)
-                                                        .getIntermediateEvent().getTrigger());
-
-                                                if (((Event) propriedade).getIntermediateEvent().getTarget() != null) {
-                                                    targetId = ((Event) propriedade).getIntermediateEvent().getTarget();
-                                                }
-                                            } else if (((Event) propriedade).getEndEvent() != null) {
-                                                tipoEvento = TipoEvento.End;
-                                                //Verifica o gatilho do evento
-                                                gatilhoEvento = geracaoElementosBPMNBO.retornaGatilhoEvento(((Event) propriedade).getEndEvent()
-                                                        .getResult());
-                                            }
-                                        }
-                                        if (propriedade instanceof Route) {
-                                            isEvento = false;
-                                            isGateway = true;
-                                            isAtividade = false;
-
-                                            //Verifica a direçao do gateway
-                                            direcaoGateway = ((Route) propriedade).getGatewayDirection().equals("Diverging")
-                                                    ? DirecaoGateway.Diverging : DirecaoGateway.Converging;
-                                            //Verifica o tipo do gateway
-                                            tipoGateway = geracaoElementosBPMNBO.retornaTipoGateway((Route) propriedade);
-                                        }
-                                        if ((propriedade instanceof Implementation)) {
-                                            isEvento = false;
-                                            isGateway = false;
-                                            isAtividade = true;
-
-                                            if (((Implementation) propriedade).getTask() != null) {
-                                                //Verifica o tipo da atividade
-                                                Task propriedadeTask = ((Implementation) propriedade).getTask();
-                                                tipoAtividade = geracaoElementosBPMNBO.retornaTipoAtividade(propriedadeTask);
-
-                                                if (tipoAtividade != null && tipoAtividade.equals(TipoAtividade.BusinessRule)) {
-                                                    regraDeNegocio = propriedadeTask.getTaskBusinessRule() != null
-                                                            ? propriedadeTask.getTaskBusinessRule().getBusinessRuleTaskImplementation()
-                                                            : null;
-                                                }
-                                            }
-
-                                            SubFlow subFlow = ((Implementation) propriedade).getSubFlow();
-                                            //Define as propriedades de subflow
-                                            if (subFlow != null && subFlow.getId() != null && !subFlow.getId().isEmpty()) {
-                                                isSubFlow = true;
-                                                idSubFlow = subFlow.getId();
-                                            }
-
-                                        }
-                                        if (propriedade instanceof BlockActivity) {
-                                            tipoAtividade = TipoAtividade.SubProcess;
-                                        }
-                                        if (propriedade instanceof InputSets) {
-                                            inputSetList = ((InputSets) propriedade).getInputSet();
-                                        }
-                                        if (propriedade instanceof OutputSets) {
-                                            outputSetList = ((OutputSets) propriedade).getOutputSet();
-                                        }
-                                        if (propriedade instanceof Performers) {
-                                            performerList = ((Performers) propriedade).getPerformer();
-                                        }
-                                    }
-
-                                    //Preenche a lista de atores para o processo corrente
-                                    if (processo.getAtorList() == null) {
-                                        processo.setAtorList(new ArrayList());
-                                    }
-                                    processo.getAtorList().addAll(geracaoElementosBPMNBO.preencheAtor(processo, performerList,
-                                            atorList));
-
-                                    if (isAtividade) {
-                                        if (processo.getAtividadeList() == null) {
-                                            processo.setAtividadeList(new ArrayList());
-                                        }
-
-                                        Atividade atividade = new Atividade();
-                                        atividade.setIdElemento(ati.getId());
-                                        atividade.setNome(TextUtils.removeTagsHtml(ati.getName()));
-                                        atividade.setDescricao(descricao);
-                                        atividade.setDocumentacao(documentacao);
-                                        atividade.setTipo(tipoAtividade);
-                                        atividade.setIsRequisitoFuncional(TextUtils.isRequisitoFuncional(tipoAtividade));
-                                        atividade.setIsRegraDeNegocio(regraDeNegocio != null && !regraDeNegocio.isEmpty());
-                                        atividade.setRegraDeNegocio(regraDeNegocio);
-                                        atividade.setAtributoEstendidoList(geracaoElementosBPMNBO.preencheAtributosEstendidos(
-                                                atividade, atributosEstendidosList));
-                                        if (isSubFlow) {
-                                            atividade.setIsSubFlow(true);
-                                            atividade.setIdSubFlow(idSubFlow);
-                                        } else {
-                                            atividade.setIsSubFlow(false);
-                                        }
-
-                                        processo.getAtividadeList().add(atividade);
-                                        //Preenchimento dos atores envolvidos nas atividades
-                                        if (processo.getExecutadoPorList() == null) {
-                                            processo.setExecutadoPorList(new ArrayList());
-                                        }
-
-                                        processo.getExecutadoPorList().addAll(geracaoElementosBPMNBO.preencheExecutadoPor(atividade,
-                                                processo.getAtorList(), performerList));
-
-                                        if (processo.getUtilizaEntradaList() == null) {
-                                            processo.setUtilizaEntradaList(new ArrayList());
-                                        }
-                                        processo.getUtilizaEntradaList().addAll(geracaoElementosBPMNBO.preencheUtilizaEntrada(false,
-                                                wfp.getId(), pacote, atividade, processo.getArtefatoList(), inputSetList));
-
-                                        if (processo.getProduzSaidaList() == null) {
-                                            processo.setProduzSaidaList(new ArrayList());
-                                        }
-                                        processo.getProduzSaidaList().addAll(geracaoElementosBPMNBO.preencheProduzSaida(false,
-                                                wfp.getId(), pacote, atividade, processo.getArtefatoList(), outputSetList));
-
-                                    } else if (isEvento) {
-                                        String nomeEvento;
-
-                                        if (processo.getEventoList() == null) {
-                                            processo.setEventoList(new ArrayList());
-                                        }
-
-                                        if (tipoEvento == null) {
-                                            nomeEvento = TextUtils.removeTagsHtml(ati.getName());
-                                        } else {
-                                            nomeEvento = TextUtils.removeTagsHtml(ati.getName());
-                                            String prefixoNomeEvento = tipoEvento.equals(TipoEvento.Start)
-                                                    ? "Inicio_" : tipoEvento.equals(TipoEvento.Intermediate)
-                                                    ? "Intermediario_" : "Fim_";
-                                            if (nomeEvento == null || nomeEvento.isEmpty()) {
-                                                nomeEvento = prefixoNomeEvento.concat(processo.getNome() == null
-                                                        || processo.getNome().isEmpty() ? "Processo_".concat(processo.getIdElemento())
-                                                                : "Processo".concat(processo.getNome()));
-                                            }
-
-                                        }
-
-                                        Evento evento = new Evento();
-                                        evento.setIdElemento(ati.getId());
-                                        evento.setNome(nomeEvento);
-                                        evento.setDescricao(descricao);
-                                        evento.setDocumentacao(documentacao);
-                                        evento.setTipo(tipoEvento);
-                                        evento.setGatilho(gatilhoEvento);
-                                        evento.setTargetId(targetId);
-                                        evento.setAtributoEstendidoList(geracaoElementosBPMNBO.preencheAtributosEstendidos(evento,
-                                                atributosEstendidosList));
-
-                                        processo.getEventoList().add(evento);
-
-                                        if (processo.getProduzSaidaList() == null) {
-                                            processo.setProduzSaidaList(new ArrayList());
-                                        }
-                                        processo.getProduzSaidaList().addAll(geracaoElementosBPMNBO.preencheProduzSaida(false,
-                                                wfp.getId(), pacote, evento, processo.getArtefatoList(), outputSetList));
-                                    } else if (isGateway) {
-                                        if (processo.getGatewayList() == null) {
-                                            processo.setGatewayList(new ArrayList());
-                                        }
-
-                                        Gateway gateway = new Gateway();
-                                        gateway.setIdElemento(ati.getId());
-                                        gateway.setNome(TextUtils.removeTagsHtml(ati.getName()));
-                                        gateway.setDescricao(descricao);
-                                        gateway.setDocumentacao(documentacao);
-                                        gateway.setTipo(tipoGateway);
-                                        gateway.setDirecao(direcaoGateway);
-                                        gateway.setIsRegraDeNegocio(TextUtils.isRegraDeNegocio(direcaoGateway));
-                                        if (gateway.getIsRegraDeNegocio()) {
-                                            gateway.setRegraDeNegocio(TextUtils.removeTagsHtml(gateway.getNome()));
-                                        }
-                                        gateway.setAtributoEstendidoList(geracaoElementosBPMNBO.preencheAtributosEstendidos(
-                                                gateway, atributosEstendidosList));
-
-                                        processo.getGatewayList().add(gateway);
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    //Trata os subprocessos
-                    for (ProcessType wfp : pacote.getWorkflowProcesses().getWorkflowProcess()) {
-                        processo = processosList.stream().filter(p -> p.getIdElemento().equals(wfp.getId()))
-                                .findFirst().get();
-                        for (Object conjunto : wfp.getContent()) {
-                            if (conjunto instanceof ActivitySets) {
-                                ActivitySets conjuntoAtividades = (ActivitySets) conjunto;
-                                if (conjuntoAtividades.getActivitySet() != null
-                                        && !conjuntoAtividades.getActivitySet().isEmpty()) {
-                                    SubProcesso subProcesso;
-
-                                    for (ActivitySet activitySet : conjuntoAtividades.getActivitySet()) {
-                                        subProcesso = geracaoElementosBPMNBO.geraSubProcesso(pacote, activitySet, artefatoList, atorList);
-
-                                        if (processo.getSubProcessoList() == null) {
-                                            processo.setSubProcessoList(new ArrayList());
-                                        }
-
-                                        /*Se já mapeou o subprocesso como atividade anteriormente, então deve remover 
-                                        da lista de atividades.*/
-                                        Atividade atividade = null;
-
-                                        if (processo.getAtividadeList() != null && !processo.getAtividadeList().isEmpty()) {
-                                            for (Atividade ati : processo.getAtividadeList()) {
-                                                if (ati.getIdElemento().equals(subProcesso.getIdElemento())) {
-                                                    atividade = ati;
-                                                    break;
-                                                }
-                                            }
-
-                                            if (atividade != null) {
-                                                subProcesso.setDescricao(atividade.getDescricao());
-                                                subProcesso.setDocumentacao(atividade.getDocumentacao());
-                                                processo.getAtividadeList().remove(processo.getAtividadeList().indexOf(atividade));
-                                            }
-                                        }
-
-                                        processo.getSubProcessoList().add(subProcesso);
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
-                    //Trata as transiçoes
-                    for (ProcessType wfp : pacote.getWorkflowProcesses().getWorkflowProcess()) {
-                        processo = processosList.stream().filter(p -> p.getIdElemento().equals(wfp.getId()))
-                                .findFirst().get();
-                        for (Object conjunto : wfp.getContent()) {
-                            //Preenchimento de transiçoes
-                            if (conjunto instanceof Transitions) {
-                                Transitions conjuntoTransicoes = (Transitions) conjunto;
-                                if (conjuntoTransicoes.getTransition() != null && !conjuntoTransicoes.getTransition().isEmpty()) {
-                                    processo.setSucedidoPorList(geracaoElementosBPMNBO.preencheListaSucedidoPor(processo,
-                                            conjuntoTransicoes.getTransition()));
-                                }
-                            }
-                        }
-                    }
-
-                    if (processosList != null && !processosList.isEmpty()) {
-                        modelo.setProcessoList(new ArrayList());
-                        modelo.getProcessoList().addAll(processosList);
-
-                        //Trata as pools
-                        if (pacote.getPools() != null && pacote.getPools().getPool() != null
-                                && !pacote.getPools().getPool().isEmpty()) {
-                            for (Pool pool : pacote.getPools().getPool()) {
-                                if (pool.getProcess() != null && !pool.getProcess().isEmpty()) {
-                                    processo = processosList.stream().filter(p -> p.getIdElemento().equals(pool.getProcess()))
-                                            .findFirst().get();
-
-                                    if (processo != null) {
-                                        Piscina piscina = new Piscina();
-                                        piscina.setIdElemento(pool.getId());
-                                        piscina.setNome(pool.getName());
-                                        if (pool.getLanes() != null && pool.getLanes().getLane() != null
-                                                && !pool.getLanes().getLane().isEmpty()) {
-                                            StringBuilder sbLanes = new StringBuilder("Lanes: ");
-
-                                            for (Lane lane : pool.getLanes().getLane()) {
-                                                sbLanes.append(lane.getName() != null && !lane.getName().isEmpty()
-                                                        ? lane.getName().concat(";") : "");
-                                            }
-                                            piscina.setDescricao(sbLanes.toString());
-                                        }
-
-                                        if (processo.getPiscinaList() == null) {
-                                            processo.setPiscinaList(new ArrayList());
-                                        }
-                                        processo.getPiscinaList().add(piscina);
-                                    }
-                                }
-                            }
-                        }
-
-                        //Adiciona as anotações e grupos nos elementos do processo
-                        for (Processo processoAux : processosList) {
-                            if (pacote.getAssociations() != null && pacote.getAssociations().getAssociationAndAny() != null
-                                    && !pacote.getAssociations().getAssociationAndAny().isEmpty()) {
-                                processoAux = geracaoElementosBPMNBO.preencheAnotacoes(processoAux,
-                                        pacote.getAssociations().getAssociationAndAny(), artefatoList);
-                            }
-                            //Define os grupos, se existirem
-                            if (!mapGrupos.isEmpty()) {
-                                processoAux = geracaoElementosBPMNBO.preencheGrupos(processoAux, mapGrupos);
-                            }
-                        }
-                        //Preenche as troca de mensagens
-                        if (pacote.getMessageFlows() != null && pacote.getMessageFlows().getMessageFlowAndAny() != null
-                                && !pacote.getMessageFlows().getMessageFlowAndAny().isEmpty()) {
-                            modelo.setTrocaMensagemComList(preencheListaTrocaMensagemCom(modelo, processosList,
-                                    pacote.getMessageFlows().getMessageFlowAndAny()));
-                        }
-                    }
-
+                    pacote.getParticipants().getParticipant().stream().map((p) -> {
+                        Ator ator = new Ator();
+                        ator.setIdElemento(p.getId());
+                        ator.setNome(TextUtils.removeTagsHtml(p.getName()));
+                        ator.setDescricao(TextUtils.removeTagsHtml(p.getDescription().getValue()));
+                        return ator;
+                    }).forEach((ator) -> {
+                        atorList.add(ator);
+                    });
                 }
 
-                if (modelo.getProcessoList() != null && !modelo.getProcessoList().isEmpty()) {
-                    //Trata os subfluxos
+                //Preenche os artefatos
+                artefatoList = preencheArtefatos(pacote);
 
-                    List<Atividade> atividadeSubFlowList;
-                    List<Integer> indicesOfProcessesToRemoveList = new ArrayList();
+                //Preenche os processos
+                for (ProcessType wfp : pacote.getWorkflowProcesses().getWorkflowProcess()) {
+                    processo = new Processo();
+                    processo.setIdElemento(wfp.getId());
+                    processo.setNome(wfp.getName());
+                    processo.setTipoProcesso(wfp.getProcessType());
+                    processo.setArtefatoList(preencheArtefatosProcesso(wfp));
 
-                    for (Processo prcAux : modelo.getProcessoList()) {
-                        atividadeSubFlowList = prcAux.getAtividadeList() != null
-                                && !prcAux.getAtividadeList().isEmpty()
-                                        ? prcAux.getAtividadeList().stream().filter(ati -> ati.getIsSubFlow() && ati.getIdSubFlow() != null
-                                                && !ati.getIdSubFlow().isEmpty()).collect(Collectors.toList()) : null;
+                    if (processosList == null) {
+                        processosList = new ArrayList();
+                    }
 
-                        if (atividadeSubFlowList != null && !atividadeSubFlowList.isEmpty()) {
-                            SubProcesso newSubProcess;
-                            Processo processToRemove;
-                            Evento eventoGatilho;
+                    processosList.add(processo);
+                }
 
-                            for (Atividade atiSub : atividadeSubFlowList) {
-                                //Verifica se a atividade apresenta um evento como gatilho
-                                eventoGatilho = prcAux.getEventoList() != null && !prcAux.getEventoList().isEmpty()
-                                        ? prcAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
-                                                && !eve.getTargetId().isEmpty() && eve.getTargetId().equals(atiSub.getIdElemento())).count() > 0
-                                        ? prcAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
-                                                && !eve.getTargetId().isEmpty() && eve.getTargetId().equals(atiSub.getIdElemento())).findFirst().get()
-                                        : null : null;
+                List<Performer> performerList;
 
-                                processToRemove = modelo.getProcessoList().stream().filter(pro -> pro.getIdElemento().equals(atiSub.getIdSubFlow()))
-                                        .count() > 0 ? modelo.getProcessoList().stream().filter(pro -> pro.getIdElemento().equals(atiSub.getIdSubFlow())).findFirst().get()
-                                                : null;
+                //Itera sobre as definições de fluxo de processos
+                for (ProcessType wfp : pacote.getWorkflowProcesses().getWorkflowProcess()) {
+                    processo = processosList.stream().filter(p -> p.getIdElemento().equals(wfp.getId()))
+                            .findFirst().get();
 
-                                if (processToRemove != null) {
-                                    //int indiceAtividade = -1;
-                                    newSubProcess = new SubProcesso();
+                    for (Object conjunto : wfp.getContent()) {
 
-                                    if (prcAux.getSubProcessoList() == null || prcAux.getSubProcessoList().isEmpty()) {
-                                        prcAux.setSubProcessoList(new ArrayList());
+                        //Itera sobre as atividades (atividades, eventos ou gateways)
+                        if (conjunto instanceof Activities) {
+                            Activities conjuntoAtividades = (Activities) conjunto;
+                            for (Activity ati : conjuntoAtividades.getActivity()) {
+                                boolean isAtividade = true, isEvento = false, isGateway = false,
+                                        isSubFlow = false;
+                                String descricao = null, documentacao = null, idSubFlow = null,
+                                        targetId = null;
+                                TipoAtividade tipoAtividade = null;
+                                TipoEvento tipoEvento = null;
+                                GatilhoEvento gatilhoEvento = null;
+                                TipoGateway tipoGateway = null;
+                                DirecaoGateway direcaoGateway = null;
+                                String regraDeNegocio = null;
+                                List<ExtendedAttribute> atributosEstendidosList = null;
+                                List<InputSet> inputSetList = null;
+                                List<OutputSet> outputSetList = null;
+                                performerList = null;
+
+                                for (Object propriedade : ati.getContent()) {
+
+                                    if (propriedade instanceof ExtendedAttributes) {
+                                        atributosEstendidosList = ((ExtendedAttributes) propriedade)
+                                                .getExtendedAttribute();
+                                    }
+                                    if (propriedade instanceof Description) {
+                                        descricao = TextUtils.removeTagsHtml(((Description) propriedade).getValue());
+                                    }
+                                    if (propriedade instanceof Documentation) {
+                                        documentacao = TextUtils.removeTagsHtml(((Documentation) propriedade).getValue());
+                                    }
+                                    if (propriedade instanceof Event) {
+                                        isEvento = true;
+                                        isGateway = false;
+                                        isAtividade = false;
+
+                                        //Verifica o tipo do evento (Start, Intermediate ou End)
+                                        if (((Event) propriedade).getStartEvent() != null) {
+                                            tipoEvento = TipoEvento.Start;
+                                            //Verifica o gatilho do evento
+                                            gatilhoEvento = geracaoElementosBPMNBO.retornaGatilhoEvento(((Event) propriedade).getStartEvent()
+                                                    .getTrigger());
+                                        } else if (((Event) propriedade).getIntermediateEvent() != null) {
+                                            tipoEvento = TipoEvento.Intermediate;
+                                            //Verifica o gatilho do evento
+                                            gatilhoEvento = geracaoElementosBPMNBO.retornaGatilhoEvento(((Event) propriedade)
+                                                    .getIntermediateEvent().getTrigger());
+
+                                            if (((Event) propriedade).getIntermediateEvent().getTarget() != null) {
+                                                targetId = ((Event) propriedade).getIntermediateEvent().getTarget();
+                                            }
+                                        } else if (((Event) propriedade).getEndEvent() != null) {
+                                            tipoEvento = TipoEvento.End;
+                                            //Verifica o gatilho do evento
+                                            gatilhoEvento = geracaoElementosBPMNBO.retornaGatilhoEvento(((Event) propriedade).getEndEvent()
+                                                    .getResult());
+                                        }
+                                    }
+                                    if (propriedade instanceof Route) {
+                                        isEvento = false;
+                                        isGateway = true;
+                                        isAtividade = false;
+
+                                        //Verifica a direçao do gateway
+                                        direcaoGateway = ((Route) propriedade).getGatewayDirection().equals("Diverging")
+                                                ? DirecaoGateway.Diverging : DirecaoGateway.Converging;
+                                        //Verifica o tipo do gateway
+                                        tipoGateway = geracaoElementosBPMNBO.retornaTipoGateway((Route) propriedade);
+                                    }
+                                    if ((propriedade instanceof Implementation)) {
+                                        isEvento = false;
+                                        isGateway = false;
+                                        isAtividade = true;
+
+                                        if (((Implementation) propriedade).getTask() != null) {
+                                            //Verifica o tipo da atividade
+                                            Task propriedadeTask = ((Implementation) propriedade).getTask();
+                                            tipoAtividade = geracaoElementosBPMNBO.retornaTipoAtividade(propriedadeTask);
+
+                                            if (tipoAtividade != null && tipoAtividade.equals(TipoAtividade.BusinessRule)) {
+                                                regraDeNegocio = propriedadeTask.getTaskBusinessRule() != null
+                                                        ? propriedadeTask.getTaskBusinessRule().getBusinessRuleTaskImplementation()
+                                                        : null;
+                                            }
+                                        }
+
+                                        SubFlow subFlow = ((Implementation) propriedade).getSubFlow();
+                                        //Define as propriedades de subflow
+                                        if (subFlow != null && subFlow.getId() != null && !subFlow.getId().isEmpty()) {
+                                            isSubFlow = true;
+                                            idSubFlow = subFlow.getId();
+                                        }
+
+                                    }
+                                    if (propriedade instanceof BlockActivity) {
+                                        tipoAtividade = TipoAtividade.SubProcess;
+                                    }
+                                    if (propriedade instanceof InputSets) {
+                                        inputSetList = ((InputSets) propriedade).getInputSet();
+                                    }
+                                    if (propriedade instanceof OutputSets) {
+                                        outputSetList = ((OutputSets) propriedade).getOutputSet();
+                                    }
+                                    if (propriedade instanceof Performers) {
+                                        performerList = ((Performers) propriedade).getPerformer();
+                                    }
+                                }
+
+                                //Preenche a lista de atores para o processo corrente
+                                if (processo.getAtorList() == null) {
+                                    processo.setAtorList(new ArrayList());
+                                }
+                                processo.getAtorList().addAll(geracaoElementosBPMNBO.preencheAtor(processo, performerList,
+                                        atorList));
+
+                                if (isAtividade) {
+                                    if (processo.getAtividadeList() == null) {
+                                        processo.setAtividadeList(new ArrayList());
                                     }
 
-                                    //Preenche os dados do novo subprocesso
-                                    newSubProcess.setIdElemento(processToRemove.getIdElemento());
-                                    newSubProcess.setNome(processToRemove.getNome());
-                                    newSubProcess.setDescricao(processToRemove.getDescricao());
-                                    newSubProcess.setDocumentacao(processToRemove.getDocumentacao());
-                                    newSubProcess.setTipo(TipoSubProcesso.Reusable);
-                                    if (eventoGatilho != null) {
-                                        newSubProcess.setEventoGatilho(eventoGatilho);
+                                    Atividade atividade = new Atividade();
+                                    atividade.setIdElemento(ati.getId());
+                                    atividade.setNome(TextUtils.removeTagsHtml(ati.getName()));
+                                    atividade.setDescricao(descricao);
+                                    atividade.setDocumentacao(documentacao);
+                                    atividade.setTipo(tipoAtividade);
+                                    atividade.setIsRequisitoFuncional(TextUtils.isRequisitoFuncional(tipoAtividade));
+                                    atividade.setIsRegraDeNegocio(regraDeNegocio != null && !regraDeNegocio.isEmpty());
+                                    atividade.setRegraDeNegocio(regraDeNegocio);
+                                    atividade.setAtributoEstendidoList(geracaoElementosBPMNBO.preencheAtributosEstendidos(
+                                            atividade, atributosEstendidosList));
+                                    if (isSubFlow) {
+                                        atividade.setIsSubFlow(true);
+                                        atividade.setIdSubFlow(idSubFlow);
+                                    } else {
+                                        atividade.setIsSubFlow(false);
                                     }
-                                    newSubProcess.setArtefatoList(processToRemove.getArtefatoList());
-                                    newSubProcess.setAtividadeList(processToRemove.getAtividadeList());
-                                    newSubProcess.setAtorList(processToRemove.getAtorList());
-                                    newSubProcess.setAtributoEstendidoList(processToRemove.getAtributoEstendidoList());
-                                    newSubProcess.setEventoList(processToRemove.getEventoList());
-                                    newSubProcess.setExecutadoPorList(processToRemove.getExecutadoPorList());
-                                    newSubProcess.setGatewayList(processToRemove.getGatewayList());
-                                    newSubProcess.setPiscinaList(processToRemove.getPiscinaList());
-                                    newSubProcess.setProcesso(prcAux);
-                                    newSubProcess.setProduzSaidaList(processToRemove.getProduzSaidaList());
-                                    newSubProcess.setSubProcessoList(processToRemove.getSubProcessoList());
-                                    newSubProcess.setSucedidoPorList(processToRemove.getSucedidoPorList());
-                                    newSubProcess.setUtilizaEntradaList(processToRemove.getUtilizaEntradaList());
-                                    newSubProcess.setIsSubFlow(true);
-                                    newSubProcess.setIdAtividadeOrigem(atiSub.getIdElemento());
 
-                                    prcAux.getSubProcessoList().add(newSubProcess);
+                                    processo.getAtividadeList().add(atividade);
+                                    //Preenchimento dos atores envolvidos nas atividades
+                                    if (processo.getExecutadoPorList() == null) {
+                                        processo.setExecutadoPorList(new ArrayList());
+                                    }
+
+                                    processo.getExecutadoPorList().addAll(geracaoElementosBPMNBO.preencheExecutadoPor(atividade,
+                                            processo.getAtorList(), performerList));
+
+                                    if (processo.getUtilizaEntradaList() == null) {
+                                        processo.setUtilizaEntradaList(new ArrayList());
+                                    }
+                                    processo.getUtilizaEntradaList().addAll(geracaoElementosBPMNBO.preencheUtilizaEntrada(false,
+                                            wfp.getId(), pacote, atividade, processo.getArtefatoList(), inputSetList));
+
+                                    if (processo.getProduzSaidaList() == null) {
+                                        processo.setProduzSaidaList(new ArrayList());
+                                    }
+                                    processo.getProduzSaidaList().addAll(geracaoElementosBPMNBO.preencheProduzSaida(false,
+                                            wfp.getId(), pacote, atividade, processo.getArtefatoList(), outputSetList));
+
+                                } else if (isEvento) {
+                                    String nomeEvento;
+
+                                    if (processo.getEventoList() == null) {
+                                        processo.setEventoList(new ArrayList());
+                                    }
+
+                                    if (tipoEvento == null) {
+                                        nomeEvento = TextUtils.removeTagsHtml(ati.getName());
+                                    } else {
+                                        nomeEvento = TextUtils.removeTagsHtml(ati.getName());
+                                        String prefixoNomeEvento = tipoEvento.equals(TipoEvento.Start)
+                                                ? "Inicio " : tipoEvento.equals(TipoEvento.Intermediate)
+                                                ? "Intermediario " : "Fim ";
+                                        if (nomeEvento == null || nomeEvento.isEmpty()) {
+                                            nomeEvento = prefixoNomeEvento.concat(processo.getNome() == null
+                                                    || processo.getNome().isEmpty() ? "Processo ".concat(processo.getIdElemento())
+                                                    : "Processo".concat(processo.getNome()));
+                                        }
+
+                                    }
+
+                                    Evento evento = new Evento();
+                                    evento.setIdElemento(ati.getId());
+                                    evento.setNome(nomeEvento);
+                                    evento.setDescricao(descricao);
+                                    evento.setDocumentacao(documentacao);
+                                    evento.setTipo(tipoEvento);
+                                    evento.setGatilho(gatilhoEvento);
+                                    evento.setTargetId(targetId);
+                                    evento.setAtributoEstendidoList(geracaoElementosBPMNBO.preencheAtributosEstendidos(evento,
+                                            atributosEstendidosList));
+
+                                    processo.getEventoList().add(evento);
+
+                                    if (processo.getProduzSaidaList() == null) {
+                                        processo.setProduzSaidaList(new ArrayList());
+                                    }
+                                    processo.getProduzSaidaList().addAll(geracaoElementosBPMNBO.preencheProduzSaida(false,
+                                            wfp.getId(), pacote, evento, processo.getArtefatoList(), outputSetList));
+                                } else if (isGateway) {
+                                    if (processo.getGatewayList() == null) {
+                                        processo.setGatewayList(new ArrayList());
+                                    }
+
+                                    Gateway gateway = new Gateway();
+                                    gateway.setIdElemento(ati.getId());
+                                    gateway.setNome(TextUtils.removeTagsHtml(ati.getName()));
+                                    gateway.setDescricao(descricao);
+                                    gateway.setDocumentacao(documentacao);
+                                    gateway.setTipo(tipoGateway);
+                                    gateway.setDirecao(direcaoGateway);
+                                    gateway.setIsRegraDeNegocio(TextUtils.isRegraDeNegocio(direcaoGateway));
+                                    if (gateway.getIsRegraDeNegocio()) {
+                                        gateway.setRegraDeNegocio(TextUtils.removeTagsHtml(gateway.getNome()));
+                                    }
+                                    gateway.setAtributoEstendidoList(geracaoElementosBPMNBO.preencheAtributosEstendidos(
+                                            gateway, atributosEstendidosList));
+
+                                    processo.getGatewayList().add(gateway);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //Trata os subprocessos
+                for (ProcessType wfp : pacote.getWorkflowProcesses().getWorkflowProcess()) {
+                    processo = processosList.stream().filter(p -> p.getIdElemento().equals(wfp.getId()))
+                            .findFirst().get();
+                    for (Object conjunto : wfp.getContent()) {
+                        if (conjunto instanceof ActivitySets) {
+                            ActivitySets conjuntoAtividades = (ActivitySets) conjunto;
+                            if (conjuntoAtividades.getActivitySet() != null
+                                    && !conjuntoAtividades.getActivitySet().isEmpty()) {
+                                SubProcesso subProcesso;
+
+                                for (ActivitySet activitySet : conjuntoAtividades.getActivitySet()) {
+                                    subProcesso = geracaoElementosBPMNBO.geraSubProcesso(pacote, activitySet, artefatoList, atorList);
+
+                                    if (processo.getSubProcessoList() == null) {
+                                        processo.setSubProcessoList(new ArrayList());
+                                    }
+
+                                    /*Se já mapeou o subprocesso como atividade anteriormente, então deve remover 
+                                        da lista de atividades.*/
+                                    Atividade atividade = null;
+
+                                    if (processo.getAtividadeList() != null && !processo.getAtividadeList().isEmpty()) {
+                                        for (Atividade ati : processo.getAtividadeList()) {
+                                            if (ati.getIdElemento().equals(subProcesso.getIdElemento())) {
+                                                atividade = ati;
+                                                break;
+                                            }
+                                        }
+
+                                        if (atividade != null) {
+                                            subProcesso.setDescricao(atividade.getDescricao());
+                                            subProcesso.setDocumentacao(atividade.getDocumentacao());
+                                            processo.getAtividadeList().remove(processo.getAtividadeList().indexOf(atividade));
+                                        }
+                                    }
+
+                                    processo.getSubProcessoList().add(subProcesso);
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+                //Trata as transiçoes
+                for (ProcessType wfp : pacote.getWorkflowProcesses().getWorkflowProcess()) {
+                    processo = processosList.stream().filter(p -> p.getIdElemento().equals(wfp.getId()))
+                            .findFirst().get();
+                    for (Object conjunto : wfp.getContent()) {
+                        //Preenchimento de transiçoes
+                        if (conjunto instanceof Transitions) {
+                            Transitions conjuntoTransicoes = (Transitions) conjunto;
+                            if (conjuntoTransicoes.getTransition() != null && !conjuntoTransicoes.getTransition().isEmpty()) {
+                                processo.setSucedidoPorList(geracaoElementosBPMNBO.preencheListaSucedidoPor(processo,
+                                        conjuntoTransicoes.getTransition()));
+                            }
+                        }
+                    }
+                }
+
+                if (processosList != null && !processosList.isEmpty()) {
+                    modelo.setProcessoList(new ArrayList());
+                    modelo.getProcessoList().addAll(processosList);
+
+                    //Trata as pools
+                    if (pacote.getPools() != null && pacote.getPools().getPool() != null
+                            && !pacote.getPools().getPool().isEmpty()) {
+                        for (Pool pool : pacote.getPools().getPool()) {
+                            if (pool.getProcess() != null && !pool.getProcess().isEmpty()) {
+                                processo = processosList.stream().filter(p -> p.getIdElemento().equals(pool.getProcess()))
+                                        .findFirst().get();
+
+                                if (processo != null) {
+                                    Piscina piscina = new Piscina();
+                                    piscina.setIdElemento(pool.getId());
+                                    piscina.setNome(pool.getName());
+                                    if (pool.getLanes() != null && pool.getLanes().getLane() != null
+                                            && !pool.getLanes().getLane().isEmpty()) {
+                                        StringBuilder sbLanes = new StringBuilder("Lanes: ");
+
+                                        for (Lane lane : pool.getLanes().getLane()) {
+                                            sbLanes.append(lane.getName() != null && !lane.getName().isEmpty()
+                                                    ? lane.getName().concat(";") : "");
+                                        }
+                                        piscina.setDescricao(sbLanes.toString());
+                                    }
+
+                                    if (processo.getPiscinaList() == null) {
+                                        processo.setPiscinaList(new ArrayList());
+                                    }
+                                    processo.getPiscinaList().add(piscina);
+                                }
+                            }
+                        }
+                    }
+
+                    //Adiciona as anotações e grupos nos elementos do processo
+                    for (Processo processoAux : processosList) {
+                        if (pacote.getAssociations() != null && pacote.getAssociations().getAssociationAndAny() != null
+                                && !pacote.getAssociations().getAssociationAndAny().isEmpty()) {
+                            processoAux = geracaoElementosBPMNBO.preencheAnotacoes(processoAux,
+                                    pacote.getAssociations().getAssociationAndAny(), artefatoList);
+                        }
+                        //Define os grupos, se existirem
+                        if (!mapGrupos.isEmpty()) {
+                            processoAux = geracaoElementosBPMNBO.preencheGrupos(processoAux, mapGrupos);
+                        }
+                    }
+                    //Preenche as troca de mensagens
+                    if (pacote.getMessageFlows() != null && pacote.getMessageFlows().getMessageFlowAndAny() != null
+                            && !pacote.getMessageFlows().getMessageFlowAndAny().isEmpty()) {
+                        modelo.setTrocaMensagemComList(preencheListaTrocaMensagemCom(modelo, processosList,
+                                pacote.getMessageFlows().getMessageFlowAndAny()));
+                    }
+                }
+
+            }
+
+            if (modelo.getProcessoList() != null && !modelo.getProcessoList().isEmpty()) {
+                //Trata os subfluxos
+
+                List<Atividade> atividadeSubFlowList;
+                List<Integer> indicesOfProcessesToRemoveList = new ArrayList();
+
+                for (Processo prcAux : modelo.getProcessoList()) {
+                    atividadeSubFlowList = prcAux.getAtividadeList() != null
+                            && !prcAux.getAtividadeList().isEmpty()
+                            ? prcAux.getAtividadeList().stream().filter(ati -> ati.getIsSubFlow() && ati.getIdSubFlow() != null
+                            && !ati.getIdSubFlow().isEmpty()).collect(Collectors.toList()) : null;
+
+                    if (atividadeSubFlowList != null && !atividadeSubFlowList.isEmpty()) {
+                        SubProcesso newSubProcess;
+                        Processo processToRemove;
+                        Evento eventoGatilho;
+
+                        for (Atividade atiSub : atividadeSubFlowList) {
+                            //Verifica se a atividade apresenta um evento como gatilho
+                            eventoGatilho = prcAux.getEventoList() != null && !prcAux.getEventoList().isEmpty()
+                                    ? prcAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
+                                    && !eve.getTargetId().isEmpty() && eve.getTargetId().equals(atiSub.getIdElemento())).count() > 0
+                                    ? prcAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
+                                    && !eve.getTargetId().isEmpty() && eve.getTargetId().equals(atiSub.getIdElemento())).findFirst().get()
+                                    : null : null;
+
+                            processToRemove = modelo.getProcessoList().stream().filter(pro -> pro.getIdElemento().equals(atiSub.getIdSubFlow()))
+                                    .count() > 0 ? modelo.getProcessoList().stream().filter(pro -> pro.getIdElemento().equals(atiSub.getIdSubFlow())).findFirst().get()
+                                            : null;
+
+                            if (processToRemove != null) {
+                                //int indiceAtividade = -1;
+                                newSubProcess = new SubProcesso();
+
+                                if (prcAux.getSubProcessoList() == null || prcAux.getSubProcessoList().isEmpty()) {
+                                    prcAux.setSubProcessoList(new ArrayList());
+                                }
+
+                                //Preenche os dados do novo subprocesso
+                                newSubProcess.setIdElemento(processToRemove.getIdElemento());
+                                newSubProcess.setNome(processToRemove.getNome());
+                                newSubProcess.setDescricao(processToRemove.getDescricao());
+                                newSubProcess.setDocumentacao(processToRemove.getDocumentacao());
+                                newSubProcess.setTipo(TipoSubProcesso.Reusable);
+                                if (eventoGatilho != null) {
+                                    newSubProcess.setEventoGatilho(eventoGatilho);
+                                }
+                                newSubProcess.setArtefatoList(processToRemove.getArtefatoList());
+                                newSubProcess.setAtividadeList(processToRemove.getAtividadeList());
+                                newSubProcess.setAtorList(processToRemove.getAtorList());
+                                newSubProcess.setAtributoEstendidoList(processToRemove.getAtributoEstendidoList());
+                                newSubProcess.setEventoList(processToRemove.getEventoList());
+                                newSubProcess.setExecutadoPorList(processToRemove.getExecutadoPorList());
+                                newSubProcess.setGatewayList(processToRemove.getGatewayList());
+                                newSubProcess.setPiscinaList(processToRemove.getPiscinaList());
+                                newSubProcess.setProcesso(prcAux);
+                                newSubProcess.setProduzSaidaList(processToRemove.getProduzSaidaList());
+                                newSubProcess.setSubProcessoList(processToRemove.getSubProcessoList());
+                                newSubProcess.setSucedidoPorList(processToRemove.getSucedidoPorList());
+                                newSubProcess.setUtilizaEntradaList(processToRemove.getUtilizaEntradaList());
+                                newSubProcess.setIsSubFlow(true);
+                                newSubProcess.setIdAtividadeOrigem(atiSub.getIdElemento());
+
+                                prcAux.getSubProcessoList().add(newSubProcess);
 
 //                                    indiceAtividade = prcAux.getAtividadeList().indexOf(atiSub);
 //
 //                                    if (indiceAtividade != -1) {
 //                                        prcAux.getAtividadeList().remove(indiceAtividade);
 //                                    }
-                                    indicesOfProcessesToRemoveList.add(modelo.getProcessoList().indexOf(processToRemove));
-                                }
+                                indicesOfProcessesToRemoveList.add(modelo.getProcessoList().indexOf(processToRemove));
                             }
                         }
                     }
+                }
 
-                    if (!indicesOfProcessesToRemoveList.isEmpty()) {
-                        for (Integer idxToRemove : indicesOfProcessesToRemoveList) {
-                            if (idxToRemove != -1) {
-                                modelo.getProcessoList().remove(idxToRemove.intValue());
-                            }
+                if (!indicesOfProcessesToRemoveList.isEmpty()) {
+                    for (Integer idxToRemove : indicesOfProcessesToRemoveList) {
+                        if (idxToRemove != -1) {
+                            modelo.getProcessoList().remove(idxToRemove.intValue());
                         }
                     }
+                }
 
-                    //Associa os subprocessos do Tipo Evento ao evento respectivo
-                    for (Processo processoAux : modelo.getProcessoList()) {
-                        List<Evento> eventoSubProcessoList = processoAux.getEventoList() != null
-                                && !processoAux.getEventoList().isEmpty()
-                                        ? processoAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
-                                                && !eve.getTargetId().isEmpty()).collect(Collectors.toList()) : null;
+                //Associa os subprocessos do Tipo Evento ao evento respectivo
+                for (Processo processoAux : modelo.getProcessoList()) {
+                    List<Evento> eventoSubProcessoList = processoAux.getEventoList() != null
+                            && !processoAux.getEventoList().isEmpty()
+                            ? processoAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
+                            && !eve.getTargetId().isEmpty()).collect(Collectors.toList()) : null;
 
-                        if (eventoSubProcessoList != null && !eventoSubProcessoList.isEmpty()) {
-                            for (Evento eve : eventoSubProcessoList) {
-                                for (SubProcesso subPro : processoAux.getSubProcessoList()) {
-                                    if (eve.getTargetId().equals(subPro.getIdElemento()) || subPro.getEventoGatilho() != null) {
-                                        subPro.setTipo(TipoSubProcesso.Event);
-                                        subPro.setEventoGatilho(subPro.getEventoGatilho() == null ? eve : subPro.getEventoGatilho());
-                                    }
+                    if (eventoSubProcessoList != null && !eventoSubProcessoList.isEmpty()) {
+                        for (Evento eve : eventoSubProcessoList) {
+                            for (SubProcesso subPro : processoAux.getSubProcessoList()) {
+                                if (eve.getTargetId().equals(subPro.getIdElemento()) || subPro.getEventoGatilho() != null) {
+                                    subPro.setTipo(TipoSubProcesso.Event);
+                                    subPro.setEventoGatilho(subPro.getEventoGatilho() == null ? eve : subPro.getEventoGatilho());
                                 }
                             }
                         }
                     }
                 }
             }
-
-            return true;
-        } catch (Exception e) {
-            throw new Exception("Erro ao carregar os pacotes dos arquivos XPDL!"
-                    .concat(e.getMessage() == null || e.getMessage().isEmpty()
-                            ? "" : "Erro".concat(e.getMessage())));
         }
+
+        return true;
+//        } catch (Exception e) {
+//            throw new Exception("Erro ao carregar os pacotes dos arquivos XPDL!"
+//                    .concat(e.getMessage() == null || e.getMessage().isEmpty()
+//                            ? "" : "\nErro: ".concat(e.getMessage())));
+//        }
     }
 
     private OntModel preencheConceitosProcesso(OntModel modeloOntologia, String NS, OntClass processoClas, Processo processo,
-            boolean isSubProcesso) //    throws Exception
-    {
+            boolean isSubProcesso) throws Exception {
         OntModel modeloOntologiaRetorno = modeloOntologia;
 
-//        try {
         if (processo.getAtorList() != null && !processo.getAtorList().isEmpty()) {
             //Preenchimento dos atores
             for (Ator ator : processo.getAtorList()) {
@@ -690,17 +688,17 @@ public class GeracaoOntologiasBO {
 
                 OntClass atorClas = modeloOntologiaProcesso.getOntClass(NS + (ator.getNome() != null
                         && !ator.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(ator.getNome()))
-                                : "actor-".concat(ator.getIdElemento())));
+                        : "actor-".concat(ator.getIdElemento())));
 
                 if (atorClas == null) {
                     atorClas = modeloOntologiaProcesso.createClass(NS + (ator.getNome() != null
                             && !ator.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(ator.getNome()))
-                                    : "actor-".concat(ator.getIdElemento())));
+                            : "actor-".concat(ator.getIdElemento())));
                 }
 
                 atorClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), ator.getIdElemento());
-                atorClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), ator.getNome() != null
-                        ? ator.getNome() : "No Name");
+                atorClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"),
+                        TextUtils.geraNomeDetalhadoElemento(ator.getNome(), processo));
                 atorClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-description"), ator.getDescricao() != null
                         ? ator.getDescricao() : "No Description");
                 atorClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"), ator.getDocumentacao() != null
@@ -717,17 +715,17 @@ public class GeracaoOntologiasBO {
             for (Piscina pis : processo.getPiscinaList()) {
                 OntClass piscinaClas = modeloOntologiaProcesso.getOntClass(NS + (pis.getNome() != null
                         && !pis.getNome().isEmpty() ? "pool-".concat(TextUtils.formataNome(pis.getNome()))
-                                : "pool-".concat(pis.getIdElemento())));
+                        : "pool-".concat(pis.getIdElemento())));
 
                 if (piscinaClas == null) {
                     piscinaClas = modeloOntologiaProcesso.createClass(NS + (pis.getNome() != null
                             && !pis.getNome().isEmpty() ? "pool-".concat(TextUtils.formataNome(pis.getNome()))
-                                    : "pool-".concat(pis.getIdElemento())));
+                            : "pool-".concat(pis.getIdElemento())));
                 }
 
                 piscinaClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), pis.getIdElemento());
-                piscinaClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), pis.getNome() != null
-                        ? pis.getNome() : "No Name");
+                piscinaClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"),
+                        TextUtils.geraNomeDetalhadoElemento(pis.getNome(), processo));
                 piscinaClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-description"), pis.getDescricao() != null
                         ? pis.getDescricao() : "No Description");
                 piscinaClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"), pis.getDocumentacao() != null
@@ -750,31 +748,17 @@ public class GeracaoOntologiasBO {
 
                 OntClass artefatoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getNome() != null
                         && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getNome()))
-                                : "artft-".concat(art.getIdElemento())));
+                        : "artft-".concat(art.getIdElemento())));
 
                 if (artefatoClas == null) {
                     artefatoClas = modeloOntologiaProcesso.createClass(NS + (art.getNome() != null
                             && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getNome()))
-                                    : "artft-".concat(art.getIdElemento())));
-                } else {
-                    RDFNode idArtefato = artefatoClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
-                    if (idArtefato != null && idArtefato.toString() != null && !idArtefato.toString().equals(art.getIdElemento())) {
-                        String sufixoProcesso = processo.getNome() != null && !processo.getNome().isEmpty()
-                                ? " for the Process ".concat(processo.getNome()) : " for the Process ".concat(processo.getIdElemento());
-
-                        if (art.getNome() != null && !art.getNome().isEmpty()) {
-                            art.setNome(art.getNome().concat(sufixoProcesso));
-                        }
-
-                        artefatoClas = modeloOntologiaProcesso.createClass(NS + (art.getNome() != null
-                                && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getNome()))
-                                        : "artft-".concat(art.getIdElemento())));
-                    }
+                            : "artft-".concat(art.getIdElemento())));
                 }
 
                 artefatoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), art.getIdElemento());
-                artefatoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), art.getNome() != null
-                        ? art.getNome() : "No Name");
+                artefatoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"),
+                        TextUtils.geraNomeDetalhadoElemento(art.getNome(), processo));
                 artefatoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-description"), art.getDescricao() != null
                         ? art.getDescricao() : "No Description");
                 artefatoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"), art.getDocumentacao() != null
@@ -785,12 +769,39 @@ public class GeracaoOntologiasBO {
                                 : "isPartOfProcess")), processoClas));
 
                 artefatoSuperClas.addSubClass(artefatoClas);
+
+                if (art.getAtributoEstendidoList() != null && !art.getAtributoEstendidoList().isEmpty()) {
+                    OntClass atributoEstendidoSuperClas = modeloOntologiaProcesso.getOntClass(NS + "ExtendedAttribute");
+                    RDFNode[] attrClasses = new RDFNode[art.getAtributoEstendidoList().size()];
+                    int i = 0;
+
+                    for (AtributoEstendido atrEst : art.getAtributoEstendidoList()) {
+                        OntClass atributoEstendidoClas = geraConceitoAtributoEstendido(NS, atrEst, processo, art);
+
+                        attrClasses[i] = atributoEstendidoClas;
+
+                        i++;
+
+                        atributoEstendidoSuperClas.addSubClass(atributoEstendidoClas);
+
+                        atributoEstendidoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
+                                modeloOntologiaProcesso.getObjectProperty(NS + "isExtendedAttributeOf"), artefatoClas));
+                    }
+
+                    if (attrClasses.length > 0) {
+                        RDFList listClasses = modeloOntologiaProcesso.createList(attrClasses);
+
+                        artefatoClas.addSuperClass(modeloOntologiaProcesso.createSomeValuesFromRestriction(null,
+                                modeloOntologiaProcesso.getObjectProperty(NS + "hasExtendedAttribute"),
+                                modeloOntologiaProcesso.createIntersectionClass(null, listClasses)));
+                    }
+                }
             }
 
             //Preenche as propriedades de objeto dos artefatos que possuem grupos
             List<Artefato> artefatoAgrupadoList = processo.getArtefatoList().stream()
                     .filter(art -> art.getGrupo() != null && art.getGrupo().getIdElemento() != null
-                            && !art.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
+                    && !art.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (artefatoAgrupadoList != null && !artefatoAgrupadoList.isEmpty()) {
                 OntClass artefatoClas;
@@ -799,10 +810,10 @@ public class GeracaoOntologiasBO {
                 for (Artefato art : artefatoAgrupadoList) {
                     artefatoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getNome() != null
                             && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getNome()))
-                                    : "artft-".concat(art.getIdElemento())));
+                            : "artft-".concat(art.getIdElemento())));
                     grupoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getGrupo().getNome() != null
                             && !art.getGrupo().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getGrupo().getNome()))
-                                    : "artft-".concat(art.getGrupo().getIdElemento())));
+                            : "artft-".concat(art.getGrupo().getIdElemento())));
 
                     if (artefatoClas != null && grupoClas != null) {
                         artefatoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -814,7 +825,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto dos artefatos que possuem anotação
             List<Artefato> artefatoAnotacaoList = processo.getArtefatoList().stream()
                     .filter(art -> art.getAnotacao() != null && art.getAnotacao().getIdElemento() != null
-                            && !art.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
+                    && !art.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (artefatoAnotacaoList != null && !artefatoAnotacaoList.isEmpty()) {
                 OntClass artefatoClas;
@@ -823,15 +834,15 @@ public class GeracaoOntologiasBO {
                 for (Artefato art : artefatoAnotacaoList) {
                     artefatoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getNome() != null
                             && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getNome()))
-                                    : "artft-".concat(art.getIdElemento())));
+                            : "artft-".concat(art.getIdElemento())));
                     anotacaoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getNome() != null
                             && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getAnotacao().getNome()))
-                                    : "artft-".concat(art.getAnotacao().getIdElemento())));
+                            : "artft-".concat(art.getAnotacao().getIdElemento())));
 
                     if (anotacaoClas == null) {
                         anotacaoClas = modeloOntologiaProcesso.createClass(NS + (art.getAnotacao().getNome() != null
                                 && !art.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getAnotacao().getNome()))
-                                        : "artft-".concat(art.getAnotacao().getIdElemento())));
+                                : "artft-".concat(art.getAnotacao().getIdElemento())));
                     }
 
                     if (artefatoClas != null && anotacaoClas != null) {
@@ -858,32 +869,17 @@ public class GeracaoOntologiasBO {
 
                 OntClass atividadeClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getNome() != null
                         && !ati.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(ati.getNome()))
-                                : "actv-".concat(ati.getIdElemento())));
+                        : "actv-".concat(ati.getIdElemento())));
 
                 if (atividadeClas == null) {
                     atividadeClas = modeloOntologiaProcesso.createClass(NS + (ati.getNome() != null
                             && !ati.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(ati.getNome()))
-                                    : "actv-".concat(ati.getIdElemento())));
-                } else {
-                    RDFNode idAtividade = atividadeClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
-
-                    if (idAtividade != null && idAtividade.toString() != null && !idAtividade.toString().equals(ati.getIdElemento())) {
-                        String sufixoProcesso = processo.getNome() != null && !processo.getNome().isEmpty()
-                                ? " for the Process ".concat(processo.getNome()) : " for the Process ".concat(processo.getIdElemento());
-
-                        if (ati.getNome() != null && !ati.getNome().isEmpty()) {
-                            ati.setNome(ati.getNome().concat(sufixoProcesso));
-                        }
-
-                        atividadeClas = modeloOntologiaProcesso.createClass(NS + (ati.getNome() != null
-                                && !ati.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(ati.getNome()))
-                                        : "actv-".concat(ati.getIdElemento())));
-                    }
+                            : "actv-".concat(ati.getIdElemento())));
                 }
 
                 atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), ati.getIdElemento());
-                atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), ati.getNome() != null
-                        ? ati.getNome() : "No Name");
+                atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"),
+                        TextUtils.geraNomeDetalhadoElemento(ati.getNome(), processo));
                 atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-description"), ati.getDescricao()
                         != null ? ati.getDescricao() : "No Description");
                 atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"), ati.getDocumentacao() != null
@@ -892,13 +888,13 @@ public class GeracaoOntologiasBO {
                 boolean hasExtAttrRegraNegocio = ati.getAtributoEstendidoList() != null
                         && !ati.getAtributoEstendidoList().isEmpty()
                         && ati.getAtributoEstendidoList().stream().anyMatch(a -> a.getIsRegraNegocio());
-                
+
                 if (ati.getIsRegraDeNegocio() || hasExtAttrRegraNegocio) {
                     String businessRule = ati.getRegraDeNegocio() != null && !ati.getRegraDeNegocio().isEmpty()
                             ? ati.getRegraDeNegocio() : ati.getDescricao() != null && !ati.getDescricao().isEmpty()
-                                    ? ati.getDescricao() : ati.getDocumentacao() != null && !ati.getDocumentacao().isEmpty()
-                                            ? ati.getDocumentacao() : ati.getNome() != null && !ati.getNome().isEmpty()
-                                                    ? ati.getNome() : "No Description for the Business Rule";
+                            ? ati.getDescricao() : ati.getDocumentacao() != null && !ati.getDocumentacao().isEmpty()
+                            ? ati.getDocumentacao() : ati.getNome() != null && !ati.getNome().isEmpty()
+                            ? ati.getNome() : "No Description for the Business Rule";
 
                     atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i5-isBusinessRule"),
                             "true", XSDDatatype.XSDboolean);
@@ -908,15 +904,15 @@ public class GeracaoOntologiasBO {
                     atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i5-isBusinessRule"),
                             "false", XSDDatatype.XSDboolean);
                 }
-                
+
                 boolean hasExtAttrRF = ati.getAtributoEstendidoList() != null
                         && !ati.getAtributoEstendidoList().isEmpty()
                         && ati.getAtributoEstendidoList().stream().anyMatch(a -> a.getIsRequisitoFuncional());
-                
+
                 boolean hasExtAttrRNF = ati.getAtributoEstendidoList() != null
                         && !ati.getAtributoEstendidoList().isEmpty()
                         && ati.getAtributoEstendidoList().stream().anyMatch(a -> a.getIsRequisitoNaoFuncional());
-                
+
                 atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i6-isFunctionalRequirement"),
                         ati.getIsRequisitoFuncional() || hasExtAttrRF ? "true" : "false", XSDDatatype.XSDboolean);
                 atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i7-isNonFunctionalRequirement"),
@@ -928,7 +924,7 @@ public class GeracaoOntologiasBO {
 
                 List<ExecutadoPor> executadoPorList = processo.getExecutadoPorList() == null
                         || processo.getExecutadoPorList().isEmpty() ? null
-                                : processo.getExecutadoPorList().stream().filter(e -> e.getAtividade().equals(ati))
+                        : processo.getExecutadoPorList().stream().filter(e -> e.getAtividade().equals(ati))
                                 .collect(Collectors.toList());
                 if (executadoPorList != null && !executadoPorList.isEmpty()) {
                     modeloOntologiaProcesso = preencheRelacaoAtividadesExecutadas(modeloOntologiaProcesso, NS, false, executadoPorList);
@@ -940,7 +936,7 @@ public class GeracaoOntologiasBO {
 
                 List<UtilizaEntrada> utilizaEntradaList = processo.getUtilizaEntradaList() == null
                         || processo.getUtilizaEntradaList().isEmpty() ? null
-                                : processo.getUtilizaEntradaList().stream().filter(e -> e.getAtividade().equals(ati))
+                        : processo.getUtilizaEntradaList().stream().filter(e -> e.getAtividade().equals(ati))
                                 .collect(Collectors.toList());
                 if (utilizaEntradaList != null && !utilizaEntradaList.isEmpty()) {
                     for (UtilizaEntrada utiEnt : utilizaEntradaList) {
@@ -948,13 +944,13 @@ public class GeracaoOntologiasBO {
                                 modeloOntologiaProcesso.getObjectProperty(NS + "usesInput"), 1,
                                 modeloOntologiaProcesso.getOntClass(NS + (utiEnt.getArtefato().getNome() != null
                                         && !utiEnt.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(utiEnt.getArtefato().getNome()))
-                                                : "artft-".concat(utiEnt.getArtefato().getIdElemento())))));
+                                        : "artft-".concat(utiEnt.getArtefato().getIdElemento())))));
                     }
                 }
 
                 List<ProduzSaida> produzSaidaList = processo.getProduzSaidaList() == null
                         || processo.getProduzSaidaList().isEmpty() ? null
-                                : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().equals(ati))
+                        : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().equals(ati))
                                 .collect(Collectors.toList());
                 if (produzSaidaList != null && !produzSaidaList.isEmpty()) {
                     for (ProduzSaida proSai : produzSaidaList) {
@@ -962,7 +958,7 @@ public class GeracaoOntologiasBO {
                                 modeloOntologiaProcesso.getObjectProperty(NS + "producesOutput"), 1,
                                 modeloOntologiaProcesso.getOntClass(NS + (proSai.getArtefato().getNome() != null
                                         && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                                : "artft-".concat(proSai.getArtefato().getIdElemento())))));
+                                        : "artft-".concat(proSai.getArtefato().getIdElemento())))));
                     }
                 }
 
@@ -972,50 +968,16 @@ public class GeracaoOntologiasBO {
                     int i = 0;
 
                     for (AtributoEstendido atrEst : ati.getAtributoEstendidoList()) {
-                        OntClass atributoEstendidoClas = modeloOntologiaProcesso.getOntClass(NS + (atrEst.getNome() != null
-                                && !atrEst.getNome().isEmpty() ? "extAttrib-".concat(TextUtils.formataNome(atrEst.getNome()))
-                                        : "extAttrib-".concat(ati.getIdElemento())));
-
-                        if (atributoEstendidoClas == null) {
-                            atributoEstendidoClas = modeloOntologiaProcesso.createClass(NS + (atrEst.getNome() != null
-                                    && !atrEst.getNome().isEmpty() ? "extAttrib-".concat(TextUtils.formataNome(atrEst.getNome()))
-                                            : "extAttrib-".concat(ati.getIdElemento())));
-                        } else {
-                            RDFNode idAtributo = atributoEstendidoClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
-                            if (idAtributo != null && idAtributo.toString() != null && idAtributo.toString().equals(atrEst.getIdElemento())) {
-                                String sufixoProcesso = processo.getNome() != null && !processo.getNome().isEmpty()
-                                        ? " for the Activity ".concat(ati.getNome()).concat(" in the Process ").concat(processo.getNome())
-                                        : " for the Activity ".concat(ati.getNome()).concat(" in the Process ").concat(processo.getIdElemento());
-
-                                if (atrEst.getNome() != null && !atrEst.getNome().isEmpty()) {
-                                    atrEst.setNome(atrEst.getNome().concat(sufixoProcesso));
-                                }
-
-                                atributoEstendidoClas = modeloOntologiaProcesso.createClass(NS + (atrEst.getNome() != null
-                                        && !atrEst.getNome().isEmpty() ? "extAttrib-".concat(TextUtils.formataNome(atrEst.getNome()))
-                                                : "extAttrib-".concat(ati.getIdElemento())));
-                            }
-                        }
-
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), atrEst.getNome() != null
-                                ? atrEst.getNome() : "No Name");
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-value"), atrEst.getValor() != null
-                                ? atrEst.getValor() : "No Value");
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"), atrEst.getNome());
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i5-isBusinessRule"),
-                                atrEst.getIsRegraNegocio() ? "true" : "false", XSDDatatype.XSDboolean);
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i6-isFunctionalRequirement"),
-                                atrEst.getIsRequisitoFuncional() ? "true" : "false", XSDDatatype.XSDboolean);
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i7-isNonFunctionalRequirement"),
-                                atrEst.getIsRequisitoNaoFuncional() ? "true" : "false", XSDDatatype.XSDboolean);
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i8-businessRule"),
-                                atrEst.getIsRegraNegocio() && atrEst.getValor() != null ? atrEst.getValor()
-                                        : "No Description for the Business Rule");
+                        OntClass atributoEstendidoClas = geraConceitoAtributoEstendido(NS, atrEst, processo, ati);
 
                         attrClasses[i] = atributoEstendidoClas;
+
                         i++;
 
                         atributoEstendidoSuperClas.addSubClass(atributoEstendidoClas);
+
+                        atributoEstendidoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
+                                modeloOntologiaProcesso.getObjectProperty(NS + "isExtendedAttributeOf"), atividadeClas));
                     }
 
                     if (attrClasses.length > 0) {
@@ -1031,7 +993,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto das atividades que possuem grupos
             List<Atividade> atividadeAgrupadaList = processo.getAtividadeList().stream()
                     .filter(ati -> ati.getGrupo() != null && ati.getGrupo().getIdElemento() != null
-                            && !ati.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
+                    && !ati.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (atividadeAgrupadaList != null && !atividadeAgrupadaList.isEmpty()) {
                 OntClass atividadeClas;
@@ -1040,10 +1002,10 @@ public class GeracaoOntologiasBO {
                 for (Atividade ati : atividadeAgrupadaList) {
                     atividadeClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getNome() != null
                             && !ati.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(ati.getNome()))
-                                    : "actv-".concat(ati.getIdElemento())));
+                            : "actv-".concat(ati.getIdElemento())));
                     grupoClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getGrupo().getNome() != null
                             && !ati.getGrupo().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(ati.getGrupo().getNome()))
-                                    : "actv-".concat(ati.getGrupo().getIdElemento())));
+                            : "actv-".concat(ati.getGrupo().getIdElemento())));
 
                     if (atividadeClas != null && grupoClas != null) {
                         atividadeClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -1055,7 +1017,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto das atividades que possuem anotação
             List<Atividade> atividadeAnotacaoList = processo.getAtividadeList().stream()
                     .filter(ati -> ati.getAnotacao() != null && ati.getAnotacao().getIdElemento() != null
-                            && !ati.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
+                    && !ati.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (atividadeAnotacaoList != null && !atividadeAnotacaoList.isEmpty()) {
                 OntClass atividadeClas;
@@ -1064,15 +1026,15 @@ public class GeracaoOntologiasBO {
                 for (Atividade ati : atividadeAnotacaoList) {
                     atividadeClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getNome() != null
                             && !ati.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(ati.getNome()))
-                                    : "actv-".concat(ati.getIdElemento())));
+                            : "actv-".concat(ati.getIdElemento())));
                     anotacaoClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getAnotacao().getNome() != null
                             && !ati.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(ati.getAnotacao().getNome()))
-                                    : "artft-".concat(ati.getAnotacao().getIdElemento())));
+                            : "artft-".concat(ati.getAnotacao().getIdElemento())));
 
                     if (anotacaoClas == null) {
                         anotacaoClas = modeloOntologiaProcesso.createClass(NS + (ati.getAnotacao().getNome() != null
                                 && !ati.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(ati.getAnotacao().getNome()))
-                                        : "artft-".concat(ati.getAnotacao().getIdElemento())));
+                                : "artft-".concat(ati.getAnotacao().getIdElemento())));
                     }
 
                     if (atividadeClas != null && anotacaoClas != null) {
@@ -1085,7 +1047,7 @@ public class GeracaoOntologiasBO {
 
         if (processo.getEventoList() != null && !processo.getEventoList().isEmpty()) {
             //Preenchimento dos eventos
-            processo.getEventoList().stream().forEach((evento) -> {
+            for (Evento evento : processo.getEventoList()) {
                 OntClass eventoSuperClas;
 
                 if (evento.getTipo() == null) {
@@ -1099,32 +1061,17 @@ public class GeracaoOntologiasBO {
 
                 OntClass eventoClas = modeloOntologiaProcesso.getOntClass(NS + (evento.getNome() != null
                         && !evento.getNome().isEmpty() ? "evt-".concat(TextUtils.formataNome(evento.getNome()))
-                                : "evt-".concat(evento.getIdElemento())));
+                        : "evt-".concat(evento.getIdElemento())));
 
                 if (eventoClas == null) {
                     eventoClas = modeloOntologiaProcesso.createClass(NS + (evento.getNome() != null
                             && !evento.getNome().isEmpty() ? "evt-".concat(TextUtils.formataNome(evento.getNome()))
-                                    : "evt-".concat(evento.getIdElemento())));
-                } else {
-                    RDFNode idEvento = eventoClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
-
-                    if (idEvento != null && idEvento.toString() != null && !idEvento.toString().equals(evento.getIdElemento())) {
-                        String sufixoProcesso = processo.getNome() != null && !processo.getNome().isEmpty()
-                                ? " for the Process ".concat(processo.getNome()) : " for the Process ".concat(processo.getIdElemento());
-
-                        if (evento.getNome() != null && !evento.getNome().isEmpty()) {
-                            evento.setNome(evento.getNome().concat(sufixoProcesso));
-                        }
-
-                        eventoClas = modeloOntologiaProcesso.createClass(NS + (evento.getNome() != null
-                                && !evento.getNome().isEmpty() ? "evt-".concat(TextUtils.formataNome(evento.getNome()))
-                                        : "evt-".concat(evento.getIdElemento())));
-                    }
+                            : "evt-".concat(evento.getIdElemento())));
                 }
 
                 eventoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), evento.getIdElemento());
-                eventoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), evento.getNome() != null
-                        ? evento.getNome() : "No Name");
+                eventoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"),
+                        TextUtils.geraNomeDetalhadoElemento(evento.getNome(), processo));
                 eventoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-description"), evento.getDescricao() != null
                         ? evento.getDescricao() : "No Description");
                 eventoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"), evento.getDocumentacao() != null
@@ -1141,7 +1088,7 @@ public class GeracaoOntologiasBO {
 
                 List<ProduzSaida> produzSaidaList = processo.getProduzSaidaList() == null
                         || processo.getProduzSaidaList().isEmpty() ? null
-                                : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().equals(evento))
+                        : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().equals(evento))
                                 .collect(Collectors.toList());
                 if (produzSaidaList != null && !produzSaidaList.isEmpty()) {
                     for (ProduzSaida proSai : produzSaidaList) {
@@ -1149,7 +1096,7 @@ public class GeracaoOntologiasBO {
                                 modeloOntologiaProcesso.getObjectProperty(NS + "producesOutput"), 1,
                                 modeloOntologiaProcesso.getOntClass(NS + (proSai.getArtefato().getNome() != null
                                         && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                                : "artft-".concat(proSai.getArtefato().getIdElemento())))));
+                                        : "artft-".concat(proSai.getArtefato().getIdElemento())))));
                     }
                 }
 
@@ -1159,52 +1106,16 @@ public class GeracaoOntologiasBO {
                     int i = 0;
 
                     for (AtributoEstendido atrEst : evento.getAtributoEstendidoList()) {
-                        OntClass atributoEstendidoClas = modeloOntologiaProcesso.getOntClass(NS + (atrEst.getNome() != null
-                                && !atrEst.getNome().isEmpty() ? "extAttrib-".concat(evento.getIdElemento())
-                                        .concat(TextUtils.formataNome(atrEst.getNome()))
-                                        : "extAttrib-".concat(evento.getIdElemento())));
-
-                        if (atributoEstendidoClas == null) {
-                            atributoEstendidoClas = modeloOntologiaProcesso.createClass(NS + (atrEst.getNome() != null
-                                    && !atrEst.getNome().isEmpty() ? "extAttrib-".concat(TextUtils.formataNome(atrEst.getNome()))
-                                            : "extAttrib-".concat(evento.getIdElemento())));
-                        } else {
-                            RDFNode idAtributo = atributoEstendidoClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
-                            if (idAtributo != null && idAtributo.toString() != null && idAtributo.toString().equals(atrEst.getIdElemento())) {
-                                String sufixoProcesso = processo.getNome() != null && !processo.getNome().isEmpty()
-                                        ? " for the Event ".concat(evento.getNome()).concat(" in the Process ").concat(processo.getNome())
-                                        : " for the Event ".concat(evento.getNome()).concat(" in the Process ").concat(processo.getIdElemento());
-
-                                if (atrEst.getNome() != null && !atrEst.getNome().isEmpty()) {
-                                    atrEst.setNome(atrEst.getNome().concat(sufixoProcesso));
-                                }
-
-                                atributoEstendidoClas = modeloOntologiaProcesso.createClass(NS + (atrEst.getNome() != null
-                                        && !atrEst.getNome().isEmpty() ? "extAttrib-".concat(TextUtils.formataNome(atrEst.getNome()))
-                                                : "extAttrib-".concat(evento.getIdElemento())));
-                            }
-                        }
-
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), evento.getIdElemento());
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), atrEst.getNome() != null
-                                ? atrEst.getNome() : "No Name");
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-value"), atrEst.getValor() != null
-                                ? atrEst.getValor() : "No Value");
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"), atrEst.getNome());
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i5-isBusinessRule"),
-                                atrEst.getIsRegraNegocio() ? "true" : "false", XSDDatatype.XSDboolean);
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i6-isFunctionalRequirement"),
-                                atrEst.getIsRequisitoFuncional() ? "true" : "false", XSDDatatype.XSDboolean);
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i7-isNonFunctionalRequirement"),
-                                atrEst.getIsRequisitoNaoFuncional() ? "true" : "false", XSDDatatype.XSDboolean);
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i8-businessRule"),
-                                atrEst.getIsRegraNegocio() && atrEst.getValor() != null ? atrEst.getValor()
-                                        : "No Description for the Business Rule");
+                        OntClass atributoEstendidoClas = geraConceitoAtributoEstendido(NS, atrEst, processo, evento);
 
                         attrClasses[i] = atributoEstendidoClas;
+
                         i++;
 
                         atributoEstendidoSuperClas.addSubClass(atributoEstendidoClas);
+
+                        atributoEstendidoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
+                                modeloOntologiaProcesso.getObjectProperty(NS + "isExtendedAttributeOf"), eventoClas));
                     }
 
                     if (attrClasses.length > 0) {
@@ -1215,12 +1126,12 @@ public class GeracaoOntologiasBO {
                                 modeloOntologiaProcesso.createIntersectionClass(null, listClasses)));
                     }
                 }
-            });
+            }
 
             //Preenche as propriedades de objeto dos eventos que possuem grupos
             List<Evento> eventoAgrupadoList = processo.getEventoList().stream()
                     .filter(eve -> eve.getGrupo() != null && eve.getGrupo().getIdElemento() != null
-                            && !eve.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
+                    && !eve.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (eventoAgrupadoList != null && !eventoAgrupadoList.isEmpty()) {
                 OntClass eventoClas;
@@ -1229,10 +1140,10 @@ public class GeracaoOntologiasBO {
                 for (Evento eve : eventoAgrupadoList) {
                     eventoClas = modeloOntologiaProcesso.getOntClass(NS + (eve.getNome() != null
                             && !eve.getNome().isEmpty() ? "evt-".concat(TextUtils.formataNome(eve.getNome()))
-                                    : "evt-".concat(eve.getIdElemento())));
+                            : "evt-".concat(eve.getIdElemento())));
                     grupoClas = modeloOntologiaProcesso.getOntClass(NS + (eve.getGrupo().getNome() != null
                             && !eve.getGrupo().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(eve.getGrupo().getNome()))
-                                    : "artft-".concat(eve.getGrupo().getIdElemento())));
+                            : "artft-".concat(eve.getGrupo().getIdElemento())));
 
                     if (eventoClas != null && grupoClas != null) {
                         eventoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -1244,7 +1155,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto dos eventos que possuem anotação
             List<Evento> eventoAnotacaoList = processo.getEventoList().stream()
                     .filter(eve -> eve.getAnotacao() != null && eve.getAnotacao().getIdElemento() != null
-                            && !eve.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
+                    && !eve.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (eventoAnotacaoList != null && !eventoAnotacaoList.isEmpty()) {
                 OntClass eventoClas;
@@ -1253,15 +1164,15 @@ public class GeracaoOntologiasBO {
                 for (Evento eve : eventoAnotacaoList) {
                     eventoClas = modeloOntologiaProcesso.getOntClass(NS + (eve.getNome() != null
                             && !eve.getNome().isEmpty() ? "evt-".concat(TextUtils.formataNome(eve.getNome()))
-                                    : "eve_".concat(eve.getIdElemento())));
+                            : "eve_".concat(eve.getIdElemento())));
                     anotacaoClas = modeloOntologiaProcesso.getOntClass(NS + (eve.getAnotacao().getNome() != null
                             && !eve.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(eve.getAnotacao().getNome()))
-                                    : "artft-".concat(eve.getAnotacao().getIdElemento())));
+                            : "artft-".concat(eve.getAnotacao().getIdElemento())));
 
                     if (anotacaoClas == null) {
                         anotacaoClas = modeloOntologiaProcesso.createClass(NS + (eve.getAnotacao().getNome() != null
                                 && !eve.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(eve.getAnotacao().getNome()))
-                                        : "artft-".concat(eve.getAnotacao().getIdElemento())));
+                                : "artft-".concat(eve.getAnotacao().getIdElemento())));
                     }
 
                     if (eventoClas != null && anotacaoClas != null) {
@@ -1274,7 +1185,7 @@ public class GeracaoOntologiasBO {
 
         if (processo.getGatewayList() != null && !processo.getGatewayList().isEmpty()) {
             //Preenchimento dos gateways
-            processo.getGatewayList().stream().forEach((Gateway gateway) -> {
+            for (Gateway gateway : processo.getGatewayList()) {
                 OntClass gatewaySuperClas;
 
                 if (gateway.getTipo() == null) {
@@ -1288,38 +1199,21 @@ public class GeracaoOntologiasBO {
 
                 OntClass gatewayClas = modeloOntologiaProcesso.getOntClass(NS + (gateway.getNome() != null
                         && !gateway.getNome().isEmpty() ? "gatw-".concat(TextUtils.formataNome(gateway.getNome()))
-                                : "gatw-".concat(gateway.getIdElemento())));
+                        : "gatw-".concat(gateway.getIdElemento())));
 
                 if (gatewayClas == null) {
                     gatewayClas = modeloOntologiaProcesso.createClass(NS + (gateway.getNome() != null
                             && !gateway.getNome().isEmpty() ? "gatw-".concat(TextUtils.formataNome(gateway.getNome()))
-                                    : "gatw-".concat(gateway.getIdElemento())));
-                } else {
-                    RDFNode idGateway = gatewayClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
-
-                    if (idGateway != null && idGateway.toString() != null && !idGateway.toString().equals(gateway.getIdElemento())) {
-                        String sufixoProcesso = processo.getNome() != null && !processo.getNome().isEmpty()
-                                ? " for the Process ".concat(processo.getNome()) : " for the Process ".concat(processo.getIdElemento());
-
-                        if (gateway.getNome() != null && !gateway.getNome().isEmpty()) {
-                            gateway.setNome(gateway.getNome().concat(sufixoProcesso));
-                        }
-
-                        gatewayClas = modeloOntologiaProcesso.createClass(NS + (gateway.getNome() != null
-                                && !gateway.getNome().isEmpty() ? "gatw-".concat(TextUtils.formataNome(gateway.getNome()))
-                                        : "gatw-".concat(gateway.getIdElemento())));
-                    }
+                            : "gatw-".concat(gateway.getIdElemento())));
                 }
 
                 gatewayClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), gateway.getIdElemento());
-                gatewayClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), gateway.getNome() != null
-                        ? gateway.getNome() : "No Name");
+                gatewayClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"),
+                        TextUtils.geraNomeDetalhadoElemento(gateway.getNome(), processo));
                 gatewayClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-description"),
-                        gateway.getDescricao() != null
-                                ? gateway.getDescricao() : "No Description");
+                        gateway.getDescricao() != null ? gateway.getDescricao() : "No Description");
                 gatewayClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"),
-                        gateway.getDocumentacao() != null
-                                ? gateway.getDocumentacao() : "No Documentation");
+                        gateway.getDocumentacao() != null ? gateway.getDocumentacao() : "No Documentation");
 
                 gatewayClas.addSuperClass(modeloOntologiaProcesso.createSomeValuesFromRestriction(null,
                         modeloOntologiaProcesso.getDatatypeProperty(NS + "gatewayDirection"),
@@ -1328,9 +1222,9 @@ public class GeracaoOntologiasBO {
                 if (gateway.getIsRegraDeNegocio()) {
                     String businessRule = gateway.getRegraDeNegocio() != null && !gateway.getRegraDeNegocio().isEmpty()
                             ? gateway.getRegraDeNegocio() : gateway.getDescricao() != null && !gateway.getDescricao().isEmpty()
-                                    ? gateway.getDescricao() : gateway.getDocumentacao() != null && !gateway.getDocumentacao().isEmpty()
-                                            ? gateway.getDocumentacao() : gateway.getNome() != null && !gateway.getNome().isEmpty()
-                                                    ? gateway.getNome() : "No Description for the Business Rule";
+                            ? gateway.getDescricao() : gateway.getDocumentacao() != null && !gateway.getDocumentacao().isEmpty()
+                            ? gateway.getDocumentacao() : gateway.getNome() != null && !gateway.getNome().isEmpty()
+                            ? gateway.getNome() : "No Description for the Business Rule";
 
                     gatewayClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i5-isBusinessRule"),
                             "true", XSDDatatype.XSDboolean);
@@ -1357,53 +1251,16 @@ public class GeracaoOntologiasBO {
                     int i = 0;
 
                     for (AtributoEstendido atrEst : gateway.getAtributoEstendidoList()) {
-                        OntClass atributoEstendidoClas = modeloOntologiaProcesso.getOntClass(NS + (atrEst.getNome() != null
-                                && !atrEst.getNome().isEmpty() ? "extAttrib-".concat(gateway.getIdElemento()).concat("-")
-                                        .concat(TextUtils.formataNome(atrEst.getNome()))
-                                        : "extAttrib-".concat(gateway.getIdElemento())));
-
-                        if (atributoEstendidoClas == null) {
-                            atributoEstendidoClas = modeloOntologiaProcesso.createClass(NS + (atrEst.getNome() != null
-                                    && !atrEst.getNome().isEmpty() ? "extAttrib-".concat(TextUtils.formataNome(atrEst.getNome()))
-                                            : "extAttrib-".concat(gateway.getIdElemento())));
-                        } else {
-                            RDFNode idAtributo = atributoEstendidoClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
-                            if (idAtributo != null && idAtributo.toString() != null && idAtributo.toString().equals(atrEst.getIdElemento())) {
-                                String sufixoProcesso = processo.getNome() != null && !processo.getNome().isEmpty()
-                                        ? " for the Gateway ".concat(gateway.getNome()).concat(" in the Process ").concat(processo.getNome())
-                                        : " for the Gateway ".concat(gateway.getNome()).concat(" in the Process ").concat(processo.getIdElemento());
-
-                                if (atrEst.getNome() != null && !atrEst.getNome().isEmpty()) {
-                                    atrEst.setNome(atrEst.getNome().concat(sufixoProcesso));
-                                }
-
-                                atributoEstendidoClas = modeloOntologiaProcesso.createClass(NS + (atrEst.getNome() != null
-                                        && !atrEst.getNome().isEmpty() ? "extAttrib-".concat(TextUtils.formataNome(atrEst.getNome()))
-                                                : "extAttrib-".concat(gateway.getIdElemento())));
-                            }
-                        }
-
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), gateway.getIdElemento());
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), atrEst.getNome() != null
-                                ? atrEst.getNome() : "No Name");
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-value"), atrEst.getValor() != null
-                                ? atrEst.getValor() : "No Value");
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"),
-                                atrEst.getNome());
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i5-isBusinessRule"),
-                                atrEst.getIsRegraNegocio() ? "true" : "false", XSDDatatype.XSDboolean);
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i6-isFunctionalRequirement"),
-                                atrEst.getIsRequisitoFuncional() ? "true" : "false", XSDDatatype.XSDboolean);
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i7-isNonFunctionalRequirement"),
-                                atrEst.getIsRequisitoNaoFuncional() ? "true" : "false", XSDDatatype.XSDboolean);
-                        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i8-businessRule"),
-                                atrEst.getIsRegraNegocio() && atrEst.getValor() != null ? atrEst.getValor()
-                                        : "No Description for the Business Rule");
+                        OntClass atributoEstendidoClas = geraConceitoAtributoEstendido(NS, atrEst, processo, gateway);
 
                         attrClasses[i] = atributoEstendidoClas;
+
                         i++;
 
                         atributoEstendidoSuperClas.addSubClass(atributoEstendidoClas);
+
+                        atributoEstendidoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
+                                modeloOntologiaProcesso.getObjectProperty(NS + "isExtendedAttributeOf"), gatewayClas));
                     }
 
                     if (attrClasses.length > 0) {
@@ -1414,12 +1271,12 @@ public class GeracaoOntologiasBO {
                                 modeloOntologiaProcesso.createIntersectionClass(null, listClasses)));
                     }
                 }
-            });
+            }
 
             //Preenche as propriedades de objeto dos gateways que possuem grupos
             List<Gateway> gatewayAgrupadoList = processo.getGatewayList().stream()
                     .filter(gat -> gat.getGrupo() != null && gat.getGrupo().getIdElemento() != null
-                            && !gat.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
+                    && !gat.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
             if (gatewayAgrupadoList != null && !gatewayAgrupadoList.isEmpty()) {
                 OntClass gatewayClas;
                 OntClass grupoClas;
@@ -1427,10 +1284,10 @@ public class GeracaoOntologiasBO {
                 for (Gateway gat : gatewayAgrupadoList) {
                     gatewayClas = modeloOntologiaProcesso.getOntClass(NS + (gat.getNome() != null
                             && !gat.getNome().isEmpty() ? "gatw-".concat(TextUtils.formataNome(gat.getNome()))
-                                    : "gatw-".concat(gat.getIdElemento())));
+                            : "gatw-".concat(gat.getIdElemento())));
                     grupoClas = modeloOntologiaProcesso.getOntClass(NS + (gat.getGrupo().getNome() != null
                             && !gat.getGrupo().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(gat.getGrupo().getNome()))
-                                    : "artft-".concat(gat.getGrupo().getIdElemento())));
+                            : "artft-".concat(gat.getGrupo().getIdElemento())));
 
                     if (gatewayClas != null && grupoClas != null) {
                         gatewayClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -1442,7 +1299,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto dos gateways que possuem anotação
             List<Gateway> gatewayAnotacaoList = processo.getGatewayList().stream()
                     .filter(gat -> gat.getAnotacao() != null && gat.getAnotacao().getIdElemento() != null
-                            && !gat.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
+                    && !gat.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (gatewayAnotacaoList != null && !gatewayAnotacaoList.isEmpty()) {
                 OntClass gatewayClas;
@@ -1451,15 +1308,15 @@ public class GeracaoOntologiasBO {
                 for (Gateway gat : gatewayAnotacaoList) {
                     gatewayClas = modeloOntologiaProcesso.getOntClass(NS + (gat.getNome() != null
                             && !gat.getNome().isEmpty() ? "gatw-".concat(TextUtils.formataNome(gat.getNome()))
-                                    : "gatw-".concat(gat.getIdElemento())));
+                            : "gatw-".concat(gat.getIdElemento())));
                     anotacaoClas = modeloOntologiaProcesso.getOntClass(NS + (gat.getAnotacao().getNome() != null
                             && !gat.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(gat.getAnotacao().getNome()))
-                                    : "artft-".concat(gat.getAnotacao().getIdElemento())));
+                            : "artft-".concat(gat.getAnotacao().getIdElemento())));
 
                     if (anotacaoClas == null) {
                         anotacaoClas = modeloOntologiaProcesso.createClass(NS + (gat.getAnotacao().getNome() != null
                                 && !gat.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(gat.getAnotacao().getNome()))
-                                        : "artft-".concat(gat.getAnotacao().getIdElemento())));
+                                : "artft-".concat(gat.getAnotacao().getIdElemento())));
                     }
 
                     if (gatewayClas != null && anotacaoClas != null) {
@@ -1476,23 +1333,23 @@ public class GeracaoOntologiasBO {
             processo.getSucedidoPorList().stream().forEach((sucPor) -> {
                 final String prefixoElementoOrigem = sucPor.getElementoOrigem() instanceof Atividade
                         ? "actv-" : sucPor.getElementoOrigem() instanceof Gateway ? "gatw-"
-                                : sucPor.getElementoOrigem() instanceof Evento ? "evt-"
-                                        : "subProcess-";
+                        : sucPor.getElementoOrigem() instanceof Evento ? "evt-"
+                        : "subProcess-";
 
                 OntClass elementoOrigemClas = modeloOntologiaProcesso.getOntClass(NS + (sucPor.getElementoOrigem().getNome() != null
                         && !sucPor.getElementoOrigem().getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                                        TextUtils.formataNome(sucPor.getElementoOrigem().getNome()))
-                                : prefixoElementoOrigem.concat(sucPor.getElementoOrigem().getIdElemento())));
+                        TextUtils.formataNome(sucPor.getElementoOrigem().getNome()))
+                        : prefixoElementoOrigem.concat(sucPor.getElementoOrigem().getIdElemento())));
 
                 final String prefixoElementoDestino = sucPor.getElementoDestino() instanceof Atividade
                         ? "actv-" : sucPor.getElementoDestino() instanceof Gateway ? "gatw-"
-                                : sucPor.getElementoDestino() instanceof Evento ? "evt-"
-                                        : "subProcess-";
+                        : sucPor.getElementoDestino() instanceof Evento ? "evt-"
+                        : "subProcess-";
 
                 OntClass elementoDestinoClas = modeloOntologiaProcesso.getOntClass(NS + (sucPor.getElementoDestino().getNome() != null
                         && !sucPor.getElementoDestino().getNome().isEmpty() ? prefixoElementoDestino.concat(
-                                        TextUtils.formataNome(sucPor.getElementoDestino().getNome()))
-                                : prefixoElementoDestino.concat(sucPor.getElementoDestino().getIdElemento())));
+                        TextUtils.formataNome(sucPor.getElementoDestino().getNome()))
+                        : prefixoElementoDestino.concat(sucPor.getElementoDestino().getIdElemento())));
 
                 if (elementoOrigemClas != null && elementoDestinoClas != null) {
 
@@ -1529,7 +1386,7 @@ public class GeracaoOntologiasBO {
                     if (sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
                             && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
                             && processo.getSucedidoPorList().stream().filter(ele -> ele.getElementoOrigem().getIdElemento()
-                                    .equals(sucPor.getElementoOrigem().getIdElemento())).count() > 1) {
+                            .equals(sucPor.getElementoOrigem().getIdElemento())).count() > 1) {
                         if (!elementosComMaisDeUmSucessor.contains(sucPor.getElementoOrigem())) {
                             elementosComMaisDeUmSucessor.add(sucPor.getElementoOrigem());
                         }
@@ -1541,7 +1398,7 @@ public class GeracaoOntologiasBO {
                     if (sucPor.getElementoDestino() != null && sucPor.getElementoDestino().getIdElemento() != null
                             && !sucPor.getElementoDestino().getIdElemento().isEmpty()
                             && processo.getSucedidoPorList().stream().filter(ele -> ele.getElementoDestino().getIdElemento()
-                                    .equals(sucPor.getElementoDestino().getIdElemento())).count() > 1) {
+                            .equals(sucPor.getElementoDestino().getIdElemento())).count() > 1) {
                         if (!elementosComMaisDeUmAntecessor.contains(sucPor.getElementoDestino())) {
                             elementosComMaisDeUmAntecessor.add(sucPor.getElementoDestino());
                         }
@@ -1563,7 +1420,7 @@ public class GeracaoOntologiasBO {
                 for (Elemento ele : elementosComMaisDeUmSucessor) {
                     sucedidoPorAuxList = processo.getSucedidoPorList() != null && !processo.getSucedidoPorList().isEmpty()
                             ? processo.getSucedidoPorList().stream().filter(sucPor -> sucPor.getElementoOrigem().getIdElemento()
-                                    .equals(ele.getIdElemento()) && sucPor.getElementoDestino() != null).collect(Collectors.toList()) : null;
+                            .equals(ele.getIdElemento()) && sucPor.getElementoDestino() != null).collect(Collectors.toList()) : null;
 
                     if (sucedidoPorAuxList != null && !sucedidoPorAuxList.isEmpty()) {
                         elements = new RDFNode[sucedidoPorAuxList.size()];
@@ -1577,19 +1434,19 @@ public class GeracaoOntologiasBO {
 
                         eleOrigemAux = modeloOntologiaProcesso.getOntClass(NS + (ele.getNome() != null
                                 && !ele.getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                                                TextUtils.formataNome(ele.getNome()))
-                                        : prefixoElementoOrigem.concat(ele.getIdElemento())));
+                                TextUtils.formataNome(ele.getNome()))
+                                : prefixoElementoOrigem.concat(ele.getIdElemento())));
 
                         for (SucedidoPor sucPor : sucedidoPorAuxList) {
                             final String prefixoElementoDestino = sucPor.getElementoDestino() instanceof Atividade
                                     ? "actv-" : sucPor.getElementoDestino() instanceof Gateway ? "gatw-"
-                                            : sucPor.getElementoDestino() instanceof Evento ? "evt-"
-                                                    : "subProcess-";
+                                    : sucPor.getElementoDestino() instanceof Evento ? "evt-"
+                                    : "subProcess-";
 
                             eleDestinoAux = modeloOntologiaProcesso.getOntClass(NS + (sucPor.getElementoDestino().getNome() != null
                                     && !sucPor.getElementoDestino().getNome().isEmpty() ? prefixoElementoDestino.concat(
-                                                    TextUtils.formataNome(sucPor.getElementoDestino().getNome()))
-                                            : prefixoElementoDestino.concat(sucPor.getElementoDestino().getIdElemento())));
+                                    TextUtils.formataNome(sucPor.getElementoDestino().getNome()))
+                                    : prefixoElementoDestino.concat(sucPor.getElementoDestino().getIdElemento())));
 
                             if (eleDestinoAux != null) {
                                 elements[i] = eleDestinoAux;
@@ -1620,7 +1477,7 @@ public class GeracaoOntologiasBO {
                 for (Elemento ele : elementosComMaisDeUmAntecessor) {
                     sucedidoPorAuxList = processo.getSucedidoPorList() != null && !processo.getSucedidoPorList().isEmpty()
                             ? processo.getSucedidoPorList().stream().filter(sucPor -> sucPor.getElementoDestino().getIdElemento()
-                                    .equals(ele.getIdElemento()) && sucPor.getElementoOrigem() != null).collect(Collectors.toList()) : null;
+                            .equals(ele.getIdElemento()) && sucPor.getElementoOrigem() != null).collect(Collectors.toList()) : null;
 
                     if (sucedidoPorAuxList != null && !sucedidoPorAuxList.isEmpty()) {
                         elements = new RDFNode[sucedidoPorAuxList.size()];
@@ -1634,19 +1491,19 @@ public class GeracaoOntologiasBO {
 
                         eleDestinoAux = modeloOntologiaProcesso.getOntClass(NS + (ele.getNome() != null
                                 && !ele.getNome().isEmpty() ? prefixoElementoDestino.concat(
-                                                TextUtils.formataNome(ele.getNome()))
-                                        : prefixoElementoDestino.concat(ele.getIdElemento())));
+                                TextUtils.formataNome(ele.getNome()))
+                                : prefixoElementoDestino.concat(ele.getIdElemento())));
 
                         for (SucedidoPor sucPor : sucedidoPorAuxList) {
                             final String prefixoElementoOrigem = sucPor.getElementoOrigem() instanceof Atividade
                                     ? "actv-" : sucPor.getElementoOrigem() instanceof Gateway ? "gatw-"
-                                            : sucPor.getElementoOrigem() instanceof Evento ? "evt-"
-                                                    : "subProcess-";
+                                    : sucPor.getElementoOrigem() instanceof Evento ? "evt-"
+                                    : "subProcess-";
 
                             eleOrigemAux = modeloOntologiaProcesso.getOntClass(NS + (sucPor.getElementoOrigem().getNome() != null
                                     && !sucPor.getElementoOrigem().getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                                                    TextUtils.formataNome(sucPor.getElementoOrigem().getNome()))
-                                            : prefixoElementoOrigem.concat(sucPor.getElementoOrigem().getIdElemento())));
+                                    TextUtils.formataNome(sucPor.getElementoOrigem().getNome()))
+                                    : prefixoElementoOrigem.concat(sucPor.getElementoOrigem().getIdElemento())));
 
                             if (eleOrigemAux != null) {
                                 elements[i] = eleOrigemAux;
@@ -1666,11 +1523,6 @@ public class GeracaoOntologiasBO {
                 }
             }
         }
-//        } catch (Exception e) {
-//            throw new Exception("Erro ao preencher os conceitos da ontologia!"
-//                    .concat(e.getMessage() == null || e.getMessage().isEmpty()
-//                            ? "" : "Erro".concat(e.getMessage())));
-//        }
 
         return modeloOntologiaRetorno;
     }
@@ -1685,19 +1537,19 @@ public class GeracaoOntologiasBO {
         if (atividade != null && atoresList != null && !atoresList.isEmpty()) {
             atividadeClas = modeloOntologiaRetorno.getOntClass(NS + (atividade.getNome() != null
                     && !atividade.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(atividade.getNome()))
-                            : "actv-".concat(atividade.getIdElemento())));
+                    : "actv-".concat(atividade.getIdElemento())));
 
             elements = new RDFNode[atoresList.size()];
 
             for (Ator atorAux : atoresList) {
                 atorClas = modeloOntologiaRetorno.getOntClass(NS + (atorAux.getNome() != null
                         && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                                : "actor-".concat(atorAux.getIdElemento())));
+                        : "actor-".concat(atorAux.getIdElemento())));
 
                 if (atorClas == null) {
                     atorClas = modeloOntologiaRetorno.createClass(NS + (atorAux.getNome() != null
                             && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                                    : "actor-".concat(atorAux.getIdElemento())));
+                            : "actor-".concat(atorAux.getIdElemento())));
                 }
 
                 elements[i] = atorClas;
@@ -1737,7 +1589,7 @@ public class GeracaoOntologiasBO {
 
             atividadeSubProcessoClas = modeloOntologiaRetorno.getOntClass(NS + (ati.getNome() != null
                     && !ati.getNome().isEmpty() ? (isSubProcesso ? "subProcess-" : "actv-").concat(TextUtils.formataNome(ati.getNome()))
-                            : (isSubProcesso ? "subProcess-" : "actv-").concat(ati.getIdElemento())));
+                    : (isSubProcesso ? "subProcess-" : "actv-").concat(ati.getIdElemento())));
 
             if (atividadeSubProcessoClas != null && !atoresList.isEmpty()) {
                 RDFNode[] elements;
@@ -1748,12 +1600,12 @@ public class GeracaoOntologiasBO {
                 for (Ator atorAux : atoresList) {
                     atorClas = modeloOntologiaRetorno.getOntClass(NS + (atorAux.getNome() != null
                             && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                                    : "actor-".concat(atorAux.getIdElemento())));
+                            : "actor-".concat(atorAux.getIdElemento())));
 
                     if (atorClas == null) {
                         atorClas = modeloOntologiaRetorno.createClass(NS + (atorAux.getNome() != null
                                 && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                                        : "actor-".concat(atorAux.getIdElemento())));
+                                : "actor-".concat(atorAux.getIdElemento())));
                     }
 
                     elements[i] = atorClas;
@@ -1831,7 +1683,7 @@ public class GeracaoOntologiasBO {
             for (Ator ator : atorAuxList) {
                 OntClass atorClas = modeloOntologiaProcesso.getOntClass(NS + (ator.getNome() != null
                         && !ator.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(ator.getNome()))
-                                : "actor-".concat(ator.getIdElemento())));
+                        : "actor-".concat(ator.getIdElemento())));
 
                 List<ExecutadoPor> executadoPorListAux = executadoPorList.stream().filter(e -> e.getAtor().equals(ator))
                         .collect(Collectors.toList());
@@ -1856,8 +1708,8 @@ public class GeracaoOntologiasBO {
 
                             atividadeAuxClas = modeloOntologiaProcesso.getOntClass(NS + (exePor.getAtividade().getNome()
                                     != null && !exePor.getAtividade().getNome().isEmpty() ? prefixoElemento.concat(
-                                                    TextUtils.formataNome(exePor.getAtividade().getNome()))
-                                            : prefixoElemento.concat(exePor.getAtividade().getIdElemento())));
+                                    TextUtils.formataNome(exePor.getAtividade().getNome()))
+                                    : prefixoElemento.concat(exePor.getAtividade().getIdElemento())));
 
                             if (atividadeAuxClas != null) {
                                 elements[i] = atividadeAuxClas;
@@ -1919,12 +1771,12 @@ public class GeracaoOntologiasBO {
             for (Ator atorAux : atorAuxList) {
                 atorClas = modeloOntologiaProcesso.getOntClass(NS + (atorAux.getNome() != null
                         && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                                : "actor-".concat(atorAux.getIdElemento())));
+                        : "actor-".concat(atorAux.getIdElemento())));
 
                 for (Processo pro : processoList) {
                     if (pro.getAtorList() != null && !pro.getAtorList().isEmpty()
                             && pro.getAtorList().stream().filter(ato -> ato.getIdElemento()
-                                    .equals(atorAux.getIdElemento())).count() > 0
+                            .equals(atorAux.getIdElemento())).count() > 0
                             && !processoListAux.contains(pro)) {
                         processoListAux.add(pro);
                     }
@@ -1934,7 +1786,7 @@ public class GeracaoOntologiasBO {
                         for (SubProcesso subProAux : pro.getSubProcessoList()) {
                             if (subProAux.getAtorList() != null && !subProAux.getAtorList().isEmpty()
                                     && subProAux.getAtorList().stream().filter(ato -> ato.getIdElemento()
-                                            .equals(atorAux.getIdElemento())).count() > 0
+                                    .equals(atorAux.getIdElemento())).count() > 0
                                     && !subProcessoListAux.contains(subProAux)) {
                                 subProcessoListAux.add(subProAux);
                             }
@@ -1951,7 +1803,7 @@ public class GeracaoOntologiasBO {
                     for (Processo proAux : processoListAux) {
                         proClas = modeloOntologiaProcesso.getOntClass(NS + (proAux.getNome() != null
                                 && !proAux.getNome().isEmpty() ? "process-".concat(TextUtils.formataNome(proAux.getNome()))
-                                        : "process-".concat(proAux.getIdElemento())));
+                                : "process-".concat(proAux.getIdElemento())));
 
                         if (proClas != null) {
                             elements[i] = proClas;
@@ -1980,7 +1832,7 @@ public class GeracaoOntologiasBO {
                     for (SubProcesso subProAux : subProcessoListAux) {
                         subProClas = modeloOntologiaProcesso.getOntClass(NS + (subProAux.getNome() != null
                                 && !subProAux.getNome().isEmpty() ? "subProcess-".concat(TextUtils.formataNome(subProAux.getNome()))
-                                        : "subProcess-".concat(subProAux.getIdElemento())));
+                                : "subProcess-".concat(subProAux.getIdElemento())));
 
                         if (subProClas != null) {
                             elements[i] = subProClas;
@@ -2022,7 +1874,7 @@ public class GeracaoOntologiasBO {
             List<SucedidoPor> sucedidoPorList, Elemento elementoOrigem, OntClass elementoDestinoClas) {
         List<SucedidoPor> sucedidoPorAnterioresList = sucedidoPorList != null && !sucedidoPorList.isEmpty()
                 ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoDestino().getIdElemento()
-                        .equals(elementoOrigem.getIdElemento())).collect(Collectors.toList()) : null;
+                .equals(elementoOrigem.getIdElemento())).collect(Collectors.toList()) : null;
 
         if (sucedidoPorAnterioresList != null && !sucedidoPorAnterioresList.isEmpty()
                 && sucedidoPorAnterioresList.get(0).getElementoOrigem() instanceof Atividade) {
@@ -2076,9 +1928,9 @@ public class GeracaoOntologiasBO {
             TipoGateway tipoGatewayCorrente;
             List<SucedidoPor> sucedidoPorFluxoList = sucedidoPorList != null
                     && !sucedidoPorList.isEmpty() ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem()
-                                    != null && sucPor.getElementoOrigem().getIdElemento() != null && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                                    && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento()))
-                            .collect(Collectors.toList()) : null;
+                    != null && sucPor.getElementoOrigem().getIdElemento() != null && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                    && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento()))
+                    .collect(Collectors.toList()) : null;
             List<Elemento> elementosIniciaisFluxoList;
             List<Elemento> elementoList = null;
 
@@ -2094,11 +1946,11 @@ public class GeracaoOntologiasBO {
 
             sucedidoPor = sucedidoPorList != null && !sucedidoPorList.isEmpty()
                     ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
-                            && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                            && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento())).count() > 0
+                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                    && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento())).count() > 0
                     ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
-                            && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                            && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento())).findFirst().get()
+                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                    && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento())).findFirst().get()
                     : null : null;
 
             if (sucedidoPorList != null && !sucedidoPorList.isEmpty() && sucedidoPor != null
@@ -2120,7 +1972,7 @@ public class GeracaoOntologiasBO {
                     tipoGatewayCorrente = sucedidoPor.getElementoDestino() != null
                             && sucedidoPor.getElementoDestino() instanceof Gateway
                             && ((Gateway) sucedidoPor.getElementoDestino()) != null
-                                    ? ((Gateway) sucedidoPor.getElementoDestino()).getTipo() : null;
+                            ? ((Gateway) sucedidoPor.getElementoDestino()).getTipo() : null;
 
                     encontrouGateway = tipoGatewayCorrente != null;
 //                            && ((isParallel && tipoGatewayCorrente.equals(TipoGateway.Parallel))
@@ -2144,9 +1996,9 @@ public class GeracaoOntologiasBO {
                             && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
                             && sucPor.getElementoOrigem().getIdElemento().equals(ele.getIdElemento())).count() > 0
                             ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null
-                                    && sucPor.getElementoOrigem().getIdElemento() != null
-                                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                                    && sucPor.getElementoOrigem().getIdElemento().equals(ele.getIdElemento())).findFirst().get()
+                            && sucPor.getElementoOrigem().getIdElemento() != null
+                            && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                            && sucPor.getElementoOrigem().getIdElemento().equals(ele.getIdElemento())).findFirst().get()
                             : null : null;
 
                     isSuceededByEndEvent = sucedidoPor != null && sucedidoPor.getElementoDestino() != null
@@ -2169,13 +2021,13 @@ public class GeracaoOntologiasBO {
                             if (isExclusiveGateway) {
                                 final String prefixoElementoDestino = sucedidoPor.getElementoDestino() instanceof Atividade
                                         ? "actv-" : sucedidoPor.getElementoDestino() instanceof Gateway ? "gatw-"
-                                                : sucedidoPor.getElementoDestino() instanceof Evento ? "evt-"
-                                                        : "subProcess-";
+                                        : sucedidoPor.getElementoDestino() instanceof Evento ? "evt-"
+                                        : "subProcess-";
 
                                 OntClass elementoDestinoClasAux = modeloOntologiaProcesso.getOntClass(NS + (sucedidoPor.getElementoDestino()
                                         .getNome() != null && !sucedidoPor.getElementoDestino().getNome().isEmpty()
-                                                ? prefixoElementoDestino.concat(TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome()))
-                                                : prefixoElementoDestino.concat(sucedidoPor.getElementoDestino().getIdElemento())));
+                                        ? prefixoElementoDestino.concat(TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome()))
+                                        : prefixoElementoDestino.concat(sucedidoPor.getElementoDestino().getIdElemento())));
 
                                 preencheRelacaoAtividadeGatewayExclusivo(modeloOntologiaProcesso, NS, sucedidoPor, sucedidoPorList,
                                         sucedidoPor.getElementoOrigem(), elementoDestinoClasAux);
@@ -2207,13 +2059,13 @@ public class GeracaoOntologiasBO {
             sucedidoPor = gatewayFim != null && gatewayFim.getIdElemento() != null
                     && !gatewayFim.getIdElemento().isEmpty()
                     && sucedidoPorList != null && !sucedidoPorList.isEmpty()
-                            ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
-                                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                                    && sucPor.getElementoOrigem().getIdElemento().equals(gatewayFim.getIdElemento())).count() > 0
-                            ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
-                                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                                    && sucPor.getElementoOrigem().getIdElemento().equals(gatewayFim.getIdElemento())).findFirst().get()
-                            : null : null;
+                    ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
+                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                    && sucPor.getElementoOrigem().getIdElemento().equals(gatewayFim.getIdElemento())).count() > 0
+                    ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
+                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                    && sucPor.getElementoOrigem().getIdElemento().equals(gatewayFim.getIdElemento())).findFirst().get()
+                    : null : null;
 
             sucedidoPorCorrente = sucedidoPor;
 
@@ -2226,8 +2078,8 @@ public class GeracaoOntologiasBO {
                     && elementoList != null && !elementoList.isEmpty()) {
                 String nomeFluxo = "flow-".concat(sucedidoPor.getElementoDestino().getNome() != null
                         && !sucedidoPor.getElementoDestino().getNome().isEmpty()
-                                ? TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome())
-                                : sucedidoPor.getElementoDestino().getIdElemento());
+                        ? TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome())
+                        : sucedidoPor.getElementoDestino().getIdElemento());
 
                 OntClass flowSuperClas = modeloOntologiaProcesso.getOntClass(NS + (isParallel ? "ParallelFlow" : "InclusiveFlow"));
 
@@ -2248,8 +2100,8 @@ public class GeracaoOntologiasBO {
 
                     OntClass elementoCorrenteClas = modeloOntologiaProcesso.getOntClass(NS + (ele.getNome() != null
                             && !ele.getNome().isEmpty() ? prefixoElementoCorrente.concat(
-                                            TextUtils.formataNome(ele.getNome()))
-                                    : prefixoElementoCorrente.concat(ele.getIdElemento())));
+                            TextUtils.formataNome(ele.getNome()))
+                            : prefixoElementoCorrente.concat(ele.getIdElemento())));
 
                     elementoCorrenteClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
                             modeloOntologiaProcesso.getObjectProperty(NS + "isPartOfFlow"), flowClas));
@@ -2257,13 +2109,13 @@ public class GeracaoOntologiasBO {
 
                 String prefixoElementoSucessor = sucedidoPor.getElementoDestino() instanceof Atividade
                         ? "actv-" : sucedidoPor.getElementoDestino() instanceof Gateway ? "gatw-"
-                                : sucedidoPor.getElementoDestino() instanceof Evento ? "evt-"
-                                        : "subProcess-";
+                        : sucedidoPor.getElementoDestino() instanceof Evento ? "evt-"
+                        : "subProcess-";
 
                 OntClass elementoSucessorClas = modeloOntologiaProcesso.getOntClass(NS + (sucedidoPor.getElementoDestino().getNome() != null
                         && !sucedidoPor.getElementoDestino().getNome().isEmpty() ? prefixoElementoSucessor.concat(
-                                        TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome()))
-                                : prefixoElementoSucessor.concat(sucedidoPor.getElementoDestino().getIdElemento())));
+                        TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome()))
+                        : prefixoElementoSucessor.concat(sucedidoPor.getElementoDestino().getIdElemento())));
 
                 if (elementoSucessorClas != null) {
                     elementoSucessorClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -2284,9 +2136,7 @@ public class GeracaoOntologiasBO {
      * @return
      * @throws Exception
      */
-    public boolean geraOntologia()
-            throws Exception {
-//        try {
+    public boolean geraOntologia() throws Exception {
         modeloOntologiaProcesso = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
         Model model = ModelFactory.createDefaultModel();
 
@@ -2310,7 +2160,7 @@ public class GeracaoOntologiasBO {
 
         OntClass clasModelo = modeloOntologiaProcesso.createClass(NS + (modelo.getNome() != null
                 && !modelo.getNome().isEmpty() ? "model-".concat(TextUtils.formataNome(modelo.getNome()))
-                        : "model-".concat(modelo.getIdModelo())));
+                : "model-".concat(modelo.getIdModelo())));
         clasModelo.addSuperClass(modeloOntologiaProcesso.createSomeValuesFromRestriction(null,
                 modeloOntologiaProcesso.getObjectProperty(NS + "isComposedBy"),
                 modeloOntologiaProcesso.getOntClass(NS + "ModelElements")));
@@ -2344,7 +2194,7 @@ public class GeracaoOntologiasBO {
 
                 OntClass processoClas = modeloOntologiaProcesso.createClass(NS + (processo.getNome() != null
                         && !processo.getNome().isEmpty() ? "process-".concat(TextUtils.formataNome(processo.getNome()))
-                                : "process-".concat(processo.getIdElemento())));
+                        : "process-".concat(processo.getIdElemento())));
 
                 processoClas.addSuperClass(modeloOntologiaProcesso.createSomeValuesFromRestriction(null,
                         modeloOntologiaProcesso.getObjectProperty(NS + "isComposedBy"),
@@ -2389,15 +2239,15 @@ public class GeracaoOntologiasBO {
 
                         OntClass subProcessoClas = modeloOntologiaProcesso.createClass(NS + (subProcesso.getNome() != null
                                 && !subProcesso.getNome().isEmpty() ? "subProcess-".concat(TextUtils.formataNome(subProcesso.getNome()))
-                                        : "subProcess-".concat(subProcesso.getIdElemento())));
+                                : "subProcess-".concat(subProcesso.getIdElemento())));
 
                         subProcessoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), subProcesso.getIdElemento());
-                        subProcessoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"), subProcesso.getNome() != null
-                                ? subProcesso.getNome() : "No Name");
+                        subProcessoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"),
+                                TextUtils.geraNomeDetalhadoElemento(subProcesso.getNome(), processo));
                         subProcessoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-description"), subProcesso.getDescricao() != null
                                 ? subProcesso.getDescricao() : "No Description");
                         subProcessoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"),
-                                processo.getDocumentacao() != null ? subProcesso.getDocumentacao() : "No Documentation");
+                                subProcesso.getDocumentacao() != null ? subProcesso.getDocumentacao() : "No Documentation");
 
                         subProcessoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
                                 modeloOntologiaProcesso.getObjectProperty(NS + "isPartOfProcess"), processoClas));
@@ -2415,11 +2265,11 @@ public class GeracaoOntologiasBO {
 
                         List<ExecutadoPor> executadoPorList = processo.getExecutadoPorList() == null
                                 || processo.getExecutadoPorList().isEmpty() ? null
-                                        : processo.getExecutadoPorList().stream().filter(e -> (subProcesso.getIsSubFlow()
-                                                && e.getAtividade().getIdElemento()
-                                                .equals(subProcesso.getIdAtividadeOrigem()))
-                                                || (!subProcesso.getIsSubFlow() && e.getAtividade().getIdElemento()
-                                                .equals(subProcesso.getIdElemento())))
+                                : processo.getExecutadoPorList().stream().filter(e -> (subProcesso.getIsSubFlow()
+                                && e.getAtividade().getIdElemento()
+                                        .equals(subProcesso.getIdAtividadeOrigem()))
+                                || (!subProcesso.getIsSubFlow() && e.getAtividade().getIdElemento()
+                                .equals(subProcesso.getIdElemento())))
                                         .collect(Collectors.toList());
 
                         if (executadoPorList != null && !executadoPorList.isEmpty()) {
@@ -2433,13 +2283,13 @@ public class GeracaoOntologiasBO {
                                         && atorSubProcesso.getNome() != null && !atorSubProcesso.getNome().isEmpty()) {
                                     OntClass atorSubProcessoClas = modeloOntologiaProcesso.getOntClass(NS + (atorSubProcesso.getNome() != null
                                             && !atorSubProcesso.getNome().isEmpty() ? "actor-".concat(
-                                                            TextUtils.formataNome(atorSubProcesso.getNome()))
-                                                    : "actor-".concat(atorSubProcesso.getIdElemento())));
+                                            TextUtils.formataNome(atorSubProcesso.getNome()))
+                                            : "actor-".concat(atorSubProcesso.getIdElemento())));
 
                                     if (atorSubProcessoClas == null) {
                                         atorSubProcessoClas = modeloOntologiaProcesso.createClass(NS + (atorSubProcesso.getNome() != null
                                                 && !atorSubProcesso.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorSubProcesso.getNome()))
-                                                        : "actor-".concat(atorSubProcesso.getIdElemento())));
+                                                : "actor-".concat(atorSubProcesso.getIdElemento())));
                                     }
 
                                     subProcessoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -2510,20 +2360,20 @@ public class GeracaoOntologiasBO {
                         //Preenche a relação dos artefatos de entrada do subprocesso
                         List<UtilizaEntrada> utilizaEntradaList = processo.getUtilizaEntradaList() == null
                                 || processo.getUtilizaEntradaList().isEmpty() ? null
-                                        : processo.getUtilizaEntradaList().stream().filter(e -> e.getAtividade().getIdElemento()
-                                                .equals(subProcesso.getIdElemento()))
+                                : processo.getUtilizaEntradaList().stream().filter(e -> e.getAtividade().getIdElemento()
+                                .equals(subProcesso.getIdElemento()))
                                         .collect(Collectors.toList());
 
                         if (utilizaEntradaList != null && !utilizaEntradaList.isEmpty()) {
                             for (UtilizaEntrada utiEnt : utilizaEntradaList) {
                                 OntClass artefatoEntradaClas = modeloOntologiaProcesso.getOntClass(NS + (utiEnt.getArtefato().getNome() != null
                                         && !utiEnt.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(utiEnt.getArtefato().getNome()))
-                                                : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
+                                        : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
 
                                 if (artefatoEntradaClas == null) {
                                     artefatoEntradaClas = modeloOntologiaProcesso.createClass(NS + (utiEnt.getArtefato().getNome() != null
                                             && !utiEnt.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(utiEnt.getArtefato().getNome()))
-                                                    : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
+                                            : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
                                 } else {
                                     RDFNode idArtefato = artefatoEntradaClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
                                     if (idArtefato != null && idArtefato.toString() != null && !idArtefato.toString().equals(utiEnt.getArtefato().getIdElemento())) {
@@ -2536,7 +2386,7 @@ public class GeracaoOntologiasBO {
 
                                         artefatoEntradaClas = modeloOntologiaProcesso.createClass(NS + (utiEnt.getArtefato().getNome() != null
                                                 && !utiEnt.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(utiEnt.getArtefato().getNome()))
-                                                        : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
+                                                : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
 
                                         //Atualiza o nome do artefato na lista dentro de processo
                                         processo.getArtefatoList().stream().filter(art -> art.getIdElemento().equals(idArtefato.toString()))
@@ -2555,20 +2405,20 @@ public class GeracaoOntologiasBO {
                         //Preenche a relação dos artefatos de saída do subprocesso
                         List<ProduzSaida> produzSaidaList = processo.getProduzSaidaList() == null
                                 || processo.getProduzSaidaList().isEmpty() ? null
-                                        : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().getIdElemento()
-                                                .equals(subProcesso.getIdElemento()))
+                                : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().getIdElemento()
+                                .equals(subProcesso.getIdElemento()))
                                         .collect(Collectors.toList());
 
                         if (produzSaidaList != null && !produzSaidaList.isEmpty()) {
                             for (ProduzSaida proSai : produzSaidaList) {
                                 OntClass artefatoSaidaClas = modeloOntologiaProcesso.getOntClass(NS + (proSai.getArtefato().getNome() != null
                                         && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                                : "artft-".concat(proSai.getArtefato().getIdElemento())));
+                                        : "artft-".concat(proSai.getArtefato().getIdElemento())));
 
                                 if (artefatoSaidaClas == null) {
                                     artefatoSaidaClas = modeloOntologiaProcesso.createClass(NS + (proSai.getArtefato().getNome() != null
                                             && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                                    : "artft-".concat(proSai.getArtefato().getIdElemento())));
+                                            : "artft-".concat(proSai.getArtefato().getIdElemento())));
                                 } else {
                                     RDFNode idArtefato = artefatoSaidaClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
                                     if (idArtefato != null && idArtefato.toString() != null && !idArtefato.toString().equals(proSai.getArtefato().getIdElemento())) {
@@ -2581,7 +2431,7 @@ public class GeracaoOntologiasBO {
 
                                         artefatoSaidaClas = modeloOntologiaProcesso.createClass(NS + (proSai.getArtefato().getNome() != null
                                                 && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                                        : "artft-".concat(proSai.getArtefato().getIdElemento())));
+                                                : "artft-".concat(proSai.getArtefato().getIdElemento())));
 
                                         //Atualiza o nome do artefato na lista dentro de processo
                                         processo.getArtefatoList().stream().filter(art -> art.getIdElemento().equals(idArtefato.toString()))
@@ -2610,20 +2460,20 @@ public class GeracaoOntologiasBO {
                         OntClass subProcessoEventoClas = modeloOntologiaProcesso.getOntClass(NS
                                 + (subProAux.getNome() != null
                                 && !subProAux.getNome().isEmpty() ? "subProcess-".concat(
-                                                TextUtils.formataNome(subProAux.getNome()))
-                                        : "subProcess-".concat(subProAux.getIdElemento())));
+                                TextUtils.formataNome(subProAux.getNome()))
+                                : "subProcess-".concat(subProAux.getIdElemento())));
 
                         OntClass eventoClas = modeloOntologiaProcesso.getOntClass(NS
                                 + (subProAux.getEventoGatilho().getNome() != null
                                 && !subProAux.getEventoGatilho().getNome().isEmpty() ? "evt-".concat(
-                                                TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
-                                        : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
+                                TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
+                                : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
 
                         if (eventoClas == null) {
                             eventoClas = modeloOntologiaProcesso.createClass(NS + (subProAux.getEventoGatilho().getNome() != null
                                     && !subProAux.getEventoGatilho().getNome().isEmpty() ? "evt-".concat(
-                                                    TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
-                                            : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
+                                    TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
+                                    : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
                         } else {
                             RDFNode idEvento = eventoClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
                             if (idEvento != null && idEvento.toString() != null && !idEvento.toString().equals(subProAux.getEventoGatilho().getIdElemento())) {
@@ -2636,8 +2486,8 @@ public class GeracaoOntologiasBO {
 
                                 eventoClas = modeloOntologiaProcesso.createClass(NS + (subProAux.getEventoGatilho().getNome() != null
                                         && !subProAux.getEventoGatilho().getNome().isEmpty() ? "evt-".concat(
-                                                        TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
-                                                : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
+                                        TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
+                                        : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
                             }
                         }
 
@@ -2661,27 +2511,27 @@ public class GeracaoOntologiasBO {
             modelo.getTrocaMensagemComList().stream().forEach((troMenCom) -> {
                 final String prefixoElementoOrigem = troMenCom.getElementoOrigem() instanceof Atividade
                         ? "actv-" : troMenCom.getElementoOrigem() instanceof Gateway ? "gatw-"
-                                : troMenCom.getElementoOrigem() instanceof Evento ? "evt-"
-                                        : troMenCom.getElementoOrigem() instanceof SubProcesso ? "subProcess-"
-                                                : "pool-";
+                        : troMenCom.getElementoOrigem() instanceof Evento ? "evt-"
+                        : troMenCom.getElementoOrigem() instanceof SubProcesso ? "subProcess-"
+                        : "pool-";
 
                 OntClass elementoOrigemClas = modeloOntologiaProcesso.getOntClass(NS
                         + (troMenCom.getElementoOrigem().getNome() != null
                         && !troMenCom.getElementoOrigem().getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                                        TextUtils.formataNome(troMenCom.getElementoOrigem().getNome()))
-                                : prefixoElementoOrigem.concat(troMenCom.getElementoOrigem().getIdElemento())));
+                        TextUtils.formataNome(troMenCom.getElementoOrigem().getNome()))
+                        : prefixoElementoOrigem.concat(troMenCom.getElementoOrigem().getIdElemento())));
 
                 final String prefixoElementoDestino = troMenCom.getElementoDestino() instanceof Atividade
                         ? "actv-" : troMenCom.getElementoDestino() instanceof Gateway ? "gatw-"
-                                : troMenCom.getElementoDestino() instanceof Evento ? "evt-"
-                                        : troMenCom.getElementoOrigem() instanceof SubProcesso ? "subProcess-"
-                                                : "pool-";
+                        : troMenCom.getElementoDestino() instanceof Evento ? "evt-"
+                        : troMenCom.getElementoOrigem() instanceof SubProcesso ? "subProcess-"
+                        : "pool-";
 
                 OntClass elementoDestinoClas = modeloOntologiaProcesso.getOntClass(NS
                         + (troMenCom.getElementoDestino().getNome() != null
                         && !troMenCom.getElementoDestino().getNome().isEmpty() ? prefixoElementoDestino.concat(
-                                        TextUtils.formataNome(troMenCom.getElementoDestino().getNome()))
-                                : prefixoElementoDestino.concat(troMenCom.getElementoDestino().getIdElemento())));
+                        TextUtils.formataNome(troMenCom.getElementoDestino().getNome()))
+                        : prefixoElementoDestino.concat(troMenCom.getElementoDestino().getIdElemento())));
 
                 long qtdeOriOrigem = modelo.getTrocaMensagemComList().stream().filter(troMen -> troMen.getElementoOrigem() != null
                         && troMen.getElementoOrigem().getIdElemento() != null && !troMen.getElementoOrigem().getIdElemento().isEmpty()
@@ -2750,8 +2600,8 @@ public class GeracaoOntologiasBO {
                     clasOrigem = modeloOntologiaProcesso.getOntClass(NS
                             + (ele.getNome() != null
                             && !ele.getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                                            TextUtils.formataNome(ele.getNome()))
-                                    : prefixoElementoOrigem.concat(ele.getIdElemento())));
+                            TextUtils.formataNome(ele.getNome()))
+                            : prefixoElementoOrigem.concat(ele.getIdElemento())));
 
                     //Busca elementos da origem
                     troMenComList = modelo.getTrocaMensagemComList().stream().filter(troMenCom -> troMenCom.getElementoOrigem() != null
@@ -2765,14 +2615,14 @@ public class GeracaoOntologiasBO {
                             if (troMenCom.getElementoDestino() != null) {
                                 final String prefixoElementoDestino = troMenCom.getElementoDestino() instanceof Atividade
                                         ? "actv-" : troMenCom.getElementoDestino() instanceof Gateway ? "gatw-"
-                                                : troMenCom.getElementoDestino() instanceof Evento ? "evt-"
-                                                        : ele instanceof SubProcesso ? "subProcess-" : "pool-";
+                                        : troMenCom.getElementoDestino() instanceof Evento ? "evt-"
+                                        : ele instanceof SubProcesso ? "subProcess-" : "pool-";
 
                                 clasDestino = modeloOntologiaProcesso.getOntClass(NS
                                         + (troMenCom.getElementoDestino().getNome() != null
                                         && !troMenCom.getElementoDestino().getNome().isEmpty() ? prefixoElementoDestino.concat(
-                                                        TextUtils.formataNome(troMenCom.getElementoDestino().getNome()))
-                                                : prefixoElementoDestino.concat(troMenCom.getElementoDestino().getIdElemento())));
+                                        TextUtils.formataNome(troMenCom.getElementoDestino().getNome()))
+                                        : prefixoElementoDestino.concat(troMenCom.getElementoDestino().getIdElemento())));
 
                                 if (clasDestino != null) {
                                     elementsDestino[i] = clasDestino;
@@ -2795,14 +2645,14 @@ public class GeracaoOntologiasBO {
                             if (troMenCom.getElementoOrigem() != null) {
                                 final String prefixoElementoOrigemAux = troMenCom.getElementoOrigem() instanceof Atividade
                                         ? "actv-" : troMenCom.getElementoOrigem() instanceof Gateway ? "gatw-"
-                                                : troMenCom.getElementoOrigem() instanceof Evento ? "evt-"
-                                                        : ele instanceof SubProcesso ? "subProcess-" : "pool-";
+                                        : troMenCom.getElementoOrigem() instanceof Evento ? "evt-"
+                                        : ele instanceof SubProcesso ? "subProcess-" : "pool-";
 
                                 clasOrigemAux = modeloOntologiaProcesso.getOntClass(NS
                                         + (troMenCom.getElementoOrigem().getNome() != null
                                         && !troMenCom.getElementoOrigem().getNome().isEmpty() ? prefixoElementoOrigemAux.concat(
-                                                        TextUtils.formataNome(troMenCom.getElementoOrigem().getNome()))
-                                                : prefixoElementoOrigemAux.concat(troMenCom.getElementoOrigem().getIdElemento())));
+                                        TextUtils.formataNome(troMenCom.getElementoOrigem().getNome()))
+                                        : prefixoElementoOrigemAux.concat(troMenCom.getElementoOrigem().getIdElemento())));
 
                                 if (clasOrigemAux != null) {
                                     elementsOrigem[i] = clasOrigemAux;
@@ -2837,7 +2687,7 @@ public class GeracaoOntologiasBO {
         }
 
         //Cria o arquivo para download e inserção no BD
-        String caminhoArquivoOntologia = "/home/lukas/NetBeansProjects/Pm2Onto/src/main/resources/OntologiasGeradas/"
+        String caminhoArquivoOntologia = "/home/lukas/NetBeansProjects/pm2onto/src/main/resources/OntologiasGeradas/"
                 .concat(nomeOntologia).concat(".owl");
         File file = new File(caminhoArquivoOntologia);
         modeloOntologiaProcesso.write(new FileOutputStream(file), "RDF/XML");
@@ -2850,11 +2700,7 @@ public class GeracaoOntologiasBO {
         modeloOntologiaProcesso.add(model);
 
         salvaDadosOntologia();
-//        } catch (Exception e) {
-//            throw new Exception(e.getMessage());
-//        }
 
-        //throw new Exception();
         return true;
     }
 
@@ -2934,6 +2780,7 @@ public class GeracaoOntologiasBO {
                             break;
                         case "Data Object":
                             DataObject objetoDados = (DataObject) objArtefato.getDataObject();
+                            List<ExtendedAttribute> atributosEstendidosList = null;
 
                             artefato = new Artefato();
                             artefato.setIdElemento(objetoDados.getId());
@@ -2941,10 +2788,24 @@ public class GeracaoOntologiasBO {
                             artefato.setNome(TextUtils.removeTagsHtml(objetoDados.getName()));
                             artefato.setDescricao(objetoDados.getObject() != null
                                     && objetoDados.getObject().getDocumentation() != null
-                                            ? TextUtils.removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
+                                    ? TextUtils.removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
                             artefato.setDocumentacao(objetoDados.getObject() != null
                                     && objetoDados.getObject().getDocumentation() != null
-                                            ? TextUtils.removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
+                                    ? TextUtils.removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
+
+                            if (objetoDados.getAny() != null && !objetoDados.getAny().isEmpty()) {
+                                for (Object obj : objetoDados.getAny()) {
+                                    if (obj instanceof ExtendedAttributes) {
+                                        if (atributosEstendidosList == null) {
+                                            atributosEstendidosList = new ArrayList();
+
+                                            atributosEstendidosList.addAll(((ExtendedAttributes) obj)
+                                                    .getExtendedAttribute());
+                                        }
+                                    }
+                                }
+                            }
+
                             artefatoListRetorno.add(artefato);
                             break;
                     }
@@ -2956,25 +2817,43 @@ public class GeracaoOntologiasBO {
         if (pacote.getDataStores() != null && pacote.getDataStores().getDataStore() != null
                 && !pacote.getDataStores().getDataStore().isEmpty()) {
             Artefato artefato;
+            List<ExtendedAttribute> atributosEstendidosList;
 
             for (Object o : pacote.getDataStores().getDataStore()) {
-                if (o instanceof DataStore) {
-                    DataStore depositoDados = (DataStore) o;
+                DataStore depositoDados = (DataStore) o;
+                atributosEstendidosList = null;
 
-                    artefato = new Artefato();
-                    artefato.setIdElemento(depositoDados.getId());
-                    artefato.setTipo(TipoArtefato.DataStore);
-                    artefato.setNome(TextUtils.removeTagsHtml(depositoDados.getName()));
-                    artefato.setDescricao(depositoDados.getObject() != null
-                            && depositoDados.getObject().getDocumentation() != null
-                                    ? TextUtils.removeTagsHtml(depositoDados.getObject().getDocumentation().getValue())
-                                    : TextUtils.removeTagsHtml(depositoDados.getName()));
-                    artefato.setDocumentacao(depositoDados.getObject() != null
-                            && depositoDados.getObject().getDocumentation() != null
-                                    ? TextUtils.removeTagsHtml(depositoDados.getObject().getDocumentation().getValue())
-                                    : TextUtils.removeTagsHtml(depositoDados.getName()));
-                    artefatoListRetorno.add(artefato);
+                artefato = new Artefato();
+
+                artefato.setIdElemento(depositoDados.getId());
+                artefato.setTipo(TipoArtefato.DataStore);
+                artefato.setNome(TextUtils.removeTagsHtml(depositoDados.getName()));
+                artefato.setDescricao(depositoDados.getObject() != null
+                        && depositoDados.getObject().getDocumentation() != null
+                        ? TextUtils.removeTagsHtml(depositoDados.getObject().getDocumentation().getValue())
+                        : TextUtils.removeTagsHtml(depositoDados.getName()));
+                artefato.setDocumentacao(depositoDados.getObject() != null
+                        && depositoDados.getObject().getDocumentation() != null
+                        ? TextUtils.removeTagsHtml(depositoDados.getObject().getDocumentation().getValue())
+                        : TextUtils.removeTagsHtml(depositoDados.getName()));
+
+                if (depositoDados.getAny() != null && !depositoDados.getAny().isEmpty()) {
+                    for (Object obj : depositoDados.getAny()) {
+                        if (obj instanceof ExtendedAttributes) {
+                            if (atributosEstendidosList == null) {
+                                atributosEstendidosList = new ArrayList();
+
+                                atributosEstendidosList.addAll(((ExtendedAttributes) obj)
+                                        .getExtendedAttribute());
+                            }
+                        }
+                    }
                 }
+
+                artefato.setAtributoEstendidoList(geracaoElementosBPMNBO.preencheAtributosEstendidos(artefato,
+                        atributosEstendidosList));
+
+                artefatoListRetorno.add(artefato);
             }
         }
 
@@ -2983,14 +2862,18 @@ public class GeracaoOntologiasBO {
 
     private List<Artefato> preencheArtefatosProcesso(ProcessType wfp) {
         List<Artefato> artefatoListRetorno = new ArrayList();
+        List<ExtendedAttribute> atributosEstendidosList;
 
         if (wfp.getContent() != null && !wfp.getContent().isEmpty()) {
-
             for (Object conjunto : wfp.getContent()) {
                 if (conjunto instanceof DataObjects) {
                     DataObjects conjuntoObjetoDados = (DataObjects) conjunto;
+
                     for (DataObject dataObject : conjuntoObjetoDados.getDataObject()) {
+                        atributosEstendidosList = null;
+
                         Artefato artefato = new Artefato();
+
                         artefato.setIdElemento(dataObject.getId());
                         artefato.setTipo(TipoArtefato.DataObject);
                         artefato.setNome(TextUtils.removeTagsHtml(dataObject.getName()));
@@ -2998,6 +2881,22 @@ public class GeracaoOntologiasBO {
                                 ? TextUtils.removeTagsHtml(dataObject.getObject().getDocumentation().getValue()) : null);
                         artefato.setDocumentacao(dataObject.getObject().getDocumentation() != null
                                 ? TextUtils.removeTagsHtml(dataObject.getObject().getDocumentation().getValue()) : null);
+
+                        if (dataObject.getAny() != null && !dataObject.getAny().isEmpty()) {
+                            for (Object obj : dataObject.getAny()) {
+                                if (obj instanceof ExtendedAttributes) {
+                                    if (atributosEstendidosList == null) {
+                                        atributosEstendidosList = new ArrayList();
+
+                                        atributosEstendidosList.addAll(((ExtendedAttributes) obj)
+                                                .getExtendedAttribute());
+                                    }
+                                }
+                            }
+                        }
+
+                        artefato.setAtributoEstendidoList(geracaoElementosBPMNBO.preencheAtributosEstendidos(artefato,
+                                atributosEstendidosList));
 
                         if (artefatoList != null && !artefatoList.isEmpty() && !artefatoList.contains(artefato)) {
                             artefatoList.add(artefato);
@@ -3052,11 +2951,29 @@ public class GeracaoOntologiasBO {
                     Artefato artefatoAux;
 
                     for (DataStoreReference datSto : conjuntoDataStore.getDataStoreReference()) {
+                        atributosEstendidosList = null;
+
                         artefatoAux = artefatoList != null && !artefatoList.isEmpty()
                                 ? artefatoList.stream().filter(a -> a.getIdElemento().equals(datSto.getDataStoreRef())).count() == 0
                                 ? null : artefatoList.stream().filter(a -> a.getIdElemento().equals(datSto.getDataStoreRef())).findFirst().get() : null;
 
                         if (artefatoAux != null) {
+                            if (datSto.getAny() != null && !datSto.getAny().isEmpty()) {
+                                for (Object obj : datSto.getAny()) {
+                                    if (obj instanceof ExtendedAttributes) {
+                                        if (atributosEstendidosList == null) {
+                                            atributosEstendidosList = new ArrayList();
+
+                                            atributosEstendidosList.addAll(((ExtendedAttributes) obj)
+                                                    .getExtendedAttribute());
+                                        }
+                                    }
+                                }
+                            }
+
+                            artefatoAux.setAtributoEstendidoList(geracaoElementosBPMNBO.preencheAtributosEstendidos(artefatoAux,
+                                    atributosEstendidosList));
+
                             if (artefatoList != null && !artefatoList.isEmpty() && !artefatoList.contains(artefatoAux)) {
                                 artefatoList.add(artefatoAux);
                             }
@@ -3098,7 +3015,7 @@ public class GeracaoOntologiasBO {
                     //Verifica se o elemento de origem é uma atividade
                     elementosList = processo.getAtividadeList() == null || processo.getAtividadeList().isEmpty()
                             ? null : processo.getAtividadeList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                            .collect(Collectors.toList());
+                                    .collect(Collectors.toList());
 
                     elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
 
@@ -3106,7 +3023,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de origem é um subprocesso
                         elementosList = processo.getSubProcessoList() == null || processo.getSubProcessoList().isEmpty()
                                 ? null : processo.getSubProcessoList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                                .collect(Collectors.toList());
+                                        .collect(Collectors.toList());
 
                         elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3115,7 +3032,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de origem é um evento
                         elementosList = processo.getEventoList() == null || processo.getEventoList().isEmpty()
                                 ? null : processo.getEventoList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                                .collect(Collectors.toList());
+                                        .collect(Collectors.toList());
 
                         elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3124,7 +3041,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de origem é um gateway
                         elementosList = processo.getGatewayList() == null || processo.getGatewayList().isEmpty()
                                 ? null : processo.getGatewayList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                                .collect(Collectors.toList());
+                                        .collect(Collectors.toList());
 
                         elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3133,7 +3050,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de origem é uma piscina
                         elementosList = processo.getPiscinaList() == null || processo.getPiscinaList().isEmpty()
                                 ? null : processo.getPiscinaList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                                .collect(Collectors.toList());
+                                        .collect(Collectors.toList());
 
                         elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3143,7 +3060,7 @@ public class GeracaoOntologiasBO {
                     //Verifica se o elemento de destino é uma atividade
                     elementosList = processo.getAtividadeList() == null || processo.getAtividadeList().isEmpty()
                             ? null : processo.getAtividadeList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                            .collect(Collectors.toList());
+                                    .collect(Collectors.toList());
 
                     elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
 
@@ -3151,7 +3068,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de destino é um subprocesso
                         elementosList = processo.getSubProcessoList() == null || processo.getSubProcessoList().isEmpty()
                                 ? null : processo.getSubProcessoList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                                .collect(Collectors.toList());
+                                        .collect(Collectors.toList());
 
                         elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3160,7 +3077,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de destino é um evento
                         elementosList = processo.getEventoList() == null || processo.getEventoList().isEmpty()
                                 ? null : processo.getEventoList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                                .collect(Collectors.toList());
+                                        .collect(Collectors.toList());
 
                         elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3169,7 +3086,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de destino é um gateway
                         elementosList = processo.getGatewayList() == null || processo.getGatewayList().isEmpty()
                                 ? null : processo.getGatewayList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                                .collect(Collectors.toList());
+                                        .collect(Collectors.toList());
 
                         elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3178,7 +3095,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de destino é uma piscina
                         elementosList = processo.getPiscinaList() == null || processo.getPiscinaList().isEmpty()
                                 ? null : processo.getPiscinaList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                                .collect(Collectors.toList());
+                                        .collect(Collectors.toList());
 
                         elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3582,6 +3499,16 @@ public class GeracaoOntologiasBO {
         possuiAtributoEstendido.addDomain(modeloRetorno.getOntClass(NS + "ProcessElements"));
         possuiAtributoEstendido.addRange(modeloRetorno.getOntClass(NS + "ExtendedAttribute"));
 
+        ObjectProperty ehAtributoEstendidoDe = modeloRetorno.createObjectProperty(NS + "isExtendedAttributeOf");
+//        possuiAtributoEstendido.addDomain(modeloRetorno.getOntClass(NS + "Activity"));
+//        possuiAtributoEstendido.addDomain(modeloRetorno.getOntClass(NS + "Event"));
+//        possuiAtributoEstendido.addDomain(modeloRetorno.getOntClass(NS + "Gateway"));
+        ehAtributoEstendidoDe.addDomain(modeloRetorno.getOntClass(NS + "ExtendedAttribute"));
+        ehAtributoEstendidoDe.addRange(modeloRetorno.getOntClass(NS + "ProcessElements"));
+
+        possuiAtributoEstendido.addInverseOf(possuiAtributoEstendido);
+        ehAtributoEstendidoDe.addInverseOf(possuiAtributoEstendido);
+
         ObjectProperty anotadoPor = modeloRetorno.createObjectProperty(NS + "isAnnotatedBy");
 //        anotadoPor.addDomain(modeloRetorno.getOntClass(NS + "Activity"));
 //        anotadoPor.addDomain(modeloRetorno.getOntClass(NS + "Event"));
@@ -3613,6 +3540,42 @@ public class GeracaoOntologiasBO {
         eExecutadoAposExecucaoInclusiva.addDomain(modeloRetorno.getOntClass(NS + "InclusiveFlow"));
 
         return modeloRetorno;
+    }
+
+    private OntClass geraConceitoAtributoEstendido(String NS, AtributoEstendido atrEst, Processo processo,
+            Elemento elementoPai) {
+        String nomeAtributo = TextUtils.geraNomeAtributoEstendido(atrEst, elementoPai);
+
+        OntClass atributoEstendidoClas = modeloOntologiaProcesso.getOntClass(NS
+                + nomeAtributo);
+
+        if (atributoEstendidoClas == null) {
+            atributoEstendidoClas = modeloOntologiaProcesso.createClass(NS
+                    + nomeAtributo);
+        }
+
+        String nomeDetalhadoAtributo = TextUtils.geraNomeDetalhadoAtributoEstendido(atrEst.getNome(),
+                elementoPai, processo);
+
+        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"),
+                atrEst.getIdElemento());
+        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"),
+                nomeDetalhadoAtributo);
+        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i3-value"), atrEst.getValor() != null
+                ? atrEst.getValor() : "No Value", atrEst.getTipoDado().getValor());
+        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i4-documentation"),
+                nomeDetalhadoAtributo);
+        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i5-isBusinessRule"),
+                atrEst.getIsRegraNegocio() ? "true" : "false", XSDDatatype.XSDboolean);
+        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i6-isFunctionalRequirement"),
+                atrEst.getIsRequisitoFuncional() ? "true" : "false", XSDDatatype.XSDboolean);
+        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i7-isNonFunctionalRequirement"),
+                atrEst.getIsRequisitoNaoFuncional() ? "true" : "false", XSDDatatype.XSDboolean);
+        atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i8-businessRule"),
+                atrEst.getIsRegraNegocio() && atrEst.getValor() != null ? atrEst.getValor()
+                : "No Description for the Business Rule");
+
+        return atributoEstendidoClas;
     }
 
     public List<File> getArquivosOntologiasList() {

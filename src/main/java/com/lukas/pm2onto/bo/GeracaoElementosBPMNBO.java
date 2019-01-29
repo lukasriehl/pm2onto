@@ -20,6 +20,7 @@ import com.lukas.pm2onto.model.enumerador.GatilhoEvento;
 import com.lukas.pm2onto.model.enumerador.TipoArtefato;
 import com.lukas.pm2onto.model.enumerador.TipoAtividade;
 import com.lukas.pm2onto.model.enumerador.TipoCondicao;
+import com.lukas.pm2onto.model.enumerador.TipoDado;
 import com.lukas.pm2onto.model.enumerador.TipoEvento;
 import com.lukas.pm2onto.model.enumerador.TipoGateway;
 import com.lukas.pm2onto.model.enumerador.TipoSubProcesso;
@@ -66,7 +67,6 @@ import org.wfmc._2009.xpdl2.Performer;
 import org.wfmc._2009.xpdl2.Performers;
 import org.wfmc._2009.xpdl2.ProcessType;
 import org.wfmc._2009.xpdl2.Route;
-import org.wfmc._2009.xpdl2.SubFlow;
 import org.wfmc._2009.xpdl2.Task;
 import org.wfmc._2009.xpdl2.Transition;
 
@@ -121,7 +121,7 @@ public class GeracaoElementosBPMNBO {
         } else {
             processTypeList = pacote.getWorkflowProcesses().getWorkflowProcess() == null
                     || pacote.getWorkflowProcesses().getWorkflowProcess().isEmpty() ? null
-                            : pacote.getWorkflowProcesses().getWorkflowProcess().stream().filter(pr -> pr.getId().equals(idProcesso))
+                    : pacote.getWorkflowProcesses().getWorkflowProcess().stream().filter(pr -> pr.getId().equals(idProcesso))
                             .collect(Collectors.toList());
 
             if (processTypeList != null && !processTypeList.isEmpty()) {
@@ -146,11 +146,13 @@ public class GeracaoElementosBPMNBO {
         if (dataAssociationSet != null && dataAssociationSet.getDataAssociation() != null
                 && !dataAssociationSet.getDataAssociation().isEmpty()) {
             if (isEntrada) {
-                dataAssociationId = dataAssociationSet.getDataAssociation().stream().filter(dt -> dt.getTo().equals(artifactId))
-                        .findFirst().get().getFrom();
+                dataAssociationId = dataAssociationSet.getDataAssociation().stream().filter(dt -> dt.getTo().equals(artifactId)).count() == 0
+                        ? null : dataAssociationSet.getDataAssociation().stream().filter(dt -> dt.getTo().equals(artifactId))
+                                .findFirst().get().getFrom();
             } else {
-                dataAssociationId = dataAssociationSet.getDataAssociation().stream().filter(dt -> dt.getFrom().equals(artifactId))
-                        .findFirst().get().getTo();
+                dataAssociationId = dataAssociationSet.getDataAssociation().stream().filter(dt -> dt.getFrom().equals(artifactId)).count() == 0
+                        ? null : dataAssociationSet.getDataAssociation().stream().filter(dt -> dt.getFrom().equals(artifactId))
+                                .findFirst().get().getTo();
             }
 
             if (dataAssociationId != null && !dataAssociationId.isEmpty()) {
@@ -158,13 +160,13 @@ public class GeracaoElementosBPMNBO {
                         && !dataStoreReferenceSet.getDataStoreReference().isEmpty()) {
                     idEncontrado = dataStoreReferenceSet.getDataStoreReference().stream().filter(dt -> dt.getId().equals(dataAssociationId))
                             .count() == 0 ? null : dataStoreReferenceSet.getDataStoreReference().stream().filter(dt -> dt.getId()
-                                            .equals(dataAssociationId)).findFirst().get().getDataStoreRef();
+                            .equals(dataAssociationId)).findFirst().get().getDataStoreRef();
                 }
                 if ((idEncontrado == null || idEncontrado.isEmpty()) && dataObjectSet != null
                         && dataObjectSet.getDataObject() != null && !dataObjectSet.getDataObject().isEmpty()) {
                     idEncontrado = dataObjectSet.getDataObject().stream().filter(dt -> dt.getId().equals(dataAssociationId))
                             .count() == 0 ? null : dataObjectSet.getDataObject().stream().filter(dt -> dt.getId()
-                                            .equals(dataAssociationId)).findFirst().get().getId();
+                            .equals(dataAssociationId)).findFirst().get().getId();
                 }
             }
         }
@@ -291,7 +293,7 @@ public class GeracaoElementosBPMNBO {
             for (Performer per : performerList) {
                 atorListAux = processo.getAtorList().isEmpty() ? null
                         : processo.getAtorList().stream().filter(a -> a.getIdElemento().equals(per.getValue()))
-                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
                 if (atorListAux == null || atorListAux.isEmpty()) {
                     atorAux = atorList.stream().filter(a -> a.getIdElemento().equals(per.getValue())).count() == 0
                             ? null : atorList.stream().filter(a -> a.getIdElemento().equals(per.getValue())).findFirst().get();
@@ -306,24 +308,79 @@ public class GeracaoElementosBPMNBO {
         return atorListRetorno;
     }
 
-    public List<AtributoEstendido> preencheAtributosEstendidos(Elemento elemento, List<ExtendedAttribute> atributosEstendidosList) {
+    public List<AtributoEstendido> preencheAtributosEstendidos(Elemento elementoPai, List<ExtendedAttribute> atributosEstendidosList) {
         List<AtributoEstendido> atributoEstendidoList = null;
 
-        if (elemento != null && atributosEstendidosList != null && !atributosEstendidosList.isEmpty()) {
+        if (elementoPai != null && atributosEstendidosList != null && !atributosEstendidosList.isEmpty()) {
             AtributoEstendido atributoEstendido;
+            Map<String, Object> mapAtributos;
+            String nomeAtributo, valorAtributo;
+            int seqAtributo = 1;
 
             atributoEstendidoList = new ArrayList();
 
             for (ExtendedAttribute extAtt : atributosEstendidosList) {
-                atributoEstendido = new AtributoEstendido();
-                //Até o momento só são preenchidos o nome e o valor dos atributos estendidos.
-                atributoEstendido.setElemento(elemento);
-                atributoEstendido.setIsRegraNegocio(TextUtils.isRegraDeNegocio(extAtt.getName()));
-                atributoEstendido.setIsRequisitoFuncional(TextUtils.isRequisitoFuncional(extAtt.getName()));
-                atributoEstendido.setIsRequisitoNaoFuncional(TextUtils.isRequisitoNaoFuncional(extAtt.getName()));
-                atributoEstendido.setNome(TextUtils.removeTagsHtml(extAtt.getName()));
-                atributoEstendido.setValor(TextUtils.removeTagsHtml(extAtt.getValue()));
-                atributoEstendidoList.add(atributoEstendido);
+                nomeAtributo = TextUtils.removeTagsHtml(extAtt.getName());
+                valorAtributo = TextUtils.removeTagsHtml(extAtt.getValue());
+
+                if (nomeAtributo != null && !nomeAtributo.isEmpty()
+                        && TextUtils.isAtributoComposto(nomeAtributo)) {
+                    mapAtributos = TextUtils.retornaAtributos(valorAtributo);
+
+                    if (mapAtributos != null && !mapAtributos.isEmpty()) {
+                        String valor;
+
+                        for (String nome : mapAtributos.keySet()) {
+                            atributoEstendido = new AtributoEstendido();
+
+                            atributoEstendido.setIdElemento(elementoPai.getIdElemento()
+                                    .substring(0, elementoPai.getIdElemento().length() - String.valueOf(seqAtributo).length())
+                                    .concat(String.valueOf(seqAtributo)));
+                            atributoEstendido.setElementoPai(elementoPai);
+                            atributoEstendido.setIsRegraNegocio(TextUtils.isRegraDeNegocio(nome));
+                            atributoEstendido.setIsRequisitoFuncional(TextUtils.isRequisitoFuncional(nome));
+                            atributoEstendido.setIsRequisitoNaoFuncional(TextUtils.isRequisitoNaoFuncional(nome));
+                            atributoEstendido.setNome(nome);
+
+                            valor = mapAtributos.get(nome) != null && mapAtributos.get(nome).toString() != null
+                                    && !mapAtributos.get(nome).toString().isEmpty()
+                                    ? TextUtils.removeTagsHtml(mapAtributos.get(nome).toString()) : null;
+
+                            if (valor != null) {
+                                if (valor.contains("&")) {
+                                    atributoEstendido.setValor(valor.split("&")[0]);
+                                    atributoEstendido.setTipoDado(TipoDado.getTipoDadoByChave(valor.split("&")[1]));
+                                } else {
+                                    atributoEstendido.setValor(valor);
+                                    atributoEstendido.setTipoDado(TipoDado.STRING);
+                                }
+                            }
+
+                            atributoEstendidoList.add(atributoEstendido);
+                        }
+                    }
+                } else {
+                    atributoEstendido = new AtributoEstendido();
+
+                    atributoEstendido.setIdElemento(elementoPai.getIdElemento()
+                            .substring(0, elementoPai.getIdElemento().length() - String.valueOf(seqAtributo).length())
+                            .concat(String.valueOf(seqAtributo)));
+                    atributoEstendido.setElementoPai(elementoPai);
+                    atributoEstendido.setIsRegraNegocio(TextUtils.isRegraDeNegocio(extAtt.getName()));
+                    atributoEstendido.setIsRequisitoFuncional(TextUtils.isRequisitoFuncional(extAtt.getName()));
+                    atributoEstendido.setIsRequisitoNaoFuncional(TextUtils.isRequisitoNaoFuncional(extAtt.getName()));
+                    atributoEstendido.setNome(nomeAtributo);
+
+                    if (TextUtils.removeTagsHtml(extAtt.getValue()).contains(":")) {
+                        atributoEstendido.setValor(TextUtils.removeTagsHtml(extAtt.getValue()).split(":")[0]);
+                        atributoEstendido.setTipoDado(TipoDado.getTipoDadoByChave(extAtt.getValue().split(":")[1]));
+                    } else {
+                        atributoEstendido.setValor(TextUtils.removeTagsHtml(extAtt.getValue()));
+                        atributoEstendido.setTipoDado(TipoDado.STRING);
+                    }
+
+                    atributoEstendidoList.add(atributoEstendido);
+                }
             }
         }
 
@@ -340,7 +397,7 @@ public class GeracaoElementosBPMNBO {
             for (Performer performer : performerList) {
                 ator = atorList != null ? atorList.stream().filter(a -> a.getIdElemento().equals(performer.getValue())).count() > 0
                         ? atorList.stream().filter(a -> a.getIdElemento().equals(performer.getValue()))
-                        .findFirst().get() : null : null;
+                                .findFirst().get() : null : null;
                 if (ator != null && atividade != null) {
                     executadoPor = new ExecutadoPor();
                     executadoPor.setAtividade(atividade);
@@ -369,9 +426,9 @@ public class GeracaoElementosBPMNBO {
             condicao = transition.getCondition();
             sucedidoPor.setTipoCondicao(condicao == null || condicao.getType() == null
                     || condicao.getType().isEmpty() ? null : condicao.getType().equals("CONDITION") ? TipoCondicao.Condition
-                            : condicao.getType().equals("OTHERWISE") ? TipoCondicao.Other
-                            : condicao.getType().equals("EXCEPTION") ? TipoCondicao.Exception
-                            : TipoCondicao.DefaultException);
+                    : condicao.getType().equals("OTHERWISE") ? TipoCondicao.Other
+                    : condicao.getType().equals("EXCEPTION") ? TipoCondicao.Exception
+                    : TipoCondicao.DefaultException);
             if (condicao != null && condicao.getContent() != null && !condicao.getContent().isEmpty()) {
                 StringBuilder descCondicao = new StringBuilder();
 
@@ -396,7 +453,7 @@ public class GeracaoElementosBPMNBO {
             //Verifica se o elemento de origem é uma atividade
             elementosList = processo.getAtividadeList() == null || processo.getAtividadeList().isEmpty()
                     ? null : processo.getAtividadeList().stream().filter(a -> a.getIdElemento().equals(transition.getFrom()))
-                    .collect(Collectors.toList());
+                            .collect(Collectors.toList());
 
             elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
 
@@ -404,7 +461,7 @@ public class GeracaoElementosBPMNBO {
                 //Verifica se o elemento de origem é um subprocesso
                 elementosList = processo.getSubProcessoList() == null || processo.getSubProcessoList().isEmpty()
                         ? null : processo.getSubProcessoList().stream().filter(a -> a.getIdElemento().equals(transition.getFrom()))
-                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                 elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
             }
@@ -413,7 +470,7 @@ public class GeracaoElementosBPMNBO {
                 //Verifica se o elemento de origem é um evento
                 elementosList = processo.getEventoList() == null || processo.getEventoList().isEmpty()
                         ? null : processo.getEventoList().stream().filter(a -> a.getIdElemento().equals(transition.getFrom()))
-                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                 elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
             }
@@ -422,7 +479,7 @@ public class GeracaoElementosBPMNBO {
                 //Verifica se o elemento de origem é um gateway
                 elementosList = processo.getGatewayList() == null || processo.getGatewayList().isEmpty()
                         ? null : processo.getGatewayList().stream().filter(a -> a.getIdElemento().equals(transition.getFrom()))
-                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                 elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
             }
@@ -432,7 +489,7 @@ public class GeracaoElementosBPMNBO {
             //Verifica se o elemento de destino é uma atividade
             elementosList = processo.getAtividadeList() == null || processo.getAtividadeList().isEmpty()
                     ? null : processo.getAtividadeList().stream().filter(a -> a.getIdElemento().equals(transition.getTo()))
-                    .collect(Collectors.toList());
+                            .collect(Collectors.toList());
 
             elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
 
@@ -440,7 +497,7 @@ public class GeracaoElementosBPMNBO {
                 //Verifica se o elemento de destino é um subprocesso
                 elementosList = processo.getSubProcessoList() == null || processo.getSubProcessoList().isEmpty()
                         ? null : processo.getSubProcessoList().stream().filter(a -> a.getIdElemento().equals(transition.getTo()))
-                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                 elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
             }
@@ -449,7 +506,7 @@ public class GeracaoElementosBPMNBO {
                 //Verifica se o elemento de destino é um evento
                 elementosList = processo.getEventoList() == null || processo.getEventoList().isEmpty()
                         ? null : processo.getEventoList().stream().filter(a -> a.getIdElemento().equals(transition.getTo()))
-                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                 elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
             }
@@ -458,7 +515,7 @@ public class GeracaoElementosBPMNBO {
                 //Verifica se o elemento de destino é um gateway
                 elementosList = processo.getGatewayList() == null || processo.getGatewayList().isEmpty()
                         ? null : processo.getGatewayList().stream().filter(a -> a.getIdElemento().equals(transition.getTo()))
-                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                 elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
             }
@@ -486,7 +543,7 @@ public class GeracaoElementosBPMNBO {
                                 artInp.getArtifactId());
                         artefatoListAux = artefatoList == null || artefatoList.isEmpty() || idArtefatoRetorno == null
                                 || idArtefatoRetorno.isEmpty() ? null
-                                        : artefatoList.stream().filter(art -> art.getIdElemento().equals(idArtefatoRetorno))
+                                : artefatoList.stream().filter(art -> art.getIdElemento().equals(idArtefatoRetorno))
                                         .collect(Collectors.toList());
                         if (artefatoListAux != null && !artefatoListAux.isEmpty()) {
                             utilizaEntrada = new UtilizaEntrada();
@@ -502,7 +559,7 @@ public class GeracaoElementosBPMNBO {
                                 inp.getArtifactId());
                         artefatoListAux = artefatoList == null || artefatoList.isEmpty() || idArtefatoRetorno == null
                                 || idArtefatoRetorno.isEmpty() ? null : artefatoList.stream().filter(art -> art.getIdElemento().equals(
-                                                idArtefatoRetorno)).collect(Collectors.toList());
+                                idArtefatoRetorno)).collect(Collectors.toList());
                         if (artefatoListAux != null && !artefatoListAux.isEmpty()) {
                             utilizaEntrada = new UtilizaEntrada();
                             utilizaEntrada.setAtividade(atividade);
@@ -518,7 +575,7 @@ public class GeracaoElementosBPMNBO {
         if (isSubProcesso && pacote.getWorkflowProcesses() != null && pacote.getWorkflowProcesses().getWorkflowProcess() != null
                 && !pacote.getWorkflowProcesses().getWorkflowProcess().isEmpty()) {
             ActivitySet actvSet = null;
-            boolean encontrouActivitySet = false;            
+            boolean encontrouActivitySet = false;
 
             for (ProcessType wfp : pacote.getWorkflowProcesses().getWorkflowProcess()) {
                 for (Object o : wfp.getContent()) {
@@ -544,7 +601,7 @@ public class GeracaoElementosBPMNBO {
             if (actvSet != null && actvSet.getAssociations() != null && actvSet.getAssociations().getAssociationAndAny() != null
                     && !actvSet.getAssociations().getAssociationAndAny().isEmpty()) {
                 UtilizaEntrada utiEnt;
-                
+
                 for (Object ass : actvSet.getAssociations().getAssociationAndAny()) {
                     if (ass instanceof Association) {
                         Association associacao = (Association) ass;
@@ -554,11 +611,11 @@ public class GeracaoElementosBPMNBO {
                             final Artefato artAux = artefatoList != null && !artefatoList.isEmpty()
                                     ? artefatoList.stream().filter(art -> art.getIdElemento().equals(associacao.getSource())).count() > 0
                                     ? artefatoList.stream().filter(art -> art.getIdElemento().equals(associacao.getSource())).findFirst()
-                                    .get() : null : null;
+                                            .get() : null : null;
 
                             if (artAux != null && (utilizaEntradaList.isEmpty()
                                     || utilizaEntradaList.stream().filter(uti -> uti.getAtividade().getIdElemento()
-                                            .equals(atividade.getIdElemento()) && uti.getArtefato().getIdElemento().equals(artAux.getIdElemento())
+                                    .equals(atividade.getIdElemento()) && uti.getArtefato().getIdElemento().equals(artAux.getIdElemento())
                                     ).count() == 0)) {
                                 utiEnt = new UtilizaEntrada();
                                 utiEnt.setArtefato(artAux);
@@ -584,11 +641,11 @@ public class GeracaoElementosBPMNBO {
                         final Artefato artAux = artefatoList != null && !artefatoList.isEmpty()
                                 ? artefatoList.stream().filter(art -> art.getIdElemento().equals(associacao.getSource())).count() > 0
                                 ? artefatoList.stream().filter(art -> art.getIdElemento().equals(associacao.getSource())).findFirst()
-                                .get() : null : null;
+                                        .get() : null : null;
 
                         if (artAux != null && (utilizaEntradaList.isEmpty()
                                 || utilizaEntradaList.stream().filter(uti -> uti.getAtividade().getIdElemento()
-                                        .equals(atividade.getIdElemento()) && uti.getArtefato().getIdElemento().equals(artAux.getIdElemento())
+                                .equals(atividade.getIdElemento()) && uti.getArtefato().getIdElemento().equals(artAux.getIdElemento())
                                 ).count() == 0)) {
                             utiEnt = new UtilizaEntrada();
                             utiEnt.setArtefato(artAux);
@@ -619,7 +676,7 @@ public class GeracaoElementosBPMNBO {
                                 out.getArtifactId());
                         artefatoListAux = artefatoList == null || artefatoList.isEmpty() || idArtefatoRetorno == null
                                 || idArtefatoRetorno.isEmpty() ? null : artefatoList.stream().filter(art -> art.getIdElemento()
-                                                .equals(idArtefatoRetorno)).collect(Collectors.toList());
+                                .equals(idArtefatoRetorno)).collect(Collectors.toList());
                         if (artefatoListAux != null && !artefatoListAux.isEmpty()) {
                             produzSaida = new ProduzSaida();
                             produzSaida.setElemento(elemento);
@@ -671,12 +728,12 @@ public class GeracaoElementosBPMNBO {
                             final Artefato artAux = artefatoList != null && !artefatoList.isEmpty()
                                     ? artefatoList.stream().filter(art -> art.getIdElemento().equals(associacao.getTarget())).count() > 0
                                     ? artefatoList.stream().filter(art -> art.getIdElemento().equals(associacao.getTarget())).findFirst()
-                                    .get() : null : null;
+                                            .get() : null : null;
 
                             if (artAux != null && (produzSaidaList.isEmpty()
                                     || produzSaidaList.stream().filter(proSai -> proSai.getElemento().getIdElemento()
-                                            .equals(elemento.getIdElemento()) && proSai.getArtefato().getIdElemento()
-                                            .equals(artAux.getIdElemento())).count() == 0)) {
+                                    .equals(elemento.getIdElemento()) && proSai.getArtefato().getIdElemento()
+                                    .equals(artAux.getIdElemento())).count() == 0)) {
                                 proSaiAux = new ProduzSaida();
                                 proSaiAux.setArtefato(artAux);
                                 proSaiAux.setElemento(elemento);
@@ -701,12 +758,12 @@ public class GeracaoElementosBPMNBO {
                         final Artefato artAux = artefatoList != null && !artefatoList.isEmpty()
                                 ? artefatoList.stream().filter(art -> art.getIdElemento().equals(associacao.getTarget())).count() > 0
                                 ? artefatoList.stream().filter(art -> art.getIdElemento().equals(associacao.getTarget())).findFirst()
-                                .get() : null : null;
+                                        .get() : null : null;
 
                         if (artAux != null && (produzSaidaList.isEmpty()
                                 || produzSaidaList.stream().filter(proSai -> proSai.getElemento().getIdElemento()
-                                        .equals(elemento.getIdElemento()) && proSai.getArtefato().getIdElemento()
-                                        .equals(artAux.getIdElemento())).count() == 0)) {
+                                .equals(elemento.getIdElemento()) && proSai.getArtefato().getIdElemento()
+                                .equals(artAux.getIdElemento())).count() == 0)) {
                             proSaiAux = new ProduzSaida();
                             proSaiAux.setArtefato(artAux);
                             proSaiAux.setElemento(elemento);
@@ -787,17 +844,36 @@ public class GeracaoElementosBPMNBO {
                             break;
                         case "Data Object":
                             DataObject objetoDados = (DataObject) objArtefato.getDataObject();
+                            List<ExtendedAttribute> atributosEstendidosList = null;
 
                             artefato = new Artefato();
+
                             artefato.setIdElemento(objetoDados.getId());
                             artefato.setTipo(TipoArtefato.DataObject);
                             artefato.setNome(removeTagsHtml(objetoDados.getName()));
                             artefato.setDescricao(objetoDados.getObject() != null
                                     && objetoDados.getObject().getDocumentation() != null
-                                            ? removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
+                                    ? removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
                             artefato.setDocumentacao(objetoDados.getObject() != null
                                     && objetoDados.getObject().getDocumentation() != null
-                                            ? removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
+                                    ? removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
+
+                            if (objetoDados.getAny() != null && !objetoDados.getAny().isEmpty()) {
+                                for (Object obj : objetoDados.getAny()) {
+                                    if (obj instanceof ExtendedAttributes) {
+                                        if (atributosEstendidosList == null) {
+                                            atributosEstendidosList = new ArrayList();
+
+                                            atributosEstendidosList.addAll(((ExtendedAttributes) obj)
+                                                    .getExtendedAttribute());
+                                        }
+                                    }
+                                }
+                            }
+
+                            artefato.setAtributoEstendidoList(preencheAtributosEstendidos(artefato,
+                                    atributosEstendidosList));
+
                             artefatoSubProcessList.add(artefato);
                             break;
                     }
@@ -807,8 +883,13 @@ public class GeracaoElementosBPMNBO {
 
         if (activitySet.getDataObjects() != null && activitySet.getDataObjects().getDataObject() != null
                 && !activitySet.getDataObjects().getDataObject().isEmpty()) {
+            List<ExtendedAttribute> atributosEstendidosList;
+
             for (DataObject dataObject : activitySet.getDataObjects().getDataObject()) {
+                atributosEstendidosList = null;
+
                 Artefato artefato = new Artefato();
+
                 artefato.setIdElemento(dataObject.getId());
                 artefato.setTipo(TipoArtefato.DataObject);
                 artefato.setNome(TextUtils.removeTagsHtml(dataObject.getName()));
@@ -816,6 +897,22 @@ public class GeracaoElementosBPMNBO {
                         ? TextUtils.removeTagsHtml(dataObject.getObject().getDocumentation().getValue()) : null);
                 artefato.setDocumentacao(dataObject.getObject().getDocumentation() != null
                         ? TextUtils.removeTagsHtml(dataObject.getObject().getDocumentation().getValue()) : null);
+
+                if (dataObject.getAny() != null && !dataObject.getAny().isEmpty()) {
+                    for (Object obj : dataObject.getAny()) {
+                        if (obj instanceof ExtendedAttributes) {
+                            if (atributosEstendidosList == null) {
+                                atributosEstendidosList = new ArrayList();
+
+                                atributosEstendidosList.addAll(((ExtendedAttributes) obj)
+                                        .getExtendedAttribute());
+                            }
+                        }
+                    }
+                }
+
+                artefato.setAtributoEstendidoList(preencheAtributosEstendidos(artefato,
+                        atributosEstendidosList));
 
                 if (!artefatoSubProcessList.isEmpty() && !artefatoSubProcessList.contains(artefato)) {
                     artefatoSubProcessList.add(artefato);
@@ -830,13 +927,32 @@ public class GeracaoElementosBPMNBO {
         if (activitySet.getDataStoreReferences() != null && activitySet.getDataStoreReferences().getDataStoreReference() != null
                 && !activitySet.getDataStoreReferences().getDataStoreReference().isEmpty()) {
             Artefato artefatoAux;
+            List<ExtendedAttribute> atributosEstendidosList;
 
             for (DataStoreReference datSto : activitySet.getDataStoreReferences().getDataStoreReference()) {
+                atributosEstendidosList = null;
+
                 artefatoAux = artefatoList != null && !artefatoList.isEmpty()
                         ? artefatoList.stream().filter(a -> a.getIdElemento().equals(datSto.getDataStoreRef())).count() == 0
                         ? null : artefatoList.stream().filter(a -> a.getIdElemento().equals(datSto.getDataStoreRef())).findFirst().get() : null;
 
                 if (artefatoAux != null) {
+                    if (datSto.getAny() != null && !datSto.getAny().isEmpty()) {
+                        for (Object obj : datSto.getAny()) {
+                            if (obj instanceof ExtendedAttributes) {
+                                if (atributosEstendidosList == null) {
+                                    atributosEstendidosList = new ArrayList();
+
+                                    atributosEstendidosList.addAll(((ExtendedAttributes) obj)
+                                            .getExtendedAttribute());
+                                }
+                            }
+                        }
+                    }
+
+                    artefatoAux.setAtributoEstendidoList(preencheAtributosEstendidos(artefatoAux,
+                            atributosEstendidosList));
+
                     if (artefatoList != null && !artefatoList.isEmpty() && !artefatoList.contains(artefatoAux)) {
                         artefatoList.add(artefatoAux);
                     }
@@ -911,7 +1027,6 @@ public class GeracaoElementosBPMNBO {
 
                 for (Object propriedade : ati.getContent()) {
 
-                    //TODO:preencher lista de atributos estendidos
                     if (propriedade instanceof ExtendedAttributes) {
                         atributosEstendidosList = ((ExtendedAttributes) propriedade)
                                 .getExtendedAttribute();
@@ -1044,7 +1159,7 @@ public class GeracaoElementosBPMNBO {
                         if (nomeEvento == null || nomeEvento.isEmpty()) {
                             nomeEvento = prefixoNomeEvento.concat(subProcesso.getNome() == null
                                     || subProcesso.getNome().isEmpty() ? "Processo_".concat(subProcesso.getIdElemento())
-                                            : "Processo".concat(subProcesso.getNome()));
+                                    : "Processo".concat(subProcesso.getNome()));
                         }
 
                     }
@@ -1119,8 +1234,8 @@ public class GeracaoElementosBPMNBO {
                 anotacao = null;
                 artefatoList = subProcessoRetorno.getArtefatoList() == null
                         || subProcessoRetorno.getArtefatoList().isEmpty() ? null
-                                : subProcessoRetorno.getArtefatoList().stream().filter(art -> art instanceof Anotacao
-                                        && art.getIdElemento().equals(associacao.getTarget())).collect(Collectors.toList());
+                        : subProcessoRetorno.getArtefatoList().stream().filter(art -> art instanceof Anotacao
+                        && art.getIdElemento().equals(associacao.getTarget())).collect(Collectors.toList());
                 if (artefatoList != null && !artefatoList.isEmpty()) {
                     anotacao = (Anotacao) artefatoList.get(0);
                 }
@@ -1130,7 +1245,7 @@ public class GeracaoElementosBPMNBO {
                     Atividade atividade = subProcessoRetorno.getAtividadeList().stream()
                             .filter(a -> a.getIdElemento().equals(associacao.getSource())).count() == 0
                             ? null : subProcessoRetorno.getAtividadeList().stream()
-                            .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
+                                    .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
 
                     if (atividade != null && anotacao != null) {
                         subProcessoRetorno.getAtividadeList().get(subProcessoRetorno.getAtividadeList().indexOf(atividade))
@@ -1144,7 +1259,7 @@ public class GeracaoElementosBPMNBO {
                     Evento evento = subProcessoRetorno.getEventoList().stream()
                             .filter(a -> a.getIdElemento().equals(associacao.getSource())).count() == 0
                             ? null : subProcessoRetorno.getEventoList().stream()
-                            .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
+                                    .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
 
                     if (evento != null && anotacao != null) {
                         subProcessoRetorno.getEventoList().get(subProcessoRetorno.getEventoList().indexOf(evento))
@@ -1158,7 +1273,7 @@ public class GeracaoElementosBPMNBO {
                     Gateway gateway = subProcessoRetorno.getGatewayList().stream()
                             .filter(a -> a.getIdElemento().equals(associacao.getSource())).count() == 0
                             ? null : subProcessoRetorno.getGatewayList().stream()
-                            .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
+                                    .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
 
                     if (gateway != null && anotacao != null) {
                         subProcessoRetorno.getAtividadeList().get(subProcessoRetorno.getAtividadeList().indexOf(gateway))
@@ -1171,10 +1286,10 @@ public class GeracaoElementosBPMNBO {
                 if (subProcessoRetorno.getArtefatoList() != null && !subProcessoRetorno.getArtefatoList().isEmpty()) {
                     Artefato artefato = subProcessoRetorno.getArtefatoList().stream()
                             .filter(a -> (a.getTipo().equals(TipoArtefato.DataStore)
-                                    || a.getTipo().equals(TipoArtefato.DataObject))
-                                    && a.getIdElemento().equals(associacao.getSource())).count() == 0
+                            || a.getTipo().equals(TipoArtefato.DataObject))
+                            && a.getIdElemento().equals(associacao.getSource())).count() == 0
                             ? null : subProcessoRetorno.getArtefatoList().stream()
-                            .filter(a -> (a.getTipo().equals(TipoArtefato.DataStore)
+                                    .filter(a -> (a.getTipo().equals(TipoArtefato.DataStore)
                                     || a.getTipo().equals(TipoArtefato.DataObject))
                                     && a.getIdElemento().equals(associacao.getSource())).findFirst().get();
 
@@ -1204,8 +1319,8 @@ public class GeracaoElementosBPMNBO {
                 anotacao = null;
                 artefatoList = processoRetorno.getArtefatoList() == null
                         || processoRetorno.getArtefatoList().isEmpty() ? null
-                                : processoRetorno.getArtefatoList().stream().filter(art -> art instanceof Anotacao
-                                        && art.getIdElemento().equals(associacao.getTarget())).collect(Collectors.toList());
+                        : processoRetorno.getArtefatoList().stream().filter(art -> art instanceof Anotacao
+                        && art.getIdElemento().equals(associacao.getTarget())).collect(Collectors.toList());
                 if (artefatoList != null && !artefatoList.isEmpty()) {
                     anotacao = (Anotacao) artefatoList.get(0);
                 }
@@ -1213,8 +1328,8 @@ public class GeracaoElementosBPMNBO {
                 if (anotacao == null) {
                     artefatoList = artefatoGeralList == null
                             || artefatoGeralList.isEmpty() ? null
-                                    : artefatoGeralList.stream().filter(art -> art instanceof Anotacao
-                                            && art.getIdElemento().equals(associacao.getTarget())).collect(Collectors.toList());
+                            : artefatoGeralList.stream().filter(art -> art instanceof Anotacao
+                            && art.getIdElemento().equals(associacao.getTarget())).collect(Collectors.toList());
 
                     if (artefatoList != null && !artefatoList.isEmpty()) {
                         anotacao = (Anotacao) artefatoList.get(0);
@@ -1227,7 +1342,7 @@ public class GeracaoElementosBPMNBO {
                     Atividade atividade = processoRetorno.getAtividadeList().stream()
                             .filter(a -> a.getIdElemento().equals(associacao.getSource())).count() == 0
                             ? null : processoRetorno.getAtividadeList().stream()
-                            .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
+                                    .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
 
                     if (atividade != null && anotacao != null) {
                         int indiceAtividade = processoRetorno.getAtividadeList() != null && !processoRetorno.getAtividadeList().isEmpty()
@@ -1248,7 +1363,7 @@ public class GeracaoElementosBPMNBO {
                     Evento evento = processoRetorno.getEventoList().stream()
                             .filter(a -> a.getIdElemento().equals(associacao.getSource())).count() == 0
                             ? null : processoRetorno.getEventoList().stream()
-                            .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
+                                    .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
 
                     if (evento != null && anotacao != null) {
                         int indiceEvento = processoRetorno.getEventoList() != null && !processoRetorno.getEventoList().isEmpty()
@@ -1269,7 +1384,7 @@ public class GeracaoElementosBPMNBO {
                     Gateway gateway = processoRetorno.getGatewayList().stream()
                             .filter(a -> a.getIdElemento().equals(associacao.getSource())).count() == 0
                             ? null : processoRetorno.getGatewayList().stream()
-                            .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
+                                    .filter(a -> a.getIdElemento().equals(associacao.getSource())).findFirst().get();
 
                     if (gateway != null && anotacao != null) {
                         int indiceGateway = processoRetorno.getGatewayList() != null && !processoRetorno.getGatewayList().isEmpty()
@@ -1289,10 +1404,10 @@ public class GeracaoElementosBPMNBO {
                 if (processoRetorno.getArtefatoList() != null && !processoRetorno.getArtefatoList().isEmpty()) {
                     Artefato artefato = processoRetorno.getArtefatoList().stream()
                             .filter(a -> (a.getTipo().equals(TipoArtefato.DataStore)
-                                    || a.getTipo().equals(TipoArtefato.DataObject))
-                                    && a.getIdElemento().equals(associacao.getSource())).count() == 0
+                            || a.getTipo().equals(TipoArtefato.DataObject))
+                            && a.getIdElemento().equals(associacao.getSource())).count() == 0
                             ? null : processoRetorno.getArtefatoList().stream()
-                            .filter(a -> (a.getTipo().equals(TipoArtefato.DataStore)
+                                    .filter(a -> (a.getTipo().equals(TipoArtefato.DataStore)
                                     || a.getTipo().equals(TipoArtefato.DataObject))
                                     && a.getIdElemento().equals(associacao.getSource())).findFirst().get();
 
@@ -1357,8 +1472,8 @@ public class GeracaoElementosBPMNBO {
             //Analisa os artefatos, desde que sejam Depósitos ou Objetos de Dados
             List<Artefato> artefatoAuxList = subProcessoRetorno.getArtefatoList() == null
                     || subProcessoRetorno.getArtefatoList().isEmpty()
-                            ? null : subProcessoRetorno.getArtefatoList().stream().filter(a -> a.getTipo().equals(TipoArtefato.DataStore)
-                                    || a.getTipo().equals(TipoArtefato.DataObject)).collect(Collectors.toList());
+                    ? null : subProcessoRetorno.getArtefatoList().stream().filter(a -> a.getTipo().equals(TipoArtefato.DataStore)
+                    || a.getTipo().equals(TipoArtefato.DataObject)).collect(Collectors.toList());
 
             if (artefatoAuxList != null && !artefatoAuxList.isEmpty()) {
                 for (Artefato artefato : artefatoAuxList) {
@@ -1416,7 +1531,7 @@ public class GeracaoElementosBPMNBO {
             //Analisa os artefatos, desde que sejam Depósitos ou Objetos de Dados
             List<Artefato> artefatoAuxList = processoRetorno.getArtefatoList() == null || processoRetorno.getArtefatoList().isEmpty()
                     ? null : processoRetorno.getArtefatoList().stream().filter(a -> a.getTipo().equals(TipoArtefato.DataStore)
-                            || a.getTipo().equals(TipoArtefato.DataObject)).collect(Collectors.toList());
+                    || a.getTipo().equals(TipoArtefato.DataObject)).collect(Collectors.toList());
 
             if (artefatoAuxList != null && !artefatoAuxList.isEmpty()) {
                 for (Artefato artefato : artefatoAuxList) {

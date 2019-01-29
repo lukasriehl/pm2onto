@@ -4,14 +4,14 @@ import com.lukas.pm2onto.bo.GeracaoOntologiasBO;
 import com.lukas.pm2onto.dto.ArquivoDTO;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.faces.application.FacesMessage;
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 import static javax.faces.application.FacesMessage.SEVERITY_WARN;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
@@ -23,15 +23,16 @@ import org.primefaces.model.DefaultStreamedContent;
  * @author lukas
  */
 @Named
-@ManagedBean
 @ViewScoped
-public class GeracaoOntologiaController {
+public class GeracaoOntologiaController implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private List<File> arquivosXpdlList;
     private List<String> nomesArquivosXpdlList;
     private String arquivoSelecionado;
     private GeracaoOntologiasBO geracaoOntologiasBO;
-    private final String diretorioBaseArqXPDL = "/home/lukas/NetBeansProjects/Pm2Onto/src/main/resources/ArquivosXPDL/";
+    private final String diretorioBaseArqXPDL = "/home/lukas/NetBeansProjects/pm2onto/src/main/resources/ArquivosXPDL/";
     private String nomeOntologia, descricaoOntologia;
     private List<ArquivoDTO> arquivosOntologiasList;
 
@@ -58,8 +59,8 @@ public class GeracaoOntologiaController {
         }
     }
 
-    public void geraOntologias() throws Exception {
-//        try {
+    public void geraOntologias() {
+        try {
             geracaoOntologiasBO = new GeracaoOntologiasBO();
 
             if (arquivosOntologiasList != null && !arquivosOntologiasList.isEmpty()) {
@@ -82,7 +83,7 @@ public class GeracaoOntologiaController {
                     if (geracaoOntologiasBO.getArquivosOntologiasList() != null
                             && !geracaoOntologiasBO.getArquivosOntologiasList().isEmpty()) {
                         int indice = 1;
-                        
+
                         for (File file : geracaoOntologiasBO.getArquivosOntologiasList()) {
                             ArquivoDTO arqDTO = new ArquivoDTO();
                             arqDTO.setCaminhoArquivo(String.valueOf(indice).concat("-").concat(file.getName()));
@@ -98,12 +99,11 @@ public class GeracaoOntologiaController {
                     }
                 }
             }
-            throw new Exception();
-//        } catch (Exception e) {
-//            FacesMessage msg = new FacesMessage(SEVERITY_ERROR, "Erro", "Erro ao gerar a ontologia!!"
-//                    .concat(e.getMessage() == null || e.getMessage().isEmpty() ? "" : "\n".concat(e.getMessage())));
-//            FacesContext.getCurrentInstance().addMessage(null, msg);
-//        }
+        } catch (Exception e) {
+            FacesMessage msg = new FacesMessage(SEVERITY_ERROR, "Erro", "Erro ao gerar a ontologia!!"
+                    .concat(e.getMessage() == null || e.getMessage().isEmpty() ? "" : "\n".concat(e.getMessage())));
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 
     public List<File> getArquivosXpdlList() {

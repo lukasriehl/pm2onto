@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="845066bf-ccd6-4b9d-b4ad-6b7939200ea5" Name="Cadastrar Cliente" xmlns="http://www.wfmc.org/2009/XPDL2.2">
+  <PackageHeader>
+    <XPDLVersion>2.2</XPDLVersion>
+    <Vendor>Bizagi Process Modeler.</Vendor>
+    <Created>2018-11-27T19:36:04.2274317-02:00</Created>
+    <ModificationDate>2019-01-14T22:03:00.3167502-02:00</ModificationDate>
+    <Description>Cadastrar Cliente</Description>
+    <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Cadastra um novo cliente no sistema.&lt;/span&gt;&lt;/p&gt;</Documentation>
+  </PackageHeader>
+  <RedefinableHeader>
+    <Author>J. L. Gregório</Author>
+    <Version>1.0</Version>
+    <Countrykey>CO</Countrykey>
+  </RedefinableHeader>
+  <ExternalPackages />
+  <Participants>
+    <Participant Id="65525f4a-72c7-44cf-ad22-e91cf7a75ad8" Name="Usuário">
+      <ParticipantType Type="ROLE" />
+      <Description />
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="Usuario" />
+      </ExtendedAttributes>
+    </Participant>
+  </Participants>
+  <DataStores>
+    <DataStore Id="8220f291-a6a3-4e0e-8732-882fc2ef393b" Name="ClienteTBL" IsUnlimited="true">
+      <Object>
+        <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Tabela Cliente do banco de dados. &lt;/span&gt;&lt;/p&gt;</Documentation>
+      </Object>
+    </DataStore>
+  </DataStores>
+  <Pools>
+    <Pool Id="03ed44cf-71d7-4800-a05c-1a283f3ca307" Name="Processo principal" Process="c2298303-a511-46ff-b575-901b7c25d34f" BoundaryVisible="false">
+      <Lanes />
+      <NodeGraphicsInfos>
+        <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="0" Width="0" BorderColor="-16777216" FillColor="-1">
+          <Coordinates XCoordinate="30" YCoordinate="30" />
+        </NodeGraphicsInfo>
+      </NodeGraphicsInfos>
+    </Pool>
+    <Pool Id="44c61ac7-e5b4-44c9-97b3-acd9c537483f" Name="Cadastrar Cliente" Process="3adabb06-48b9-4a4d-9659-18b53245c43d" BoundaryVisible="true">
+      <Lanes>
+        <Lane Id="a9494080-0f4c-4b7f-a7ab-87034a6881e1" Name="Recepção" ParentPool="44c61ac7-e5b4-44c9-97b3-acd9c537483f">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="270" Width="358" BorderColor="-11513776" FillColor="-1">
+              <Coordinates XCoordinate="50" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Lane>
+      </Lanes>
+      <NodeGraphicsInfos>
+        <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="270" Width="408" BorderColor="-16777216" FillColor="-1">
+          <Coordinates XCoordinate="50" YCoordinate="50" />
+        </NodeGraphicsInfo>
+      </NodeGraphicsInfos>
+    </Pool>
+  </Pools>
+  <Associations>
+    <Association Id="ffa80955-65d4-41c7-a90e-cdb1c4f2b2aa" Source="4f19c66d-aeb3-4d6f-85e0-c8a2393c23a8" Target="f928cf65-4aec-4209-80bd-74966950e90d">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="287" YCoordinate="147" />
+          <Coordinates XCoordinate="287" YCoordinate="185" />
+          <Coordinates XCoordinate="312" YCoordinate="185" />
+          <Coordinates XCoordinate="312" YCoordinate="223" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+    <Association Id="b2512158-7fdc-4cb5-a206-1c81b75db1ee" Source="4f19c66d-aeb3-4d6f-85e0-c8a2393c23a8" Target="530a9f89-8d8d-4292-94e7-950ef21adf83">
+      <ConnectorGraphicsInfos>
+        <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+          <Coordinates XCoordinate="332" YCoordinate="117" />
+          <Coordinates XCoordinate="361" YCoordinate="117" />
+          <Coordinates XCoordinate="361" YCoordinate="213" />
+          <Coordinates XCoordinate="390" YCoordinate="213" />
+        </ConnectorGraphicsInfo>
+      </ConnectorGraphicsInfos>
+      <ExtendedAttributes />
+    </Association>
+  </Associations>
+  <WorkflowProcesses>
+    <WorkflowProcess Id="c2298303-a511-46ff-b575-901b7c25d34f" Name="Processo principal">
+      <ProcessHeader>
+        <Created>2019-01-24T22:54:39.5738136-02:00</Created>
+        <Description />
+      </ProcessHeader>
+      <RedefinableHeader>
+        <Author />
+        <Version />
+        <Countrykey>CO</Countrykey>
+      </RedefinableHeader>
+      <ActivitySets />
+      <DataInputOutputs />
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;processClassProperties&quot;:{&quot;displayName&quot;:&quot;Processo principal&quot;,&quot;accessType&quot;:&quot;Process&quot;,&quot;order&quot;:1,&quot;useParentCaseNumber&quot;:true,&quot;enableAlarms&quot;:true,&quot;enableNotifications&quot;:true,&quot;creationDate&quot;:&quot;2018-11-27T19:36:04.2294321-02:00&quot;,&quot;parentCategory&quot;:{&quot;baref&quot;:{&quot;ref&quot;:&quot;02bf759e-86ea-440a-bd61-9c6e9575ee44&quot;}}},&quot;processProperties&quot;:{&quot;version&quot;:{&quot;numberVersion&quot;:&quot;1.0&quot;,&quot;isActive&quot;:true},&quot;versionCreationDate&quot;:&quot;2018-11-27T19:36:04.2294321-02:00&quot;,&quot;supportsScopes&quot;:true,&quot;caseAccessType&quot;:&quot;Public&quot;,&quot;renderVersion&quot;:2,&quot;formsVersion&quot;:0}}" />
+      </ExtendedAttributes>
+    </WorkflowProcess>
+    <WorkflowProcess Id="3adabb06-48b9-4a4d-9659-18b53245c43d" Name="Cadastrar Cliente">
+      <ProcessHeader>
+        <Created>2019-01-24T22:54:39.5738136-02:00</Created>
+        <Description />
+      </ProcessHeader>
+      <RedefinableHeader>
+        <Author />
+        <Version />
+        <Countrykey>CO</Countrykey>
+      </RedefinableHeader>
+      <ActivitySets />
+      <DataInputOutputs>
+        <DataOutput Id="284f293d-b16a-408d-b081-067df8977fa0" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+        <DataOutput Id="3b4ad084-5b42-437e-932d-db368b52b653" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+        <DataOutput Id="2dc79d3a-8e85-43f3-8fc6-aa22965e521d" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+        <DataOutput Id="7105d602-cde5-412d-87f8-0fdfdad25809" IsCollection="false">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="0" YCoordinate="0" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <Documentation />
+        </DataOutput>
+      </DataInputOutputs>
+      <Activities>
+        <Activity Id="a75aa89c-1131-47c1-9ce7-7bda9eb644c5" Name="">
+          <Description />
+          <Event>
+            <StartEvent Trigger="None" />
+          </Event>
+          <Documentation />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-10311914" FillColor="-1638505">
+              <Coordinates XCoordinate="153" YCoordinate="102" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{}" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="4f19c66d-aeb3-4d6f-85e0-c8a2393c23a8" Name="Cadastrar Cliente">
+          <Description>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Usu&amp;aacute;rio cadastra cliente.&lt;/span&gt;&lt;/p&gt;</Description>
+          <Implementation>
+            <Task>
+              <TaskUser Implementation="Unspecified" />
+            </Task>
+          </Implementation>
+          <Performers>
+            <Performer>65525f4a-72c7-44cf-ad22-e91cf7a75ad8</Performer>
+          </Performers>
+          <Documentation>&lt;p style="text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;"&gt;&lt;span style="color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;"&gt;Usu&amp;aacute;rio cadastra cliente.&lt;/span&gt;&lt;/p&gt;</Documentation>
+          <InputSets>
+            <InputSet />
+          </InputSets>
+          <OutputSets>
+            <OutputSet>
+              <Output ArtifactId="284f293d-b16a-408d-b081-067df8977fa0" />
+              <Output ArtifactId="3b4ad084-5b42-437e-932d-db368b52b653" />
+              <Output ArtifactId="43cda7e1-6288-4fbc-949b-5e16ed683b7d" />
+              <Output ArtifactId="069e30d1-7b0e-4ee3-af53-7f26194c0c43" />
+              <Output ArtifactId="2dc79d3a-8e85-43f3-8fc6-aa22965e521d" />
+              <Output ArtifactId="7105d602-cde5-412d-87f8-0fdfdad25809" />
+            </OutputSet>
+          </OutputSets>
+          <Loop LoopType="None" />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="60" Width="90" BorderColor="-16553830" FillColor="-1249281">
+              <Coordinates XCoordinate="242" YCoordinate="87" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;cost&quot;:0,&quot;priority&quot;:0,&quot;notifyOnMobile&quot;:false,&quot;isSingleton&quot;:false,&quot;isConditional&quot;:false}" />
+            <ExtendedAttribute Name="REGRA" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;&amp;Eacute; necess&amp;aacute;rio validar o CPF do cliente.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Cadastrar somente clientes com mais de 18 anos.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" />
+            <ExtendedAttribute Name="RNF" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;O usu&amp;aacute;rio deve fazer o cadastro do cliente em menos de 5 minutos. &lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </Activity>
+        <Activity Id="6ffd5758-1855-4a7c-a589-e05158f997b2" Name="">
+          <Description />
+          <Event>
+            <EndEvent Result="None" />
+          </Event>
+          <Documentation />
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="30" Width="30" BorderColor="-6750208" FillColor="-1135958">
+              <Coordinates XCoordinate="381" YCoordinate="102" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes />
+        </Activity>
+      </Activities>
+      <DataObjects>
+        <DataObject Id="530a9f89-8d8d-4292-94e7-950ef21adf83" Name="Relatorio de Cadastro" State="">
+          <Object>
+            <Documentation />
+          </Object>
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="40" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="390" YCoordinate="188" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <DataField />
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;id:1:IN;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;nome:TESTE2:ST;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;data_nascto:19800102:DA;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;sexo:M:CH;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;cpf:38901656718:IN;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;endereco:RUA TESTE 123:ST;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;cidade:CIDADE TESTE 123:ST;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataObject>
+      </DataObjects>
+      <DataStoreReferences>
+        <DataStoreReference DataStoreRef="8220f291-a6a3-4e0e-8732-882fc2ef393b" Id="f928cf65-4aec-4209-80bd-74966950e90d" State="">
+          <NodeGraphicsInfos>
+            <NodeGraphicsInfo ToolId="BizAgi_Process_Modeler" Height="50" Width="50" BorderColor="-10066330" FillColor="-986896">
+              <Coordinates XCoordinate="287" YCoordinate="223" />
+            </NodeGraphicsInfo>
+          </NodeGraphicsInfos>
+          <ExtendedAttributes>
+            <ExtendedAttribute Name="ATRIBUTOS" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;id:I;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;nome:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;data_nascto:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;sexo:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Segoe UI;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;cpf:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;endereco:T;&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;cidade:Cidade;&lt;/span&gt;&lt;/p&gt;" />
+          </ExtendedAttributes>
+        </DataStoreReference>
+      </DataStoreReferences>
+      <Transitions>
+        <Transition Id="dcb0f2b2-43eb-4959-9c26-a0f7bd9ede21" From="a75aa89c-1131-47c1-9ce7-7bda9eb644c5" To="4f19c66d-aeb3-4d6f-85e0-c8a2393c23a8">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+              <Coordinates XCoordinate="183" YCoordinate="117" />
+              <Coordinates XCoordinate="242" YCoordinate="117" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+        <Transition Id="94375962-20c3-4eca-bab2-d6e67821ab2c" From="4f19c66d-aeb3-4d6f-85e0-c8a2393c23a8" To="6ffd5758-1855-4a7c-a589-e05158f997b2">
+          <Condition />
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216">
+              <Coordinates XCoordinate="332" YCoordinate="117" />
+              <Coordinates XCoordinate="381" YCoordinate="117" />
+            </ConnectorGraphicsInfo>
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </Transition>
+      </Transitions>
+      <DataAssociations>
+        <DataAssociation Id="145b446f-ed76-4884-afe2-fbc1b30aa5a6" From="284f293d-b16a-408d-b081-067df8977fa0" To="94c2902e-7ba4-48d3-8bf0-d63d8846a095">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="60110f36-7866-41d8-9ad1-7e875e2a4abb" From="3b4ad084-5b42-437e-932d-db368b52b653" To="61f0e474-930f-41ee-8e5c-5ed72ed88eef">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="abb11907-4638-4288-9ac3-6911ffbea9ce" From="2dc79d3a-8e85-43f3-8fc6-aa22965e521d" To="f928cf65-4aec-4209-80bd-74966950e90d">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+        <DataAssociation Id="2b179186-0759-4d25-b0c3-a4c0b2b05091" From="7105d602-cde5-412d-87f8-0fdfdad25809" To="530a9f89-8d8d-4292-94e7-950ef21adf83">
+          <Description />
+          <ConnectorGraphicsInfos>
+            <ConnectorGraphicsInfo ToolId="BizAgi_Process_Modeler" BorderColor="-16777216" />
+          </ConnectorGraphicsInfos>
+          <ExtendedAttributes />
+        </DataAssociation>
+      </DataAssociations>
+      <ExtendedAttributes>
+        <ExtendedAttribute Name="RuntimeProperties" Value="{&quot;processClassProperties&quot;:{&quot;displayName&quot;:&quot;Cadastrar Cliente&quot;,&quot;accessType&quot;:&quot;Process&quot;,&quot;order&quot;:1,&quot;useParentCaseNumber&quot;:true,&quot;enableAlarms&quot;:true,&quot;enableNotifications&quot;:true,&quot;creationDate&quot;:&quot;2018-11-27T19:36:08.3452397-02:00&quot;,&quot;parentCategory&quot;:{&quot;baref&quot;:{&quot;ref&quot;:&quot;02bf759e-86ea-440a-bd61-9c6e9575ee44&quot;}}},&quot;processProperties&quot;:{&quot;version&quot;:{&quot;numberVersion&quot;:&quot;1.0&quot;,&quot;isActive&quot;:true},&quot;versionCreationDate&quot;:&quot;2018-11-27T19:36:08.3452397-02:00&quot;,&quot;supportsScopes&quot;:true,&quot;caseAccessType&quot;:&quot;Public&quot;,&quot;renderVersion&quot;:2,&quot;formsVersion&quot;:0}}" />
+      </ExtendedAttributes>
+    </WorkflowProcess>
+  </WorkflowProcesses>
+  <ExtendedAttributes>
+    <ExtendedAttribute Name="Objective" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Cadastrar um novo cliente no sistema. &lt;/span&gt;&lt;/p&gt;" />
+    <ExtendedAttribute Name="Scope" Value="&lt;p style=&quot;text-align:left;text-indent:0pt;margin:0pt 0pt 0pt 0pt;&quot;&gt;&lt;span style=&quot;color:#000000;background-color:transparent;font-family:Microsoft Sans Serif;font-size:8pt;font-weight:normal;font-style:normal;&quot;&gt;Esse processo deve ser executado por um usu&amp;aacute;rio autorizado do sistema.&lt;/span&gt;&lt;/p&gt;" />
+  </ExtendedAttributes>
+</Package>
