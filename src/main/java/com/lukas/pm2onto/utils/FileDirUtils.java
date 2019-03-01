@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.apache.jena.ontology.OntTools;
 
 /**
  *
@@ -20,7 +19,7 @@ public class FileDirUtils {
 
     public static File getDiretorioTemporario() {
         File diretorioTemporario = new File(OsIsWindows()
-                ? "C:\\tmpPm2Onto" : "//tmpPm2Onto");
+                ? "C:\\tmpPm2Onto" : "/tmp/tmpPm2Onto");
 
         return diretorioTemporario;
     }
@@ -39,7 +38,7 @@ public class FileDirUtils {
             diretorioTemporario.mkdir();
         }
 
-        String caminhoDiretorioGerado = diretorioTemporario.getPath().concat(OsIsWindows() ? "\\" : "//");
+        String caminhoDiretorioGerado = diretorioTemporario.getPath().concat(OsIsWindows() ? "\\" : "/");
 
         File arquivo = new File(caminhoDiretorioGerado.concat(nomeArquivo));
 
