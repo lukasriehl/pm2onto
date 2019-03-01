@@ -25,11 +25,12 @@ import com.lukas.pm2onto.model.enumerador.DirecaoGateway;
 import com.lukas.pm2onto.model.enumerador.GatilhoEvento;
 import com.lukas.pm2onto.model.enumerador.TipoArtefato;
 import com.lukas.pm2onto.model.enumerador.TipoAtividade;
-import com.lukas.pm2onto.model.enumerador.TipoDado;
 import com.lukas.pm2onto.model.enumerador.TipoEvento;
 import com.lukas.pm2onto.model.enumerador.TipoGateway;
 import com.lukas.pm2onto.model.enumerador.TipoSubProcesso;
+import com.lukas.pm2onto.utils.FileDirUtils;
 import com.lukas.pm2onto.utils.TextUtils;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -143,7 +144,6 @@ public class GeracaoOntologiasBO {
     public boolean geraProcessos() throws Exception {
         Processo processo;
 
-//        try {
         if (arquivosOntologiasList != null && !arquivosOntologiasList.isEmpty()) {
             arquivosOntologiasList.clear();
         }
@@ -396,7 +396,7 @@ public class GeracaoOntologiasBO {
                                         if (nomeEvento == null || nomeEvento.isEmpty()) {
                                             nomeEvento = prefixoNomeEvento.concat(processo.getNome() == null
                                                     || processo.getNome().isEmpty() ? "Processo ".concat(processo.getIdElemento())
-                                                    : "Processo".concat(processo.getNome()));
+                                                            : "Processo".concat(processo.getNome()));
                                         }
 
                                     }
@@ -573,8 +573,8 @@ public class GeracaoOntologiasBO {
                 for (Processo prcAux : modelo.getProcessoList()) {
                     atividadeSubFlowList = prcAux.getAtividadeList() != null
                             && !prcAux.getAtividadeList().isEmpty()
-                            ? prcAux.getAtividadeList().stream().filter(ati -> ati.getIsSubFlow() && ati.getIdSubFlow() != null
-                            && !ati.getIdSubFlow().isEmpty()).collect(Collectors.toList()) : null;
+                                    ? prcAux.getAtividadeList().stream().filter(ati -> ati.getIsSubFlow() && ati.getIdSubFlow() != null
+                                            && !ati.getIdSubFlow().isEmpty()).collect(Collectors.toList()) : null;
 
                     if (atividadeSubFlowList != null && !atividadeSubFlowList.isEmpty()) {
                         SubProcesso newSubProcess;
@@ -585,9 +585,9 @@ public class GeracaoOntologiasBO {
                             //Verifica se a atividade apresenta um evento como gatilho
                             eventoGatilho = prcAux.getEventoList() != null && !prcAux.getEventoList().isEmpty()
                                     ? prcAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
-                                    && !eve.getTargetId().isEmpty() && eve.getTargetId().equals(atiSub.getIdElemento())).count() > 0
+                                            && !eve.getTargetId().isEmpty() && eve.getTargetId().equals(atiSub.getIdElemento())).count() > 0
                                     ? prcAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
-                                    && !eve.getTargetId().isEmpty() && eve.getTargetId().equals(atiSub.getIdElemento())).findFirst().get()
+                                            && !eve.getTargetId().isEmpty() && eve.getTargetId().equals(atiSub.getIdElemento())).findFirst().get()
                                     : null : null;
 
                             processToRemove = modelo.getProcessoList().stream().filter(pro -> pro.getIdElemento().equals(atiSub.getIdSubFlow()))
@@ -652,8 +652,8 @@ public class GeracaoOntologiasBO {
                 for (Processo processoAux : modelo.getProcessoList()) {
                     List<Evento> eventoSubProcessoList = processoAux.getEventoList() != null
                             && !processoAux.getEventoList().isEmpty()
-                            ? processoAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
-                            && !eve.getTargetId().isEmpty()).collect(Collectors.toList()) : null;
+                                    ? processoAux.getEventoList().stream().filter(eve -> eve.getTargetId() != null
+                                            && !eve.getTargetId().isEmpty()).collect(Collectors.toList()) : null;
 
                     if (eventoSubProcessoList != null && !eventoSubProcessoList.isEmpty()) {
                         for (Evento eve : eventoSubProcessoList) {
@@ -670,11 +670,6 @@ public class GeracaoOntologiasBO {
         }
 
         return true;
-//        } catch (Exception e) {
-//            throw new Exception("Erro ao carregar os pacotes dos arquivos XPDL!"
-//                    .concat(e.getMessage() == null || e.getMessage().isEmpty()
-//                            ? "" : "\nErro: ".concat(e.getMessage())));
-//        }
     }
 
     private OntModel preencheConceitosProcesso(OntModel modeloOntologia, String NS, OntClass processoClas, Processo processo,
@@ -688,12 +683,12 @@ public class GeracaoOntologiasBO {
 
                 OntClass atorClas = modeloOntologiaProcesso.getOntClass(NS + (ator.getNome() != null
                         && !ator.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(ator.getNome()))
-                        : "actor-".concat(ator.getIdElemento())));
+                                : "actor-".concat(ator.getIdElemento())));
 
                 if (atorClas == null) {
                     atorClas = modeloOntologiaProcesso.createClass(NS + (ator.getNome() != null
                             && !ator.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(ator.getNome()))
-                            : "actor-".concat(ator.getIdElemento())));
+                                    : "actor-".concat(ator.getIdElemento())));
                 }
 
                 atorClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), ator.getIdElemento());
@@ -715,12 +710,12 @@ public class GeracaoOntologiasBO {
             for (Piscina pis : processo.getPiscinaList()) {
                 OntClass piscinaClas = modeloOntologiaProcesso.getOntClass(NS + (pis.getNome() != null
                         && !pis.getNome().isEmpty() ? "pool-".concat(TextUtils.formataNome(pis.getNome()))
-                        : "pool-".concat(pis.getIdElemento())));
+                                : "pool-".concat(pis.getIdElemento())));
 
                 if (piscinaClas == null) {
                     piscinaClas = modeloOntologiaProcesso.createClass(NS + (pis.getNome() != null
                             && !pis.getNome().isEmpty() ? "pool-".concat(TextUtils.formataNome(pis.getNome()))
-                            : "pool-".concat(pis.getIdElemento())));
+                                    : "pool-".concat(pis.getIdElemento())));
                 }
 
                 piscinaClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), pis.getIdElemento());
@@ -748,12 +743,12 @@ public class GeracaoOntologiasBO {
 
                 OntClass artefatoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getNome() != null
                         && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getNome()))
-                        : "artft-".concat(art.getIdElemento())));
+                                : "artft-".concat(art.getIdElemento())));
 
                 if (artefatoClas == null) {
                     artefatoClas = modeloOntologiaProcesso.createClass(NS + (art.getNome() != null
                             && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getNome()))
-                            : "artft-".concat(art.getIdElemento())));
+                                    : "artft-".concat(art.getIdElemento())));
                 }
 
                 artefatoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), art.getIdElemento());
@@ -801,7 +796,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto dos artefatos que possuem grupos
             List<Artefato> artefatoAgrupadoList = processo.getArtefatoList().stream()
                     .filter(art -> art.getGrupo() != null && art.getGrupo().getIdElemento() != null
-                    && !art.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
+                            && !art.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (artefatoAgrupadoList != null && !artefatoAgrupadoList.isEmpty()) {
                 OntClass artefatoClas;
@@ -810,10 +805,10 @@ public class GeracaoOntologiasBO {
                 for (Artefato art : artefatoAgrupadoList) {
                     artefatoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getNome() != null
                             && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getNome()))
-                            : "artft-".concat(art.getIdElemento())));
+                                    : "artft-".concat(art.getIdElemento())));
                     grupoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getGrupo().getNome() != null
                             && !art.getGrupo().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getGrupo().getNome()))
-                            : "artft-".concat(art.getGrupo().getIdElemento())));
+                                    : "artft-".concat(art.getGrupo().getIdElemento())));
 
                     if (artefatoClas != null && grupoClas != null) {
                         artefatoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -825,7 +820,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto dos artefatos que possuem anotação
             List<Artefato> artefatoAnotacaoList = processo.getArtefatoList().stream()
                     .filter(art -> art.getAnotacao() != null && art.getAnotacao().getIdElemento() != null
-                    && !art.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
+                            && !art.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (artefatoAnotacaoList != null && !artefatoAnotacaoList.isEmpty()) {
                 OntClass artefatoClas;
@@ -834,15 +829,15 @@ public class GeracaoOntologiasBO {
                 for (Artefato art : artefatoAnotacaoList) {
                     artefatoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getNome() != null
                             && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getNome()))
-                            : "artft-".concat(art.getIdElemento())));
+                                    : "artft-".concat(art.getIdElemento())));
                     anotacaoClas = modeloOntologiaProcesso.getOntClass(NS + (art.getNome() != null
                             && !art.getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getAnotacao().getNome()))
-                            : "artft-".concat(art.getAnotacao().getIdElemento())));
+                                    : "artft-".concat(art.getAnotacao().getIdElemento())));
 
                     if (anotacaoClas == null) {
                         anotacaoClas = modeloOntologiaProcesso.createClass(NS + (art.getAnotacao().getNome() != null
                                 && !art.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(art.getAnotacao().getNome()))
-                                : "artft-".concat(art.getAnotacao().getIdElemento())));
+                                        : "artft-".concat(art.getAnotacao().getIdElemento())));
                     }
 
                     if (artefatoClas != null && anotacaoClas != null) {
@@ -869,12 +864,12 @@ public class GeracaoOntologiasBO {
 
                 OntClass atividadeClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getNome() != null
                         && !ati.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(ati.getNome()))
-                        : "actv-".concat(ati.getIdElemento())));
+                                : "actv-".concat(ati.getIdElemento())));
 
                 if (atividadeClas == null) {
                     atividadeClas = modeloOntologiaProcesso.createClass(NS + (ati.getNome() != null
                             && !ati.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(ati.getNome()))
-                            : "actv-".concat(ati.getIdElemento())));
+                                    : "actv-".concat(ati.getIdElemento())));
                 }
 
                 atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), ati.getIdElemento());
@@ -892,9 +887,9 @@ public class GeracaoOntologiasBO {
                 if (ati.getIsRegraDeNegocio() || hasExtAttrRegraNegocio) {
                     String businessRule = ati.getRegraDeNegocio() != null && !ati.getRegraDeNegocio().isEmpty()
                             ? ati.getRegraDeNegocio() : ati.getDescricao() != null && !ati.getDescricao().isEmpty()
-                            ? ati.getDescricao() : ati.getDocumentacao() != null && !ati.getDocumentacao().isEmpty()
-                            ? ati.getDocumentacao() : ati.getNome() != null && !ati.getNome().isEmpty()
-                            ? ati.getNome() : "No Description for the Business Rule";
+                                    ? ati.getDescricao() : ati.getDocumentacao() != null && !ati.getDocumentacao().isEmpty()
+                                            ? ati.getDocumentacao() : ati.getNome() != null && !ati.getNome().isEmpty()
+                                                    ? ati.getNome() : "No Description for the Business Rule";
 
                     atividadeClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i5-isBusinessRule"),
                             "true", XSDDatatype.XSDboolean);
@@ -924,7 +919,7 @@ public class GeracaoOntologiasBO {
 
                 List<ExecutadoPor> executadoPorList = processo.getExecutadoPorList() == null
                         || processo.getExecutadoPorList().isEmpty() ? null
-                        : processo.getExecutadoPorList().stream().filter(e -> e.getAtividade().equals(ati))
+                                : processo.getExecutadoPorList().stream().filter(e -> e.getAtividade().equals(ati))
                                 .collect(Collectors.toList());
                 if (executadoPorList != null && !executadoPorList.isEmpty()) {
                     modeloOntologiaProcesso = preencheRelacaoAtividadesExecutadas(modeloOntologiaProcesso, NS, false, executadoPorList);
@@ -936,7 +931,7 @@ public class GeracaoOntologiasBO {
 
                 List<UtilizaEntrada> utilizaEntradaList = processo.getUtilizaEntradaList() == null
                         || processo.getUtilizaEntradaList().isEmpty() ? null
-                        : processo.getUtilizaEntradaList().stream().filter(e -> e.getAtividade().equals(ati))
+                                : processo.getUtilizaEntradaList().stream().filter(e -> e.getAtividade().equals(ati))
                                 .collect(Collectors.toList());
                 if (utilizaEntradaList != null && !utilizaEntradaList.isEmpty()) {
                     for (UtilizaEntrada utiEnt : utilizaEntradaList) {
@@ -944,13 +939,13 @@ public class GeracaoOntologiasBO {
                                 modeloOntologiaProcesso.getObjectProperty(NS + "usesInput"), 1,
                                 modeloOntologiaProcesso.getOntClass(NS + (utiEnt.getArtefato().getNome() != null
                                         && !utiEnt.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(utiEnt.getArtefato().getNome()))
-                                        : "artft-".concat(utiEnt.getArtefato().getIdElemento())))));
+                                                : "artft-".concat(utiEnt.getArtefato().getIdElemento())))));
                     }
                 }
 
                 List<ProduzSaida> produzSaidaList = processo.getProduzSaidaList() == null
                         || processo.getProduzSaidaList().isEmpty() ? null
-                        : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().equals(ati))
+                                : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().equals(ati))
                                 .collect(Collectors.toList());
                 if (produzSaidaList != null && !produzSaidaList.isEmpty()) {
                     for (ProduzSaida proSai : produzSaidaList) {
@@ -958,7 +953,7 @@ public class GeracaoOntologiasBO {
                                 modeloOntologiaProcesso.getObjectProperty(NS + "producesOutput"), 1,
                                 modeloOntologiaProcesso.getOntClass(NS + (proSai.getArtefato().getNome() != null
                                         && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                        : "artft-".concat(proSai.getArtefato().getIdElemento())))));
+                                                : "artft-".concat(proSai.getArtefato().getIdElemento())))));
                     }
                 }
 
@@ -993,7 +988,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto das atividades que possuem grupos
             List<Atividade> atividadeAgrupadaList = processo.getAtividadeList().stream()
                     .filter(ati -> ati.getGrupo() != null && ati.getGrupo().getIdElemento() != null
-                    && !ati.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
+                            && !ati.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (atividadeAgrupadaList != null && !atividadeAgrupadaList.isEmpty()) {
                 OntClass atividadeClas;
@@ -1002,10 +997,10 @@ public class GeracaoOntologiasBO {
                 for (Atividade ati : atividadeAgrupadaList) {
                     atividadeClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getNome() != null
                             && !ati.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(ati.getNome()))
-                            : "actv-".concat(ati.getIdElemento())));
+                                    : "actv-".concat(ati.getIdElemento())));
                     grupoClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getGrupo().getNome() != null
                             && !ati.getGrupo().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(ati.getGrupo().getNome()))
-                            : "actv-".concat(ati.getGrupo().getIdElemento())));
+                                    : "actv-".concat(ati.getGrupo().getIdElemento())));
 
                     if (atividadeClas != null && grupoClas != null) {
                         atividadeClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -1017,7 +1012,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto das atividades que possuem anotação
             List<Atividade> atividadeAnotacaoList = processo.getAtividadeList().stream()
                     .filter(ati -> ati.getAnotacao() != null && ati.getAnotacao().getIdElemento() != null
-                    && !ati.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
+                            && !ati.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (atividadeAnotacaoList != null && !atividadeAnotacaoList.isEmpty()) {
                 OntClass atividadeClas;
@@ -1026,15 +1021,15 @@ public class GeracaoOntologiasBO {
                 for (Atividade ati : atividadeAnotacaoList) {
                     atividadeClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getNome() != null
                             && !ati.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(ati.getNome()))
-                            : "actv-".concat(ati.getIdElemento())));
+                                    : "actv-".concat(ati.getIdElemento())));
                     anotacaoClas = modeloOntologiaProcesso.getOntClass(NS + (ati.getAnotacao().getNome() != null
                             && !ati.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(ati.getAnotacao().getNome()))
-                            : "artft-".concat(ati.getAnotacao().getIdElemento())));
+                                    : "artft-".concat(ati.getAnotacao().getIdElemento())));
 
                     if (anotacaoClas == null) {
                         anotacaoClas = modeloOntologiaProcesso.createClass(NS + (ati.getAnotacao().getNome() != null
                                 && !ati.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(ati.getAnotacao().getNome()))
-                                : "artft-".concat(ati.getAnotacao().getIdElemento())));
+                                        : "artft-".concat(ati.getAnotacao().getIdElemento())));
                     }
 
                     if (atividadeClas != null && anotacaoClas != null) {
@@ -1061,12 +1056,12 @@ public class GeracaoOntologiasBO {
 
                 OntClass eventoClas = modeloOntologiaProcesso.getOntClass(NS + (evento.getNome() != null
                         && !evento.getNome().isEmpty() ? "evt-".concat(TextUtils.formataNome(evento.getNome()))
-                        : "evt-".concat(evento.getIdElemento())));
+                                : "evt-".concat(evento.getIdElemento())));
 
                 if (eventoClas == null) {
                     eventoClas = modeloOntologiaProcesso.createClass(NS + (evento.getNome() != null
                             && !evento.getNome().isEmpty() ? "evt-".concat(TextUtils.formataNome(evento.getNome()))
-                            : "evt-".concat(evento.getIdElemento())));
+                                    : "evt-".concat(evento.getIdElemento())));
                 }
 
                 eventoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), evento.getIdElemento());
@@ -1088,7 +1083,7 @@ public class GeracaoOntologiasBO {
 
                 List<ProduzSaida> produzSaidaList = processo.getProduzSaidaList() == null
                         || processo.getProduzSaidaList().isEmpty() ? null
-                        : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().equals(evento))
+                                : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().equals(evento))
                                 .collect(Collectors.toList());
                 if (produzSaidaList != null && !produzSaidaList.isEmpty()) {
                     for (ProduzSaida proSai : produzSaidaList) {
@@ -1096,7 +1091,7 @@ public class GeracaoOntologiasBO {
                                 modeloOntologiaProcesso.getObjectProperty(NS + "producesOutput"), 1,
                                 modeloOntologiaProcesso.getOntClass(NS + (proSai.getArtefato().getNome() != null
                                         && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                        : "artft-".concat(proSai.getArtefato().getIdElemento())))));
+                                                : "artft-".concat(proSai.getArtefato().getIdElemento())))));
                     }
                 }
 
@@ -1131,7 +1126,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto dos eventos que possuem grupos
             List<Evento> eventoAgrupadoList = processo.getEventoList().stream()
                     .filter(eve -> eve.getGrupo() != null && eve.getGrupo().getIdElemento() != null
-                    && !eve.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
+                            && !eve.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (eventoAgrupadoList != null && !eventoAgrupadoList.isEmpty()) {
                 OntClass eventoClas;
@@ -1140,10 +1135,10 @@ public class GeracaoOntologiasBO {
                 for (Evento eve : eventoAgrupadoList) {
                     eventoClas = modeloOntologiaProcesso.getOntClass(NS + (eve.getNome() != null
                             && !eve.getNome().isEmpty() ? "evt-".concat(TextUtils.formataNome(eve.getNome()))
-                            : "evt-".concat(eve.getIdElemento())));
+                                    : "evt-".concat(eve.getIdElemento())));
                     grupoClas = modeloOntologiaProcesso.getOntClass(NS + (eve.getGrupo().getNome() != null
                             && !eve.getGrupo().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(eve.getGrupo().getNome()))
-                            : "artft-".concat(eve.getGrupo().getIdElemento())));
+                                    : "artft-".concat(eve.getGrupo().getIdElemento())));
 
                     if (eventoClas != null && grupoClas != null) {
                         eventoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -1155,7 +1150,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto dos eventos que possuem anotação
             List<Evento> eventoAnotacaoList = processo.getEventoList().stream()
                     .filter(eve -> eve.getAnotacao() != null && eve.getAnotacao().getIdElemento() != null
-                    && !eve.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
+                            && !eve.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (eventoAnotacaoList != null && !eventoAnotacaoList.isEmpty()) {
                 OntClass eventoClas;
@@ -1164,15 +1159,15 @@ public class GeracaoOntologiasBO {
                 for (Evento eve : eventoAnotacaoList) {
                     eventoClas = modeloOntologiaProcesso.getOntClass(NS + (eve.getNome() != null
                             && !eve.getNome().isEmpty() ? "evt-".concat(TextUtils.formataNome(eve.getNome()))
-                            : "eve_".concat(eve.getIdElemento())));
+                                    : "eve_".concat(eve.getIdElemento())));
                     anotacaoClas = modeloOntologiaProcesso.getOntClass(NS + (eve.getAnotacao().getNome() != null
                             && !eve.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(eve.getAnotacao().getNome()))
-                            : "artft-".concat(eve.getAnotacao().getIdElemento())));
+                                    : "artft-".concat(eve.getAnotacao().getIdElemento())));
 
                     if (anotacaoClas == null) {
                         anotacaoClas = modeloOntologiaProcesso.createClass(NS + (eve.getAnotacao().getNome() != null
                                 && !eve.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(eve.getAnotacao().getNome()))
-                                : "artft-".concat(eve.getAnotacao().getIdElemento())));
+                                        : "artft-".concat(eve.getAnotacao().getIdElemento())));
                     }
 
                     if (eventoClas != null && anotacaoClas != null) {
@@ -1199,12 +1194,12 @@ public class GeracaoOntologiasBO {
 
                 OntClass gatewayClas = modeloOntologiaProcesso.getOntClass(NS + (gateway.getNome() != null
                         && !gateway.getNome().isEmpty() ? "gatw-".concat(TextUtils.formataNome(gateway.getNome()))
-                        : "gatw-".concat(gateway.getIdElemento())));
+                                : "gatw-".concat(gateway.getIdElemento())));
 
                 if (gatewayClas == null) {
                     gatewayClas = modeloOntologiaProcesso.createClass(NS + (gateway.getNome() != null
                             && !gateway.getNome().isEmpty() ? "gatw-".concat(TextUtils.formataNome(gateway.getNome()))
-                            : "gatw-".concat(gateway.getIdElemento())));
+                                    : "gatw-".concat(gateway.getIdElemento())));
                 }
 
                 gatewayClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), gateway.getIdElemento());
@@ -1222,9 +1217,9 @@ public class GeracaoOntologiasBO {
                 if (gateway.getIsRegraDeNegocio()) {
                     String businessRule = gateway.getRegraDeNegocio() != null && !gateway.getRegraDeNegocio().isEmpty()
                             ? gateway.getRegraDeNegocio() : gateway.getDescricao() != null && !gateway.getDescricao().isEmpty()
-                            ? gateway.getDescricao() : gateway.getDocumentacao() != null && !gateway.getDocumentacao().isEmpty()
-                            ? gateway.getDocumentacao() : gateway.getNome() != null && !gateway.getNome().isEmpty()
-                            ? gateway.getNome() : "No Description for the Business Rule";
+                                    ? gateway.getDescricao() : gateway.getDocumentacao() != null && !gateway.getDocumentacao().isEmpty()
+                                            ? gateway.getDocumentacao() : gateway.getNome() != null && !gateway.getNome().isEmpty()
+                                                    ? gateway.getNome() : "No Description for the Business Rule";
 
                     gatewayClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i5-isBusinessRule"),
                             "true", XSDDatatype.XSDboolean);
@@ -1276,7 +1271,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto dos gateways que possuem grupos
             List<Gateway> gatewayAgrupadoList = processo.getGatewayList().stream()
                     .filter(gat -> gat.getGrupo() != null && gat.getGrupo().getIdElemento() != null
-                    && !gat.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
+                            && !gat.getGrupo().getIdElemento().isEmpty()).collect(Collectors.toList());
             if (gatewayAgrupadoList != null && !gatewayAgrupadoList.isEmpty()) {
                 OntClass gatewayClas;
                 OntClass grupoClas;
@@ -1284,10 +1279,10 @@ public class GeracaoOntologiasBO {
                 for (Gateway gat : gatewayAgrupadoList) {
                     gatewayClas = modeloOntologiaProcesso.getOntClass(NS + (gat.getNome() != null
                             && !gat.getNome().isEmpty() ? "gatw-".concat(TextUtils.formataNome(gat.getNome()))
-                            : "gatw-".concat(gat.getIdElemento())));
+                                    : "gatw-".concat(gat.getIdElemento())));
                     grupoClas = modeloOntologiaProcesso.getOntClass(NS + (gat.getGrupo().getNome() != null
                             && !gat.getGrupo().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(gat.getGrupo().getNome()))
-                            : "artft-".concat(gat.getGrupo().getIdElemento())));
+                                    : "artft-".concat(gat.getGrupo().getIdElemento())));
 
                     if (gatewayClas != null && grupoClas != null) {
                         gatewayClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -1299,7 +1294,7 @@ public class GeracaoOntologiasBO {
             //Preenche as propriedades de objeto dos gateways que possuem anotação
             List<Gateway> gatewayAnotacaoList = processo.getGatewayList().stream()
                     .filter(gat -> gat.getAnotacao() != null && gat.getAnotacao().getIdElemento() != null
-                    && !gat.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
+                            && !gat.getAnotacao().getIdElemento().isEmpty()).collect(Collectors.toList());
 
             if (gatewayAnotacaoList != null && !gatewayAnotacaoList.isEmpty()) {
                 OntClass gatewayClas;
@@ -1308,15 +1303,15 @@ public class GeracaoOntologiasBO {
                 for (Gateway gat : gatewayAnotacaoList) {
                     gatewayClas = modeloOntologiaProcesso.getOntClass(NS + (gat.getNome() != null
                             && !gat.getNome().isEmpty() ? "gatw-".concat(TextUtils.formataNome(gat.getNome()))
-                            : "gatw-".concat(gat.getIdElemento())));
+                                    : "gatw-".concat(gat.getIdElemento())));
                     anotacaoClas = modeloOntologiaProcesso.getOntClass(NS + (gat.getAnotacao().getNome() != null
                             && !gat.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(gat.getAnotacao().getNome()))
-                            : "artft-".concat(gat.getAnotacao().getIdElemento())));
+                                    : "artft-".concat(gat.getAnotacao().getIdElemento())));
 
                     if (anotacaoClas == null) {
                         anotacaoClas = modeloOntologiaProcesso.createClass(NS + (gat.getAnotacao().getNome() != null
                                 && !gat.getAnotacao().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(gat.getAnotacao().getNome()))
-                                : "artft-".concat(gat.getAnotacao().getIdElemento())));
+                                        : "artft-".concat(gat.getAnotacao().getIdElemento())));
                     }
 
                     if (gatewayClas != null && anotacaoClas != null) {
@@ -1333,23 +1328,23 @@ public class GeracaoOntologiasBO {
             processo.getSucedidoPorList().stream().forEach((sucPor) -> {
                 final String prefixoElementoOrigem = sucPor.getElementoOrigem() instanceof Atividade
                         ? "actv-" : sucPor.getElementoOrigem() instanceof Gateway ? "gatw-"
-                        : sucPor.getElementoOrigem() instanceof Evento ? "evt-"
-                        : "subProcess-";
+                                : sucPor.getElementoOrigem() instanceof Evento ? "evt-"
+                                        : "subProcess-";
 
                 OntClass elementoOrigemClas = modeloOntologiaProcesso.getOntClass(NS + (sucPor.getElementoOrigem().getNome() != null
                         && !sucPor.getElementoOrigem().getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                        TextUtils.formataNome(sucPor.getElementoOrigem().getNome()))
-                        : prefixoElementoOrigem.concat(sucPor.getElementoOrigem().getIdElemento())));
+                                        TextUtils.formataNome(sucPor.getElementoOrigem().getNome()))
+                                : prefixoElementoOrigem.concat(sucPor.getElementoOrigem().getIdElemento())));
 
                 final String prefixoElementoDestino = sucPor.getElementoDestino() instanceof Atividade
                         ? "actv-" : sucPor.getElementoDestino() instanceof Gateway ? "gatw-"
-                        : sucPor.getElementoDestino() instanceof Evento ? "evt-"
-                        : "subProcess-";
+                                : sucPor.getElementoDestino() instanceof Evento ? "evt-"
+                                        : "subProcess-";
 
                 OntClass elementoDestinoClas = modeloOntologiaProcesso.getOntClass(NS + (sucPor.getElementoDestino().getNome() != null
                         && !sucPor.getElementoDestino().getNome().isEmpty() ? prefixoElementoDestino.concat(
-                        TextUtils.formataNome(sucPor.getElementoDestino().getNome()))
-                        : prefixoElementoDestino.concat(sucPor.getElementoDestino().getIdElemento())));
+                                        TextUtils.formataNome(sucPor.getElementoDestino().getNome()))
+                                : prefixoElementoDestino.concat(sucPor.getElementoDestino().getIdElemento())));
 
                 if (elementoOrigemClas != null && elementoDestinoClas != null) {
 
@@ -1386,7 +1381,7 @@ public class GeracaoOntologiasBO {
                     if (sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
                             && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
                             && processo.getSucedidoPorList().stream().filter(ele -> ele.getElementoOrigem().getIdElemento()
-                            .equals(sucPor.getElementoOrigem().getIdElemento())).count() > 1) {
+                                    .equals(sucPor.getElementoOrigem().getIdElemento())).count() > 1) {
                         if (!elementosComMaisDeUmSucessor.contains(sucPor.getElementoOrigem())) {
                             elementosComMaisDeUmSucessor.add(sucPor.getElementoOrigem());
                         }
@@ -1398,7 +1393,7 @@ public class GeracaoOntologiasBO {
                     if (sucPor.getElementoDestino() != null && sucPor.getElementoDestino().getIdElemento() != null
                             && !sucPor.getElementoDestino().getIdElemento().isEmpty()
                             && processo.getSucedidoPorList().stream().filter(ele -> ele.getElementoDestino().getIdElemento()
-                            .equals(sucPor.getElementoDestino().getIdElemento())).count() > 1) {
+                                    .equals(sucPor.getElementoDestino().getIdElemento())).count() > 1) {
                         if (!elementosComMaisDeUmAntecessor.contains(sucPor.getElementoDestino())) {
                             elementosComMaisDeUmAntecessor.add(sucPor.getElementoDestino());
                         }
@@ -1420,7 +1415,7 @@ public class GeracaoOntologiasBO {
                 for (Elemento ele : elementosComMaisDeUmSucessor) {
                     sucedidoPorAuxList = processo.getSucedidoPorList() != null && !processo.getSucedidoPorList().isEmpty()
                             ? processo.getSucedidoPorList().stream().filter(sucPor -> sucPor.getElementoOrigem().getIdElemento()
-                            .equals(ele.getIdElemento()) && sucPor.getElementoDestino() != null).collect(Collectors.toList()) : null;
+                                    .equals(ele.getIdElemento()) && sucPor.getElementoDestino() != null).collect(Collectors.toList()) : null;
 
                     if (sucedidoPorAuxList != null && !sucedidoPorAuxList.isEmpty()) {
                         elements = new RDFNode[sucedidoPorAuxList.size()];
@@ -1434,19 +1429,19 @@ public class GeracaoOntologiasBO {
 
                         eleOrigemAux = modeloOntologiaProcesso.getOntClass(NS + (ele.getNome() != null
                                 && !ele.getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                                TextUtils.formataNome(ele.getNome()))
-                                : prefixoElementoOrigem.concat(ele.getIdElemento())));
+                                                TextUtils.formataNome(ele.getNome()))
+                                        : prefixoElementoOrigem.concat(ele.getIdElemento())));
 
                         for (SucedidoPor sucPor : sucedidoPorAuxList) {
                             final String prefixoElementoDestino = sucPor.getElementoDestino() instanceof Atividade
                                     ? "actv-" : sucPor.getElementoDestino() instanceof Gateway ? "gatw-"
-                                    : sucPor.getElementoDestino() instanceof Evento ? "evt-"
-                                    : "subProcess-";
+                                            : sucPor.getElementoDestino() instanceof Evento ? "evt-"
+                                                    : "subProcess-";
 
                             eleDestinoAux = modeloOntologiaProcesso.getOntClass(NS + (sucPor.getElementoDestino().getNome() != null
                                     && !sucPor.getElementoDestino().getNome().isEmpty() ? prefixoElementoDestino.concat(
-                                    TextUtils.formataNome(sucPor.getElementoDestino().getNome()))
-                                    : prefixoElementoDestino.concat(sucPor.getElementoDestino().getIdElemento())));
+                                                    TextUtils.formataNome(sucPor.getElementoDestino().getNome()))
+                                            : prefixoElementoDestino.concat(sucPor.getElementoDestino().getIdElemento())));
 
                             if (eleDestinoAux != null) {
                                 elements[i] = eleDestinoAux;
@@ -1477,7 +1472,7 @@ public class GeracaoOntologiasBO {
                 for (Elemento ele : elementosComMaisDeUmAntecessor) {
                     sucedidoPorAuxList = processo.getSucedidoPorList() != null && !processo.getSucedidoPorList().isEmpty()
                             ? processo.getSucedidoPorList().stream().filter(sucPor -> sucPor.getElementoDestino().getIdElemento()
-                            .equals(ele.getIdElemento()) && sucPor.getElementoOrigem() != null).collect(Collectors.toList()) : null;
+                                    .equals(ele.getIdElemento()) && sucPor.getElementoOrigem() != null).collect(Collectors.toList()) : null;
 
                     if (sucedidoPorAuxList != null && !sucedidoPorAuxList.isEmpty()) {
                         elements = new RDFNode[sucedidoPorAuxList.size()];
@@ -1491,19 +1486,19 @@ public class GeracaoOntologiasBO {
 
                         eleDestinoAux = modeloOntologiaProcesso.getOntClass(NS + (ele.getNome() != null
                                 && !ele.getNome().isEmpty() ? prefixoElementoDestino.concat(
-                                TextUtils.formataNome(ele.getNome()))
-                                : prefixoElementoDestino.concat(ele.getIdElemento())));
+                                                TextUtils.formataNome(ele.getNome()))
+                                        : prefixoElementoDestino.concat(ele.getIdElemento())));
 
                         for (SucedidoPor sucPor : sucedidoPorAuxList) {
                             final String prefixoElementoOrigem = sucPor.getElementoOrigem() instanceof Atividade
                                     ? "actv-" : sucPor.getElementoOrigem() instanceof Gateway ? "gatw-"
-                                    : sucPor.getElementoOrigem() instanceof Evento ? "evt-"
-                                    : "subProcess-";
+                                            : sucPor.getElementoOrigem() instanceof Evento ? "evt-"
+                                                    : "subProcess-";
 
                             eleOrigemAux = modeloOntologiaProcesso.getOntClass(NS + (sucPor.getElementoOrigem().getNome() != null
                                     && !sucPor.getElementoOrigem().getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                                    TextUtils.formataNome(sucPor.getElementoOrigem().getNome()))
-                                    : prefixoElementoOrigem.concat(sucPor.getElementoOrigem().getIdElemento())));
+                                                    TextUtils.formataNome(sucPor.getElementoOrigem().getNome()))
+                                            : prefixoElementoOrigem.concat(sucPor.getElementoOrigem().getIdElemento())));
 
                             if (eleOrigemAux != null) {
                                 elements[i] = eleOrigemAux;
@@ -1537,19 +1532,19 @@ public class GeracaoOntologiasBO {
         if (atividade != null && atoresList != null && !atoresList.isEmpty()) {
             atividadeClas = modeloOntologiaRetorno.getOntClass(NS + (atividade.getNome() != null
                     && !atividade.getNome().isEmpty() ? "actv-".concat(TextUtils.formataNome(atividade.getNome()))
-                    : "actv-".concat(atividade.getIdElemento())));
+                            : "actv-".concat(atividade.getIdElemento())));
 
             elements = new RDFNode[atoresList.size()];
 
             for (Ator atorAux : atoresList) {
                 atorClas = modeloOntologiaRetorno.getOntClass(NS + (atorAux.getNome() != null
                         && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                        : "actor-".concat(atorAux.getIdElemento())));
+                                : "actor-".concat(atorAux.getIdElemento())));
 
                 if (atorClas == null) {
                     atorClas = modeloOntologiaRetorno.createClass(NS + (atorAux.getNome() != null
                             && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                            : "actor-".concat(atorAux.getIdElemento())));
+                                    : "actor-".concat(atorAux.getIdElemento())));
                 }
 
                 elements[i] = atorClas;
@@ -1589,7 +1584,7 @@ public class GeracaoOntologiasBO {
 
             atividadeSubProcessoClas = modeloOntologiaRetorno.getOntClass(NS + (ati.getNome() != null
                     && !ati.getNome().isEmpty() ? (isSubProcesso ? "subProcess-" : "actv-").concat(TextUtils.formataNome(ati.getNome()))
-                    : (isSubProcesso ? "subProcess-" : "actv-").concat(ati.getIdElemento())));
+                            : (isSubProcesso ? "subProcess-" : "actv-").concat(ati.getIdElemento())));
 
             if (atividadeSubProcessoClas != null && !atoresList.isEmpty()) {
                 RDFNode[] elements;
@@ -1600,12 +1595,12 @@ public class GeracaoOntologiasBO {
                 for (Ator atorAux : atoresList) {
                     atorClas = modeloOntologiaRetorno.getOntClass(NS + (atorAux.getNome() != null
                             && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                            : "actor-".concat(atorAux.getIdElemento())));
+                                    : "actor-".concat(atorAux.getIdElemento())));
 
                     if (atorClas == null) {
                         atorClas = modeloOntologiaRetorno.createClass(NS + (atorAux.getNome() != null
                                 && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                                : "actor-".concat(atorAux.getIdElemento())));
+                                        : "actor-".concat(atorAux.getIdElemento())));
                     }
 
                     elements[i] = atorClas;
@@ -1683,7 +1678,7 @@ public class GeracaoOntologiasBO {
             for (Ator ator : atorAuxList) {
                 OntClass atorClas = modeloOntologiaProcesso.getOntClass(NS + (ator.getNome() != null
                         && !ator.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(ator.getNome()))
-                        : "actor-".concat(ator.getIdElemento())));
+                                : "actor-".concat(ator.getIdElemento())));
 
                 List<ExecutadoPor> executadoPorListAux = executadoPorList.stream().filter(e -> e.getAtor().equals(ator))
                         .collect(Collectors.toList());
@@ -1708,8 +1703,8 @@ public class GeracaoOntologiasBO {
 
                             atividadeAuxClas = modeloOntologiaProcesso.getOntClass(NS + (exePor.getAtividade().getNome()
                                     != null && !exePor.getAtividade().getNome().isEmpty() ? prefixoElemento.concat(
-                                    TextUtils.formataNome(exePor.getAtividade().getNome()))
-                                    : prefixoElemento.concat(exePor.getAtividade().getIdElemento())));
+                                                    TextUtils.formataNome(exePor.getAtividade().getNome()))
+                                            : prefixoElemento.concat(exePor.getAtividade().getIdElemento())));
 
                             if (atividadeAuxClas != null) {
                                 elements[i] = atividadeAuxClas;
@@ -1771,12 +1766,12 @@ public class GeracaoOntologiasBO {
             for (Ator atorAux : atorAuxList) {
                 atorClas = modeloOntologiaProcesso.getOntClass(NS + (atorAux.getNome() != null
                         && !atorAux.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorAux.getNome()))
-                        : "actor-".concat(atorAux.getIdElemento())));
+                                : "actor-".concat(atorAux.getIdElemento())));
 
                 for (Processo pro : processoList) {
                     if (pro.getAtorList() != null && !pro.getAtorList().isEmpty()
                             && pro.getAtorList().stream().filter(ato -> ato.getIdElemento()
-                            .equals(atorAux.getIdElemento())).count() > 0
+                                    .equals(atorAux.getIdElemento())).count() > 0
                             && !processoListAux.contains(pro)) {
                         processoListAux.add(pro);
                     }
@@ -1786,7 +1781,7 @@ public class GeracaoOntologiasBO {
                         for (SubProcesso subProAux : pro.getSubProcessoList()) {
                             if (subProAux.getAtorList() != null && !subProAux.getAtorList().isEmpty()
                                     && subProAux.getAtorList().stream().filter(ato -> ato.getIdElemento()
-                                    .equals(atorAux.getIdElemento())).count() > 0
+                                            .equals(atorAux.getIdElemento())).count() > 0
                                     && !subProcessoListAux.contains(subProAux)) {
                                 subProcessoListAux.add(subProAux);
                             }
@@ -1803,7 +1798,7 @@ public class GeracaoOntologiasBO {
                     for (Processo proAux : processoListAux) {
                         proClas = modeloOntologiaProcesso.getOntClass(NS + (proAux.getNome() != null
                                 && !proAux.getNome().isEmpty() ? "process-".concat(TextUtils.formataNome(proAux.getNome()))
-                                : "process-".concat(proAux.getIdElemento())));
+                                        : "process-".concat(proAux.getIdElemento())));
 
                         if (proClas != null) {
                             elements[i] = proClas;
@@ -1832,7 +1827,7 @@ public class GeracaoOntologiasBO {
                     for (SubProcesso subProAux : subProcessoListAux) {
                         subProClas = modeloOntologiaProcesso.getOntClass(NS + (subProAux.getNome() != null
                                 && !subProAux.getNome().isEmpty() ? "subProcess-".concat(TextUtils.formataNome(subProAux.getNome()))
-                                : "subProcess-".concat(subProAux.getIdElemento())));
+                                        : "subProcess-".concat(subProAux.getIdElemento())));
 
                         if (subProClas != null) {
                             elements[i] = subProClas;
@@ -1874,7 +1869,7 @@ public class GeracaoOntologiasBO {
             List<SucedidoPor> sucedidoPorList, Elemento elementoOrigem, OntClass elementoDestinoClas) {
         List<SucedidoPor> sucedidoPorAnterioresList = sucedidoPorList != null && !sucedidoPorList.isEmpty()
                 ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoDestino().getIdElemento()
-                .equals(elementoOrigem.getIdElemento())).collect(Collectors.toList()) : null;
+                        .equals(elementoOrigem.getIdElemento())).collect(Collectors.toList()) : null;
 
         if (sucedidoPorAnterioresList != null && !sucedidoPorAnterioresList.isEmpty()
                 && sucedidoPorAnterioresList.get(0).getElementoOrigem() instanceof Atividade) {
@@ -1928,9 +1923,9 @@ public class GeracaoOntologiasBO {
             TipoGateway tipoGatewayCorrente;
             List<SucedidoPor> sucedidoPorFluxoList = sucedidoPorList != null
                     && !sucedidoPorList.isEmpty() ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem()
-                    != null && sucPor.getElementoOrigem().getIdElemento() != null && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                    && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento()))
-                    .collect(Collectors.toList()) : null;
+                                    != null && sucPor.getElementoOrigem().getIdElemento() != null && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                                    && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento()))
+                            .collect(Collectors.toList()) : null;
             List<Elemento> elementosIniciaisFluxoList;
             List<Elemento> elementoList = null;
 
@@ -1946,11 +1941,11 @@ public class GeracaoOntologiasBO {
 
             sucedidoPor = sucedidoPorList != null && !sucedidoPorList.isEmpty()
                     ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
-                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                    && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento())).count() > 0
+                            && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                            && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento())).count() > 0
                     ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
-                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                    && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento())).findFirst().get()
+                            && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                            && sucPor.getElementoOrigem().getIdElemento().equals(elementoOrigem.getIdElemento())).findFirst().get()
                     : null : null;
 
             if (sucedidoPorList != null && !sucedidoPorList.isEmpty() && sucedidoPor != null
@@ -1972,7 +1967,7 @@ public class GeracaoOntologiasBO {
                     tipoGatewayCorrente = sucedidoPor.getElementoDestino() != null
                             && sucedidoPor.getElementoDestino() instanceof Gateway
                             && ((Gateway) sucedidoPor.getElementoDestino()) != null
-                            ? ((Gateway) sucedidoPor.getElementoDestino()).getTipo() : null;
+                                    ? ((Gateway) sucedidoPor.getElementoDestino()).getTipo() : null;
 
                     encontrouGateway = tipoGatewayCorrente != null;
 //                            && ((isParallel && tipoGatewayCorrente.equals(TipoGateway.Parallel))
@@ -1996,9 +1991,9 @@ public class GeracaoOntologiasBO {
                             && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
                             && sucPor.getElementoOrigem().getIdElemento().equals(ele.getIdElemento())).count() > 0
                             ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null
-                            && sucPor.getElementoOrigem().getIdElemento() != null
-                            && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                            && sucPor.getElementoOrigem().getIdElemento().equals(ele.getIdElemento())).findFirst().get()
+                                    && sucPor.getElementoOrigem().getIdElemento() != null
+                                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                                    && sucPor.getElementoOrigem().getIdElemento().equals(ele.getIdElemento())).findFirst().get()
                             : null : null;
 
                     isSuceededByEndEvent = sucedidoPor != null && sucedidoPor.getElementoDestino() != null
@@ -2021,13 +2016,13 @@ public class GeracaoOntologiasBO {
                             if (isExclusiveGateway) {
                                 final String prefixoElementoDestino = sucedidoPor.getElementoDestino() instanceof Atividade
                                         ? "actv-" : sucedidoPor.getElementoDestino() instanceof Gateway ? "gatw-"
-                                        : sucedidoPor.getElementoDestino() instanceof Evento ? "evt-"
-                                        : "subProcess-";
+                                                : sucedidoPor.getElementoDestino() instanceof Evento ? "evt-"
+                                                        : "subProcess-";
 
                                 OntClass elementoDestinoClasAux = modeloOntologiaProcesso.getOntClass(NS + (sucedidoPor.getElementoDestino()
                                         .getNome() != null && !sucedidoPor.getElementoDestino().getNome().isEmpty()
-                                        ? prefixoElementoDestino.concat(TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome()))
-                                        : prefixoElementoDestino.concat(sucedidoPor.getElementoDestino().getIdElemento())));
+                                                ? prefixoElementoDestino.concat(TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome()))
+                                                : prefixoElementoDestino.concat(sucedidoPor.getElementoDestino().getIdElemento())));
 
                                 preencheRelacaoAtividadeGatewayExclusivo(modeloOntologiaProcesso, NS, sucedidoPor, sucedidoPorList,
                                         sucedidoPor.getElementoOrigem(), elementoDestinoClasAux);
@@ -2059,13 +2054,13 @@ public class GeracaoOntologiasBO {
             sucedidoPor = gatewayFim != null && gatewayFim.getIdElemento() != null
                     && !gatewayFim.getIdElemento().isEmpty()
                     && sucedidoPorList != null && !sucedidoPorList.isEmpty()
-                    ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
-                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                    && sucPor.getElementoOrigem().getIdElemento().equals(gatewayFim.getIdElemento())).count() > 0
-                    ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
-                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
-                    && sucPor.getElementoOrigem().getIdElemento().equals(gatewayFim.getIdElemento())).findFirst().get()
-                    : null : null;
+                            ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
+                                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                                    && sucPor.getElementoOrigem().getIdElemento().equals(gatewayFim.getIdElemento())).count() > 0
+                            ? sucedidoPorList.stream().filter(sucPor -> sucPor.getElementoOrigem() != null && sucPor.getElementoOrigem().getIdElemento() != null
+                                    && !sucPor.getElementoOrigem().getIdElemento().isEmpty()
+                                    && sucPor.getElementoOrigem().getIdElemento().equals(gatewayFim.getIdElemento())).findFirst().get()
+                            : null : null;
 
             sucedidoPorCorrente = sucedidoPor;
 
@@ -2078,8 +2073,8 @@ public class GeracaoOntologiasBO {
                     && elementoList != null && !elementoList.isEmpty()) {
                 String nomeFluxo = "flow-".concat(sucedidoPor.getElementoDestino().getNome() != null
                         && !sucedidoPor.getElementoDestino().getNome().isEmpty()
-                        ? TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome())
-                        : sucedidoPor.getElementoDestino().getIdElemento());
+                                ? TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome())
+                                : sucedidoPor.getElementoDestino().getIdElemento());
 
                 OntClass flowSuperClas = modeloOntologiaProcesso.getOntClass(NS + (isParallel ? "ParallelFlow" : "InclusiveFlow"));
 
@@ -2100,8 +2095,8 @@ public class GeracaoOntologiasBO {
 
                     OntClass elementoCorrenteClas = modeloOntologiaProcesso.getOntClass(NS + (ele.getNome() != null
                             && !ele.getNome().isEmpty() ? prefixoElementoCorrente.concat(
-                            TextUtils.formataNome(ele.getNome()))
-                            : prefixoElementoCorrente.concat(ele.getIdElemento())));
+                                            TextUtils.formataNome(ele.getNome()))
+                                    : prefixoElementoCorrente.concat(ele.getIdElemento())));
 
                     elementoCorrenteClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
                             modeloOntologiaProcesso.getObjectProperty(NS + "isPartOfFlow"), flowClas));
@@ -2109,13 +2104,13 @@ public class GeracaoOntologiasBO {
 
                 String prefixoElementoSucessor = sucedidoPor.getElementoDestino() instanceof Atividade
                         ? "actv-" : sucedidoPor.getElementoDestino() instanceof Gateway ? "gatw-"
-                        : sucedidoPor.getElementoDestino() instanceof Evento ? "evt-"
-                        : "subProcess-";
+                                : sucedidoPor.getElementoDestino() instanceof Evento ? "evt-"
+                                        : "subProcess-";
 
                 OntClass elementoSucessorClas = modeloOntologiaProcesso.getOntClass(NS + (sucedidoPor.getElementoDestino().getNome() != null
                         && !sucedidoPor.getElementoDestino().getNome().isEmpty() ? prefixoElementoSucessor.concat(
-                        TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome()))
-                        : prefixoElementoSucessor.concat(sucedidoPor.getElementoDestino().getIdElemento())));
+                                        TextUtils.formataNome(sucedidoPor.getElementoDestino().getNome()))
+                                : prefixoElementoSucessor.concat(sucedidoPor.getElementoDestino().getIdElemento())));
 
                 if (elementoSucessorClas != null) {
                     elementoSucessorClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -2160,7 +2155,7 @@ public class GeracaoOntologiasBO {
 
         OntClass clasModelo = modeloOntologiaProcesso.createClass(NS + (modelo.getNome() != null
                 && !modelo.getNome().isEmpty() ? "model-".concat(TextUtils.formataNome(modelo.getNome()))
-                : "model-".concat(modelo.getIdModelo())));
+                        : "model-".concat(modelo.getIdModelo())));
         clasModelo.addSuperClass(modeloOntologiaProcesso.createSomeValuesFromRestriction(null,
                 modeloOntologiaProcesso.getObjectProperty(NS + "isComposedBy"),
                 modeloOntologiaProcesso.getOntClass(NS + "ModelElements")));
@@ -2194,7 +2189,7 @@ public class GeracaoOntologiasBO {
 
                 OntClass processoClas = modeloOntologiaProcesso.createClass(NS + (processo.getNome() != null
                         && !processo.getNome().isEmpty() ? "process-".concat(TextUtils.formataNome(processo.getNome()))
-                        : "process-".concat(processo.getIdElemento())));
+                                : "process-".concat(processo.getIdElemento())));
 
                 processoClas.addSuperClass(modeloOntologiaProcesso.createSomeValuesFromRestriction(null,
                         modeloOntologiaProcesso.getObjectProperty(NS + "isComposedBy"),
@@ -2239,7 +2234,7 @@ public class GeracaoOntologiasBO {
 
                         OntClass subProcessoClas = modeloOntologiaProcesso.createClass(NS + (subProcesso.getNome() != null
                                 && !subProcesso.getNome().isEmpty() ? "subProcess-".concat(TextUtils.formataNome(subProcesso.getNome()))
-                                : "subProcess-".concat(subProcesso.getIdElemento())));
+                                        : "subProcess-".concat(subProcesso.getIdElemento())));
 
                         subProcessoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"), subProcesso.getIdElemento());
                         subProcessoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i2-name"),
@@ -2265,11 +2260,11 @@ public class GeracaoOntologiasBO {
 
                         List<ExecutadoPor> executadoPorList = processo.getExecutadoPorList() == null
                                 || processo.getExecutadoPorList().isEmpty() ? null
-                                : processo.getExecutadoPorList().stream().filter(e -> (subProcesso.getIsSubFlow()
-                                && e.getAtividade().getIdElemento()
-                                        .equals(subProcesso.getIdAtividadeOrigem()))
-                                || (!subProcesso.getIsSubFlow() && e.getAtividade().getIdElemento()
-                                .equals(subProcesso.getIdElemento())))
+                                        : processo.getExecutadoPorList().stream().filter(e -> (subProcesso.getIsSubFlow()
+                                                && e.getAtividade().getIdElemento()
+                                                .equals(subProcesso.getIdAtividadeOrigem()))
+                                                || (!subProcesso.getIsSubFlow() && e.getAtividade().getIdElemento()
+                                                .equals(subProcesso.getIdElemento())))
                                         .collect(Collectors.toList());
 
                         if (executadoPorList != null && !executadoPorList.isEmpty()) {
@@ -2283,13 +2278,13 @@ public class GeracaoOntologiasBO {
                                         && atorSubProcesso.getNome() != null && !atorSubProcesso.getNome().isEmpty()) {
                                     OntClass atorSubProcessoClas = modeloOntologiaProcesso.getOntClass(NS + (atorSubProcesso.getNome() != null
                                             && !atorSubProcesso.getNome().isEmpty() ? "actor-".concat(
-                                            TextUtils.formataNome(atorSubProcesso.getNome()))
-                                            : "actor-".concat(atorSubProcesso.getIdElemento())));
+                                                            TextUtils.formataNome(atorSubProcesso.getNome()))
+                                                    : "actor-".concat(atorSubProcesso.getIdElemento())));
 
                                     if (atorSubProcessoClas == null) {
                                         atorSubProcessoClas = modeloOntologiaProcesso.createClass(NS + (atorSubProcesso.getNome() != null
                                                 && !atorSubProcesso.getNome().isEmpty() ? "actor-".concat(TextUtils.formataNome(atorSubProcesso.getNome()))
-                                                : "actor-".concat(atorSubProcesso.getIdElemento())));
+                                                        : "actor-".concat(atorSubProcesso.getIdElemento())));
                                     }
 
                                     subProcessoClas.addSuperClass(modeloOntologiaProcesso.createAllValuesFromRestriction(null,
@@ -2360,20 +2355,20 @@ public class GeracaoOntologiasBO {
                         //Preenche a relação dos artefatos de entrada do subprocesso
                         List<UtilizaEntrada> utilizaEntradaList = processo.getUtilizaEntradaList() == null
                                 || processo.getUtilizaEntradaList().isEmpty() ? null
-                                : processo.getUtilizaEntradaList().stream().filter(e -> e.getAtividade().getIdElemento()
-                                .equals(subProcesso.getIdElemento()))
+                                        : processo.getUtilizaEntradaList().stream().filter(e -> e.getAtividade().getIdElemento()
+                                                .equals(subProcesso.getIdElemento()))
                                         .collect(Collectors.toList());
 
                         if (utilizaEntradaList != null && !utilizaEntradaList.isEmpty()) {
                             for (UtilizaEntrada utiEnt : utilizaEntradaList) {
                                 OntClass artefatoEntradaClas = modeloOntologiaProcesso.getOntClass(NS + (utiEnt.getArtefato().getNome() != null
                                         && !utiEnt.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(utiEnt.getArtefato().getNome()))
-                                        : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
+                                                : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
 
                                 if (artefatoEntradaClas == null) {
                                     artefatoEntradaClas = modeloOntologiaProcesso.createClass(NS + (utiEnt.getArtefato().getNome() != null
                                             && !utiEnt.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(utiEnt.getArtefato().getNome()))
-                                            : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
+                                                    : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
                                 } else {
                                     RDFNode idArtefato = artefatoEntradaClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
                                     if (idArtefato != null && idArtefato.toString() != null && !idArtefato.toString().equals(utiEnt.getArtefato().getIdElemento())) {
@@ -2386,7 +2381,7 @@ public class GeracaoOntologiasBO {
 
                                         artefatoEntradaClas = modeloOntologiaProcesso.createClass(NS + (utiEnt.getArtefato().getNome() != null
                                                 && !utiEnt.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(utiEnt.getArtefato().getNome()))
-                                                : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
+                                                        : "artft-".concat(utiEnt.getArtefato().getIdElemento())));
 
                                         //Atualiza o nome do artefato na lista dentro de processo
                                         processo.getArtefatoList().stream().filter(art -> art.getIdElemento().equals(idArtefato.toString()))
@@ -2405,20 +2400,20 @@ public class GeracaoOntologiasBO {
                         //Preenche a relação dos artefatos de saída do subprocesso
                         List<ProduzSaida> produzSaidaList = processo.getProduzSaidaList() == null
                                 || processo.getProduzSaidaList().isEmpty() ? null
-                                : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().getIdElemento()
-                                .equals(subProcesso.getIdElemento()))
+                                        : processo.getProduzSaidaList().stream().filter(e -> e.getElemento().getIdElemento()
+                                                .equals(subProcesso.getIdElemento()))
                                         .collect(Collectors.toList());
 
                         if (produzSaidaList != null && !produzSaidaList.isEmpty()) {
                             for (ProduzSaida proSai : produzSaidaList) {
                                 OntClass artefatoSaidaClas = modeloOntologiaProcesso.getOntClass(NS + (proSai.getArtefato().getNome() != null
                                         && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                        : "artft-".concat(proSai.getArtefato().getIdElemento())));
+                                                : "artft-".concat(proSai.getArtefato().getIdElemento())));
 
                                 if (artefatoSaidaClas == null) {
                                     artefatoSaidaClas = modeloOntologiaProcesso.createClass(NS + (proSai.getArtefato().getNome() != null
                                             && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                            : "artft-".concat(proSai.getArtefato().getIdElemento())));
+                                                    : "artft-".concat(proSai.getArtefato().getIdElemento())));
                                 } else {
                                     RDFNode idArtefato = artefatoSaidaClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
                                     if (idArtefato != null && idArtefato.toString() != null && !idArtefato.toString().equals(proSai.getArtefato().getIdElemento())) {
@@ -2431,7 +2426,7 @@ public class GeracaoOntologiasBO {
 
                                         artefatoSaidaClas = modeloOntologiaProcesso.createClass(NS + (proSai.getArtefato().getNome() != null
                                                 && !proSai.getArtefato().getNome().isEmpty() ? "artft-".concat(TextUtils.formataNome(proSai.getArtefato().getNome()))
-                                                : "artft-".concat(proSai.getArtefato().getIdElemento())));
+                                                        : "artft-".concat(proSai.getArtefato().getIdElemento())));
 
                                         //Atualiza o nome do artefato na lista dentro de processo
                                         processo.getArtefatoList().stream().filter(art -> art.getIdElemento().equals(idArtefato.toString()))
@@ -2460,20 +2455,20 @@ public class GeracaoOntologiasBO {
                         OntClass subProcessoEventoClas = modeloOntologiaProcesso.getOntClass(NS
                                 + (subProAux.getNome() != null
                                 && !subProAux.getNome().isEmpty() ? "subProcess-".concat(
-                                TextUtils.formataNome(subProAux.getNome()))
-                                : "subProcess-".concat(subProAux.getIdElemento())));
+                                                TextUtils.formataNome(subProAux.getNome()))
+                                        : "subProcess-".concat(subProAux.getIdElemento())));
 
                         OntClass eventoClas = modeloOntologiaProcesso.getOntClass(NS
                                 + (subProAux.getEventoGatilho().getNome() != null
                                 && !subProAux.getEventoGatilho().getNome().isEmpty() ? "evt-".concat(
-                                TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
-                                : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
+                                                TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
+                                        : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
 
                         if (eventoClas == null) {
                             eventoClas = modeloOntologiaProcesso.createClass(NS + (subProAux.getEventoGatilho().getNome() != null
                                     && !subProAux.getEventoGatilho().getNome().isEmpty() ? "evt-".concat(
-                                    TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
-                                    : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
+                                                    TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
+                                            : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
                         } else {
                             RDFNode idEvento = eventoClas.getPropertyValue(modeloOntologiaProcesso.getDatatypeProperty(NS + "i1-id"));
                             if (idEvento != null && idEvento.toString() != null && !idEvento.toString().equals(subProAux.getEventoGatilho().getIdElemento())) {
@@ -2486,8 +2481,8 @@ public class GeracaoOntologiasBO {
 
                                 eventoClas = modeloOntologiaProcesso.createClass(NS + (subProAux.getEventoGatilho().getNome() != null
                                         && !subProAux.getEventoGatilho().getNome().isEmpty() ? "evt-".concat(
-                                        TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
-                                        : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
+                                                        TextUtils.formataNome(subProAux.getEventoGatilho().getNome()))
+                                                : "evt-".concat(subProAux.getEventoGatilho().getIdElemento())));
                             }
                         }
 
@@ -2511,27 +2506,27 @@ public class GeracaoOntologiasBO {
             modelo.getTrocaMensagemComList().stream().forEach((troMenCom) -> {
                 final String prefixoElementoOrigem = troMenCom.getElementoOrigem() instanceof Atividade
                         ? "actv-" : troMenCom.getElementoOrigem() instanceof Gateway ? "gatw-"
-                        : troMenCom.getElementoOrigem() instanceof Evento ? "evt-"
-                        : troMenCom.getElementoOrigem() instanceof SubProcesso ? "subProcess-"
-                        : "pool-";
+                                : troMenCom.getElementoOrigem() instanceof Evento ? "evt-"
+                                        : troMenCom.getElementoOrigem() instanceof SubProcesso ? "subProcess-"
+                                                : "pool-";
 
                 OntClass elementoOrigemClas = modeloOntologiaProcesso.getOntClass(NS
                         + (troMenCom.getElementoOrigem().getNome() != null
                         && !troMenCom.getElementoOrigem().getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                        TextUtils.formataNome(troMenCom.getElementoOrigem().getNome()))
-                        : prefixoElementoOrigem.concat(troMenCom.getElementoOrigem().getIdElemento())));
+                                        TextUtils.formataNome(troMenCom.getElementoOrigem().getNome()))
+                                : prefixoElementoOrigem.concat(troMenCom.getElementoOrigem().getIdElemento())));
 
                 final String prefixoElementoDestino = troMenCom.getElementoDestino() instanceof Atividade
                         ? "actv-" : troMenCom.getElementoDestino() instanceof Gateway ? "gatw-"
-                        : troMenCom.getElementoDestino() instanceof Evento ? "evt-"
-                        : troMenCom.getElementoOrigem() instanceof SubProcesso ? "subProcess-"
-                        : "pool-";
+                                : troMenCom.getElementoDestino() instanceof Evento ? "evt-"
+                                        : troMenCom.getElementoOrigem() instanceof SubProcesso ? "subProcess-"
+                                                : "pool-";
 
                 OntClass elementoDestinoClas = modeloOntologiaProcesso.getOntClass(NS
                         + (troMenCom.getElementoDestino().getNome() != null
                         && !troMenCom.getElementoDestino().getNome().isEmpty() ? prefixoElementoDestino.concat(
-                        TextUtils.formataNome(troMenCom.getElementoDestino().getNome()))
-                        : prefixoElementoDestino.concat(troMenCom.getElementoDestino().getIdElemento())));
+                                        TextUtils.formataNome(troMenCom.getElementoDestino().getNome()))
+                                : prefixoElementoDestino.concat(troMenCom.getElementoDestino().getIdElemento())));
 
                 long qtdeOriOrigem = modelo.getTrocaMensagemComList().stream().filter(troMen -> troMen.getElementoOrigem() != null
                         && troMen.getElementoOrigem().getIdElemento() != null && !troMen.getElementoOrigem().getIdElemento().isEmpty()
@@ -2600,8 +2595,8 @@ public class GeracaoOntologiasBO {
                     clasOrigem = modeloOntologiaProcesso.getOntClass(NS
                             + (ele.getNome() != null
                             && !ele.getNome().isEmpty() ? prefixoElementoOrigem.concat(
-                            TextUtils.formataNome(ele.getNome()))
-                            : prefixoElementoOrigem.concat(ele.getIdElemento())));
+                                            TextUtils.formataNome(ele.getNome()))
+                                    : prefixoElementoOrigem.concat(ele.getIdElemento())));
 
                     //Busca elementos da origem
                     troMenComList = modelo.getTrocaMensagemComList().stream().filter(troMenCom -> troMenCom.getElementoOrigem() != null
@@ -2615,14 +2610,14 @@ public class GeracaoOntologiasBO {
                             if (troMenCom.getElementoDestino() != null) {
                                 final String prefixoElementoDestino = troMenCom.getElementoDestino() instanceof Atividade
                                         ? "actv-" : troMenCom.getElementoDestino() instanceof Gateway ? "gatw-"
-                                        : troMenCom.getElementoDestino() instanceof Evento ? "evt-"
-                                        : ele instanceof SubProcesso ? "subProcess-" : "pool-";
+                                                : troMenCom.getElementoDestino() instanceof Evento ? "evt-"
+                                                        : ele instanceof SubProcesso ? "subProcess-" : "pool-";
 
                                 clasDestino = modeloOntologiaProcesso.getOntClass(NS
                                         + (troMenCom.getElementoDestino().getNome() != null
                                         && !troMenCom.getElementoDestino().getNome().isEmpty() ? prefixoElementoDestino.concat(
-                                        TextUtils.formataNome(troMenCom.getElementoDestino().getNome()))
-                                        : prefixoElementoDestino.concat(troMenCom.getElementoDestino().getIdElemento())));
+                                                        TextUtils.formataNome(troMenCom.getElementoDestino().getNome()))
+                                                : prefixoElementoDestino.concat(troMenCom.getElementoDestino().getIdElemento())));
 
                                 if (clasDestino != null) {
                                     elementsDestino[i] = clasDestino;
@@ -2645,14 +2640,14 @@ public class GeracaoOntologiasBO {
                             if (troMenCom.getElementoOrigem() != null) {
                                 final String prefixoElementoOrigemAux = troMenCom.getElementoOrigem() instanceof Atividade
                                         ? "actv-" : troMenCom.getElementoOrigem() instanceof Gateway ? "gatw-"
-                                        : troMenCom.getElementoOrigem() instanceof Evento ? "evt-"
-                                        : ele instanceof SubProcesso ? "subProcess-" : "pool-";
+                                                : troMenCom.getElementoOrigem() instanceof Evento ? "evt-"
+                                                        : ele instanceof SubProcesso ? "subProcess-" : "pool-";
 
                                 clasOrigemAux = modeloOntologiaProcesso.getOntClass(NS
                                         + (troMenCom.getElementoOrigem().getNome() != null
                                         && !troMenCom.getElementoOrigem().getNome().isEmpty() ? prefixoElementoOrigemAux.concat(
-                                        TextUtils.formataNome(troMenCom.getElementoOrigem().getNome()))
-                                        : prefixoElementoOrigemAux.concat(troMenCom.getElementoOrigem().getIdElemento())));
+                                                        TextUtils.formataNome(troMenCom.getElementoOrigem().getNome()))
+                                                : prefixoElementoOrigemAux.concat(troMenCom.getElementoOrigem().getIdElemento())));
 
                                 if (clasOrigemAux != null) {
                                     elementsOrigem[i] = clasOrigemAux;
@@ -2687,15 +2682,17 @@ public class GeracaoOntologiasBO {
         }
 
         //Cria o arquivo para download e inserção no BD
-        String caminhoArquivoOntologia = "/home/lukas/NetBeansProjects/pm2onto/src/main/resources/OntologiasGeradas/"
-                .concat(nomeOntologia).concat(".owl");
-        File file = new File(caminhoArquivoOntologia);
-        modeloOntologiaProcesso.write(new FileOutputStream(file), "RDF/XML");
+        File arquivoOWL = FileDirUtils.geraArquivo(nomeOntologia.concat(".owl"));
+
+        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(arquivoOWL))) {
+            modeloOntologiaProcesso.writeAll(bos, "RDF/XML");
+        }
 
         if (arquivosOntologiasList == null) {
             arquivosOntologiasList = new ArrayList();
         }
-        arquivosOntologiasList.add(file);
+
+        arquivosOntologiasList.add(arquivoOWL);
 
         modeloOntologiaProcesso.add(model);
 
@@ -2706,7 +2703,6 @@ public class GeracaoOntologiasBO {
 
     public boolean salvaDadosOntologia() throws Exception {
         boolean salvou = true;
-        FileInputStream fileInput;
         ModeloDAO modeloDAO = new ModeloDAO();
         OntologiaDAO ontologiaDAO = new OntologiaDAO();
 
@@ -2719,9 +2715,11 @@ public class GeracaoOntologiasBO {
                 ontologia.setDescricao(descricaoOntologia);
                 ontologia.setDataCriacao(new Date());
 
-                fileInput = new FileInputStream(arquivoOntologia);
-                byte[] arquivo = IOUtils.toByteArray(fileInput);
-                ontologia.setArquivo(arquivo);
+                try (FileInputStream fileInput = new FileInputStream(arquivoOntologia)) {;
+                    byte[] arquivo = IOUtils.toByteArray(fileInput);
+                    ontologia.setArquivo(arquivo);
+                }
+
                 ontologia.setModeloList(new ArrayList());
                 ontologia.getModeloList().add(modelo);
                 modelo.setOntologia(ontologia);
@@ -2788,10 +2786,10 @@ public class GeracaoOntologiasBO {
                             artefato.setNome(TextUtils.removeTagsHtml(objetoDados.getName()));
                             artefato.setDescricao(objetoDados.getObject() != null
                                     && objetoDados.getObject().getDocumentation() != null
-                                    ? TextUtils.removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
+                                            ? TextUtils.removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
                             artefato.setDocumentacao(objetoDados.getObject() != null
                                     && objetoDados.getObject().getDocumentation() != null
-                                    ? TextUtils.removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
+                                            ? TextUtils.removeTagsHtml(objetoDados.getObject().getDocumentation().getValue()) : null);
 
                             if (objetoDados.getAny() != null && !objetoDados.getAny().isEmpty()) {
                                 for (Object obj : objetoDados.getAny()) {
@@ -2830,12 +2828,12 @@ public class GeracaoOntologiasBO {
                 artefato.setNome(TextUtils.removeTagsHtml(depositoDados.getName()));
                 artefato.setDescricao(depositoDados.getObject() != null
                         && depositoDados.getObject().getDocumentation() != null
-                        ? TextUtils.removeTagsHtml(depositoDados.getObject().getDocumentation().getValue())
-                        : TextUtils.removeTagsHtml(depositoDados.getName()));
+                                ? TextUtils.removeTagsHtml(depositoDados.getObject().getDocumentation().getValue())
+                                : TextUtils.removeTagsHtml(depositoDados.getName()));
                 artefato.setDocumentacao(depositoDados.getObject() != null
                         && depositoDados.getObject().getDocumentation() != null
-                        ? TextUtils.removeTagsHtml(depositoDados.getObject().getDocumentation().getValue())
-                        : TextUtils.removeTagsHtml(depositoDados.getName()));
+                                ? TextUtils.removeTagsHtml(depositoDados.getObject().getDocumentation().getValue())
+                                : TextUtils.removeTagsHtml(depositoDados.getName()));
 
                 if (depositoDados.getAny() != null && !depositoDados.getAny().isEmpty()) {
                     for (Object obj : depositoDados.getAny()) {
@@ -3015,7 +3013,7 @@ public class GeracaoOntologiasBO {
                     //Verifica se o elemento de origem é uma atividade
                     elementosList = processo.getAtividadeList() == null || processo.getAtividadeList().isEmpty()
                             ? null : processo.getAtividadeList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                                    .collect(Collectors.toList());
+                            .collect(Collectors.toList());
 
                     elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
 
@@ -3023,7 +3021,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de origem é um subprocesso
                         elementosList = processo.getSubProcessoList() == null || processo.getSubProcessoList().isEmpty()
                                 ? null : processo.getSubProcessoList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                         elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3032,7 +3030,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de origem é um evento
                         elementosList = processo.getEventoList() == null || processo.getEventoList().isEmpty()
                                 ? null : processo.getEventoList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                         elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3041,7 +3039,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de origem é um gateway
                         elementosList = processo.getGatewayList() == null || processo.getGatewayList().isEmpty()
                                 ? null : processo.getGatewayList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                         elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3050,7 +3048,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de origem é uma piscina
                         elementosList = processo.getPiscinaList() == null || processo.getPiscinaList().isEmpty()
                                 ? null : processo.getPiscinaList().stream().filter(a -> a.getIdElemento().equals(idElementoOrigem))
-                                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                         elementoOrigem = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3060,7 +3058,7 @@ public class GeracaoOntologiasBO {
                     //Verifica se o elemento de destino é uma atividade
                     elementosList = processo.getAtividadeList() == null || processo.getAtividadeList().isEmpty()
                             ? null : processo.getAtividadeList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                                    .collect(Collectors.toList());
+                            .collect(Collectors.toList());
 
                     elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
 
@@ -3068,7 +3066,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de destino é um subprocesso
                         elementosList = processo.getSubProcessoList() == null || processo.getSubProcessoList().isEmpty()
                                 ? null : processo.getSubProcessoList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                         elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3077,7 +3075,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de destino é um evento
                         elementosList = processo.getEventoList() == null || processo.getEventoList().isEmpty()
                                 ? null : processo.getEventoList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                         elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3086,7 +3084,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de destino é um gateway
                         elementosList = processo.getGatewayList() == null || processo.getGatewayList().isEmpty()
                                 ? null : processo.getGatewayList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                         elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3095,7 +3093,7 @@ public class GeracaoOntologiasBO {
                         //Verifica se o elemento de destino é uma piscina
                         elementosList = processo.getPiscinaList() == null || processo.getPiscinaList().isEmpty()
                                 ? null : processo.getPiscinaList().stream().filter(a -> a.getIdElemento().equals(idElementoDestino))
-                                        .collect(Collectors.toList());
+                                .collect(Collectors.toList());
 
                         elementoDestino = elementosList == null || elementosList.isEmpty() ? null : elementosList.get(0);
                     }
@@ -3573,7 +3571,7 @@ public class GeracaoOntologiasBO {
                 atrEst.getIsRequisitoNaoFuncional() ? "true" : "false", XSDDatatype.XSDboolean);
         atributoEstendidoClas.addProperty(modeloOntologiaProcesso.getDatatypeProperty(NS + "i8-businessRule"),
                 atrEst.getIsRegraNegocio() && atrEst.getValor() != null ? atrEst.getValor()
-                : "No Description for the Business Rule");
+                        : "No Description for the Business Rule");
 
         return atributoEstendidoClas;
     }

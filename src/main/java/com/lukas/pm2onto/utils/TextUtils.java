@@ -35,7 +35,7 @@ public class TextUtils {
                         .replaceAll("[úùũûü]", "u")
                         .replaceAll("[ÚÙÛÛÜ]", "U")
                         .replaceAll("ç", "c")
-                        .replaceAll("Ç", "C") : null;
+                        .replaceAll("Ç", "C") : "";
     }
 
     public static String formataNome(String nome) {

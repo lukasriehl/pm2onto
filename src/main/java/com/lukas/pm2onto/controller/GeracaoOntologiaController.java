@@ -2,18 +2,22 @@ package com.lukas.pm2onto.controller;
 
 import com.lukas.pm2onto.bo.GeracaoOntologiasBO;
 import com.lukas.pm2onto.dto.ArquivoDTO;
+import com.lukas.pm2onto.utils.FileDirUtils;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 import static javax.faces.application.FacesMessage.SEVERITY_WARN;
 import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.apache.commons.io.FileUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -32,30 +36,111 @@ public class GeracaoOntologiaController implements Serializable {
     private List<String> nomesArquivosXpdlList;
     private String arquivoSelecionado;
     private GeracaoOntologiasBO geracaoOntologiasBO;
-    private final String diretorioBaseArqXPDL = "/home/lukas/NetBeansProjects/pm2onto/src/main/resources/ArquivosXPDL/";
     private String nomeOntologia, descricaoOntologia;
     private List<ArquivoDTO> arquivosOntologiasList;
 
     public GeracaoOntologiaController() {
-        arquivosXpdlList = new ArrayList();
-        nomesArquivosXpdlList = new ArrayList();
-        arquivoSelecionado = null;
+    }
+
+    @PostConstruct
+    public void iniciaForm() {
+        removeArquivosEDiretorios(false);
     }
 
     public void realizaUploadArquivos(FileUploadEvent event) {
-        arquivosXpdlList.add(new File(diretorioBaseArqXPDL.concat(event.getFile().getFileName())));
+        try {
+            File arquivoXPDL = FileDirUtils.geraArquivo(event.getFile().getFileName());
 
-        nomesArquivosXpdlList.add(diretorioBaseArqXPDL.concat(event.getFile().getFileName()));
+            FileUtils.writeByteArrayToFile(arquivoXPDL, event.getFile().getContents());
 
-        FacesMessage msg = new FacesMessage("Sucesso", "O arquivo ".concat(event.getFile().getFileName()) + " foi carregado!");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+            arquivosXpdlList.add(arquivoXPDL);
+
+            nomesArquivosXpdlList.add(arquivoXPDL.getPath());
+
+            FacesMessage msg = new FacesMessage("Sucesso", "O arquivo ".concat(event.getFile().getFileName()) + " foi carregado!");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        } catch (Exception e) {
+            FacesMessage msg = new FacesMessage(SEVERITY_ERROR, "Erro", "Erro ao realizar o upload do arquivo!!"
+                    .concat(e.getMessage() == null || e.getMessage().isEmpty() ? "" : "\n".concat(e.getMessage())));
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 
-    public void removerArquivo() {
-        if (arquivoSelecionado != null && !arquivoSelecionado.isEmpty()) {
-            arquivosXpdlList = arquivosXpdlList.stream().filter(f -> !f.getAbsolutePath().equals(arquivoSelecionado))
-                    .collect(Collectors.toList());
-            nomesArquivosXpdlList.remove(arquivoSelecionado);
+    public void removeArquivoXPDL() {
+        try {
+            if (arquivoSelecionado != null && !arquivoSelecionado.isEmpty()) {
+                arquivosXpdlList = arquivosXpdlList.stream().filter(f -> !f.getAbsolutePath().equals(arquivoSelecionado))
+                        .collect(Collectors.toList());
+                nomesArquivosXpdlList.remove(arquivoSelecionado);
+
+                FileDirUtils.removeArquivoOuDiretorio(new File(arquivoSelecionado));
+
+                FacesMessage msg = new FacesMessage("Sucesso", "O arquivo ".concat(arquivoSelecionado) + " foi removido!");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+        } catch (IOException e) {
+            FacesMessage msg = new FacesMessage(SEVERITY_ERROR, "Erro", "Erro ao remover arquivo!!"
+                    .concat(e.getMessage() == null || e.getMessage().isEmpty() ? "" : "\n".concat(e.getMessage())));
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
+    public void removeArquivosOWL() {
+        try {
+            if (arquivosOntologiasList != null && !arquivosOntologiasList.isEmpty()) {
+                for (ArquivoDTO arqDTO : arquivosOntologiasList) {
+                    if (arqDTO.getConteudo() != null && arqDTO.getConteudo().getStream() != null) {
+                        arqDTO.getConteudo().getStream().close();
+                    }
+                }
+            }
+
+            if (geracaoOntologiasBO.getArquivosOntologiasList() != null
+                    && !geracaoOntologiasBO.getArquivosOntologiasList().isEmpty()) {
+                for (File arq : geracaoOntologiasBO.getArquivosOntologiasList()) {
+                    FileDirUtils.removeArquivoOuDiretorio(arq);
+                }
+
+                geracaoOntologiasBO.getArquivosOntologiasList().clear();
+            }
+
+            FacesMessage msg = new FacesMessage(SEVERITY_WARN, "Aviso",
+                    "O(s) arquivo(s) em OWL da(s) ontologia(s) gerada(s) foi(ram) removido(s)!");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        } catch (IOException e) {
+            FacesMessage msg = new FacesMessage(SEVERITY_ERROR, "Erro", "Erro ao remover o(s) arquivo(s) em OWL da(s) ontologia(s) geradas!!"
+                    .concat(e.getMessage() == null || e.getMessage().isEmpty() ? "" : "\n".concat(e.getMessage())));
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
+    public void removeArquivosEDiretorios(boolean exibeMensagem) {
+        File diretorioTemporario = null;
+
+        try {
+            diretorioTemporario = FileDirUtils.getDiretorioTemporario();
+            FileDirUtils.removeArquivoOuDiretorio(diretorioTemporario);
+
+            arquivosXpdlList = new ArrayList();
+            nomesArquivosXpdlList = new ArrayList();
+            arquivoSelecionado = null;
+            arquivosOntologiasList = new ArrayList();
+
+            if (exibeMensagem) {
+                FacesMessage msg = new FacesMessage("Sucesso", new StringBuilder("O(s) arquivo(s) do Upload foram removidos com sucesso da pasta temporária ")
+                        .append(diretorioTemporario.getAbsolutePath())
+                        .append("gerada!").toString());
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+        } catch (IOException ex) {
+            if (exibeMensagem) {
+                FacesMessage msg = new FacesMessage(SEVERITY_ERROR, "Erro", new StringBuilder("Erro ao remover arquivo(s) do Upload da pasta temporária ")
+                        .append(diretorioTemporario != null ? diretorioTemporario.getAbsolutePath() : "")
+                        .append("gerada!")
+                        .append(ex.getMessage() == null || ex.getMessage().isEmpty() ? ""
+                                : "\nErro:".concat(ex.getMessage())).toString());
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
         }
     }
 
@@ -93,9 +178,11 @@ public class GeracaoOntologiaController implements Serializable {
                             if (arquivosOntologiasList == null) {
                                 arquivosOntologiasList = new ArrayList();
                             }
+
                             arquivosOntologiasList.add(arqDTO);
                         }
-                        RequestContext.getCurrentInstance().execute("abreDlgArquivosOntologias();");
+
+                        RequestContext.getCurrentInstance().addCallbackParam("gerouOntologia", this);
                     }
                 }
             }

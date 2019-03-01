@@ -23,6 +23,17 @@
                              name="abreDlgArquivosOntologias"
                              update="dlgArquivosOntologias"
                              oncomplete="PF('dlgArquivosOntologias').show();"/>
+            <p:remoteCommand id="removeArquivosEDiretorios"
+                             name="removeArquivosEDiretorios"
+                             actionListener="#{geracaoOntologiaController.removeArquivosEDiretorios(true)}"
+                             process="@this"
+                             update="pnlGeracao, pnlSelecaoXpdl"/>
+            <p:remoteCommand id="removeArquivosOntologias"
+                             name="removeArquivosOntologias"
+                             actionListener="#{geracaoOntologiaController.removeArquivosOWL}"
+                             process="@this"
+                             update="pnlGeracao"/>
+            
             <h:panelGrid id="pnlGeracao" columns="1">
                 <p:outputLabel id="lblGeracao" value="Arquivos XPDL para importação (máximo 10 arquivos):"
                                style="width: 120px; font-weight: bold"/>
@@ -57,8 +68,8 @@
                     </p:selectOneListbox>
                     <p:commandButton id="btnRemoverArquivoXPDL" 
                                      value="Remover Arquivo Selecionado"
-                                     actionListener="#{geracaoOntologiaController.removerArquivo}"
-                                     update="@parent:@parent, @parent:@parent:pnlBotoes"/>
+                                     actionListener="#{geracaoOntologiaController.removeArquivoXPDL}"
+                                     update="@parent:@parent:pnlGeracao:messages, @parent:@parent:pnlBotoes"/>
                 </h:panelGroup> 
             </h:panelGrid>
             <h:panelGrid id="pnlNomeOntologia" columns="2" style="margin-top: 10px">
@@ -90,9 +101,11 @@
                                  disabled="#{((geracaoOntologiaController.arquivosXpdlList eq null)
                                              or (empty geracaoOntologiaController.arquivosXpdlList))}"
                                  onstart="PF('statusDialog').show();"
-                                 onsuccess="PF('statusDialog').hide();"/>
+                                 onsuccess="PF('statusDialog').hide();"
+                                 oncomplete="if(args.gerouOntologia){abreDlgArquivosOntologias();};"/>
                 <p:commandButton id="btnRetornar"
                                  value="Retornar ao Menu Inicial"
+                                 onclick="removeArquivosEDiretorios();"
                                  action="index"
                                  process="@this"/>
                 <p:growl id="messagesBotoes" showDetail="true"/>
@@ -100,11 +113,13 @@
             <p:dialog id="dlgArquivosOntologias"
                       widgetVar="dlgArquivosOntologias"
                       modal="true"
-                      header="Download dos arquivos de ontologias gerados"
+                      header="Download dos arquivos de ontologias geradas"
                       width="750"
-                      height="500">
+                      height="500"
+                      onHide="removeArquivosOntologias();">
                 <h:panelGrid id="pnlArquivosOntologias" columns="1">
-                    <h:outputLabel id="lblDownloadArquivosOntologias" value="Efetue o download dos arquivos de ontologias:"
+                    <h:outputLabel id="lblDownloadArquivosOntologias" 
+                                   value="Efetue o download das ontologias em OWL:"
                                    style="font-weight: bold; text-align: center; margin-bottom: 5px;"/>
                     <ui:repeat id="repeatArquivos" var="arq" value="#{geracaoOntologiaController.arquivosOntologiasList}">
                         <p:commandLink value="#{arq.caminhoArquivo}"
