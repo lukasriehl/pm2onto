@@ -95,7 +95,7 @@ public class Ontologia implements java.io.Serializable {
 
     public void setArquivo(byte[] arquivo) {
         this.arquivo = arquivo;
-    }
+    }    
 
     @Override
     public int hashCode() {

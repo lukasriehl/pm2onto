@@ -24,42 +24,34 @@ public class GenericDAO<T extends Serializable> {
     }
 
     protected void save(T entity) {
-        EntityTransaction tx = getEntityManager().getTransaction();
+        EntityTransaction tx = null;
 
         try {
+            tx = getEntityManager().getTransaction();
             tx.begin();
             getEntityManager().persist(entity);
             tx.commit();
         } catch (Throwable t) {
-            tx.rollback();
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
         } finally {
             close();
-        }
-    }
-    
-    protected void saveAlternativo(T entity){
-        Session session = (Session) getEntityManager().getDelegate();
-        
-        try {
-            session.saveOrUpdate(entity);
-        } catch (Throwable t) {
-            session.close();
-            close();
-        } finally {
-            session.close();
         }
     }
 
     protected void update(T entity) {
-        EntityTransaction tx = getEntityManager().getTransaction();
+        EntityTransaction tx = null;
 
         try {
+            tx = getEntityManager().getTransaction();
             tx.begin();
             getEntityManager().merge(entity);
             tx.commit();
         } catch (Throwable t) {
-            t.printStackTrace();
-            tx.rollback();
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
         } finally {
             close();
         }

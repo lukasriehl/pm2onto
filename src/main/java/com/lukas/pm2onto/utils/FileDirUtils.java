@@ -19,7 +19,7 @@ public class FileDirUtils {
 
     public static File getDiretorioTemporario() {
         File diretorioTemporario = new File(OsIsWindows()
-                ? "C:\\tmpPm2Onto" : "/tmp/tmpPm2Onto");
+                ? "C:\\tmpPm2Onto" : "tmpPm2Onto");
 
         return diretorioTemporario;
     }
@@ -35,6 +35,9 @@ public class FileDirUtils {
         File diretorioTemporario = getDiretorioTemporario();
 
         if (!diretorioTemporario.exists()) {
+            diretorioTemporario.setExecutable(true);
+            diretorioTemporario.setReadable(true);
+            
             diretorioTemporario.mkdir();
         }
 

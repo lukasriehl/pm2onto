@@ -190,7 +190,7 @@ public class GeracaoOntologiaController implements Serializable {
             FacesMessage msg = new FacesMessage(SEVERITY_ERROR, "Erro", "Erro ao gerar a ontologia!!"
                     .concat(e.getMessage() == null || e.getMessage().isEmpty() ? "" : "\n".concat(e.getMessage())));
             FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
+    }
     }
 
     public List<File> getArquivosXpdlList() {

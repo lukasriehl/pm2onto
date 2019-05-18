@@ -2715,7 +2715,7 @@ public class GeracaoOntologiasBO {
                 ontologia.setDescricao(descricaoOntologia);
                 ontologia.setDataCriacao(new Date());
 
-                try (FileInputStream fileInput = new FileInputStream(arquivoOntologia)) {;
+                try (FileInputStream fileInput = new FileInputStream(arquivoOntologia);) {
                     byte[] arquivo = IOUtils.toByteArray(fileInput);
                     ontologia.setArquivo(arquivo);
                 }
@@ -3229,8 +3229,13 @@ public class GeracaoOntologiasBO {
         modeloRetorno.getOntClass(NS + "ProcessElements").addSubClass(modeloRetorno.getOntClass(NS + "Pool"));
         modeloRetorno.getOntClass(NS + "ProcessElements").addSubClass(modeloRetorno.getOntClass(NS + "ExtendedAttribute"));
         modeloRetorno.getOntClass(NS + "ProcessElements").addSubClass(modeloRetorno.getOntClass(NS + "Flow"));
+        
+        modeloRetorno.getOntClass(NS + "ModelElements").addDisjointWith(modeloRetorno.getOntClass(NS + "Model"));
 
         modeloRetorno.createClass(NS + "AuxiliaryElements");
+        
+        modeloRetorno.getOntClass(NS + "AuxiliaryElements").addDisjointWith(modeloRetorno.getOntClass(NS + "Model"));
+        modeloRetorno.getOntClass(NS + "AuxiliaryElements").addDisjointWith(modeloRetorno.getOntClass(NS + "ModelElements"));
 
         modeloRetorno.createClass(NS + "EventTriggers");
         modeloRetorno.createClass(NS + "GatewaysDirections");
