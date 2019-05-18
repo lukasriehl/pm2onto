@@ -4,7 +4,7 @@
 
     <groupId>com.lukas</groupId>
     <artifactId>Pm2Onto</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>war</packaging>
 
     <name>Pm2Onto</name>
